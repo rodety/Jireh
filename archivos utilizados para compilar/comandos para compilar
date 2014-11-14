@@ -1,0 +1,4 @@
+Copiar todos los archivos de la carpeta NCReport2.8.7_EVAL/lib a /usr/local/lib
+
+
+sudo apt-get install libqt4-sql-mysql   //para Agregar el Driver QMYSQL SOlo en UBUNTU 
