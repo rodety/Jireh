@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ui_producto</class>
+ <widget class="QWidget" name="ui_producto">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>783</width>
+    <height>425</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Producto: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_tipoProducto">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="mouseTracking">
+        <bool>false</bool>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Seleccione Producto</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/search_64.png</normaloff>:/Icons/search_64.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lunas</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/Circle.png</normaloff>:/Icons/Circle.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monturas</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/internet-news-reader.png</normaloff>:/Icons/internet-news-reader.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Lentes de Contacto</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/1354339076_picasa.png</normaloff>:/Icons/1354339076_picasa.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Otros</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/color_swatch.png</normaloff>:/Icons/color_swatch.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Trabajos Extras</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/Stethoscope_Black.png</normaloff>:/Icons/Stethoscope_Black.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Accesorios</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Icons/Icons.qrc">
+          <normaloff>:/Icons/package_games_logic.png</normaloff>:/Icons/package_games_logic.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_etiquetar">
+       <property name="text">
+        <string>Etiquetar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/tag.png</normaloff>:/Icons/tag.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnToVitrina">
+       <property name="text">
+        <string>A Vitrina</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/inventory-maintenance.png</normaloff>:/Icons/inventory-maintenance.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnToAlmacen">
+       <property name="text">
+        <string>A Almacen</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1354339097_localbusiness-y.png</normaloff>:/Icons/1354339097_localbusiness-y.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="Tab1_2">
+      <attribute name="title">
+       <string>Lista</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="0">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_select_2">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="MyComboBox" name="comboBox_select_2"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="MyComboBox" name="comboBox_select_1"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_select_1">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_valor_inicial">
+           <property name="text">
+            <string>M. Esfera</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_Inicio">
+           <property name="minimum">
+            <double>-20.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.250000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_cilindro">
+           <property name="text">
+            <string>M. Cilindro</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_Cilindro">
+           <property name="minimum">
+            <double>-50.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.250000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="pushButton_transponer">
+           <property name="text">
+            <string>Transponer</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="MyComboBox" name="comboBox_select_4"/>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="label_select_4">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLabel" name="label_select_3">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="MyComboBox" name="comboBox_select_3"/>
+         </item>
+         <item row="3" column="4">
+          <widget class="MyComboBox" name="comboBox_select_5"/>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLabel" name="label_select_5">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QLabel" name="label_select_6">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="5">
+          <widget class="MyComboBox" name="comboBox_select_6"/>
+         </item>
+         <item row="1" column="3" colspan="3">
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton_agregar_2">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Agregar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716423_sq_plus.png</normaloff>:/Icons/1349716423_sq_plus.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+N</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_editar">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Editar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716425_doc_edit.png</normaloff>:/Icons/1349716425_doc_edit.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+E</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_eliminar">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Eliminar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716432_round_minus.png</normaloff>:/Icons/1349716432_round_minus.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Del</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Buscar por codigo</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_buscar">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>250</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_buscar">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/search_64.png</normaloff>:/Icons/search_64.png</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0">
+        <widget class="QTableView" name="tableView_productos">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>130</number>
+         </attribute>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Ubicacion</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>En Vitrina</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableView" name="tableView_vitrina"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>En Almacen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableView" name="tableView_almacen"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Etiquetas</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_pag">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>0/0</string>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Normal</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" rowspan="2">
+        <layout class="QGridLayout" name="gridLayout_21">
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <spacer name="horizontalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_previsualizar">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Previsualizar</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Icons/Icons.qrc">
+               <normaloff>:/Icons/1349716430_zoom.png</normaloff>:/Icons/1349716430_zoom.png</iconset>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+Alt+P</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_imprimir">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Imprimir</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Icons/Icons.qrc">
+               <normaloff>:/Icons/1349716426_print.png</normaloff>:/Icons/1349716426_print.png</iconset>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+P</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_23">
+           <item row="1" column="0">
+            <widget class="QTableWidget" name="tableView_etiquetas">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>Codigo</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Color</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Calidad</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Ubicación</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Precio</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Lista  de Productos a Etiquetar:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="pushButton_siguiente">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>&gt;&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="3">
+        <widget class="QLabel" name="draw_label">
+         <property name="frameShape">
+          <enum>QFrame::WinPanel</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="pushButton_anterior">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>&lt;&lt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_kardex">
+      <attribute name="title">
+       <string>Kardex</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Desde</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit_desde_kardex"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Hasta</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit_hasta_kardex"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTableView" name="tableView_kardex"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_compras">
+      <attribute name="title">
+       <string>Lista de Compras</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_13">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="2" column="0">
+          <layout class="QGridLayout" name="gridLayout_8"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QTableView" name="tableView_compras">
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Lista de Compras</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">mycombobox.h</header>
+   <slots>
+    <slot>Eliminar_Item()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>pushButton_agregar_2</tabstop>
+  <tabstop>pushButton_editar</tabstop>
+  <tabstop>pushButton_eliminar</tabstop>
+  <tabstop>comboBox_tipoProducto</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>comboBox_select_1</tabstop>
+  <tabstop>comboBox_select_2</tabstop>
+  <tabstop>tableView_productos</tabstop>
+  <tabstop>lineEdit_buscar</tabstop>
+  <tabstop>pushButton_buscar</tabstop>
+  <tabstop>btnToVitrina</tabstop>
+  <tabstop>btnToAlmacen</tabstop>
+  <tabstop>lineEdit_pag</tabstop>
+  <tabstop>pushButton_previsualizar</tabstop>
+  <tabstop>pushButton_imprimir</tabstop>
+  <tabstop>tableView_etiquetas</tabstop>
+  <tabstop>pushButton_siguiente</tabstop>
+  <tabstop>pushButton_anterior</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../Icons/Icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

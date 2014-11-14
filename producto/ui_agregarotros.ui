@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ui_agregarOtros</class>
+ <widget class="QWidget" name="ui_agregarOtros">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>530</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_tiulo">
+       <property name="text">
+        <string>Otro Producto :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>Codigo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_codigo"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Tipo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="MyComboBox" name="comboBox_tipo"/>
+     </item>
+     <item row="1" column="4">
+      <widget class="QPushButton" name="pushButton_xtipo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_21">
+       <property name="text">
+        <string>Stock</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="spinBox_stock">
+       <property name="maximum">
+        <number>999999999</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="label_24">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Marca</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="MyComboBox" name="comboBox_marca">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QPushButton" name="pushButton_xmarca">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>Precio de Compra</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="lineEdit_precioCompra">
+       <property name="text">
+        <string>00.00</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLabel" name="label_28">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Calidad</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="MyComboBox" name="comboBox_calidad">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QPushButton" name="pushButton_xcalidad">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_25">
+       <property name="text">
+        <string>Precio de Venta</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEdit_precioVenta">
+       <property name="text">
+        <string>00.00</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLabel" name="label_29">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Color</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="MyComboBox" name="comboBox_color">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QPushButton" name="pushButton_xcolor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_22">
+       <property name="text">
+        <string>Precio De Descuento</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="lineEdit_precioDescuento">
+       <property name="minimumSize">
+        <size>
+         <width>170</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>00.00</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_34">
+       <property name="text">
+        <string>Descripcion</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="lineEdit_descripcion"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_33">
+       <property name="text">
+        <string>Accesorios</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="lineEdit_accesorios"/>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_26">
+       <property name="text">
+        <string>Observaciones</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="lineEdit_observaciones">
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QLabel" name="label_32">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Talla</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="MyComboBox" name="comboBox_talla">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QPushButton" name="pushButton_xtalla">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Genero</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="MyComboBox" name="comboBox_genero"/>
+     </item>
+     <item row="6" column="4">
+      <widget class="QPushButton" name="pushButton_xgenero">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLabel" name="label_estado">
+       <property name="text">
+        <string>Estado</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="MyComboBox" name="comboBox_estado"/>
+     </item>
+     <item row="7" column="4">
+      <widget class="QPushButton" name="pushButton_xestado">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Icons/Icons.qrc">
+         <normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</normaloff>:/Icons/1349716373_monotone_close_exit_delete_small.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_agregar">
+       <property name="text">
+        <string>Aceptar</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+G</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_cancelar">
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+       <property name="shortcut">
+        <string>Esc</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">mycombobox.h</header>
+   <slots>
+    <slot>Eliminar_Item()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>lineEdit_codigo</tabstop>
+  <tabstop>spinBox_stock</tabstop>
+  <tabstop>lineEdit_precioCompra</tabstop>
+  <tabstop>lineEdit_precioVenta</tabstop>
+  <tabstop>lineEdit_precioDescuento</tabstop>
+  <tabstop>lineEdit_descripcion</tabstop>
+  <tabstop>lineEdit_accesorios</tabstop>
+  <tabstop>lineEdit_observaciones</tabstop>
+  <tabstop>comboBox_tipo</tabstop>
+  <tabstop>pushButton_xtipo</tabstop>
+  <tabstop>comboBox_marca</tabstop>
+  <tabstop>pushButton_xmarca</tabstop>
+  <tabstop>comboBox_calidad</tabstop>
+  <tabstop>pushButton_xcalidad</tabstop>
+  <tabstop>comboBox_color</tabstop>
+  <tabstop>pushButton_xcolor</tabstop>
+  <tabstop>comboBox_talla</tabstop>
+  <tabstop>pushButton_xtalla</tabstop>
+  <tabstop>comboBox_genero</tabstop>
+  <tabstop>pushButton_xgenero</tabstop>
+  <tabstop>comboBox_estado</tabstop>
+  <tabstop>pushButton_xestado</tabstop>
+  <tabstop>pushButton_agregar</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../Icons/Icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton_cancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>ui_agregarOtros</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>393</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

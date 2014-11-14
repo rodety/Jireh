@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ui_busca_producto</class>
+ <widget class="QWidget" name="ui_busca_producto">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>564</width>
+    <height>323</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_productos">
+      <attribute name="icon">
+       <iconset resource="../Icons/Icons.qrc">
+        <normaloff>:/Icons/file-roller.png</normaloff>:/Icons/file-roller.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Productos</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_vitrina">
+      <attribute name="icon">
+       <iconset resource="../Icons/Icons.qrc">
+        <normaloff>:/Icons/inventory-maintenance.png</normaloff>:/Icons/inventory-maintenance.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Vitrina</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_almacen">
+      <attribute name="icon">
+       <iconset resource="../Icons/Icons.qrc">
+        <normaloff>:/Icons/1354339097_localbusiness-y.png</normaloff>:/Icons/1354339097_localbusiness-y.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Almacen</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../Icons/Icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

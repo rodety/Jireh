@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>779</width>
+    <height>518</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Optical Manager</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Icons/Icons.qrc">
+    <normaloff>:/Icons/internet-news-reader.png</normaloff>:/Icons/internet-news-reader.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>779</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAgenda"/>
+   <addaction name="actionProducto"/>
+   <addaction name="actionCliente"/>
+   <addaction name="actionVitrina"/>
+   <addaction name="actionAlmacen"/>
+   <addaction name="actionCompras"/>
+   <addaction name="actionVentas"/>
+   <addaction name="actionReportes"/>
+   <addaction name="actionUsuario"/>
+   <addaction name="actionConfiguracion"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionProducto">
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/file-roller.png</normaloff>:/Icons/file-roller.png</iconset>
+   </property>
+   <property name="text">
+    <string>Producto</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+P</string>
+   </property>
+  </action>
+  <action name="actionUsuario">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/users.png</normaloff>:/Icons/users.png</iconset>
+   </property>
+   <property name="text">
+    <string>Usuario</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+U</string>
+   </property>
+  </action>
+  <action name="actionCliente">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/clients.png</normaloff>:/Icons/clients.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cliente</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+C</string>
+   </property>
+  </action>
+  <action name="actionVitrina">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/inventory-maintenance.png</normaloff>:/Icons/inventory-maintenance.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vitrina</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+V</string>
+   </property>
+  </action>
+  <action name="actionAlmacen">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/1354339097_localbusiness-y.png</normaloff>:/Icons/1354339097_localbusiness-y.png</iconset>
+   </property>
+   <property name="text">
+    <string>Almacen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+A</string>
+   </property>
+  </action>
+  <action name="actionCompras">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/shopping-cart_basic_blue.png</normaloff>:/Icons/shopping-cart_basic_blue.png</iconset>
+   </property>
+   <property name="text">
+    <string>Compras</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+O</string>
+   </property>
+  </action>
+  <action name="actionReportes">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/abiword.png</normaloff>:/Icons/abiword.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reportes</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+R</string>
+   </property>
+  </action>
+  <action name="actionVentas">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/ticket.png</normaloff>:/Icons/ticket.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ventas</string>
+   </property>
+   <property name="iconText">
+    <string>Venta</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+N</string>
+   </property>
+  </action>
+  <action name="actionConfiguracion">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/1349716392_monotone_wrench_settings.png</normaloff>:/Icons/1349716392_monotone_wrench_settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Configuracion</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+F</string>
+   </property>
+  </action>
+  <action name="actionAgenda">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/Icons/1354339085_ebooks.png</normaloff>:/Icons/1354339085_ebooks.png</iconset>
+   </property>
+   <property name="text">
+    <string>Agenda</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+G</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="Icons/Icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
