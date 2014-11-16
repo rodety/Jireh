@@ -183,7 +183,8 @@ void compras::on_pushButton_guardar_clicked()
                    cant = ui->tableWidget__items_productos->item(i,3)->text().toInt();
                    p.mf_set_idProducto(idProducto);
                    p.mf_load(idProducto);
-                   if(!p.mf_update_cant_stock(cant))
+                   //ACTUALIZANDO EL STOCK DEL PRODUCTO Y EL PRECIO DE COMPRA INCLUIDO IGV
+                   if(!p.mf_update_cant_stock_price(cant,ui->tableWidget__items_productos->item(i,2)->text().toDouble()*((igv/100)+1)))
                    {
                        QMessageBox msgBox;
                        msgBox.setText(QString("No se logro aumentar stock de producto con id: "+ idProducto));
@@ -191,9 +192,8 @@ void compras::on_pushButton_guardar_clicked()
                        return;
                    }
 
-
                    QString descripcion = "Aumento de stock por compra "+fecha.toString(Qt::ISODate)+" "+serieDocuemento+"-"+numeroDocumento+" "+ui->lineEdit_proveedor->text();
-
+                   qDebug()<<descripcion<<endl;
                    if(!p.mf_registrarKardex(cant,p.mf_get_stock().toInt(),descripcion,1))
                    {
                        QMessageBox msgBox;
@@ -511,3 +511,6 @@ void compras::loadCompra(QString idCompra)
     ui->tabWidget->setCurrentIndex(1);
 
 }
+
+
+

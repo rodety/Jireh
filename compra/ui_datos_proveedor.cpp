@@ -39,7 +39,7 @@ void ui_datos_proveedor::update_form()
     ui->lineEdit_comentario->clear();
 
     QSqlQuery query;
-    query.prepare("SELECT raz_social,ruc,direccion,telefono1,telefono2,nombre_contacto,email,nombre_banco,numero_cuenta,comentario FROM Proveedor WHERE idProveedor=?");
+    query.prepare("SELECT idProveedoor,raz_social,ruc,direccion,telefono1,telefono2,nombre_contacto,email,nombre_banco,numero_cuenta,comentario FROM Proveedor WHERE idProveedor=?");
     query.bindValue(0,ui_proveedores_parent->get_currentidProveedor());
     query.exec();
     query.next();

@@ -746,8 +746,8 @@ void uiventas::on_pushButton_guardar_clicked()
                     QString idVitrina_Producto_old = seleccionados_model->item(i,7)->text();
                     producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto_old);
                     producto_vitrina.mf_set_estado("V");
-                    QString descripcion = "Cod. ";
-                    descripcion += seleccionados_model->item(i,7)->text();
+                    QString descripcion = "";
+
                     descripcion += " Vendido con ";
                     if(ui->radioButton_Boleta->isChecked())
                          descripcion += "boleta: "+ui->label_numero_documento->text();
@@ -755,6 +755,7 @@ void uiventas::on_pushButton_guardar_clicked()
                         descripcion += "factura: "+ui->label_numero_documento->text();
                     if(ui->radioButton_cotizacion->isChecked())
                         descripcion += "cotizacion: "+ui->label_numero_documento->text();
+                    descripcion+= " tienda "+tienda_actual.mf_get_nombre();
 
                     producto_vitrina.mf_set_comentario(descripcion);
                     if(!producto_vitrina.mf_update_estado())
@@ -871,7 +872,7 @@ void uiventas::on_pushButton_guardar_clicked()
             else
             {
                 QMessageBox msgBox;
-                msgBox.setText("No se logro carcar datos");
+                msgBox.setText("No se logro cargar datos");
                 msgBox.exec();
                 return;
             }
@@ -1579,8 +1580,8 @@ void uiventas::loadListaPagos()
     for(int i = 0;i<ui->tableView_pagos->model()->rowCount();i++)
     {
 
-        totalefectivo+= ui->tableView_pagos->model()->index(i,3).data().toFloat();
-        totaltarjeta+= ui->tableView_pagos->model()->index(i,4).data().toFloat();
+        totalefectivo+= ui->tableView_pagos->model()->index(i,4).data().toFloat();
+        totaltarjeta+= ui->tableView_pagos->model()->index(i,5).data().toFloat();
     }
     ui->lineEdit_pagos_efectivo->setText(QString::number(totalefectivo));
     ui->lineEdit_pagos_tarjeta->setText(QString::number(totaltarjeta));

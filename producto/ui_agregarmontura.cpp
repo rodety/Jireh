@@ -304,3 +304,5 @@ void ui_agregarMontura::on_pushButton_xgenero_clicked()
 }
 
 
+
+

@@ -31,8 +31,6 @@ private slots:
 
     void on_pushButton_xgenero_clicked();
 
-
-
 signals:
     void guardado();
 private:

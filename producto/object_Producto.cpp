@@ -617,6 +617,36 @@ bool object_Producto::mf_update_cant_stock(int cant)
     }
 }
 
+bool object_Producto::mf_update_cant_stock_price(int cant, double price)
+{
+    //function mf_update
+    //w!
+
+    QSqlQuery query;
+    if(cant > 0)
+        query.prepare("UPDATE Producto SET stock = stock + ?, precioCompra = ? WHERE idProducto = ?");
+    else
+        query.prepare("UPDATE Producto SET stock = stock ?, precioCompra = ? WHERE idProducto = ?");
+
+    query.bindValue(0, cant);
+    query.bindValue(1, price);
+    query.bindValue(2, md_o_idProducto);
+
+    if(query.exec())
+    {
+        //state OK
+        //w!
+
+        return true;
+
+    }else{
+        //state FAILED
+        //w!
+
+        return false;
+    }
+}
+
 bool object_Producto::mf_registrarKardex(int cant_k,int stock_k,QString detalle, int tipo)//cant CANTIDAD DE VARIACION SIEMPRE, Stock del Producto
 {
     object_Kardex kardex;

@@ -62,16 +62,17 @@ public:
 	_QSTR mf_get_tipo();
 
 	bool mf_load(_QSTR pk);
-        bool mf_load_stock(_QSTR pk);
+    bool mf_load_stock(_QSTR pk);
 	bool mf_add();
 	bool mf_update();
 	bool mf_remove();
-        bool mf_update_cant_vitrina(int cant);
-        bool mf_update_cant_almacen(int cant);
-        static QSqlQueryModel* mf_search(_QSTR cod);
-        bool mf_load_code(_QSTR code);
-        bool mf_update_cant_stock(int cant);
-        bool mf_registrarKardex(int cant,int stock,QString detalle, int tipo);
+    bool mf_update_cant_vitrina(int cant);
+    bool mf_update_cant_almacen(int cant);
+    static QSqlQueryModel* mf_search(_QSTR cod);
+    bool mf_load_code(_QSTR code);
+    bool mf_update_cant_stock_price(int cant, double price);
+    bool mf_update_cant_stock(int cant);
+    bool mf_registrarKardex(int cant,int stock,QString detalle, int tipo);
 
 	~object_Producto();
 };
