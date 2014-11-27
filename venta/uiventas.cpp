@@ -454,7 +454,15 @@ void uiventas::on_pushButton_guardar_clicked()
 
     fechaPreventa = ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::ISODate);
     fechaCancelacion = ui->dateTimeEdit_entrega->dateTime().toString(Qt::ISODate);    
-    serieDocumento = QString::number(Sesion::getUbicacion().second);
+    //Si existe nuevo pago
+
+    if(validar_montoEntregado()){
+        serieDocumento = QString::number(Sesion::getUbicacion().second);
+    }
+    else{
+        serieDocumento = ui->label_serie->text();
+        numeroDocumento = ui->label_numero_documento->text();
+    }
 
     //Forma de pago Contado 0, Credito 1, Ambos 2,  ninguno 3
     if(ui->label_efectivo->text().toDouble() > 0 && ui->label_tarjeta->text().toDouble() > 0)
@@ -750,11 +758,11 @@ void uiventas::on_pushButton_guardar_clicked()
 
                     descripcion += " Vendido con ";
                     if(ui->radioButton_Boleta->isChecked())
-                         descripcion += "boleta: "+ui->label_numero_documento->text();
+                         descripcion += "boleta: "+ui->label_serie->text()+"-"+ui->label_numero_documento->text();
                     if(ui->radioButton_Factura->isChecked())
-                        descripcion += "factura: "+ui->label_numero_documento->text();
+                        descripcion += "factura: "+ui->label_serie->text()+"-"+ui->label_numero_documento->text();
                     if(ui->radioButton_cotizacion->isChecked())
-                        descripcion += "cotizacion: "+ui->label_numero_documento->text();
+                        descripcion += "cotizacion: "+ui->label_serie->text()+"-"+ui->label_numero_documento->text();
                     descripcion+= " tienda "+tienda_actual.mf_get_nombre();
 
                     producto_vitrina.mf_set_comentario(descripcion);
@@ -1019,7 +1027,7 @@ void uiventas::imprimir()
     myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
     myimpresion.setDireccionTienda(tienda_actual.mf_get_direccion());
     myimpresion.setRucTienda_Telefono(tienda_actual.mf_get_ruc(),tienda_actual.mf_get_telefono());
-    myimpresion.setNumeroTicket_Fecha(ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+    myimpresion.setNumeroTicket_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
 
     myimpresion.setNombreCliente(ui->lineEdit_razonSocial->text());
     myimpresion.setRucCliente(ui->lineEdit_ruc->text());
@@ -1561,7 +1569,8 @@ void uiventas::loadVenta(QString idVenta)
         ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
     }
     //SETEANDO EL NUMERO DE DOCUMENTO
-    ui->label_numero_documento->setText(venta.mf_get_serieDocumento()+"-"+venta.mf_get_numeroDocumento());
+    ui->label_serie->setText(venta.mf_get_serieDocumento());
+    ui->label_numero_documento->setText(venta.mf_get_numeroDocumento());
 
 }
 
