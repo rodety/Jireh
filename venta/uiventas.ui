@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>955</width>
+    <width>1069</width>
     <height>548</height>
    </rect>
   </property>
@@ -408,7 +408,7 @@
                 <double>-99.989999999999995</double>
                </property>
                <property name="singleStep">
-                <double>0.500000000000000</double>
+                <double>0.200000000000000</double>
                </property>
               </widget>
              </item>
@@ -493,6 +493,9 @@
                </item>
                <item>
                 <widget class="QLabel" name="label_numero_documento">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
                  <property name="text">
                   <string>numero</string>
                  </property>

@@ -30,6 +30,8 @@ public:
     void setTotal(QString tmp);
     void setEntregaEfectivo(QString tmp);
     void setEntregaTarjeta(QString tmp);
+    void setAdelantoEfectivo(QString tmp);
+    void setAdelantoTarjeta(QString tmp);
     void setSaldo(QString tmp);
     void setFechaEntrega(QString tmp);
     void setNombreColaborador(QString tmp);

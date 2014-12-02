@@ -50,7 +50,7 @@ void impresion::setArticuloVector(QVector<articulo> art)
 
     for(int i=0;i<art.size();i++)
     {
-        Ticket1.TextoMensaje(art[i].get_t_articulo());
+        Ticket1.TextoAutoFormateado(art[i].get_t_articulo());
         Ticket1.AgregaArticulo(descripcion,art[i].get_t_entregado(),art[i].get_cantidad().toInt(),art[i].get_p_unitario().toDouble(),art[i].get_descuento().toDouble(),art[i].get_importe().toDouble()); //imprime una linea de descripcion
     }    
 }
@@ -91,6 +91,21 @@ void impresion::setEntregaTarjeta(QString tmp)
 {
     QString
             text = "TARJETA  S/."; text.append(tmp);
+    Ticket1.TextoIzquierda(text);
+}
+
+void impresion::setAdelantoEfectivo(QString tmp)
+{
+    Ticket1.LineasGuion(); // imprime una linea de guiones
+    QString
+            text = "ADELANTO EFECTIVO S/."; text.append(tmp);
+    Ticket1.TextoIzquierda(text);
+}
+
+void impresion::setAdelantoTarjeta(QString tmp)
+{
+    QString
+            text = "ADELANTO TARJETA  S/."; text.append(tmp);
     Ticket1.TextoIzquierda(text);
 }
 

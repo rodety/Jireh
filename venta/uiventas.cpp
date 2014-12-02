@@ -44,13 +44,8 @@ void uiventas::configuracionesIniciaciales()
     //Nombre de Tienda
     ui->label_nombre_Tienda->setText(tienda_actual.mf_get_nombre());    
 
-    //Estamos asumiendo que el siguiente de la serie sera el siguiente del documento
-    if(ui->radioButton_Boleta->isChecked())
-        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieBoleta().toInt()+1));
-    if(ui->radioButton_Factura->isChecked())
-        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieFactura().toInt()+1));
-    if(ui->radioButton_cotizacion->isChecked())
-        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieCotizacion().toInt()+1));
+    updateSerieNumeroDocumento();
+
 
     //Datos de colaborador
 
@@ -134,16 +129,19 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     seleccionados_model->setHeaderData(4,Qt::Horizontal,"Cantidad");
     seleccionados_model->setHeaderData(5,Qt::Horizontal,"Entregado");
     seleccionados_model->setHeaderData(6,Qt::Horizontal,"Sub Total");
+    ui->tableView_Productos->setRowHeight(count_row,150);
     count_row++;
     //OCULTANDO ALGUNAS COLUMNAS
     ui->tableView_Productos->setColumnWidth(0,0);//idProducto
-    ui->tableView_Productos->setColumnWidth(1,450);//Descripcion Resumida del Producto
+    ui->tableView_Productos->setColumnWidth(1,300);//Descripcion Resumida del Producto
     ui->tableView_Productos->setColumnWidth(7,0);//idUbicacicion o IdContenedor
     ui->tableView_Productos->setColumnWidth(8,0);//Tipo de Producto
     ui->tableView_Productos->setColumnWidth(9,0); //Stock Producto
     ui->tableView_Productos->setColumnWidth(10,0); //Precio Compra
     ui->tableView_Productos->setColumnWidth(11,0); //Fuente de Producto
     ui->tableView_Productos->setColumnWidth(12,0); //Copia del Descuento
+    //ANCHANDO LAS FILAS
+
 
     ui->lineEdit_efectivo->setEnabled(true);
     ui->lineEdit_tarjeta->setEnabled(true);
@@ -428,9 +426,6 @@ void uiventas::on_pushButton_guardar_clicked()
         return;
     }
 
-
-
-
     QString fechaPreventa,fechaCancelacion,serieDocumento,formaPago,codigoTransaccion,
             plazo,montoTotal,fechaEntrega,montoAdelanto,
             idTienda,IdColaborador,tipoDocumento;
@@ -457,7 +452,9 @@ void uiventas::on_pushButton_guardar_clicked()
     //Si existe nuevo pago
 
     if(validar_montoEntregado()){
-        serieDocumento = QString::number(Sesion::getUbicacion().second);
+        updateSerieNumeroDocumento();
+        serieDocumento = ui->label_serie->text();
+        numeroDocumento = ui->label_numero_documento->text();
     }
     else{
         serieDocumento = ui->label_serie->text();
@@ -831,7 +828,7 @@ void uiventas::on_pushButton_guardar_clicked()
         switch (ret) {
           case QMessageBox::Yes:
               // Yes was clicked
-                imprimir();
+                imprimir(validarCancelado());
               break;
           case QMessageBox::No:
               // Don't Save was clicked
@@ -886,6 +883,7 @@ void uiventas::on_pushButton_guardar_clicked()
             }
 
         }
+        //El cliente esta entregando dinero
         if(validar_montoEntregado())
         {
             //AGREGANDO TARJETA SI LA UBIERE
@@ -960,7 +958,7 @@ void uiventas::on_pushButton_guardar_clicked()
             switch (ret) {
               case QMessageBox::Yes:
                   // Yes was clicked
-                    imprimir();
+                    imprimir(validarCancelado());
                   break;
               case QMessageBox::No:
                   // Don't Save was clicked
@@ -1009,10 +1007,11 @@ bool uiventas::actualizar_configuracion()
         configuracion.mf_set_serieCotizacion(QString::number(configuracion.mf_get_serieCotizacion().toInt()+1));
 
     Sesion::getSesion()->uptadeConfiguracion();
-
-    return configuracion.mf_update();
+    bool flag = configuracion.mf_update();
+    Sesion::getSesion()->uptadeConfiguracion();
+    return flag;
 }
-
+//Aqui esta dando dinero el cliente.
 bool uiventas::validar_montoEntregado()
 {
     if(ui->lineEdit_efectivo->text().toDouble() <= 0  && ui->lineEdit_tarjeta->text().toDouble() <= 0 )
@@ -1021,7 +1020,7 @@ bool uiventas::validar_montoEntregado()
         return true;
 }
 
-void uiventas::imprimir()
+void uiventas::imprimir(bool pendiente)
 {
     impresion myimpresion;
     myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
@@ -1039,8 +1038,16 @@ void uiventas::imprimir()
     {
         articulo myarticulo;
         myarticulo.set_t_articulo(seleccionados_model->item(i,1)->text());
-        myarticulo.set_p_unitario((seleccionados_model->item(i,2)->text()));
-        myarticulo.set_descuento((seleccionados_model->item(i,3)->text()));
+
+        //Si el descuento es negativo (le aumento el precio)
+        if((seleccionados_model->item(i,3)->text().toDouble()) <0){
+            myarticulo.set_p_unitario((seleccionados_model->item(i,6)->text()));
+            myarticulo.set_descuento("0");
+        }
+        else {
+            myarticulo.set_p_unitario((seleccionados_model->item(i,2)->text()));
+            myarticulo.set_descuento((seleccionados_model->item(i,3)->text()));
+        }
         myarticulo.set_cantidad((seleccionados_model->item(i,4)->text()));
         myarticulo.set_t_entregado(seleccionados_model->item(i,5)->text());
         myarticulo.set_importe((seleccionados_model->item(i,6)->text()));
@@ -1052,9 +1059,22 @@ void uiventas::imprimir()
     myimpresion.setSubTotal(QString::number(total_venta));
     myimpresion.setIgv(QString::number(monto_igv));
     myimpresion.setTotal(ui->lineEdit_total->text());
-    myimpresion.setEntregaEfectivo(ui->label_efectivo->text());
-    myimpresion.setEntregaTarjeta(ui->label_tarjeta->text());
-    myimpresion.setSaldo(ui->lineEdit_restante->text());
+    //No esta pendiente de pago
+    if(!pendiente){
+        myimpresion.setAdelantoEfectivo(ui->label_efectivo->text());
+        myimpresion.setAdelantoTarjeta(ui->label_tarjeta->text());
+    }
+    else{
+        myimpresion.setEntregaEfectivo(ui->label_efectivo->text());
+        myimpresion.setEntregaTarjeta(ui->label_tarjeta->text());
+    }
+
+    if(ui->lineEdit_total_cancelado->text().toDouble() >= ui->lineEdit_total->text().toDouble()){
+        myimpresion.setSaldo("0");
+    }
+    else {
+        myimpresion.setSaldo(ui->lineEdit_restante->text());
+    }
     myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
     myimpresion.setNombreColaborador(ui->lineEdit_usuario->text());
     myimpresion.setMensajeVenta(tienda_actual.mf_get_mensaje_compra());
@@ -1274,6 +1294,8 @@ void uiventas::limpiarInterfazVenta()
 
     habilitar_nuevo();
     flag_reporte = true;
+    ui->doubleSpinBox_descuento->setValue(0);
+    ui->doubleSpinBox_descuento->setEnabled(false);
 
 
 }
@@ -1659,20 +1681,12 @@ void uiventas::on_tableView_Productos_clicked(const QModelIndex &index)
 
 void uiventas::on_doubleSpinBox_descuento_valueChanged(double arg1)
 {
-
-
     double pVenta = ui->tableView_Productos->model()->index(indiceProducto.row(),2).data().toDouble();
     int cantidadProducto = ui->tableView_Productos->model()->index(indiceProducto.row(),4).data().toInt();
-    int descuento = pVenta * arg1/100;
-
+    double descuento = pVenta * arg1/100;
     seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(descuento)));
     seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number((pVenta-descuento)*cantidadProducto)));
-
-
-
     calcularSubtotal();
-
-
 }
 
 void uiventas::calcularSubtotal()
@@ -1706,6 +1720,29 @@ bool uiventas::validarEntregadoProducto()
 
     }
     return true;
+
+}
+
+bool uiventas::validarCancelado()
+{
+    if(ui->lineEdit_total_cancelado->text().toDouble() >= ui->lineEdit_total->text().toDouble())
+        return true;
+    else return false;
+
+}
+
+void uiventas::updateSerieNumeroDocumento()
+{
+    //Ponemos la serie del documento.
+    ui->label_serie->setText(QString::number(Sesion::getUbicacion().second));
+
+    //Estamos asumiendo que el siguiente de la serie sera el siguiente del documento
+    if(ui->radioButton_Boleta->isChecked())
+        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieBoleta().toInt()+1));
+    if(ui->radioButton_Factura->isChecked())
+        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieFactura().toInt()+1));
+    if(ui->radioButton_cotizacion->isChecked())
+        ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieCotizacion().toInt()+1));
 
 }
 

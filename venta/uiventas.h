@@ -153,12 +153,14 @@ private:
     bool flag_reporte;
     QModelIndex index_pagos;
     object_Tienda tienda_actual;
-    void imprimir();
+    void imprimir(bool);
     QComboBoxItemDelegate * delegate1;
     void anularVenta();
     QModelIndex indiceProducto;
     void calcularSubtotal();
     bool validarEntregadoProducto();
+    bool validarCancelado();
+    void updateSerieNumeroDocumento();
 
 
 

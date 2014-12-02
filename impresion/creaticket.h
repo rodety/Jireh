@@ -62,8 +62,8 @@ public:
 
      void EncabezadoVenta()
     {
-        ticket = "            Articulo                Can    P.Unit    Importe\n";   // agrega lineas de  encabezados
-        ticket = "  Articulo    Entregado   Cant.  P.Unit  Descuento   Importe\n";   // agrega lineas de  encabezados
+        //ticket = "            Articulo                Can    P.Unit    Importe\n";   // agrega lineas de  encabezados
+        ticket = "  Art.  Entrego  Cant.  P.Unit.  Desct.  Total\n";   // agrega lineas de  encabezados
         impresora +=ticket; // imprime texto
     }
      void TextoIzquierda(QString par1)                          // agrega texto a la izquierda
@@ -96,6 +96,13 @@ public:
             ticket += " ";                          // agrega espacios para alinear a la derecha
         }
         ticket += parte1 + "\n";                    //Agrega el texto
+        impresora +=ticket; // imprime texto
+    }
+     //No controla la logitud
+     void TextoAutoFormateado(QString par1)
+    {
+        ticket = "";
+        ticket += par1 + "\n";                    //Agrega el texto
         impresora +=ticket; // imprime texto
     }
      void TextoCentro(QString par1)
@@ -294,7 +301,7 @@ public:
              QPainter painter;
              painter.begin(&printer);
              painter.setPen(Qt::black);
-             painter.setFont(QFont("Arial", 9));
+             painter.setFont(QFont("Arial", 7));
              painter.drawText(0,0,500,500, Qt::AlignLeft|Qt::AlignTop, impresora);
              painter.end();
              qDebug()<<impresora<<endl;

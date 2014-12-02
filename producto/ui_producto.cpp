@@ -916,7 +916,7 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
     //Monturas
     if(posicion==2)
     {
-
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toString();
 
@@ -996,8 +996,8 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
 
 void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, int tipo) //Tipo de Producto
 {
-    QString id,descripcion,precioVenta,descuento,tipoLuna,tratamiento,valorInicial,ValorFinal,marca,forma,color,tamano,calidad,presentacion,
-            tinte,contacuoso,diseno,tipoLente,potencia,curva,diametro,tiempouso,material,genero, mtalla,mtipo,precioCompra;
+    QString id,codigo,descripcion,precioVenta,descuento,tipoLuna,tratamiento,valorInicial,ValorFinal,marca,forma,color,tamano,calidad,presentacion,
+            tinte,contacuoso,diseno,tipoLente,potencia,curva,diametro,tiempouso,material,genero, mtalla,mtipo,precioCompra,accesorios;
     int fila = model.row();
     int stock_producto;
 
@@ -1019,6 +1019,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
     //Lunas
     if(posicion==1)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
@@ -1029,12 +1030,12 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString();
         //estamos sacando el stock
-        descripcion+= " Tipo: " +tipoLuna+", tratamiento: "+tratamiento+", de: "+valorInicial+", a: "+ValorFinal;
+        descripcion+= " Luna: \n Codigo:"+codigo+" \n Tipo: " +tipoLuna+"\n tratamiento: "+tratamiento;
     }
     //Monturas
     if(posicion==2)
     {
-
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toString();
 
@@ -1044,13 +1045,15 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         tamano=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
         calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString();
+        accesorios=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,16)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Marca: " +marca+", forma: "+forma+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
+        descripcion+= " Lentes: \n Codigo:"+codigo+ "\n Marca: "+marca+"\n Forma: "+forma+"\n Color: "+color+"\n Calidad: "+calidad+"\n Accesorios: "+accesorios;
     }
     //Lentes de Contacto
     if(posicion==3)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
@@ -1068,13 +1071,13 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         material=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,18)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Marca:" +marca+", present."+presentacion+", tinte: "+tinte+", C. Acuoso: "+contacuoso+", diseño: "+diseno+", tipo: "+tipoLente+", potencia: "+potencia+
-                ", curv. "+curva+", diam. "+diametro+", tiempo uso: "+tiempouso+", material: "+material;
+        descripcion+= " Lente de Contacto: \n Codigo: "+codigo+"\n Marca:" +marca+"\n present."+presentacion+"\n tinte: "+tinte+"\n C. Acuoso: "+contacuoso+"\n diseño: "+diseno+"\n tipo: "+tipoLente+"\n tiempo uso: "+tiempouso+"\n material: "+material;
 
     }
     //Otros
     if(posicion==4)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
@@ -1086,21 +1089,24 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Marca: " +marca+", color: "+color+", talla: "+mtalla+", calidad: "+calidad+", tipo: "+mtipo+", genero: "+genero;
+        descripcion= " "+mtipo+": \n Codigo: "+codigo+" Marca: " +marca+"\n color: "+color+"\n talla: "+mtalla+"\n calidad: "+calidad;
     }
     //Trabajos Extras
     if(posicion==5)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString();
         stock_producto = 0;
         precioCompra = "0";
+        descripcion+="\n Codigo: "+codigo;
     }
 
     if(posicion==6)
     {
 
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
 
@@ -1111,7 +1117,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Marca: " +marca+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
+        descripcion+= "\n Codigo: "+codigo+"\n Marca: " +marca+"\n color: "+color+"\n tamaño: "+tamano+"\n calidad: "+calidad+"\n genero: "+genero;
     }
 
     emit sentProductoVenta(id,descripcion,precioVenta,descuento,cant,pos,tipo,stock_producto,precioCompra);
