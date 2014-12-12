@@ -1108,3 +1108,11 @@ void ui_tienda::on_pushButton_reponer_clicked()
     actualizar_grilla();
 
 }
+
+void ui_tienda::on_pushButton_print_clicked()
+{
+    //validaciones
+    //Mensaje
+
+
+}
