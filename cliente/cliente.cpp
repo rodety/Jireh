@@ -248,7 +248,7 @@ bool cliente::eliminar()
 QSqlQueryModel* cliente::mostrar()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1");
+    model->setQuery("SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Num. Documento',nombres as 'Nombres',primer_apellido as 'Ap. Paterno',segundo_apellido as 'Ap. Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1");
     return model;
 }
 
@@ -287,14 +287,48 @@ bool cliente::completar()
         return false;
 }
 
+bool cliente::completarId(QString id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT nombres,primer_apellido,segundo_apellido,numeroDocumento,direccion,sexo,fechaNacimiento,telefono,telefono2,movil,email,nacionalidad,Documento_idDocumento1,ruc,razonSocial,direccion2 FROM Cliente WHERE idCliente =?");
+    query.bindValue(0,id);
+
+    if(query.exec())
+    {
+        if(query.size()!=0)
+        {
+            query.first();
+            nombres=query.value(0).toString();
+            primerApellido=query.value(1).toString();
+            segundoApellido=query.value(2).toString();
+            numeroDocumento=query.value(3).toString();
+            direccion=query.value(4).toString();
+            sexo=query.value(5).toString();
+            fechaNacimiento=query.value(6).toString();
+            telefono=query.value(7).toString();
+            telefono2=query.value(8).toString();
+            movil=query.value(9).toString();
+            email=query.value(10).toString();
+            nacionalidad=query.value(11).toString();
+            pDocumento.setIdDocumento(query.value(12).toString());
+            return true;
+        }
+        else
+            return false;
+    }
+    else
+        return false;
+}
+
+
 QSqlQueryModel* cliente::buscarCliente(QString _item)
 {
     QSqlQueryModel *model = new QSqlQueryModel;
     QString query;
     if(_item.size() != 0)
-        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND ( nombres REGEXP '"+_item+"' OR primer_apellido REGEXP '"+_item+"' OR segundo_apellido REGEXP '"+_item+"' OR numeroDocumento REGEXP '"+_item+"' )";
+        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND ( nombres REGEXP '"+_item+"' OR primer_apellido REGEXP '"+_item+"' OR segundo_apellido REGEXP '"+_item+"' OR numeroDocumento REGEXP '"+_item+"' )";
     else
-        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1";
+        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1";
     model->setQuery(query);
     qDebug()<<query<<endl;
     return model;

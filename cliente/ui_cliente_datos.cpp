@@ -45,6 +45,12 @@ void ui_cliente_datos::setCliente(cliente *c)
     }
 }
 
+void ui_cliente_datos::setDatosEmpresa()
+{
+    ui->pushButton->click();
+    ui->lineEdit_razonSocial->setFocus();
+}
+
 bool ui_cliente_datos::verificaRestriccionesCliente()
 {
     QRegExp noNumeros("[a-zA-Z]");
@@ -167,6 +173,26 @@ bool ui_cliente_datos::verificaRestriccionesCliente()
         ui->celular->setFocus();
         return false;
     }
+    if(ui->lineEdit_razonSocial->text().size()>0 || ui->lineEdit_ruc->text().size() >0 || ui->lineEdit_direccionEmpresa->text() >0){
+        if(ui->lineEdit_razonSocial->text().size() ==0){
+            box.setText(QString("Ingrese Razon Social"));
+            box.exec();
+            ui->lineEdit_razonSocial->setFocus();
+            return false;
+        }
+        if(ui->lineEdit_direccionEmpresa->text().size() ==0){
+            box.setText(QString("Ingrese dirección de empresa"));
+            box.exec();
+            ui->lineEdit_direccionEmpresa->setFocus();
+            return false;
+        }
+        if(ui->lineEdit_ruc->text().size() <11 && ui->lineEdit_ruc->text().contains(noAlfabeto)){
+            box.setText(QString("El RUC debe contener 11 digitos"));
+            box.exec();
+            ui->lineEdit_ruc->setFocus();
+            return false;
+        }
+    }
 
     /*if(!ui->comboBox_tipoDoc->selecciono())
     {
@@ -228,6 +254,7 @@ void ui_cliente_datos::on_pushButton_Aceptar_clicked()
         if(cliente_act.actualizar())
         {
             emit guarde();
+            emit enviarCliente(cliente_act);
             this->close();
         }
         else

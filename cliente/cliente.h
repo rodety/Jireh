@@ -69,6 +69,7 @@ public:
 
     static QSqlQueryModel* mostrar();
     bool completar();
+    bool completarId(QString id);
 
     static QSqlQueryModel* buscarCliente(QString _item);
 };

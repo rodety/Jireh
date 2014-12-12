@@ -40,7 +40,7 @@ void app::loadMainWindow()
 {
     MainWindow *MAIN_WINDOW;
     MAIN_WINDOW = new MainWindow;
-    MAIN_WINDOW->show();
+    MAIN_WINDOW->showMaximized();
     //Cargando Datos de ubicacion de la DB
     Sesion::getSesion()->loadUbicacion();
     splash.close();

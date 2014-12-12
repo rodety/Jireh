@@ -283,33 +283,21 @@ void ui_cliente::enviar_cliente(const QModelIndex & model)
     if(fila!=-1)
     {
         cliente cliente_selec;
-        pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());pDocumento.completar();
+        cliente_selec.setIdCliente(ui->tableView->model()->data(ui->tableView->model()->index(fila,0)).toString());
+        //pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());
+        //pDocumento.completar();
         cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
         cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
         cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
         cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
         cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
         cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
-        cliente_selec.setDocumento(pDocumento);
-        if(cliente_selec.completar())
-        {
-            QString idCliente,razon,ruc,direccion;
-            if(cliente_selec.getRuc().size()>0)
-            {
-                idCliente = cliente_selec.getIdCliente();
-                razon=cliente_selec.getRazonSocial();
-                ruc=cliente_selec.getRuc();
-                direccion=cliente_selec.getDireccion2();
-            }
-            else
-            {
-                idCliente = cliente_selec.getIdCliente();
-                razon=cliente_selec.getNombres()+" "+cliente_selec.getPrimerApellido()+" "+cliente_selec.getSegundoApellido();
-                ruc="";
-                direccion=cliente_selec.getDireccion();
-            }
-            emit sentCliente(idCliente,razon,ruc,direccion);
-        }
+        //cliente_selec.setDocumento(pDocumento);
+        cliente_selec.setRuc(ui->tableView->model()->data(ui->tableView->model()->index(fila,8)).toString());
+        cliente_selec.setRazonSocial(ui->tableView->model()->data(ui->tableView->model()->index(fila,9)).toString());
+        cliente_selec.setDireccion2(ui->tableView->model()->data(ui->tableView->model()->index(fila,10)).toString());
+        emit sentCliente(cliente_selec);
+
     }
 }
 

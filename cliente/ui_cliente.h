@@ -52,7 +52,7 @@ private slots:
 public slots:
     void setComportamiento(int a);
 signals:
-    void sentCliente(QString,QString,QString,QString);
+    void sentCliente(cliente);
 private:
     Ui::ui_cliente *ui;
     cliente clt_his;

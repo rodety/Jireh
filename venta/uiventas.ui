@@ -303,6 +303,9 @@
                </item>
                <item>
                 <widget class="QRadioButton" name="radioButton_cotizacion">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
                  <property name="text">
                   <string>Cotizacion</string>
                  </property>

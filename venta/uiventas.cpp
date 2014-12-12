@@ -3,7 +3,7 @@
 #include <vitrina/empresa.h>
 #include <cliente/object_Cliente.h>
 
-
+//Bienvenido Eddy Caceres Hucarpuma
 uiventas::uiventas(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::uiventas)
@@ -17,7 +17,6 @@ uiventas::uiventas(QWidget *parent) :
 uiventas::~uiventas()
 {
     //delete validator;
-    qDebug()<<"Saliendo de Ventas"<<endl;
     delete ui;
 }
 
@@ -74,15 +73,69 @@ void uiventas::on_pushButton_buscarCliente_clicked()
     form->setComportamiento(1);
     form->setWindowTitle("Cliente");
     form->show();
-    connect(form,SIGNAL(sentCliente(QString,QString,QString,QString)),this,SLOT(recojeCliente(QString,QString,QString,QString)));
-    connect(form,SIGNAL(sentCliente(QString,QString,QString,QString)),form,SLOT(close()));
+    connect(form,SIGNAL(sentCliente(cliente)),this,SLOT(recojeCliente(cliente)));
+    connect(form,SIGNAL(sentCliente(cliente)),form,SLOT(close()));
 }
-void uiventas::recojeCliente(QString id,QString razon,QString ruc,QString direccion)
+void uiventas::recojeCliente(cliente clienteAct)
 {
-    idCliente = id;
-    ui->lineEdit_razonSocial->setText(razon);
-    ui->lineEdit_ruc->setText(ruc);
-    ui->lineEdit_direccion->setText(direccion);
+
+    customer = clienteAct;
+    qDebug()<<"RUC "<<customer.getRuc()<<endl;
+    //VERIFICANDO SI LA VENTA ES CON BOLETA O FACTURA
+    idCliente = customer.getIdCliente();
+    if(!ventaBoleta() && (customer.getRazonSocial().size() ==0 || customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Complete datos del Cliente");
+        msgBox.exec();
+        //INICIANDO EDITAR CLIENTE
+        if(customer.completar())
+        {
+            ui_cliente_datos* cliente_actualizar=new ui_cliente_datos;
+            cliente_actualizar->setWindowTitle("Editar Cliente");
+            cliente_actualizar->setCliente(&customer);
+            cliente_actualizar->setDatosEmpresa();
+            cliente_actualizar->show();
+            connect(cliente_actualizar,SIGNAL(enviarCliente(cliente)),this,SLOT(recojeCliente(cliente)));
+        }
+    }
+    actualizaDatosCliente();
+
+}
+
+void uiventas::actualizaDatosCliente()
+{
+    if(ventaBoleta()){
+        ui->lineEdit_razonSocial->setText(customer.getNombres() +" "+ customer.getPrimerApellido()+" "+customer.getSegundoApellido());
+        ui->lineEdit_ruc->setText("");
+        ui->lineEdit_direccion->setText(customer.getDireccion());
+    }
+    else {
+
+        if(customer.getRazonSocial().size() ==0 || customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0){
+            ui_cliente_datos* cliente_actualizar=new ui_cliente_datos;
+            cliente_actualizar->setWindowTitle("Editar Cliente");
+            cliente_actualizar->setCliente(&customer);
+            cliente_actualizar->setDatosEmpresa();
+            cliente_actualizar->show();
+            connect(cliente_actualizar,SIGNAL(enviarCliente(cliente)),this,SLOT(recojeCliente(cliente)));
+        }
+        else{
+            ui->lineEdit_razonSocial->setText(customer.getRazonSocial());
+            ui->lineEdit_ruc->setText(customer.getRuc());
+            ui->lineEdit_direccion->setText(customer.getDireccion2());
+        }
+
+    }
+
+}
+
+bool uiventas::ventaBoleta()
+{
+    if(ui->radioButton_Boleta->isChecked())
+        return true;
+    else return false;
+
 }
 
 
@@ -388,6 +441,7 @@ void uiventas::on_radioButton_Boleta_clicked()
 {
     numeroDocumento = QString::number(configuracion.mf_get_serieBoleta().toInt()+1);
     ui->label_numero_documento->setText(numeroDocumento);
+    actualizaDatosCliente();
 
 }
 
@@ -395,12 +449,14 @@ void uiventas::on_radioButton_Factura_clicked()
 {
     numeroDocumento = QString::number(configuracion.mf_get_serieFactura().toInt()+1);
     ui->label_numero_documento->setText(numeroDocumento);
+    actualizaDatosCliente();
 }
 
 void uiventas::on_radioButton_cotizacion_clicked()
 {
     numeroDocumento = QString::number(configuracion.mf_get_serieCotizacion().toInt()+1);
     ui->label_numero_documento->setText(numeroDocumento);
+    actualizaDatosCliente();
 }
 
 void uiventas::on_pushButton_guardar_clicked()
@@ -425,10 +481,51 @@ void uiventas::on_pushButton_guardar_clicked()
         msgBox.exec();
         return;
     }
+    //VALIDANDO FACTURA
+    if(ui->radioButton_Factura->isChecked() && ui->lineEdit_ruc->text().size() < 11){
+        QMessageBox msgBox;
+        msgBox.setText("Ingrese datos de factura");
+        msgBox.exec();
+        //idCliente
+
+        if(idCliente.size() > 0)
+        {
+            qDebug()<<idCliente<<" id Cliente "<<endl;
+            cliente cliente_selec;
+
+            cliente_selec.setIdCliente(idCliente);
+            /*pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());
+            pDocumento.completar();
+            cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
+            cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
+            cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
+            cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
+            cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
+            cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
+            cliente_selec.setDocumento(pDocumento);*/
+            if(cliente_selec.completarId(idCliente))
+            {
+                ui_cliente_datos* cliente_actualizar=new ui_cliente_datos;
+                cliente_actualizar->setWindowTitle("Editar Cliente");
+                cliente_actualizar->setCliente(&cliente_selec);
+                cliente_actualizar->setDatosEmpresa();
+                cliente_actualizar->show();
+                connect(cliente_actualizar,SIGNAL(enviarCliente(cliente)),this,SLOT(recojeCliente(cliente)));
+
+            }
+            else
+            {
+                msgBox.setText("No se puedo completar");
+                msgBox.exec();
+            }
+        }
+
+
+        return;
+    }
 
     QString fechaPreventa,fechaCancelacion,serieDocumento,formaPago,codigoTransaccion,
-            plazo,montoTotal,fechaEntrega,montoAdelanto,
-            idTienda,IdColaborador,tipoDocumento;
+            plazo,montoTotal,fechaEntrega,montoAdelanto,idTienda,IdColaborador,tipoDocumento;
 
     object_Venta venta;
 
@@ -1026,7 +1123,12 @@ void uiventas::imprimir(bool pendiente)
     myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
     myimpresion.setDireccionTienda(tienda_actual.mf_get_direccion());
     myimpresion.setRucTienda_Telefono(tienda_actual.mf_get_ruc(),tienda_actual.mf_get_telefono());
-    myimpresion.setNumeroTicket_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+    //DIFERENCIANDO ENTRE BOLETA Y FACTURA
+
+    if(ui->radioButton_Factura->isChecked())
+        myimpresion.setNumeroFactura_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+    else
+        myimpresion.setNumeroTicket_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
 
     myimpresion.setNombreCliente(ui->lineEdit_razonSocial->text());
     myimpresion.setRucCliente(ui->lineEdit_ruc->text());

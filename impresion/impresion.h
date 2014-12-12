@@ -19,6 +19,7 @@ public:
     void setRucTienda_Telefono(QString tmp,QString tmp1);
 
     void setNumeroTicket_Fecha(QString tmp,QString tmp1);
+    void setNumeroFactura_Fecha(QString tmp,QString tmp1);
 
     void setNombreCliente(QString tmp);
     void setRucCliente(QString tmp);

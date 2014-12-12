@@ -26,6 +26,11 @@ void impresion::setNumeroTicket_Fecha(QString tmp, QString tmp1)
     Ticket1.TextoExtremos("Ticket nro: "+tmp,tmp1);
 }
 
+void impresion::setNumeroFactura_Fecha(QString tmp, QString tmp1)
+{
+    Ticket1.TextoExtremos("Factura nro: "+tmp,tmp1);
+}
+
 void impresion::setNombreCliente(QString tmp)
 {
     nombreCliente = tmp;

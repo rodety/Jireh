@@ -18,8 +18,10 @@ public:
     ~ui_cliente_datos();
 
     void setCliente(cliente*);
+    void setDatosEmpresa();
 signals:
     void guarde();
+    void enviarCliente(cliente);
 private slots:
     bool verificaRestriccionesCliente();
 

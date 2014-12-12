@@ -49,8 +49,9 @@ signals:
 
 private slots:
     void on_pushButton_buscarCliente_clicked();
-    void recojeCliente(QString,QString,QString,QString);
-
+    void recojeCliente(cliente);
+    void actualizaDatosCliente();
+    bool ventaBoleta();
     void recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString);
     void on_lineEdit_efectivo_textChanged(const QString &arg1);
     void on_lineEdit_tarjeta_textChanged(const QString &arg1);
@@ -99,15 +100,11 @@ private slots:
 
     void on_pushButton_compras_clicked();
 
-
-
     void on_tableView_Productos_clicked(const QModelIndex &index);
 
     void on_doubleSpinBox_descuento_valueChanged(double arg1);
 
     void on_pushButton_buscar_clicked();
-
-
 
     void on_buscar_venta_returnPressed();
 
@@ -161,6 +158,7 @@ private:
     bool validarEntregadoProducto();
     bool validarCancelado();
     void updateSerieNumeroDocumento();
+    cliente customer;
 
 
 
