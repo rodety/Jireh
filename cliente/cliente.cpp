@@ -311,6 +311,9 @@ bool cliente::completarId(QString id)
             email=query.value(10).toString();
             nacionalidad=query.value(11).toString();
             pDocumento.setIdDocumento(query.value(12).toString());
+            ruc = query.value(13).toString();
+            razonSocial = query.value(14).toString();
+            direccion2 = query.value(15).toString();
             return true;
         }
         else

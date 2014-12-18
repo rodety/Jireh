@@ -24,8 +24,7 @@ public:
     void setNombreCliente(QString tmp);
     void setRucCliente(QString tmp);
     void setDireccionCliente(QString tmp);
-    void setArticuloVector(QVector<articulo> art);
-
+    void setArticuloVector(QVector<articulo> art);    
     void setSubTotal(QString tmp);
     void setIgv(QString tmp);
     void setTotal(QString tmp);
@@ -36,6 +35,7 @@ public:
     void setSaldo(QString tmp);
     void setFechaEntrega(QString tmp);
     void setNombreColaborador(QString tmp);
+    void setFirmaCliente(QString tmp);
     void setMensajeVenta(QString tmp);
     void setMensajeFinal(QString tmp);
     void imprimir();

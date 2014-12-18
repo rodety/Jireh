@@ -60,11 +60,15 @@ public:
         impresora +=ticket; // imprime linea
     }
 
+     void Descripcion()
+    {
+        ticket = "Descripcion\n"; ;   //
+        impresora +=ticket; // imprime linea
+    }
      void EncabezadoVenta()
     {
-        //ticket = "            Articulo                Can    P.Unit    Importe\n";   // agrega lineas de  encabezados
-        ticket = "  Art.  Entrego  Cant.  P.Unit.  Desct.  Total\n";   // agrega lineas de  encabezados
-        impresora +=ticket; // imprime texto
+        QString ticket1 = "Entrego  Cant.  P.Unit.  Desct.  Total\n";   // agrega lineas de  encabezados
+        impresora +=ticket1; // imprime texto
     }
      void TextoIzquierda(QString par1)                          // agrega texto a la izquierda
     {
@@ -220,27 +224,20 @@ public:
         ticket += parte2 + "\n";
         impresora +=ticket; // imprime texto
     }
-     void AgregaArticulo(QString par1, QString entregado, int cant, double precio, double descuento, double total)
+     void AgregaArticulo(QString entregado, int cant, double precio, double descuento, double total)
     {
+         ticket="";
          m_max = 0;
         if (QString::number(cant).length() <= 3 && QString::number(precio).length() <= 10 && QString::number(total).length() <= 11) // valida que cant precio y total esten dentro de rango
         {
-            m_max = par1.length();
-            if (m_max > t_descripcion)                                 // **********
-            {
-                cort = m_max - t_descripcion;
-                parte1 = par1.remove(t_descripcion, cort);          // corta a 16 la descripcion del articulo
-            }
-            else { parte1 = par1; }                      // **********
-            ticket = parte1;                             // agrega articulo
 
-            m_max = 10 - (entregado.length());
+            m_max = 0 - (entregado.length());
             for (int i = 0; i < m_max; i++)                // **********
             {
                 ticket += " ";                           // Agrega espacios para poner el valor de entregado
             }
             ticket += entregado;                   // agrega Entregado
-            m_max = 10 - (QString::number(cant).length());
+            m_max = 15 - (QString::number(cant).length());
             for (int i = 0; i < m_max; i++)                // **********
             {
                 ticket += " ";                           // Agrega espacios para poner el valor de cantidad

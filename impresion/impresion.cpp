@@ -50,15 +50,20 @@ void impresion::setDireccionCliente(QString tmp)
 
 void impresion::setArticuloVector(QVector<articulo> art)
 {
-    Ticket1.EncabezadoVenta(); // imprime encabezados
-    QString descripcion = "--------";
+
+
 
     for(int i=0;i<art.size();i++)
     {
+        Ticket1.Descripcion();
         Ticket1.TextoAutoFormateado(art[i].get_t_articulo());
-        Ticket1.AgregaArticulo(descripcion,art[i].get_t_entregado(),art[i].get_cantidad().toInt(),art[i].get_p_unitario().toDouble(),art[i].get_descuento().toDouble(),art[i].get_importe().toDouble()); //imprime una linea de descripcion
-    }    
+        Ticket1.EncabezadoVenta(); // imprime encabezados
+        Ticket1.AgregaArticulo(art[i].get_t_entregado(),art[i].get_cantidad().toInt(),art[i].get_p_unitario().toDouble(),art[i].get_descuento().toDouble(),art[i].get_importe().toDouble()); //imprime una linea de descripcion
+        Ticket1.LineasGuion(); // imprime una linea de guiones
+
+    }
 }
+
 
 
 void impresion::setSubTotal(QString tmp)
@@ -134,9 +139,14 @@ void impresion::setNombreColaborador(QString tmp)
     QString
             text = "Ud. fue atendido por: "; text.append(tmp);
     Ticket1.TextoMensaje(text);
+
+}
+
+void impresion::setFirmaCliente(QString nombreCliente1)
+{
     Ticket1.TextoMensaje("\n\n\n\n\n\n");
     Ticket1.LineasGuion(); // imprime una linea de guiones
-    QString firma = "Firma: "; firma.append(nombreCliente);
+    QString firma = "Firma: "; firma.append(nombreCliente1);
     Ticket1.TextoCentro(firma);
 }
 void impresion::setMensajeVenta(QString tmp)

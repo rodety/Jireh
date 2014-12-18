@@ -159,6 +159,7 @@ private:
     bool validarCancelado();
     void updateSerieNumeroDocumento();
     cliente customer;
+    bool entregado;
 
 
 

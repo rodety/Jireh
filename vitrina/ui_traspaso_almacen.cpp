@@ -275,11 +275,11 @@ void ui_traspaso_almacen::on_pushButton_aceptar_traspaso_clicked()
         ui_tienda_traspaso->actualizar_grilla();
 
 
-        QPrinter printer;
+        /*QPrinter printer;
         printer.setOrientation(QPrinter::Landscape);
         printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName("Guia_Traspaso.pdf");
-        QPainter painter;
+        printer.setOutputFileName("Guia_Traspaso.pdf");*/
+        /*QPainter painter;
         if (! painter.begin(&printer))
             qWarning("failed to open file, is it writable?");
 
@@ -303,7 +303,7 @@ void ui_traspaso_almacen::on_pushButton_aceptar_traspaso_clicked()
 
 
 
-
+/*
         painter.setFont(QFont("Times New Roman", 20));
         painter.drawText(10,200,"Posicion Antigua del Producto:");
         painter.setFont(QFont("Times New Roman", 15));
@@ -377,11 +377,11 @@ void ui_traspaso_almacen::on_pushButton_aceptar_traspaso_clicked()
                 filename.append(".pdf");
             }
 
-            QPrinter printer(QPrinter::HighResolution);
+            /*QPrinter printer(QPrinter::HighResolution);
             printer.setOutputFormat(QPrinter::PdfFormat);
-            printer.setOutputFileName(filename);
-            QPrintDialog*dlg = new QPrintDialog(&printer,&parent);
-            dlg->setWindowTitle(QObject::tr("Print Document"));
+            printer.setOutputFileName(filename);*/
+            //QPrintDialog*dlg = new QPrintDialog(&printer,&parent);
+      /*      dlg->setWindowTitle(QObject::tr("Print Document"));
 
             if(dlg->exec() == QDialog::Accepted) {
                 parent.print(&printer);
@@ -396,5 +396,6 @@ void ui_traspaso_almacen::on_pushButton_aceptar_traspaso_clicked()
         msgBox.exec();
 
     }
-
+*/
+    }
 }

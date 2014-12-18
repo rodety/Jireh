@@ -112,7 +112,7 @@ void uiventas::actualizaDatosCliente()
     }
     else {
 
-        if(customer.getRazonSocial().size() ==0 || customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0){
+        if(customer.getIdCliente().size() > 0 && (customer.getRazonSocial().size() == 0 && customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0)){
             ui_cliente_datos* cliente_actualizar=new ui_cliente_datos;
             cliente_actualizar->setWindowTitle("Editar Cliente");
             cliente_actualizar->setCliente(&customer);
@@ -482,7 +482,8 @@ void uiventas::on_pushButton_guardar_clicked()
         return;
     }
     //VALIDANDO FACTURA
-    if(ui->radioButton_Factura->isChecked() && ui->lineEdit_ruc->text().size() < 11){
+    if(ui->radioButton_Factura->isChecked() && ui->lineEdit_ruc->text().size() <= 10)
+    {
         QMessageBox msgBox;
         msgBox.setText("Ingrese datos de factura");
         msgBox.exec();
@@ -597,7 +598,7 @@ void uiventas::on_pushButton_guardar_clicked()
         montoAdelanto = ui->lineEdit_total_cancelado->text();
 
 
-    bool entregado = true;
+    entregado = true;
 
     for(int i = 0; i<count_row;i++)
     {
@@ -1117,7 +1118,7 @@ bool uiventas::validar_montoEntregado()
         return true;
 }
 
-void uiventas::imprimir(bool pendiente)
+void uiventas::imprimir(bool pendiente)//pendiente de pago
 {
     impresion myimpresion;
     myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
@@ -1179,10 +1180,12 @@ void uiventas::imprimir(bool pendiente)
     }
     myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
     myimpresion.setNombreColaborador(ui->lineEdit_usuario->text());
+    if(entregado){
+        myimpresion.setFirmaCliente(ui->lineEdit_razonSocial->text());
+    }
     myimpresion.setMensajeVenta(tienda_actual.mf_get_mensaje_compra());
     myimpresion.setMensajeFinal(tienda_actual.mf_get_mensaje_cliente());
     myimpresion.imprimir();
-
 }
 
 
@@ -1371,7 +1374,7 @@ void uiventas::on_comboBox_Colaborador_currentIndexChanged(int index)
 
 void uiventas::limpiarInterfazVenta()
 {
-    ui->radioButton_Boleta->setChecked(TRUE);
+    ui->radioButton_Boleta->setChecked(true);
     ui->lineEdit_razonSocial->clear();
     ui->lineEdit_ruc->clear();
     ui->lineEdit_direccion->clear();

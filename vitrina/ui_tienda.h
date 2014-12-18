@@ -197,6 +197,8 @@ private slots:
 
     void on_pushButton_reponer_clicked();
 
+    void on_pushButton_print_clicked();
+
 public slots:
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString idEmpresa);
