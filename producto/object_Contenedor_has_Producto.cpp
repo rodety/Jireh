@@ -185,7 +185,7 @@ bool object_Contenedor_has_Producto::mf_add()
 		query.bindValue(integer++, md_o_idContenedor);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Contenedor_idContenedor);
 	query.bindValue(integer++, md_o_Producto_idProducto);
 	query.bindValue(integer++, md_o_Colaborador_Persona_idPersona);

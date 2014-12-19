@@ -1,5 +1,4 @@
 #include "etiqueta.h"
-
 etiqueta::etiqueta()
 {
 }

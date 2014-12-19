@@ -185,7 +185,7 @@ bool object_Otros::mf_add()
 		query.bindValue(integer++, md_o_Producto_idProducto);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Color_idColor);
 	query.bindValue(integer++, md_o_Talla_idTalla);
 	query.bindValue(integer++, md_o_Calidad_idCalidad);

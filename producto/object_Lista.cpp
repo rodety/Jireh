@@ -109,7 +109,7 @@ bool object_Lista::mf_add()
 		query.bindValue(integer++, md_o_idLista);
 	}
 	else
-                query.bindValue(integer++, NULL);
+                query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_nombre);
 
 	if(query.exec())

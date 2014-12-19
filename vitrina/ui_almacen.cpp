@@ -7,7 +7,7 @@
 #include "almacen_datos.h"
 #include "ui_andamio_datos.h"
 #include "ui_contenedor_datos.h"
-
+#include "share_typedef.h"
 #include "almacen.h"
 #include "andamio.h"
 #include "contenedor.h"
@@ -17,6 +17,7 @@
 #include "ncreportpreviewoutput.h"
 #include "ncreportpreviewwindow.h"
 #include <QFileDialog>
+
 
 ui_almacen::ui_almacen(QWidget *parent) :
     QWidget(parent),

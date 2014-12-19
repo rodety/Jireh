@@ -394,7 +394,7 @@ bool object_Cliente::mf_add()
 		query.bindValue(integer++, md_o_idCliente);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_nombres);
 	query.bindValue(integer++, md_o_primer_apellido);
 	query.bindValue(integer++, md_o_segundo_apellido);

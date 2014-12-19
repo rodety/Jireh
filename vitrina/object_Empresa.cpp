@@ -223,7 +223,7 @@ bool object_Empresa::mf_add()
 		query.bindValue(integer++, md_o_idEmpresa);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_razonSocial);
 	query.bindValue(integer++, md_o_ruc);
 	query.bindValue(integer++, md_o_direccion);

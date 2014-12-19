@@ -432,7 +432,7 @@ bool object_Colaborador::mf_add()
 		query.bindValue(integer++, md_o_nombres);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_primer_apellido);
 	query.bindValue(integer++, md_o_segundo_apellido);
 	query.bindValue(integer++, md_o_idTipoColaborador);

@@ -128,7 +128,7 @@ bool object_Tarjeta::mf_add()
 		query.bindValue(integer++, md_o_idTarjeta);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_nombre);
 	query.bindValue(integer++, md_o_descripcion);
 

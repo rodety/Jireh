@@ -166,7 +166,7 @@ bool object_Accesorios_n::mf_add()
 		query.bindValue(integer++, md_o_Producto_idProducto);
 	}
 	else
-		query.bindValue(integer++, "NULL");
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Color_idColor);
 	query.bindValue(integer++, md_o_Tamanio_idTamanio);
 	query.bindValue(integer++, md_o_Calidad_idCalidad);

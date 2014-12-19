@@ -272,7 +272,7 @@ bool object_Venta_has_Tarjeta::mf_add()
 		query.bindValue(integer++, md_o_idVenta_has_Tarjeta);
 	}
 	else
-                query.bindValue(integer++, NULL);
+                query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Tarjeta_idTarjeta);
 	query.bindValue(integer++, md_o_id);
 	query.bindValue(integer++, md_o_tarjeta);

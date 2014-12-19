@@ -109,7 +109,7 @@ bool object_Tratamiento::mf_add()
 		query.bindValue(integer++, md_o_idTratamiento);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_nombre);
 
 	if(query.exec())

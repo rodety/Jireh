@@ -298,7 +298,7 @@ bool object_proveedor::mf_add()
 		query.bindValue(integer++, md_o_idProveedor);
 	}
 	else
-                query.bindValue(integer++, NULL);
+                query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_raz_social);
 	query.bindValue(integer++, md_o_ruc);
 	query.bindValue(integer++, md_o_direccion);

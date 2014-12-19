@@ -204,7 +204,7 @@ bool object_EntregaProducto::mf_add()
         query.bindValue(integer++, md_o_idEntregaProducto);
     }
     else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
     query.bindValue(integer++, md_o_Cliente_idCliente);
     query.bindValue(integer++, md_o_Colaborador_idColaborador);
     query.bindValue(integer++, md_o_Producto_idProducto);

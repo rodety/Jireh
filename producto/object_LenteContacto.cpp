@@ -280,7 +280,7 @@ bool object_LenteContacto::mf_add()
 		query.bindValue(integer++, md_o_Producto_idProducto);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_presentacion);
 	query.bindValue(integer++, md_o_tinteVisibilidad);
 	query.bindValue(integer++, md_o_contenidoAcuoso);

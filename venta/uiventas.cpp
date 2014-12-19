@@ -1502,6 +1502,7 @@ void uiventas::on_comboBox_buscar_producto_activated(int index)
         form->setWindowTitle("Seleccione Monturas o Gafas");
         form->setComportamiento(1);
         form->configurarVenta();
+        form->configurarPermisos();
         //Pendiente configuracion Usuario
         connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
         connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));

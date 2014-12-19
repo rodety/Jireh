@@ -213,7 +213,7 @@ bool object_Compra::mf_add()
         query.bindValue(integer++, md_o_idCompra);
     }
     else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
     query.bindValue(integer++, md_o_fecha);
     query.bindValue(integer++, md_o_montoTotal);
     query.bindValue(integer++, md_o_anulado);

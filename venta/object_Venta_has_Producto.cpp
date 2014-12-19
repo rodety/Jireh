@@ -204,7 +204,7 @@ bool object_Venta_has_Producto::mf_add()
         query.bindValue(integer++, md_o_idVenta_has_Producto);
     }
     else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
     query.bindValue(integer++, md_o_Venta_idVenta);
     query.bindValue(integer++, md_o_Producto_idProducto);
     query.bindValue(integer++, md_o_cantidad);

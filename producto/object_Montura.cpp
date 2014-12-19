@@ -185,7 +185,7 @@ bool object_Montura::mf_add()
 		query.bindValue(integer++, md_o_Producto_idProducto);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Forma_idForma);
 	query.bindValue(integer++, md_o_Color_idColor);
 	query.bindValue(integer++, md_o_Tamanio_idTamanio);

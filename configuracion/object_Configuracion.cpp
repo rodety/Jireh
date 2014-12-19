@@ -204,7 +204,7 @@ bool object_Configuracion::mf_add()
 		query.bindValue(integer++, md_o_idConfiguracion);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Tienda_idTienda);
 	query.bindValue(integer++, md_o_igv);
 	query.bindValue(integer++, md_o_serieBoleta);

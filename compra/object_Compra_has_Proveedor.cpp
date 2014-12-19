@@ -128,7 +128,7 @@ bool object_Compra_has_Proveedor::mf_add()
 		query.bindValue(integer++, md_o_Compra_idCompra);
 	}
 	else
-        query.bindValue(integer++, NULL);
+        query.bindValue(integer++, "NULL");
 	query.bindValue(integer++, md_o_Proveedor_idProveedor);
 	query.bindValue(integer++, md_o_Colaborador_idColaborador);
 

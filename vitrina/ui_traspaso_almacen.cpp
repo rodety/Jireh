@@ -4,6 +4,7 @@
 #include <QtGui>
 #include <QTextEdit>
 #include <QPrintDialog>
+#include<QPrinter>
 
 ui_traspaso_almacen::ui_traspaso_almacen(QWidget *parent) :
     QWidget(parent),

@@ -568,6 +568,20 @@ void ui_tienda::configurarVenta()
     //ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second);
 }
 
+void ui_tienda::configurarPermisos()
+{
+    //Tipo == 1 Administrador
+    //Tipo == 2 Vendedor
+
+    int tipo = Sesion::getIdTypeColaborador();
+    qDebug()<<tipo<<endl;
+    if(tipo==2){
+        ui->btnAgregar_empresa->hide();
+        ui->btnAgregar_tienda->hide();
+        ui->btnAgregar_vitrina->hide();
+    }
+}
+
 
 
 void ui_tienda::on_grilla_cellDoubleClicked(int row, int column)
@@ -1129,10 +1143,10 @@ void ui_tienda::on_pushButton_reponer_clicked()
 
 }
 
-void ui_tienda::on_pushButton_print_clicked()
+/*void ui_tienda::on_pushButton_print_clicked()
 {
     //validaciones
     //Mensaje
 
 
-}
+}*/
