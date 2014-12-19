@@ -135,6 +135,7 @@ public:
     void setComportamiento(int tem);
     void setMovimiento(int mov);
     int getMovimiento();
+    void configurarVenta();
 
 
 public:

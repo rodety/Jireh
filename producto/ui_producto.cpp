@@ -52,6 +52,13 @@ void ui_producto::set_index_combo_producto(int index)
     ui->comboBox_tipoProducto->setEnabled(false);
 }
 
+void ui_producto::configurarVenta(int index)
+{
+    //SELECCIONAR TIPO DE PRODUCTO
+    ui->comboBox_tipoProducto->setCurrentIndex(index);
+
+}
+
 void ui_producto::on_comboBox_tipoProducto_currentIndexChanged(int index)
 {
 

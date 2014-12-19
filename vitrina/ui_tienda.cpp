@@ -548,6 +548,26 @@ int ui_tienda::getMovimiento()
     return movimiento;
 }
 
+void ui_tienda::configurarVenta()
+{
+    //CONFIGURANDO UBICACION EMPRESA
+    for(int i=0;i<ui->comboBox_empresa->count();i++){
+
+        if( Sesion::getUbicacion().first == QString(Empresas[ui->comboBox_empresa->itemText(i)]).toInt()){
+            ui->comboBox_empresa->setCurrentIndex(i);
+        }
+    }
+
+    //CONFIGURANDO UBICACION TIENDA
+    for(int i=0;i<ui->comboBox_tienda->count();i++){
+
+        if( Sesion::getUbicacion().second == QString(Tiendas[ui->comboBox_tienda->itemText(i)]).toInt()){
+            ui->comboBox_tienda->setCurrentIndex(i);
+        }
+    }
+    //ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second);
+}
+
 
 
 void ui_tienda::on_grilla_cellDoubleClicked(int row, int column)

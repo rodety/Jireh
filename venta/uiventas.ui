@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -344,29 +344,56 @@
                </item>
                <item>
                 <property name="text">
-                 <string>Productos</string>
+                 <string>Monturas - Gafas</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../Icons/Icons.qrc">
-                  <normaloff>:/Icons/file-roller.png</normaloff>:/Icons/file-roller.png</iconset>
+                  <normaloff>:/Icons/internet-news-reader.png</normaloff>:/Icons/internet-news-reader.png</iconset>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>Vitrina</string>
+                 <string>Lunas</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../Icons/Icons.qrc">
-                  <normaloff>:/Icons/inventory-maintenance.png</normaloff>:/Icons/inventory-maintenance.png</iconset>
+                  <normaloff>:/Icons/Circle.png</normaloff>:/Icons/Circle.png</iconset>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>Almacen</string>
+                 <string>Lentes de Contacto</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../Icons/Icons.qrc">
-                  <normaloff>:/Icons/1354339097_localbusiness-y.png</normaloff>:/Icons/1354339097_localbusiness-y.png</iconset>
+                  <normaloff>:/Icons/1354339076_picasa.png</normaloff>:/Icons/1354339076_picasa.png</iconset>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Accesorios</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../Icons/Icons.qrc">
+                  <normaloff>:/Icons/package_games_logic.png</normaloff>:/Icons/package_games_logic.png</iconset>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Trabajos Extras</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../Icons/Icons.qrc">
+                  <normaloff>:/Icons/Stethoscope_Black.png</normaloff>:/Icons/Stethoscope_Black.png</iconset>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Otros</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../Icons/Icons.qrc">
+                  <normaloff>:/Icons/color_swatch.png</normaloff>:/Icons/color_swatch.png</iconset>
                 </property>
                </item>
               </widget>

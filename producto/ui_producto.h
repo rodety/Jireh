@@ -44,7 +44,7 @@ public:
     explicit ui_producto(QWidget *parent = 0);
     ~ui_producto();
     void set_index_combo_producto(int index);    
-    
+    void configurarVenta(int index);
 private slots:
 
     void configurarCombos(int index);

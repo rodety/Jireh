@@ -156,6 +156,7 @@ private:
     QModelIndex indiceProducto;
     void calcularSubtotal();
     bool validarEntregadoProducto();
+    bool EntregadoProducto();
     bool validarCancelado();
     void updateSerieNumeroDocumento();
     cliente customer;

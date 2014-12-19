@@ -1180,7 +1180,7 @@ void uiventas::imprimir(bool pendiente)//pendiente de pago
     }
     myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
     myimpresion.setNombreColaborador(ui->lineEdit_usuario->text());
-    if(entregado){
+    if(EntregadoProducto()){
         myimpresion.setFirmaCliente(ui->lineEdit_razonSocial->text());
     }
     myimpresion.setMensajeVenta(tienda_actual.mf_get_mensaje_compra());
@@ -1498,22 +1498,45 @@ void uiventas::on_comboBox_buscar_producto_activated(int index)
     fuente = index;
     if(index == 1)
     {
+        ui_tienda* form = new ui_tienda;
+        form->setWindowTitle("Seleccione Monturas o Gafas");
+        form->setComportamiento(1);
+        form->configurarVenta();
+        //Pendiente configuracion Usuario
+        connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
+        connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
+        form->show();
+    }
+    if(index == 2 || index == 3 || index == 4 || index == 5 || index == 6)
+    {
         ui_producto* form=new ui_producto;
         form->setComportamiento(2);
-        form->setWindowTitle("Seleccione Producto");
+        if(index == 2){
+            form->setWindowTitle("Seleccione Lunas");
+            form->configurarVenta(1);
+        }
+        if(index == 3){
+            form->setWindowTitle("Seleccione Lentes de Contacto");
+            form->configurarVenta(3);
+        }
+        if(index == 4){
+            form->setWindowTitle("Seleccione Accesorios");
+            form->configurarVenta(6);
+        }
+        if(index == 5){
+            form->setWindowTitle("Seleccione Trabajos Extras");
+            form->configurarVenta(5);
+        }
+        if(index == 6){
+            form->setWindowTitle("Seleccione Otros Productos");
+            form->configurarVenta(4);
+        }
+
         connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
         connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
         form->show();
     }
-    if(index == 2)
-    {
-        ui_tienda* form = new ui_tienda;
-        form->setWindowTitle("Seleccione Producto");
-        form->setComportamiento(1);
-        connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
-        connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
-        form->show();
-    }
+    /*
     if(index == 3)
     {
         ui_almacen* form = new ui_almacen;
@@ -1522,7 +1545,7 @@ void uiventas::on_comboBox_buscar_producto_activated(int index)
         connect(form,SIGNAL(sendProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
         connect(form,SIGNAL(sendProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
         form->show();
-    }
+    }*/
 
 }
 
@@ -1819,13 +1842,28 @@ bool uiventas::validarEntregadoProducto()
 
         if( entrega != "Si" && entrega != "si" && entrega != "SI" && entrega != "No" && entrega != "no" && entrega != "NO")
         {
-            qDebug()<<"Entregado"<<entrega<<endl;
             return false;
         }
 
     }
     return true;
 
+}
+
+bool uiventas::EntregadoProducto()
+{
+    QString entrega;
+    for(int i = 0; i<count_row;i++)
+    {
+        entrega = seleccionados_model->item(i,5)->text();
+
+        if( entrega == "no" || entrega != "No" && entrega == "NO" )
+        {
+            return false;
+        }
+
+    }
+    return true;
 }
 
 bool uiventas::validarCancelado()
