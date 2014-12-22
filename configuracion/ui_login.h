@@ -1,6 +1,6 @@
 #ifndef UI_LOGIN_H
 #define UI_LOGIN_H
-
+#include "sesion.h"
 #include <QWidget>
 #include "mainwindow.h"
 
@@ -23,6 +23,7 @@ private slots:
 
 private:
     Ui::UI_LOGIN *ui;
+    Sesion * a;
 };
 
 #endif // UI_LOGIN_H

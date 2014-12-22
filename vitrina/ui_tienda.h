@@ -140,7 +140,8 @@ public:
 
 
 public:
-    explicit ui_tienda(QWidget *parent = 0);
+    ui_tienda(QWidget *parent = 0);
+    ui_tienda(QWidget *, int a);
     ~ui_tienda();
     
 private slots:

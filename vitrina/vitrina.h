@@ -3,6 +3,7 @@
 
 #include <objetopersistente.h>
 #include <QSqlQueryModel>
+#include "configuracion/sesion.h"
 
 class vitrina:public ObjetoPersistente
 {
@@ -38,6 +39,7 @@ class vitrina:public ObjetoPersistente
         bool agregar();        
         bool eliminar();
         bool actualizar();
+        bool ver_usuario();
 
 //        bool buscar();   //parece que no se usa
 

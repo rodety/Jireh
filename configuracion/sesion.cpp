@@ -72,32 +72,36 @@ int Sesion::Iniciar(QString user, QString pass)
     return Sesion::SleepTime; ///<Retorna bloqueo
     QSqlQuery q;
     bool ok = q.exec("select idColaborador,idTipoColaborador,usuario,nombres,primer_apellido,segundo_apellido,habilitado,resset_pass from Colaborador where usuario = '"+user+"' and contrasena = MD5('"+pass+"')"); ///<Verifica si el usuario y el pass estan registrados
+
     if(!ok)
     {
-    qDebug()<<q.lastError().text();
-    qDebug()<<"Parece que no hay resultados"<<endl;
+        qDebug()<<q.lastError().text();
+        qDebug()<<"Parece que no hay resultados"<<endl;
     }
     if(!q.next()) ///<Si no se producen resultados
     {
-    intentos ++; ///<Se aumenta el numero de intentos;
-    if(intentos >= numMaxIntentos) ///<Si el numero de intentos paso el numero maximo de intentos
-    {
-    if(q.exec("call deshabilitarUsr("+user+")")) ///<se deshabilita la cuenta
-    return Sesion::UsuarioDeshabilitado;
+        intentos ++; ///<Se aumenta el numero de intentos;
+        if(intentos >= numMaxIntentos) ///<Si el numero de intentos paso el numero maximo de intentos
+          {
+            if(q.exec("call deshabilitarUsr("+user+")")) ///<se deshabilita la cuenta
+            return Sesion::UsuarioDeshabilitado;
+                }
+            else if(!(intentos%numMinIntentos)) ///<Si se ha alcanzado el numero minimo de intentos
+                {
+                    sleep = true; ///<se bloquea el incio de sesion
+                    tiempoBloqueo.restart(); ///<se inicia la cuenta de tiempo
+                     return Sesion::SleepTime;
+                }
+            return Sesion::PassUsrWrong;
     }
-    else if(!(intentos%numMinIntentos)) ///<Si se ha alcanzado el numero minimo de intentos
-    {
-    sleep = true; ///<se bloquea el incio de sesion
-    tiempoBloqueo.restart(); ///<se inicia la cuenta de tiempo
-    return Sesion::SleepTime;
-    }
-    return Sesion::PassUsrWrong;
-    }
+
     QSqlRecord rec = q.record();
     if(!rec.value("habilitado").toBool()) ///<se verifica si el usuario esta deshabilitado
         return Sesion::UsuarioDeshabilitado;
     Usuario *usr = new Usuario(rec.value("idColaborador").toInt(),
-    rec.value("idTipoColaborador").toInt(),
+    rec.value("idTipoColaborador").toInt(),// estes es el que necesito;
+
+
     rec.value("usuario").toString(),
     rec.value("nombres").toString(),
     rec.value("primer_apellido").toString(),

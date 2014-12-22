@@ -1,9 +1,10 @@
 #include "ui_login.h"
 #include "ui_ui_login.h"
 #include "ui_cambiarpassdialog.h"
-#include "sesion.h"
 #include <QMessageBox>
 #include <QDesktopWidget>
+#include<QDebug>
+
 
 UI_LOGIN::UI_LOGIN(QWidget *parent):QWidget(parent),ui(new Ui::UI_LOGIN)
 {
@@ -25,8 +26,13 @@ UI_LOGIN::~UI_LOGIN()
 
 void UI_LOGIN::on_pushButton_Aceptar_clicked()
 {
-    int status = Sesion::Iniciar(ui->lineEdit_Usuario->text(),ui->lineEdit_Password->text());
-  switch(status)
+
+    int status = a->Iniciar(ui->lineEdit_Usuario->text(),ui->lineEdit_Password->text());
+
+//qDebug()<<"este es el tipo de usuario "<< a->get_Usuario()->get_tipoUsuario();
+
+
+    switch(status)
   {
     case Sesion::PassUsrWrong :
       {

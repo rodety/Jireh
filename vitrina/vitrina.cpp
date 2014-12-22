@@ -67,6 +67,17 @@ bool vitrina::eliminar()
     else
         return false;
 }
+bool vitrina::ver_usuario()
+{
+    // aqui verificamos el tipo de usuario para que oculte o no las funciones
+
+   /* cout<<"este es el tipo de usuario!!!!!! ::: "<< Sesion::s_user->m_tipoUsuario;
+    Sesion a();
+    a.s_user*/
+
+
+
+}
 
 //QSqlQueryModel* vitrina::mostrar()
 //{

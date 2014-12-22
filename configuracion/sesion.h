@@ -17,10 +17,25 @@
 class Sesion:public QObject
 {
     Q_OBJECT
+    private:
+        Sesion(Usuario * usr = 0);
+        static Sesion* mp_instance;  ///<instancia de la clase singletone
+        static int intentos;         ///<Numero de intentos de inicio de sesion
+        static bool sleep;           ///<inhabilita el inicio de sesion por un tiempo determinado
+        static QTime tiempoBloqueo;  ///<Cuenta el tiempo de bloqueo
+        static int numMinIntentos;  ///<Numero minimo de intentos de inicio
+        static int numMaxIntentos;  ///<Numero maximo de intentos de inicio
+        static int tiempoEspera;    ///<Tiempo de bloqueo de el inicio
+        static int idEmpresa;       ///<Empresa en la que se inicio sesion
+        static int idTienda;       ///<Tienda en la que se inicio sesion
+        static double impuesto;    ///<Igv
+        QTime s_time;               ///<tiempo de inicio de sesion
+        Usuario * s_user;           ///<referencia a un usuario
+        object_Tienda* tienda;     ///referencia a Tienda
+        object_Configuracion* configuracion;   ///Referencia a configuracion
 public:
 
     enum sesionState{UsuarioDeshabilitado,PassUsrWrong,SleepTime,ResetPass,inicioOK};
-
     static Sesion* getSesion();
     static int Iniciar(QString user,QString pass);
     static void Configurar(int nminI,int nmaxI,int tEspera);
@@ -39,22 +54,6 @@ public:
     void uptadeConfiguracion();
 
     static double getIgv() { return impuesto;}
-private:
-    Sesion(Usuario * usr = 0);
-    static Sesion* mp_instance;  ///<instancia de la clase singletone
-    static int intentos;         ///<Numero de intentos de inicio de sesion
-    static bool sleep;           ///<inhabilita el inicio de sesion por un tiempo determinado
-    static QTime tiempoBloqueo;  ///<Cuenta el tiempo de bloqueo
-    static int numMinIntentos;  ///<Numero minimo de intentos de inicio
-    static int numMaxIntentos;  ///<Numero maximo de intentos de inicio
-    static int tiempoEspera;    ///<Tiempo de bloqueo de el inicio
-    static int idEmpresa;       ///<Empresa en la que se inicio sesion
-    static int idTienda;       ///<Tienda en la que se inicio sesion
-    static double impuesto;    ///<Igv
-    QTime s_time;               ///<tiempo de inicio de sesion
-    Usuario * s_user;           ///<referencia a un usuario
-    object_Tienda* tienda;     ///referencia a Tienda
-    object_Configuracion* configuracion;   ///Referencia a configuracion
 
 };
 

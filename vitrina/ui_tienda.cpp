@@ -15,20 +15,51 @@
 #include <QInputDialog>
 #include <QMessageBox>
 class c_tienda;
-ui_tienda::ui_tienda(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ui_tienda)
+
+ui_tienda::ui_tienda(QWidget *parent) : QWidget(parent), ui(new Ui::ui_tienda)
 {
-    ui->setupUi(this);    
-    actualizar_combo_empresa();    
-    caso=false;    toVitrina=false;
-    habilitar_botones();    
-    //actual=Empresa;
-    ui->pushButton_aceptar_traspaso->hide();    
-    ui->pushButton_reponer->setEnabled(false);
-    ui->lineEdit_cod_reponer->setEnabled(false);
-    ui->label_cod->setEnabled(false);
+        ui->setupUi(this);
+        actualizar_combo_empresa();
+        caso=false;    toVitrina=false;
+        habilitar_botones();
+        //actual=Empresa;
+
+        if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
+        {
+
+            ui->pushButton_reponer->setEnabled(false);
+            ui->lineEdit_cod_reponer->setEnabled(false);
+            ui->label_cod->setEnabled(false);
+            ui->pushButton_traspaso->setEnabled(false);
+            ui->btnAgregar_empresa->setEnabled(false);
+            ui->btnAgregar_tienda->setEnabled(false);
+            ui->btnAgregar_vitrina->setEnabled(false);
+            ui->btnDeshabilitar_empresa->setEnabled(false);
+            ui->btnDeshabilitar_tienda->setEnabled(false);
+            ui->btnDeshabilitar_vitrina->setEnabled(false);
+            ui->btnEditar_empresa->setEnabled(false);
+            ui->btnEditar_tienda->setEnabled(false);
+            ui->btnEditar_vitrina->setEnabled(false);
+            ui->pushButton_quitar->setEnabled(false);
+            ui->pushButton_aceptar_traspaso->setEnabled(false);
+            ui->button_traspaso_almacen->setEnabled(false);
+
+        }
 }
+ui_tienda::ui_tienda(QWidget *parent, int a) : QWidget(parent), ui(new Ui::ui_tienda)
+{
+        ui->setupUi(this);
+        actualizar_combo_empresa();
+        caso=false;    toVitrina=false;
+        habilitar_botones();
+        //actual=Empresa;
+        ui->pushButton_print->setEnabled(false);
+        ui->pushButton_aceptar_traspaso->hide();
+        ui->pushButton_reponer->setEnabled(false);
+        ui->lineEdit_cod_reponer->setEnabled(false);
+        ui->label_cod->setEnabled(false);
+}
+
 
 ui_tienda::~ui_tienda()
 {

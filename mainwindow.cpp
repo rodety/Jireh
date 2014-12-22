@@ -127,6 +127,7 @@ void MainWindow::on_actionCliente_triggered()
 
 void MainWindow::on_actionVitrina_triggered()
 {
+
     bool control = true;
     foreach(QWidget *widget, QApplication::topLevelWidgets()) {
       if(widget->objectName() == "ui_tienda")
