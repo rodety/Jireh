@@ -69,17 +69,20 @@ bool alerta::actualizar()
 bool alerta::eliminar()
 {
     QSqlQuery query;
-    query.prepare("DELETE FROM Alerta WHERE idAlerta =?");
+    query.prepare("DELETE FROM Alerta WHERE idAlerta = ?");
     query.bindValue(0,idAlerta);
     if(query.exec())
         return true;
     else return false;
 }
 
-QSqlQueryModel* alerta::mostrar(int t, QDate d)
+QSqlQueryModel* alerta::mostrar(int t, QDate d,int id)
 {
     QSqlQueryModel* model=new QSqlQueryModel;        
-    model->setQuery("SELECT hora as 'Hora',descripcion as 'Descripcion' FROM Alerta WHERE tipo = "+QString::number(t)+" AND fechaInicio <= '"+d.toString(Qt::ISODate)+"' AND fechaFin >= '"+d.toString(Qt::ISODate)+"' order by hora");
+    if(t==0)//General
+        model->setQuery("SELECT hora as 'Hora',descripcion as 'Descripcion' FROM Alerta WHERE tipo = "+QString::number(t)+" AND fechaInicio <= '"+d.toString(Qt::ISODate)+"' AND fechaFin >= '"+d.toString(Qt::ISODate)+"' order by hora");
+    else
+        model->setQuery("SELECT hora as 'Hora',descripcion as 'Descripcion' FROM Alerta WHERE tipo = "+QString::number(t)+" AND Colaborador_idColaborador = "+QString::number(id)+ " AND fechaInicio <= '"+d.toString(Qt::ISODate)+"' AND fechaFin >= '"+d.toString(Qt::ISODate)+"' order by hora");
     return model;
 }
 
