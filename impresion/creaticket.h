@@ -298,7 +298,7 @@ public:
              QPainter painter;
              painter.begin(&printer);
              painter.setPen(Qt::black);
-             painter.setFont(QFont("Arial", 7));
+             painter.setFont(QFont("Arial", 10));
              painter.drawText(0,0,500,500, Qt::AlignLeft|Qt::AlignTop, impresora);
              painter.end();
              qDebug()<<impresora<<endl;
