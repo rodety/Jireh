@@ -14,6 +14,9 @@
 #include "vitrina/object_Empresa.h"
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QThreadPool>
+
+
 class c_tienda;
 
 ui_tienda::ui_tienda(QWidget *parent) : QWidget(parent), ui(new Ui::ui_tienda)
@@ -846,12 +849,10 @@ void ui_tienda::on_button_traspaso_almacen_clicked()
 }
 
 
-
-
-void ui_tienda::on_comboBox_vitrina_activated(int index)
+/*void ui_tienda::on_comboBox_vitrina_activated(int index)
 {
     changeActual(Vitrina);
-}
+}*/
 
 void ui_tienda::on_comboBox_empresa_activated(const QString &arg1)
 {
@@ -1174,10 +1175,15 @@ void ui_tienda::on_pushButton_reponer_clicked()
 
 }
 
-/*void ui_tienda::on_pushButton_print_clicked()
+
+
+void ui_tienda::on_pushButton_print_clicked()
 {
-    //validaciones
-    //Mensaje
+   report r;
+   r.execute();
 
 
-}*/
+
+  /*  report r;
+    r.run();*/
+}

@@ -17,6 +17,7 @@ public:
     
 private:
     Ui::ui_reporte *ui;
+    void execute();
 };
 
 #endif // UI_REPORTE_H
