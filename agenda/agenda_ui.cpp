@@ -215,12 +215,12 @@ void agenda_ui::on_pushButton_Alert_General_add_clicked()
 }
 void agenda_ui::updateTable_Alert_General()
 {
-    ui->tableView_Alert_General->setModel(alerta::mostrar(0,fecha));
+    ui->tableView_Alert_General->setModel(alerta::mostrar(0,fecha,Sesion::getIdColaborador()));
 }
 
 void agenda_ui::updateTable_Alert_Personal()
 {
-    ui->tableView_Alert_Personal->setModel(alerta::mostrar(1,fecha));
+    ui->tableView_Alert_Personal->setModel(alerta::mostrar(1,fecha,Sesion::getIdColaborador()));
 }
 
 void agenda_ui::actualizar_combo_tienda()

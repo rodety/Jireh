@@ -41,7 +41,7 @@ public:
     bool actualizar();
     bool eliminar();
 
-    static QSqlQueryModel* mostrar(int,QDate);
+    static QSqlQueryModel* mostrar(int,QDate,int id);
     bool completar();
 
     static QSqlQueryModel* buscarAlerta(QString _item);
