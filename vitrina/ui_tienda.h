@@ -27,7 +27,7 @@
 #include <producto/object_TipoLente.h>
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
-#include <report.h>
+#include <reporte/report.h>
 
 class ui_tienda_agregar;
 
