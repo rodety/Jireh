@@ -12,3 +12,5 @@ ui_reporte::~ui_reporte()
 {
     delete ui;
 }
+
+void execute();

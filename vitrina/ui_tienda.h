@@ -27,6 +27,8 @@
 #include <producto/object_TipoLente.h>
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
+#include <reporte/report.h>
+
 class ui_tienda_agregar;
 
 class ui_agregar_empresa;
@@ -165,7 +167,7 @@ private slots:
 
     void on_button_traspaso_almacen_clicked();
 
-    void on_comboBox_vitrina_activated(int index);
+    //void on_comboBox_vitrina_activated(int index);
 
     void on_comboBox_empresa_activated(const QString &arg1);
 
@@ -201,7 +203,8 @@ private slots:
 
     void on_pushButton_reponer_clicked();
 
-   // void on_pushButton_print_clicked();
+    void on_pushButton_print_clicked();
+
 
     void on_pushButton_etiquetar_clicked();
     void agregar_etiqueta(const QModelIndex & model);
