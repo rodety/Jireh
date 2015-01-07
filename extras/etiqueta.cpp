@@ -11,9 +11,9 @@ QString etiqueta::getColor()
 {
     return color;
 }
-QString etiqueta::getCalidad()
+QString etiqueta::getMarca()
 {
-    return calidad;
+    return marca;
 }
 QString etiqueta::getUbicacion()
 {
@@ -32,9 +32,9 @@ void etiqueta::setColor(QString tmp)
 {
     color=tmp;
 }
-void etiqueta::setCalidad(QString tmp)
+void etiqueta::setMarca(QString tmp)
 {
-    calidad=tmp;
+    marca=tmp;
 }
 void etiqueta::setUbicacion(QString tmp)
 {
@@ -46,7 +46,7 @@ void etiqueta::setPrecio(QString tmp)
 }
 
 void etiqueta::etiquetar()
-{
+{    
     QString path;
     path.append("etiquetas/imagenes/");
     path.append(codigo);
@@ -59,8 +59,11 @@ void etiqueta::etiquetar()
     my_symbol->output_options=BARCODE_BOX;
     int error;
     error = ZBarcode_Encode_and_Print(my_symbol,(unsigned char*)codigo.toStdString().c_str(), 0, 0);
+
+    //SOLUCIONAR EL PROBLEMA DE LA CREACION DE LA CARPETA
     if(error!=0)
-        qDebug()<<my_symbol->errtxt;
+        qDebug()<<my_symbol->errtxt<<"FALTA CREAR LA CARPETA ETIQUETAS/IMAGENES"<<endl;
+
     ZBarcode_Delete(my_symbol);
 }
 

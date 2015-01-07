@@ -70,11 +70,12 @@ private:
     map<QString,QString> comentario;
     map<QString,QString> cod_producto;
     ui_tienda_agregar* tienda_agregar;
-    QModelIndex indice;
+    QModelIndex current_index;
     int item;
     int comportamiento;
     int movimiento;
     QString idVitrina_Producto_old;
+
 
 
 
@@ -201,6 +202,9 @@ private slots:
     void on_pushButton_reponer_clicked();
 
    // void on_pushButton_print_clicked();
+
+    void on_pushButton_etiquetar_clicked();
+    void agregar_etiqueta(const QModelIndex & model);
 
 public slots:
     void actualizar_combo_empresa();

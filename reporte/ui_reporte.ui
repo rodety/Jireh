@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="styleSheet">
@@ -31,6 +31,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <layout class="QGridLayout" name="gridLayout_6">
+           <item row="9" column="0" colspan="4">
+            <widget class="QTableView" name="tableView"/>
+           </item>
            <item row="7" column="0">
             <widget class="QLabel" name="label_28">
              <property name="text">
@@ -54,6 +57,13 @@
            <item row="0" column="1">
             <widget class="QComboBox" name="comboBox_9"/>
            </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>Vitrina</string>
+             </property>
+            </widget>
+           </item>
            <item row="8" column="3">
             <widget class="QPushButton" name="pushButton_7">
              <property name="text">
@@ -63,13 +73,6 @@
            </item>
            <item row="3" column="1">
             <widget class="QComboBox" name="comboBox_10"/>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_19">
-             <property name="text">
-              <string>Vitrina</string>
-             </property>
-            </widget>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_17">
@@ -109,6 +112,9 @@
              </property>
             </widget>
            </item>
+           <item row="3" column="3">
+            <widget class="QDateEdit" name="dateEdit_2"/>
+           </item>
            <item row="0" column="3">
             <widget class="QLabel" name="label_30">
              <property name="text">
@@ -119,49 +125,21 @@
            <item row="3" column="2">
             <widget class="QDateEdit" name="dateEdit"/>
            </item>
-           <item row="3" column="3">
-            <widget class="QDateEdit" name="dateEdit_2"/>
+           <item row="10" column="3">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="2">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="tableWidget_3">
-           <column>
-            <property name="text">
-             <string>Codigo</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Descripcion</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>P. Compra</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>P. Venta</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Descuento</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>C. Vitrina</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>C. Almacen</string>
-            </property>
-           </column>
-          </widget>
          </item>
         </layout>
        </item>
@@ -193,18 +171,11 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_15">
-             <property name="text">
-              <string>Tienda</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox"/>
+            <widget class="QComboBox" name="comboBox_Empresa"/>
            </item>
            <item row="3" column="1">
-            <widget class="QComboBox" name="comboBox_2"/>
+            <widget class="QComboBox" name="comboBox_Tienda"/>
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_16">
@@ -248,10 +219,18 @@
             </widget>
            </item>
            <item row="3" column="2">
-            <widget class="QDateEdit" name="dateEdit_3"/>
+            <widget class="QDateEdit" name="dateEdit_3">
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="3" column="3">
-            <widget class="QDateEdit" name="dateEdit_4"/>
+            <widget class="QDateEdit" name="dateEdit_4">
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="4" column="2">
             <widget class="QLabel" name="label_23">
@@ -263,43 +242,19 @@
            <item row="4" column="3">
             <widget class="QComboBox" name="comboBox_5"/>
            </item>
-           <item row="6" column="2">
-            <widget class="QLabel" name="label">
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_15">
              <property name="text">
-              <string>Escala</string>
+              <string>Tienda</string>
              </property>
             </widget>
-           </item>
-           <item row="6" column="3">
-            <widget class="QComboBox" name="comboBox_8"/>
            </item>
           </layout>
          </item>
         </layout>
        </item>
        <item row="1" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Imagen</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+        <widget class="QTableView" name="tableView_2"/>
        </item>
       </layout>
      </widget>

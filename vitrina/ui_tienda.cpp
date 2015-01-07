@@ -123,7 +123,7 @@ void ui_tienda::actualizar_grilla_productos()
 void ui_tienda::remove_producto()
 {
     //BORRANDO CELDA
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
     object_Producto_has_Vitrina producto_vitrina;
     producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto[key]);
     if(!producto_vitrina.mf_remove())
@@ -659,7 +659,7 @@ void ui_tienda::on_pushButton_traspaso_clicked()
     if(!idItem.isEmpty())
     {
 
-        QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+        QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
         QString codigo = idProductos[key];
         this->set_idTraspaso(codigo);
         this->set_traspaso(false);
@@ -680,7 +680,7 @@ void ui_tienda::on_pushButton_traspaso_clicked()
 
 void ui_tienda::on_pushButton_aceptar_traspaso_clicked()
 {    
-    if(indice.row() < 0 || indice.column() < 0 )
+    if(current_index.row() < 0 || current_index.column() < 0 )
     {
         QMessageBox box;
         box.setIcon(QMessageBox::Warning);
@@ -692,7 +692,7 @@ void ui_tienda::on_pushButton_aceptar_traspaso_clicked()
     }
 
 //PENDIENTE DE SOLUCION EL END WITH
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
     if(estado[key] == "P")
     {
         QMessageBox msgBox;
@@ -826,7 +826,7 @@ void ui_tienda::on_button_traspaso_almacen_clicked()
     if(!idItem.isEmpty())
     {
 
-        QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+        QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
         ui_almacen* traspaso_almacen=new ui_almacen;
         traspaso_almacen->set_currentCode(idProductos[key]);        
         traspaso_almacen->enable_push_button_aceptar();
@@ -865,7 +865,7 @@ void ui_tienda::on_comboBox_tienda_activated(const QString &arg1)
 
 void ui_tienda::on_lineEdit_estado_returnPressed()
 {
-    if(indice.row() < 0 || indice.column() < 0 )
+    if(current_index.row() < 0 || current_index.column() < 0 )
     {
         QMessageBox box;
         box.setIcon(QMessageBox::Warning);
@@ -876,7 +876,7 @@ void ui_tienda::on_lineEdit_estado_returnPressed()
         return;
     }
 
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
     object_Producto_has_Vitrina producto_vitrina;
     producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto[key]);
     producto_vitrina.mf_set_comentario(ui->lineEdit_estado->text());
@@ -898,8 +898,8 @@ void ui_tienda::enableButtonAceptar()
 
 void ui_tienda::on_grilla_clicked(const QModelIndex &index)
 {
-    indice = index;
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    current_index = index;
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
     ui->lineEdit_estado->setText(comentario[key]);
     if(estado[key] == "P")
     {
@@ -919,7 +919,7 @@ void ui_tienda::on_grilla_clicked(const QModelIndex &index)
 
 void ui_tienda::on_pushButton_quitar_clicked()
 {
-    if(indice.row() < 0 || indice.column() < 0 )
+    if(current_index.row() < 0 || current_index.column() < 0 )
     {
         QMessageBox box;
         box.setIcon(QMessageBox::Warning);
@@ -930,8 +930,8 @@ void ui_tienda::on_pushButton_quitar_clicked()
         return;
     }
 
-    QString texto = indice.data().toString();
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    QString texto = current_index.data().toString();
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
 
     QMessageBox box;
     box.setIcon(QMessageBox::Question);
@@ -1118,7 +1118,7 @@ void ui_tienda::on_pushButton_reponer_clicked()
         msgBox.exec();
         return;
     }
-    QString key = QString::number(indice.row()+1)+"-"+QString::number(indice.column()+1);
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
 
     object_Producto_has_Vitrina producto_vitrina;
     producto_vitrina.mf_set_estado("P");//ESTADOS: P = PRESENTE, V = VENDIDO
@@ -1181,3 +1181,14 @@ void ui_tienda::on_pushButton_reponer_clicked()
 
 
 }*/
+
+void ui_tienda::on_pushButton_etiquetar_clicked()
+{
+    agregar_etiqueta(current_index);
+
+}
+
+void ui_tienda::agregar_etiqueta(const QModelIndex &model)
+{
+
+}

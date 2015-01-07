@@ -497,6 +497,7 @@ void ui_producto::on_pushButton_eliminar_clicked()
 
 void ui_producto::agregar_etiqueta(const QModelIndex &model)
 {
+    //falta validar que selecciono
     if(posicion==0)
     {
         QMessageBox box;
@@ -542,8 +543,9 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
     if(fila!=-1)
     {
         etiqueta t;
-        QString codigo,color,calidad,precio;
-        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
+        QString codigo,color,marca,precio;
+
+        //BUSCANDO SI ESTA REPETIDO
         for(int i=0;i<etiquetas.size();i++)
             if(etiquetas[i].getCodigo()==codigo)
             {
@@ -565,43 +567,46 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
                 }
                 break;
             }
-        if(codigo.size()==0)
-            return;
+
         if(posicion==2)
         {
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
-            calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
+            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
+            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();
+            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
+            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         }
         if(posicion==3)
         {
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();//tinte visibilidad
-            calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toString();//marca
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
+            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
+            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();//tinte visibilidad
+            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();//marca
+            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         }
         if(posicion==4)
         {
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
-            calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
+            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
+            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
+            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
+            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         }
 
         if(posicion==6)
         {
+            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
             color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
-            calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
+            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
+            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
         }
         t.setCodigo(codigo);
         t.setColor(color);
-        t.setCalidad(calidad);
+        t.setMarca(marca);
         t.setPrecio(precio);
         t.buscarUbicacion();
         etiquetas.append(t);
         ui->tableView_etiquetas->insertRow(ui->tableView_etiquetas->rowCount());
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,0,new QTableWidgetItem(codigo));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,1,new QTableWidgetItem(color));
-        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,2,new QTableWidgetItem(calidad));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,2,new QTableWidgetItem(marca));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,4,new QTableWidgetItem(precio));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,3,new QTableWidgetItem(t.getUbicacion()));
     }
@@ -610,19 +615,24 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
 void ui_producto::eliminar_etiqueta(const QModelIndex &model)
 {
     int fila=model.row();
+
+
+
     ui->tableView_etiquetas->removeRow(fila);
     etiquetas.removeAt(fila);
 }
 
 void ui_producto::on_pushButton_previsualizar_clicked()
 {
-    for(int i=0;i<etiquetas.size();i++)
+    for(int i=0;i<etiquetas.size();i++){
         etiquetas[i].etiquetar();
+    }
+
     QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
     pm.fill(Qt::white);
     QPainter p;
     //QFont font("times",16);
-    QFont font("times",12);
+    QFont font("times",8);
     p.begin(&pm);
     p.setFont(font);
 
@@ -635,18 +645,19 @@ void ui_producto::on_pushButton_previsualizar_clicked()
     {
         QImage tmp("etiquetas/imagenes/"+etiquetas[i].getCodigo()+".png");
         //QImage imagen=tmp.scaledToHeight(60);
-        QImage imagen=tmp.scaledToHeight(80);
-        /*p.drawImage((200*k)+60,(100*j)+30,imagen);
-        p.drawText((200*k)+60,(100*j)+105,etiquetas[i].getColor());
-        p.drawText((200*k)+130,(100*j)+105,etiquetas[i].getCalidad());
-        p.drawText((200*k)+60,(100*j)+121,etiquetas[i].getUbicacion());
-        p.drawText((200*k)+130,(100*j)+121,"S/."+etiquetas[i].getPrecio());*/
-        p.drawImage((500*k)+220,(100*j)+30,imagen);
+        //Escalando Imagen
+        QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
+        p.drawImage((200*k)+60,(100*j)+30,imagen);
+        p.drawText((200*k)+60,(100*j)+90,etiquetas[i].getMarca());
+        p.drawText((200*k)+130,(100*j)+90,etiquetas[i].getColor());
+        p.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
+        p.drawText((200*k)+130,(100*j)+106,"S/."+etiquetas[i].getPrecio());
+        /*p.drawImage((500*k)+220,(100*j)+30,imagen);
         p.drawText((500*k)+440,(100*j)+46,etiquetas[i].getCodigo());
         p.drawText((500*k)+440,(100*j)+62,etiquetas[i].getColor());
         p.drawText((500*k)+510,(100*j)+62,etiquetas[i].getCalidad());
         p.drawText((500*k)+440,(100*j)+78,etiquetas[i].getUbicacion());
-        p.drawText((500*k)+510,(100*j)+78,"S/."+etiquetas[i].getPrecio());
+        p.drawText((500*k)+510,(100*j)+78,"S/."+etiquetas[i].getPrecio());*/
 
         if(k==1)
         {
@@ -813,7 +824,7 @@ void ui_producto::on_btnToVitrina_clicked()
         return;
 
     int fila=ui->tableView_productos->currentIndex().row();
-    QString codigo =ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
+    QString codigo = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
 
     ui_tienda* tienda= new ui_tienda;
     tienda->set_idTraspaso(codigo);
@@ -1775,8 +1786,8 @@ void ui_producto::on_tableView_productos_doubleClicked(const QModelIndex &index)
 
 void ui_producto::on_pushButton_etiquetar_clicked()
 {
-    //agregar_etiqueta(current_index);
-    object_Luna myluna;
+    agregar_etiqueta(current_index);
+    /*object_Luna myluna;
     QSqlQuery query;
     query.exec("select Producto_idProducto from Luna INNER JOIN Producto where idProducto = Producto_idProducto AND descripcion = 'TOP'");
     while(query.next())
@@ -1786,7 +1797,7 @@ void ui_producto::on_pushButton_etiquetar_clicked()
         myluna.mf_update();
 
 
-    }
+    }*/
 }
 
 void ui_producto::on_tableView_vitrina_doubleClicked(const QModelIndex &index)
