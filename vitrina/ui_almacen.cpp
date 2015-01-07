@@ -30,12 +30,12 @@ ui_almacen::ui_almacen(QWidget *parent) :
 
     if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
     {
-        ui->pushButton_addAlmacen->setEnabled(false);
-        ui->pushButton_addAndamio->setEnabled(false);
-        ui->pushButton_deleteAlmacen->setEnabled(false);
-        ui->pushButton_deleteAndamio->setEnabled(false);
-        ui->pushButton_editAlmacen->setEnabled(false);
-        ui->pushButton_editAndamio->setEnabled(false);
+        ui->pushButton_addAlmacen->hide();
+        ui->pushButton_addAndamio->hide();
+        ui->pushButton_deleteAlmacen->hide();
+        ui->pushButton_deleteAndamio->hide();
+        ui->pushButton_editAlmacen->hide();
+        ui->pushButton_editAndamio->hide();
     }
 }
 

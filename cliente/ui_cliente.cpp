@@ -22,6 +22,14 @@ ui_cliente::ui_cliente(QWidget *parent) :
     this->listar_clientes();
     comportamiento=0;//cliente
 
+     if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
+     {
+         ui->pushButton_editar->hide();
+         ui->pushButton_eliminar->hide();
+     }
+
+
+
 }
 
 ui_cliente::~ui_cliente()

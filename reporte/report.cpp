@@ -12,7 +12,7 @@ report::report()
 
 }
 
-void report::execute()
+void report::execute(QWidget * parent)
 {
     QStringList lista_e;
 
@@ -22,7 +22,6 @@ void report::execute()
          << "aaaa;aaaa;aaaa;aaaa;aaaa;aaaa"
          << "aaaaa;aaaaa;aaaaa;aaaaa;aaaaa;aaaaa"
          << "eddy ...;aaaaaa;aaaaaa;no es mentira;aaaaaa;aaaaaa";
-
 
     NCReport report;
 
@@ -42,14 +41,32 @@ void report::execute()
     else
     {
         qDebug()<<"entre"<<endl;
-        NCReportPreviewWindow pv;
+        NCReportPreviewWindow pvf;
+        pvf.setParent(parent);
         qDebug()<<"entre"<<endl;// create preview window
-        pv.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
         qDebug()<<"entre"<<endl;
-        pv.setReport(&report);
-        pv.setWindowModality(Qt::ApplicationModal );    // set modality
-        pv.setAttribute( Qt::WA_DeleteOnClose );    // set attrib
-        pv.exec();  // run like modal dialog
-}
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
+
     delete &report;
     }
+
+
+
+void report::actualizar_combo_empresa()
+{
+
+
+}
+
+void report::actualizar_combo_tienda(QString empresa)
+{
+
+
+
+}
