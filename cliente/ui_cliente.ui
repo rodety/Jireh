@@ -189,14 +189,22 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="pushButton_imprimir_lista">
            <property name="text">
-            <string>PushButton</string>
+            <string>Imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <selectedon>:/Icons/1349716391_monotone_printer_hardware.png</selectedon>
+            </iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="3" column="0" colspan="2">
-          <widget class="QTableView" name="tableView"/>
+          <widget class="QTableView" name="tableView_Clientes"/>
          </item>
         </layout>
        </item>
@@ -235,7 +243,7 @@
         </widget>
        </item>
        <item row="1" column="0" rowspan="2">
-        <widget class="QTableView" name="tableView_2">
+        <widget class="QTableView" name="tableView_Historia">
          <property name="minimumSize">
           <size>
            <width>220</width>
@@ -778,9 +786,17 @@
           </spacer>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="pushButton_imprimir_lc">
            <property name="text">
-            <string>PushButton</string>
+            <string>imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <selectedon>:/Icons/1349716391_monotone_printer_hardware.png</selectedon>
+            </iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

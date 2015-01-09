@@ -34,6 +34,7 @@ class ui_tienda_agregar;
 class ui_agregar_empresa;
 using namespace std;
 
+
 enum lbls {Empresa,Tienda,Vitrina};
 
 namespace Ui {

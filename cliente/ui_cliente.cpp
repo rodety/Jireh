@@ -8,13 +8,13 @@ ui_cliente::ui_cliente(QWidget *parent) :
     ui(new Ui::ui_cliente)
 {
     ui->setupUi(this);
-    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView_2->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableView_2->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView_Clientes->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_Clientes->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView_Historia->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_Historia->setSelectionBehavior(QAbstractItemView::SelectRows);
     //connect(ui->tableView, SIGNAL (doubleClicked (const QModelIndex & )), this, SLOT (historial_clinico(const QModelIndex & )));
-    //connect(ui->tableView_2, SIGNAL (Clicked (const QModelIndex & )), this, SLOT (medidas_historial(const QModelIndex & )));
-    connect(ui->tableView_2, SIGNAL (clicked (const QModelIndex & )), this, SLOT (medidas_historial(const QModelIndex & )));
+    //connect(ui->tableView_Historia, SIGNAL (Clicked (const QModelIndex & )), this, SLOT (medidas_historial(const QModelIndex & )));
+    connect(ui->tableView_Historia, SIGNAL (clicked (const QModelIndex & )), this, SLOT (medidas_historial(const QModelIndex & )));
     //DESABILITANDO LOS TABS
     ui->tabWidget->setTabEnabled(1,0);
     ui->tabWidget->setTabEnabled(2,0);
@@ -39,17 +39,17 @@ ui_cliente::~ui_cliente()
 
 void ui_cliente::listar_clientes()
 {
-    ui->tableView->setModel(cliente::mostrar());
+    ui->tableView_Clientes->setModel(cliente::mostrar());
 }
 
 void ui_cliente::listar_historial()
 {
     historialClinico historial;
     historial.setIdCliente(clt_his.getIdCliente());
-    ui->tableView_2->setModel(historial.mostrar());
+    ui->tableView_Historia->setModel(historial.mostrar());
 
-    ui->tableView_2->setColumnWidth(0,70);
-    ui->tableView_2->setColumnWidth(1,170);
+    ui->tableView_Historia->setColumnWidth(0,70);
+    ui->tableView_Historia->setColumnWidth(1,170);
 
     ui->lineEdit_ecd->setText("");
     ui->lineEdit_eci->setText("");
@@ -76,13 +76,13 @@ void ui_cliente::historial_clinico(const QModelIndex &model)
     if(fila!=-1)
     {
         cliente cliente_selec;
-        pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());pDocumento.completar();
-        cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
-        cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
-        cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
-        cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
-        cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
-        cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
+        pDocumento.setNombre(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,1)).toString());pDocumento.completar();
+        cliente_selec.setNumeroDocumento(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,2)).toString());
+        cliente_selec.setNombres(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,3)).toString());
+        cliente_selec.setPrimerApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,4)).toString());
+        cliente_selec.setSegundoApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,5)).toString());
+        cliente_selec.setTelefono(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,6)).toString());
+        cliente_selec.setMovil(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,7)).toString());
         cliente_selec.setDocumento(pDocumento);
         if(cliente_selec.completar())
         {
@@ -99,8 +99,8 @@ void ui_cliente::medidas_historial(const QModelIndex &model)
     if(fila!=-1)
     {
         historialClinico historial;
-        historial.setDoctor(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,1)).toString());
-        historial.setFecha(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,0)).toString());
+        historial.setDoctor(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,1)).toString());
+        historial.setFecha(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,0)).toString());
         historial.setIdCliente(clt_his.getIdCliente());
         if(historial.buscar())
         {
@@ -170,13 +170,13 @@ void ui_cliente::on_NuevoHistorial_clicked()
 
 void ui_cliente::on_EditarHistorial_clicked()
 {
-    int fila=ui->tableView_2->currentIndex().row();
+    int fila=ui->tableView_Historia->currentIndex().row();
     if(fila!=-1)
     {
         historialClinico historial_selec;
         historial_selec.setIdCliente(clt_his.getIdCliente());
-        historial_selec.setDoctor(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,1)).toString());
-        historial_selec.setFecha(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,0)).toString());
+        historial_selec.setDoctor(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,1)).toString());
+        historial_selec.setFecha(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,0)).toString());
         if(historial_selec.buscar())
         {
             ui_historial_clinico *historial_cliente = new ui_historial_clinico;
@@ -191,7 +191,7 @@ void ui_cliente::on_EditarHistorial_clicked()
 
 void ui_cliente::on_BorrarHistorial_clicked()
 {
-    int fila=ui->tableView_2->currentIndex().row();
+    int fila=ui->tableView_Historia->currentIndex().row();
     if(fila!=-1)
     {
         QMessageBox box;
@@ -207,8 +207,8 @@ void ui_cliente::on_BorrarHistorial_clicked()
             {
                 historialClinico historial_selec;
                 historial_selec.setIdCliente(clt_his.getIdCliente());
-                historial_selec.setDoctor(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,1)).toString());
-                historial_selec.setFecha(ui->tableView_2->model()->data(ui->tableView_2->model()->index(fila,0)).toString());
+                historial_selec.setDoctor(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,1)).toString());
+                historial_selec.setFecha(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(fila,0)).toString());
                 if(historial_selec.buscar())
                 {
                     historial_selec.eliminar();
@@ -231,19 +231,19 @@ void ui_cliente::on_pushButton_buscar_clicked()
     if(ui->tabWidget->currentIndex()==0)
     {
         QSqlQueryModel* model=cliente::buscarCliente(buscar);
-        ui->tableView->setModel(model);
+        ui->tableView_Clientes->setModel(model);
     }
     else
     {
         /*historialClinico historial;
         QSqlQueryModel* model=historial.buscarHistorial(buscar);
-        ui->tableView_2->setModel(model);*/
+        ui->tableView_Historia->setModel(model);*/
     }
 }
 
 void ui_cliente::on_pushButton_Informe_clicked()
 {
-    if(ui->tableView_2->model()->rowCount()<2)
+    if(ui->tableView_Historia->model()->rowCount()<2)
     {
         QMessageBox box;
         box.setIcon(QMessageBox::Warning);
@@ -256,12 +256,12 @@ void ui_cliente::on_pushButton_Informe_clicked()
     else
     {
         QList<historialClinico>* lista=new QList<historialClinico>;
-        for(int i=0;i<ui->tableView_2->model()->rowCount();i++)
+        for(int i=0;i<ui->tableView_Historia->model()->rowCount();i++)
         {
             historialClinico h;
             h.setIdCliente(clt_his.getIdCliente());
-            h.setDoctor(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i,1)).toString());
-            h.setFecha(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i,0)).toString());
+            h.setDoctor(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(i,1)).toString());
+            h.setFecha(ui->tableView_Historia->model()->data(ui->tableView_Historia->model()->index(i,0)).toString());
             h.buscar();
             lista->append(h);
         }
@@ -281,29 +281,29 @@ void ui_cliente::setComportamiento(int a)
     }*/
     if(a == 1)
     {
-        connect(ui->tableView, SIGNAL (doubleClicked (const QModelIndex & )), this, SLOT (enviar_cliente(const QModelIndex & )));
+        connect(ui->tableView_Clientes , SIGNAL (doubleClicked (const QModelIndex & )), this, SLOT (enviar_cliente(const QModelIndex & )));
     }
 }
 
 void ui_cliente::enviar_cliente(const QModelIndex & model)
 {
-    int fila=ui->tableView->currentIndex().row();
+    int fila=ui->tableView_Clientes->currentIndex().row();
     if(fila!=-1)
     {
         cliente cliente_selec;
-        cliente_selec.setIdCliente(ui->tableView->model()->data(ui->tableView->model()->index(fila,0)).toString());
-        //pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());
+        cliente_selec.setIdCliente(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,0)).toString());
+        //pDocumento.setNombre(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,1)).toString());
         //pDocumento.completar();
-        cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
-        cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
-        cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
-        cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
-        cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
-        cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
+        cliente_selec.setNumeroDocumento(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,2)).toString());
+        cliente_selec.setNombres(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,3)).toString());
+        cliente_selec.setPrimerApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,4)).toString());
+        cliente_selec.setSegundoApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,5)).toString());
+        cliente_selec.setTelefono(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,6)).toString());
+        cliente_selec.setMovil(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,7)).toString());
         //cliente_selec.setDocumento(pDocumento);
-        cliente_selec.setRuc(ui->tableView->model()->data(ui->tableView->model()->index(fila,8)).toString());
-        cliente_selec.setRazonSocial(ui->tableView->model()->data(ui->tableView->model()->index(fila,9)).toString());
-        cliente_selec.setDireccion2(ui->tableView->model()->data(ui->tableView->model()->index(fila,10)).toString());
+        cliente_selec.setRuc(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,8)).toString());
+        cliente_selec.setRazonSocial(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,9)).toString());
+        cliente_selec.setDireccion2(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,10)).toString());
         emit sentCliente(cliente_selec);
 
     }
@@ -321,20 +321,20 @@ void ui_cliente::on_pushButton_agregar_clicked()
 
 void ui_cliente::on_pushButton_editar_clicked()
 {
-    int fila=ui->tableView->currentIndex().row();
+    int fila=ui->tableView_Clientes->currentIndex().row();
     if(fila!=-1)
     {
         cliente cliente_selec;
 
-        cliente_selec.setIdCliente(ui->tableView->model()->data(ui->tableView->model()->index(fila,0)).toString());
-        pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());
+        cliente_selec.setIdCliente(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,0)).toString());
+        pDocumento.setNombre(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,1)).toString());
         pDocumento.completar();
-        cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
-        cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
-        cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
-        cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
-        cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
-        cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
+        cliente_selec.setNumeroDocumento(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,2)).toString());
+        cliente_selec.setNombres(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,3)).toString());
+        cliente_selec.setPrimerApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,4)).toString());
+        cliente_selec.setSegundoApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,5)).toString());
+        cliente_selec.setTelefono(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,6)).toString());
+        cliente_selec.setMovil(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,7)).toString());
         cliente_selec.setDocumento(pDocumento);
         if(cliente_selec.completar())
         {
@@ -353,7 +353,7 @@ void ui_cliente::on_pushButton_editar_clicked()
 
 void ui_cliente::on_pushButton_eliminar_clicked()
 {
-    int fila=ui->tableView->currentIndex().row();
+    int fila=ui->tableView_Clientes->currentIndex().row();
     if(fila!=-1)
     {
         QMessageBox box;
@@ -368,13 +368,13 @@ void ui_cliente::on_pushButton_eliminar_clicked()
             case QMessageBox::Ok:
             {
                 cliente cliente_selec;
-                pDocumento.setNombre(ui->tableView->model()->data(ui->tableView->model()->index(fila,1)).toString());pDocumento.completar();
-                cliente_selec.setNumeroDocumento(ui->tableView->model()->data(ui->tableView->model()->index(fila,2)).toString());
-                cliente_selec.setNombres(ui->tableView->model()->data(ui->tableView->model()->index(fila,3)).toString());
-                cliente_selec.setPrimerApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,4)).toString());
-                cliente_selec.setSegundoApellido(ui->tableView->model()->data(ui->tableView->model()->index(fila,5)).toString());
-                cliente_selec.setTelefono(ui->tableView->model()->data(ui->tableView->model()->index(fila,6)).toString());
-                cliente_selec.setMovil(ui->tableView->model()->data(ui->tableView->model()->index(fila,7)).toString());
+                pDocumento.setNombre(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,1)).toString());pDocumento.completar();
+                cliente_selec.setNumeroDocumento(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,2)).toString());
+                cliente_selec.setNombres(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,3)).toString());
+                cliente_selec.setPrimerApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,4)).toString());
+                cliente_selec.setSegundoApellido(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,5)).toString());
+                cliente_selec.setTelefono(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,6)).toString());
+                cliente_selec.setMovil(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,7)).toString());
                 cliente_selec.setDocumento(pDocumento);
                 if(cliente_selec.completar())
                 {
@@ -419,7 +419,7 @@ void ui_cliente::cargarListaCompras(const QModelIndex &model)
     if(fila!=-1)
     {
         object_Venta consulta;
-        consulta.mf_set_Cliente_idCliente(ui->tableView->model()->data(ui->tableView->model()->index(fila,0)).toString());
+        consulta.mf_set_Cliente_idCliente(ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(fila,0)).toString());
         ui->tableView_compras->setModel(consulta.mf_show(13));
     }
 
@@ -431,4 +431,11 @@ void ui_cliente::on_tableView_compras_doubleClicked(const QModelIndex &index)
     venta->loadVenta(ui->tableView_compras->model()->index(index.row(),0).data().toString());
     venta->setWindowTitle("Venta");
     venta->show();
+}
+
+void ui_cliente::on_pushButton_imprimir_lista_clicked()
+{
+    report a;
+    a.imprimir_usuarios(ui->tableView_Clientes);
+
 }

@@ -15,6 +15,10 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QThreadPool>
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
 
 
 class c_tienda;
@@ -1176,8 +1180,10 @@ void ui_tienda::on_pushButton_reponer_clicked()
 
 void ui_tienda::on_btnImprimir_clicked()
 {
+
     report r;
-    r.execute(this);
+    r.execute();
+
 }
 
 
