@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>759</width>
+    <width>808</width>
     <height>558</height>
    </rect>
   </property>
@@ -14,6 +14,7 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+<<<<<<< HEAD
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -255,28 +256,116 @@
        </item>
        <item row="1" column="0">
         <widget class="QTableView" name="tableView_2"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>Compras</string>
-      </attribute>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>130</y>
-         <width>181</width>
-         <height>17</height>
-        </rect>
-       </property>
+=======
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Compras por Producto</string>
+        <string>Desde</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
-     </widget>
-    </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QDateEdit" name="dateEdit_2_hasta">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="calendarPopup">
+        <bool>false</bool>
+       </property>
+       <property name="date">
+        <date>
+         <year>2000</year>
+         <month>6</month>
+         <day>14</day>
+        </date>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QComboBox" name="comboBox_reporte">
+       <item>
+        <property name="text">
+         <string>Tienda</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Vendedores</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Producto</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Cliente</string>
+        </property>
+>>>>>>> d3e13cdc295a3e37b9257611d84ac58584828a58
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Hasta</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="3">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>RANKING DE PRODUCTOS</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QDateEdit" name="dateEdit_desde">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="date">
+        <date>
+         <year>2000</year>
+         <month>2</month>
+         <day>24</day>
+        </date>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QTableWidget" name="tableWidget_a"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Seleccion de tipo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1" colspan="3">
+      <widget class="QTableWidget" name="tableWidget_b"/>
+     </item>
+     <item row="5" column="3">
+      <widget class="QPushButton" name="pushButton_imprimir">
+       <property name="text">
+        <string>IMPRIMIR</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

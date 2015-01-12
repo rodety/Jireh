@@ -35,6 +35,7 @@ class ui_tienda_agregar;
 class ui_agregar_empresa;
 using namespace std;
 
+
 enum lbls {Empresa,Tienda,Vitrina};
 
 namespace Ui {
@@ -208,8 +209,6 @@ private slots:
     void on_btnImprimir_clicked();
 
     void on_pushButton_reponer_clicked();
-
-    void on_pushButton_print_clicked();
 
 
     void on_pushButton_etiquetar_clicked();

@@ -21,6 +21,7 @@ agenda_ui::agenda_ui(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::agenda_ui)
 {
+    //aqui son las modificaciones
     ui->setupUi(this);
     fecha = QDate::currentDate();
     ui->calendarWidget->setSelectedDate(fecha);
@@ -50,6 +51,15 @@ agenda_ui::agenda_ui(QWidget *parent) :
     ui->comboBox_tipo_pendiente->addItem("Pendiente de Entrega");
     ui->comboBox_tipo_pendiente->addItem("Pendiente de Registro Tarjeta");
     calcularReporte();
+
+    if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
+    {
+        ui->label_Alert_General->hide();
+        ui->pushButton_AlertaGeneral_changeColor->hide();
+        ui->pushButton_Alert_General_add->hide();
+        ui->pushButton_Alert_General_edit->hide();
+        ui->pushButton_Alert_General_remove->hide();
+    }
 }
 
 

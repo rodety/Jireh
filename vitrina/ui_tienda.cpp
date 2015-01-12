@@ -15,12 +15,19 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QThreadPool>
+<<<<<<< HEAD
 #include <ncreport.h>
 #include <ncreportsource.h>
 #include <ncreportoutput.h>
 #include <ncreportpreviewoutput.h>
 #include <ncreportpreviewoutput.h>
 #include <qdebug.h>
+=======
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+>>>>>>> d3e13cdc295a3e37b9257611d84ac58584828a58
 
 
 class c_tienda;
@@ -36,22 +43,22 @@ ui_tienda::ui_tienda(QWidget *parent) : QWidget(parent), ui(new Ui::ui_tienda)
         if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
         {
 
-            ui->pushButton_reponer->setEnabled(false);
-            ui->lineEdit_cod_reponer->setEnabled(false);
-            ui->label_cod->setEnabled(false);
-            ui->pushButton_traspaso->setEnabled(false);
-            ui->btnAgregar_empresa->setEnabled(false);
-            ui->btnAgregar_tienda->setEnabled(false);
-            ui->btnAgregar_vitrina->setEnabled(false);
-            ui->btnDeshabilitar_empresa->setEnabled(false);
-            ui->btnDeshabilitar_tienda->setEnabled(false);
-            ui->btnDeshabilitar_vitrina->setEnabled(false);
-            ui->btnEditar_empresa->setEnabled(false);
-            ui->btnEditar_tienda->setEnabled(false);
-            ui->btnEditar_vitrina->setEnabled(false);
-            ui->pushButton_quitar->setEnabled(false);
-            ui->pushButton_aceptar_traspaso->setEnabled(false);
-            ui->button_traspaso_almacen->setEnabled(false);
+            ui->pushButton_reponer->hide();
+            ui->lineEdit_cod_reponer->hide();
+            ui->label_cod->hide();
+            ui->pushButton_traspaso->hide();
+            ui->btnAgregar_empresa->hide();
+            ui->btnAgregar_tienda->hide();
+            ui->btnAgregar_vitrina->hide();
+            ui->btnDeshabilitar_empresa->hide();
+            ui->btnDeshabilitar_tienda->hide();
+            ui->btnDeshabilitar_vitrina->hide();
+            ui->btnEditar_empresa->hide();
+            ui->btnEditar_tienda->hide();
+            ui->btnEditar_vitrina->hide();
+            ui->pushButton_quitar->hide();
+            ui->pushButton_aceptar_traspaso->hide();
+            ui->button_traspaso_almacen->hide();
 
         }
 
@@ -66,7 +73,7 @@ ui_tienda::ui_tienda(QWidget *parent, int a) : QWidget(parent), ui(new Ui::ui_ti
         caso=false;    toVitrina=false;
         habilitar_botones();
         //actual=Empresa;
-        ui->pushButton_print->setEnabled(false);
+        ui->btnImprimir->hide();
         ui->pushButton_aceptar_traspaso->hide();
         ui->pushButton_reponer->setEnabled(false);
         ui->lineEdit_cod_reponer->setEnabled(false);
@@ -1096,10 +1103,7 @@ void ui_tienda::on_btnDeshabilitar_vitrina_clicked()
     deshabilitarVitrina();
 }
 
-void ui_tienda::on_btnImprimir_clicked()
-{
 
-}
 void ui_tienda::on_pushButton_reponer_clicked()
 {
 
@@ -1191,8 +1195,9 @@ void ui_tienda::on_pushButton_reponer_clicked()
 
 
 
-void ui_tienda::on_pushButton_print_clicked()
+void ui_tienda::on_btnImprimir_clicked()
 {
+<<<<<<< HEAD
    /*report r;
    r.execute();*/
 }
@@ -1396,4 +1401,12 @@ void ui_tienda::on_pushButton_anterior_clicked()
         if(this->act==0)
             ui->pushButton_anterior->setDisabled(1);
     }
+=======
+
+    report r;
+    r.execute();
+
+>>>>>>> d3e13cdc295a3e37b9257611d84ac58584828a58
 }
+
+
