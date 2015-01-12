@@ -27,14 +27,10 @@
 #include <producto/object_TipoLente.h>
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
-#include <reporte/report.h>
-#include <extras/etiqueta.h>
-
 class ui_tienda_agregar;
 
 class ui_agregar_empresa;
 using namespace std;
-
 
 enum lbls {Empresa,Tienda,Vitrina};
 
@@ -72,19 +68,13 @@ private:
     map<QString,QString> idVitrina_Producto;
     map<QString,QString> estado;
     map<QString,QString> comentario;
-    map<QString,QString> codigo_producto;
-    map<QString,QString> descripcion;
-    map<QString,QString> marca;
-    map<QString,QString> precio;
-    map<QString,QString> fila;
-    map<QString,QString> columna;
+    map<QString,QString> cod_producto;
     ui_tienda_agregar* tienda_agregar;
-    QModelIndex current_index;
+    QModelIndex indice;
     int item;
     int comportamiento;
     int movimiento;
     QString idVitrina_Producto_old;
-
 
 
 
@@ -145,13 +135,10 @@ public:
     void setComportamiento(int tem);
     void setMovimiento(int mov);
     int getMovimiento();
-    void configurarVenta();
-    void configurarPermisos();
 
 
 public:
-    ui_tienda(QWidget *parent = 0);
-    ui_tienda(QWidget *, int a);
+    explicit ui_tienda(QWidget *parent = 0);
     ~ui_tienda();
     
 private slots:
@@ -174,7 +161,7 @@ private slots:
 
     void on_button_traspaso_almacen_clicked();
 
-    //void on_comboBox_vitrina_activated(int index);
+    void on_comboBox_vitrina_activated(int index);
 
     void on_comboBox_empresa_activated(const QString &arg1);
 
@@ -210,18 +197,6 @@ private slots:
 
     void on_pushButton_reponer_clicked();
 
-
-    void on_pushButton_etiquetar_clicked();
-    void agregar_etiqueta(const QModelIndex & model);
-
-    void on_pushButton_previsualizar_clicked();
-
-    void on_pushButton_imprimir_clicked();
-
-    void on_pushButton_siguiente_clicked();
-
-    void on_pushButton_anterior_clicked();
-
 public slots:
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString idEmpresa);
@@ -236,9 +211,6 @@ signals:
 private:
     Ui::ui_tienda *ui;
     bool flag; //Control de actualizacion de Lista de tiendas
-    QList<etiqueta> etiquetas;
-    int act;
-    int pag;
 };
 
 #endif // UI_TIENDA_H
