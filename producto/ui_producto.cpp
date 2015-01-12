@@ -17,7 +17,6 @@ ui_producto::ui_producto(QWidget *parent) :
     ui->tabWidget->setCurrentIndex(0);
 
     posicion=0;
-
     comportamiento = 0;
 
     //SIRVER PARA CONTABILIZAR LOS COMBOX CON LA FINALIDAD QUE NO REALICE CONSULTAS
@@ -36,8 +35,6 @@ ui_producto::ui_producto(QWidget *parent) :
     ui->tabWidget->setTabEnabled(3,0);
     ui->tabWidget->setTabEnabled(4,0);
     ui->tabWidget->setCurrentIndex(0);
-
-
 }
 
 
@@ -543,7 +540,7 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
     if(fila!=-1)
     {
         etiqueta t;
-        QString codigo,color,marca,precio;
+        QString codigo,descripcion,marca,precio;
 
         //BUSCANDO SI ESTA REPETIDO
         for(int i=0;i<etiquetas.size();i++)
@@ -570,22 +567,24 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
 
         if(posicion==2)
         {
+            /*
             codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();
+            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();
             marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
             precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
+            */
         }
         if(posicion==3)
         {
             codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();//tinte visibilidad
+            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();//tinte visibilidad
             marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();//marca
             precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         }
         if(posicion==4)
         {
             codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
+            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
             marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
             precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
         }
@@ -593,19 +592,19 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
         if(posicion==6)
         {
             codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            color=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
+            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
             marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
             precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
         }
         t.setCodigo(codigo);
-        t.setColor(color);
+        t.setDescripcion(descripcion);
         t.setMarca(marca);
         t.setPrecio(precio);
         t.buscarUbicacion();
         etiquetas.append(t);
         ui->tableView_etiquetas->insertRow(ui->tableView_etiquetas->rowCount());
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,0,new QTableWidgetItem(codigo));
-        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,1,new QTableWidgetItem(color));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,1,new QTableWidgetItem(descripcion));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,2,new QTableWidgetItem(marca));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,4,new QTableWidgetItem(precio));
         ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,3,new QTableWidgetItem(t.getUbicacion()));
@@ -615,9 +614,6 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
 void ui_producto::eliminar_etiqueta(const QModelIndex &model)
 {
     int fila=model.row();
-
-
-
     ui->tableView_etiquetas->removeRow(fila);
     etiquetas.removeAt(fila);
 }
@@ -648,8 +644,8 @@ void ui_producto::on_pushButton_previsualizar_clicked()
         //Escalando Imagen
         QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
         p.drawImage((200*k)+60,(100*j)+30,imagen);
-        p.drawText((200*k)+60,(100*j)+90,etiquetas[i].getMarca());
-        p.drawText((200*k)+130,(100*j)+90,etiquetas[i].getColor());
+        p.drawText((200*k)+60,(100*j)+90,etiquetas[i].getDescripcion());
+        p.drawText((200*k)+130,(100*j)+90,etiquetas[i].getMarca());
         p.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
         p.drawText((200*k)+130,(100*j)+106,"S/."+etiquetas[i].getPrecio());
         /*p.drawImage((500*k)+220,(100*j)+30,imagen);

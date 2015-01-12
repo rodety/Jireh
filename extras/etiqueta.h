@@ -11,7 +11,7 @@ class etiqueta
 {
 private:
     QString codigo;
-    QString color;
+    QString descripcion;
     QString marca;
     QString ubicacion;
     QString precio;
@@ -19,13 +19,16 @@ public:
     etiqueta();
 
     QString getCodigo();
-    QString getColor();
+    QString getDescripcion();
     QString getMarca();
     QString getUbicacion();
     QString getPrecio();
 
     void setCodigo(QString);
-    void setColor(QString);
+    void setDescripcion(QString tmp)
+    {
+        descripcion=tmp;
+    }
     void setMarca(QString);
     void setUbicacion(QString);
     void setPrecio(QString);

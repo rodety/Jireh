@@ -15,6 +15,12 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QThreadPool>
+#include <ncreport.h>
+#include <ncreportsource.h>
+#include <ncreportoutput.h>
+#include <ncreportpreviewoutput.h>
+#include <ncreportpreviewoutput.h>
+#include <qdebug.h>
 
 
 class c_tienda;
@@ -48,6 +54,10 @@ ui_tienda::ui_tienda(QWidget *parent) : QWidget(parent), ui(new Ui::ui_tienda)
             ui->button_traspaso_almacen->setEnabled(false);
 
         }
+
+        NCReport * n =new NCReport();
+        qDebug()<<"Version" << n->version()<<endl;
+
 }
 ui_tienda::ui_tienda(QWidget *parent, int a) : QWidget(parent), ui(new Ui::ui_tienda)
 {
@@ -87,8 +97,6 @@ void ui_tienda::actualizar_combo_empresa()
         idEmpresa = Empresas[ui->comboBox_empresa->currentText()];
         this->actualizar_combo_tienda(idEmpresa);
     }
-
-
 }
 
 void ui_tienda::actualizar_combo_tienda(QString empresa)
@@ -213,10 +221,12 @@ void ui_tienda::actualizar_grilla()
     idVitrina_Producto.clear();
     estado.clear();
     QSqlQuery query;
-    query.prepare("SELECT Producto_idProducto,fila,columna,idProducto_has_Vitrina,estado,comentario,codigo,descripcion FROM Producto_has_Vitrina INNER JOIN Producto WHERE Producto_has_Vitrina.Producto_idProducto = Producto.idProducto AND Vitrina_Ubicacion_idUbicacion=? AND nivel=?");
+    QString act_query = "SELECT Producto_idProducto,fila,columna,idProducto_has_Vitrina,estado,comentario,codigo,descripcion,precioVenta,Marca.nombre FROM Producto_has_Vitrina INNER JOIN Producto INNER JOIN Marca WHERE (Producto_has_Vitrina.Producto_idProducto = Producto.idProducto) AND Vitrina_Ubicacion_idUbicacion=? AND nivel=? AND Producto.Marca_idMarca = Marca.idMarca";
+    query.prepare(act_query);
     query.bindValue(0,idVitrina);
     query.bindValue(1,actual_nivel);
     query.exec();
+    qDebug()<<act_query<<" "<<idVitrina<<" "<<actual_nivel<<endl;
 
     while(query.next())
     {
@@ -231,12 +241,16 @@ void ui_tienda::actualizar_grilla()
         idVitrina_Producto[key] = query.value(3).toString();
         estado[key] = query.value(4).toString();
         comentario[key] = query.value(5).toString();
-
-        QString codigo=query.value(6).toString();
-        QString descripcion=query.value(7).toString();
-        cod_producto[key] =  codigo;
+        fila[key] = QString::number(pos_fila);
+        columna[key]= QString::number(pos_columna);
+        precio[key] = query.value(8).toString();
+        marca[key] = query.value(9).toString();
+        QString act_descripcion=query.value(7).toString();
+        descripcion[key] = act_descripcion;
+        QString act_codigo=query.value(6).toString();
+        codigo_producto[key] =  act_codigo;
         if(state == "P")
-            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem(codigo+"-"+descripcion));
+            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem(act_codigo+"-"+act_descripcion));
         if(state == "V")
             ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem("Vendido"));
     }
@@ -912,7 +926,7 @@ void ui_tienda::on_grilla_clicked(const QModelIndex &index)
     {
         ui->pushButton_reponer->setEnabled(true);
         ui->lineEdit_cod_reponer->setEnabled(true);
-        ui->lineEdit_cod_reponer->setText(cod_producto[key]);
+        ui->lineEdit_cod_reponer->setText(codigo_producto[key]);
         ui->label_cod->setEnabled(true);
     }
 
@@ -1186,14 +1200,200 @@ void ui_tienda::on_pushButton_print_clicked()
 void ui_tienda::on_pushButton_etiquetar_clicked()
 {
     agregar_etiqueta(current_index);
-
 }
 
 void ui_tienda::agregar_etiqueta(const QModelIndex &model)
 {
+    QString key = QString::number(current_index.row()+1)+"-"+QString::number(current_index.column()+1);
+    if(key.size() > 0)
+    {
+        etiqueta t;
+        QString act_codigo,act_descripcion,act_marca,act_precio;
 
+        //BUSCANDO SI ESTA REPETIDO
 
-  /*  report r;
-    r.run();*/
+        for(int i=0;i<etiquetas.size();i++)
+            if(etiquetas[i].getCodigo()==codigo_producto[key])
+            {
+                QMessageBox box;
+                box.setIcon(QMessageBox::Question);
+                box.setWindowTitle("Advertencia");
+                box.setText("Ya existe este producto!\nDesea etiquetarlo de igual manera?");
+                box.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                box.setDefaultButton(QMessageBox::Ok);
+                int ret=box.exec();
+                switch(ret)
+                {
+                    case QMessageBox::Ok:
+                        break;
+                    case QMessageBox::Cancel:
+                        return;
+                    default:
+                        break;
+                }
+                break;
+            }
+        act_codigo = codigo_producto[key];
+        act_descripcion = descripcion[key];
+        act_marca = marca[key];
+        act_precio = precio[key];
 
+        t.setCodigo(act_codigo);
+        t.setDescripcion(act_descripcion);
+        t.setMarca(act_marca);
+        t.setPrecio(act_precio);
+        QString ubicacion;
+        ubicacion.append(fila[key]);
+        ubicacion.append(",");
+        ubicacion.append(columna[key]);
+        ubicacion.append(",");
+        ubicacion.append(QString::number(actual_nivel));
+        t.setUbicacion(ubicacion);
+        etiquetas.append(t);
+        ui->tableView_etiquetas->insertRow(ui->tableView_etiquetas->rowCount());
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,0,new QTableWidgetItem(act_codigo));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,1,new QTableWidgetItem(act_descripcion));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,2,new QTableWidgetItem(act_marca));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,4,new QTableWidgetItem(act_precio));
+        ui->tableView_etiquetas->setItem(ui->tableView_etiquetas->rowCount()-1,3,new QTableWidgetItem(t.getUbicacion()));
+    }
+
+}
+
+void ui_tienda::on_pushButton_previsualizar_clicked()
+{
+    for(int i=0;i<etiquetas.size();i++){
+        etiquetas[i].etiquetar();
+    }
+
+    QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
+    pm.fill(Qt::white);
+    QPainter p;
+    //QFont font("times",16);
+    QFont font("times",8);
+    p.begin(&pm);
+    p.setFont(font);
+
+    int j=0;
+    int k=0;
+    pag=0;
+    QString num;
+
+    for(int i=0;i<etiquetas.size();i++)
+    {
+        QImage tmp("etiquetas/imagenes/"+etiquetas[i].getCodigo()+".png");
+        //QImage imagen=tmp.scaledToHeight(60);
+        //Escalando Imagen
+        QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
+        p.drawImage((200*k)+60,(100*j)+30,imagen);
+        p.drawText((200*k)+60,(100*j)+90,etiquetas[i].getDescripcion());
+        p.drawText((200*k)+130,(100*j)+90,etiquetas[i].getMarca());
+        p.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
+        p.drawText((200*k)+130,(100*j)+106,"S/."+etiquetas[i].getPrecio());
+        /*p.drawImage((500*k)+220,(100*j)+30,imagen);
+        p.drawText((500*k)+440,(100*j)+46,etiquetas[i].getCodigo());
+        p.drawText((500*k)+440,(100*j)+62,etiquetas[i].getColor());
+        p.drawText((500*k)+510,(100*j)+62,etiquetas[i].getCalidad());
+        p.drawText((500*k)+440,(100*j)+78,etiquetas[i].getUbicacion());
+        p.drawText((500*k)+510,(100*j)+78,"S/."+etiquetas[i].getPrecio());*/
+
+        if(k==1)
+        {
+            k=-1;
+            j++;
+        }
+        k++;
+        if(j==17 || (i+1)==etiquetas.size())
+        {
+            j=0;
+            pm.save("etiquetas/"+num.setNum(pag)+".png");
+            pm.fill(Qt::white);
+            pag++;
+        }
+    }
+
+    if(pag!=0)
+    {
+        ui->lineEdit_pag->setText("1/"+num.setNum(pag));
+        this->act=0;
+        ui->pushButton_siguiente->setEnabled(1);
+        if(this->act==0)
+            ui->pushButton_anterior->setDisabled(1);
+        if(this->act+1==pag)
+            ui->pushButton_siguiente->setDisabled(1);
+        QImage act("etiquetas/0.png");
+        p.drawImage(0,0,act);
+    }
+    else
+    {
+        ui->lineEdit_pag->setText("0/0");
+        ui->pushButton_anterior->setDisabled(1);
+        ui->pushButton_anterior->setDisabled(1);
+        pm.fill(Qt::white);
+    }
+    ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
+
+}
+
+void ui_tienda::on_pushButton_imprimir_clicked()
+{
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setFullPage(QPrinter::A4);
+    printer.setOutputFileName("etiquetas.pdf");
+    QPainter painter;
+    if (! painter.begin(&printer))
+        qWarning("failed to open file, is it writable?");
+    QImage act("etiquetas/0.png");
+    act=act.scaledToWidth(9000);
+    painter.drawImage(0,0,act);
+    painter.end();
+    QTextEdit parent;
+    QPrintDialog*dlg = new QPrintDialog(&printer,&parent);
+    dlg->setWindowTitle(QObject::tr("Print Document"));
+
+    if(dlg->exec() == QDialog::Accepted) {
+        parent.print(&printer);
+    }
+    delete dlg;
+}
+
+void ui_tienda::on_pushButton_siguiente_clicked()
+{
+    if(pag!=0 && (act+1)<pag)
+    {
+        QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
+        pm.fill(Qt::white);
+        QPainter p;
+        p.begin(&pm);
+        QString num;
+        QImage act("etiquetas/"+num.setNum(++this->act)+".png");
+        ui->lineEdit_pag->setText(num.setNum(this->act+1)+"/"+num.setNum(pag));
+        p.drawImage(0,0,act);
+        ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
+
+        ui->pushButton_anterior->setEnabled(1);
+        if(this->act+1==pag)
+            ui->pushButton_siguiente->setDisabled(1);
+    }
+}
+
+void ui_tienda::on_pushButton_anterior_clicked()
+{
+    if(pag!=0 && act>0)
+    {
+        QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
+        pm.fill(Qt::white);
+        QPainter p;
+        p.begin(&pm);
+        QString num;
+        QImage act("etiquetas/"+num.setNum(--this->act)+".png");
+        ui->lineEdit_pag->setText(num.setNum(this->act+1)+"/"+num.setNum(pag));
+        p.drawImage(0,0,act);
+        ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
+
+        ui->pushButton_siguiente->setEnabled(1);
+        if(this->act==0)
+            ui->pushButton_anterior->setDisabled(1);
+    }
 }

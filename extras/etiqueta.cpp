@@ -7,9 +7,9 @@ QString etiqueta::getCodigo()
 {
     return codigo;
 }
-QString etiqueta::getColor()
+QString etiqueta::getDescripcion()
 {
-    return color;
+    return descripcion;
 }
 QString etiqueta::getMarca()
 {
@@ -28,10 +28,7 @@ void etiqueta::setCodigo(QString tmp)
 {
     codigo=tmp;
 }
-void etiqueta::setColor(QString tmp)
-{
-    color=tmp;
-}
+
 void etiqueta::setMarca(QString tmp)
 {
     marca=tmp;
