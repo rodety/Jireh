@@ -28,6 +28,7 @@
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
 #include <reporte/report.h>
+#include <extras/etiqueta.h>
 
 class ui_tienda_agregar;
 
@@ -71,13 +72,19 @@ private:
     map<QString,QString> idVitrina_Producto;
     map<QString,QString> estado;
     map<QString,QString> comentario;
-    map<QString,QString> cod_producto;
+    map<QString,QString> codigo_producto;
+    map<QString,QString> descripcion;
+    map<QString,QString> marca;
+    map<QString,QString> precio;
+    map<QString,QString> fila;
+    map<QString,QString> columna;
     ui_tienda_agregar* tienda_agregar;
-    QModelIndex indice;
+    QModelIndex current_index;
     int item;
     int comportamiento;
     int movimiento;
     QString idVitrina_Producto_old;
+
 
 
 
@@ -204,6 +211,17 @@ private slots:
     void on_pushButton_reponer_clicked();
 
 
+    void on_pushButton_etiquetar_clicked();
+    void agregar_etiqueta(const QModelIndex & model);
+
+    void on_pushButton_previsualizar_clicked();
+
+    void on_pushButton_imprimir_clicked();
+
+    void on_pushButton_siguiente_clicked();
+
+    void on_pushButton_anterior_clicked();
+
 public slots:
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString idEmpresa);
@@ -218,6 +236,9 @@ signals:
 private:
     Ui::ui_tienda *ui;
     bool flag; //Control de actualizacion de Lista de tiendas
+    QList<etiqueta> etiquetas;
+    int act;
+    int pag;
 };
 
 #endif // UI_TIENDA_H
