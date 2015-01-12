@@ -18,19 +18,19 @@ void report::execute()
     QStringList lista_e;
 
     lista_e << "a;a;a;a;a;a"
-         << "aa;aa;aa;aa;aa;aa"
-         << "aaa;aaa;aaa;aaa;aaa;aaa"
-         << "aaaa;aaaa;aaaa;aaaa;aaaa;aaaa"
-         << "aaaaa;aaaaa;aaaaa;aaaaa;aaaaa;aaaaa"
-         << "eddy ...;aaaaaa;aaaaaa;no es mentira;aaaaaa;aaaaaa";
+            <<"aa;aa;aa;aa;aa;aa"
+            << "aaa;aaa;aaa;aaa;aaa;aaa"
+            << "aaaa;aaaa;aaaa;aaaa;aaaa;aaaa"
+            << "aaaaa;aaaaa;aaaaa;aaaaa;aaaaa;aaaaa"
+            << "eddy ...;aaaaaa;aaaaaa;;;";
 
     NCReport report;
     NCReport * r = new NCReport;
 
 
     report.setReportSource( NCReportSource::File );
-    report.setReportFile("reportes/report.xml");
-    report.addStringList(lista_e,"model1");
+    report.setReportFile("reportes/mi_informe.xml");
+    report.addStringList(lista_e,"Mylist");
 
     report.runReportToPDF("documento_vitrina.pdf");
     report.runReportToPreview();
@@ -55,8 +55,6 @@ void report::execute()
 
 }
 
-
-
 void report::actualizar_combo_empresa()
 {
 
@@ -70,15 +68,15 @@ void report::actualizar_combo_tienda(QString empresa)
 
 }
 
-void report::imprimir_usuarios( QTableView * a )
+void report::imprimir_usuarios(QWidget * t)
 {
-   NCReport *report = new NCReport();
-    report->setReportSource( NCReportSource::File );
-    report->setReportFile("reportes/tabla_usuarios.xml");
-
-    report->addTableView("tvista1",a);
-    report->addItemModel("Tv1",a->model());
-    report->runReportToPreview();
+   /*NCReport *report = new NCReport(t);
+   report->setReportSource( NCReportSource::File );
+   report->setReportFile("reportes/tabla_usuarios.xml");
+   report->addTableView("tvista1",a);
+   report->addItemModel("Tv1",a->model());
+   report->runReportToPDF("lista_usuarios.pdf");
+   report->runReportToPreview();
 
     if (report->hasError()) {
 
@@ -88,11 +86,7 @@ void report::imprimir_usuarios( QTableView * a )
     }
     else {
 
-        NCReportPreviewWindow *pv = new NCReportPreviewWindow();
-        pv->setOutput( (NCReportPreviewOutput*)report->output() );
-        pv->setWindowModality( Qt::ApplicationModal );
-        pv->setAttribute( Qt::WA_DeleteOnClose );
-        pv->show();
-    }
+         report->execPreview((NCReportPreviewOutput*)report->output());
+    }*/
 
 }

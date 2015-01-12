@@ -2,6 +2,12 @@
 #include "ui_ui_cliente.h"
 #include <QSqlRecord>
 #include <QSqlQueryModel>
+#include "ncreport.h"
+#include <QtCore/QDebug>
+#include <QtCore/QResource>
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
 
 ui_cliente::ui_cliente(QWidget *parent) :
     QWidget(parent),
@@ -407,9 +413,6 @@ void ui_cliente::on_pushButton_eliminar_clicked()
 
 void ui_cliente::on_tableView_clicked(const QModelIndex &index)
 {
-    indice = index;
-    ui->tabWidget->setTabEnabled(1,1);
-    ui->tabWidget->setTabEnabled(2,1);
 
 }
 
@@ -433,9 +436,72 @@ void ui_cliente::on_tableView_compras_doubleClicked(const QModelIndex &index)
     venta->show();
 }
 
+void ui_cliente::on_tableView_Clientes_clicked(const QModelIndex &index)
+{
+    indice = index;
+    ui->tabWidget->setTabEnabled(1,1);
+    ui->tabWidget->setTabEnabled(2,1);
+}
+
+
 void ui_cliente::on_pushButton_imprimir_lista_clicked()
 {
-    report a;
-    a.imprimir_usuarios(ui->tableView_Clientes);
 
+    NCReport * report = new NCReport(this);
+    report->setReportSource( NCReportSource::File );
+    report->setReportFile("reportes/tabla_usuarios.xml");
+    report->addItemModel("mymodel",ui->tableView_Clientes->model());
+    report->addTableView("myview",ui->tableView_Clientes);
+
+    report->runReportToPDF("lista_de_compras.pdf");
+    report->runReportToPreview();
+
+     if (report->hasError()) {
+
+         QMessageBox po;
+         po.setText(report->lastErrorMsg());
+         po.exec();
+     }
+     else {
+         NCReportPreviewWindow pvf;
+         pvf.setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
+         pvf.setReport(report);
+         pvf.setWindowModality(Qt::ApplicationModal);    // set modality
+         pvf.setAttribute( Qt::WA_QuitOnClose );
+         pvf.deleteLater();// set attrib
+         pvf.exec();  // run like modal dialog
+     }
+
+
+}
+
+
+void ui_cliente::on_pushButton_imprimir_lc_clicked()
+{
+
+    NCReport * report = new NCReport(this);
+    report->setReportSource( NCReportSource::File );
+    report->setReportFile("reportes/tabla_usuarios.xml");
+    report->addItemModel("mymodel",ui->tableView_compras->model());
+    report->addTableView("myview",ui->tableView_compras);
+
+    report->runReportToPDF("lista_de_compras.pdf");
+    report->runReportToPreview();
+
+     if (report->hasError()) {
+
+         QMessageBox po;
+         po.setText(report->lastErrorMsg());
+         po.exec();
+     }
+     else {
+         NCReportPreviewWindow pvf;
+         pvf.setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
+         pvf.setReport(report);
+         pvf.setWindowModality(Qt::ApplicationModal);    // set modality
+         pvf.setAttribute( Qt::WA_QuitOnClose );
+         pvf.deleteLater();// set attrib
+         pvf.exec();  // run like modal dialog
+     }
+    delete report;
 }

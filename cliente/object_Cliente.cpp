@@ -12,7 +12,6 @@ object_Cliente::object_Cliente(_QSTR idCliente, _QSTR nombres, _QSTR primer_apel
 	//file Cliente
 	//function construct_1
 	//w!
-
 	md_o_idCliente = idCliente;
 	md_o_nombres = nombres;
 	md_o_primer_apellido = primer_apellido;

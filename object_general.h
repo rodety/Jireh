@@ -13,7 +13,6 @@ private:
 	virtual bool mf_add() = 0;
 	virtual bool mf_remove() = 0;
 
-
 	//virtual bool mf_load(_QSTR pk) = 0;
 	//virtual bool mf_load(_QSTR pk) = 0;
 };

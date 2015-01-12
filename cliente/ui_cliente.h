@@ -28,28 +28,21 @@ private slots:
     void medidas_historial(const QModelIndex &);
     void enviar_cliente(const QModelIndex &);
     void on_tabWidget_currentChanged(int index);
-
     void on_NuevoHistorial_clicked();
     void on_EditarHistorial_clicked();
     void on_BorrarHistorial_clicked();
-
     void on_pushButton_buscar_clicked();
     void on_pushButton_Informe_clicked();
-
-
-
     void on_pushButton_agregar_clicked();
-
     void on_pushButton_editar_clicked();
-
     void on_pushButton_eliminar_clicked();
-
-
     void on_tableView_clicked(const QModelIndex &index);
-
     void on_tableView_compras_doubleClicked(const QModelIndex &index);
-
     void on_pushButton_imprimir_lista_clicked();
+
+    void on_tableView_Clientes_clicked(const QModelIndex &index);
+
+    void on_pushButton_imprimir_lc_clicked();
 
 public slots:
     void setComportamiento(int a);

@@ -11,7 +11,7 @@ public:
     void execute();
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString empresa);
-    void imprimir_usuarios( QTableView * a);
+    void imprimir_usuarios(  QWidget * t);
 
 };
 
