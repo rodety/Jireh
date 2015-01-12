@@ -3,8 +3,6 @@
 #include <QSqlRecord>
 #include <QSqlQueryModel>
 #include "ncreport.h"
-#include <QtCore/QDebug>
-#include <QtCore/QResource>
 #include "ncreportoutput.h"
 #include "ncreportpreviewoutput.h"
 #include "ncreportpreviewwindow.h"
@@ -447,7 +445,66 @@ void ui_cliente::on_tableView_Clientes_clicked(const QModelIndex &index)
 void ui_cliente::on_pushButton_imprimir_lista_clicked()
 {
 
-    NCReport * report = new NCReport(this);
+    QStringList lista_e;
+
+    int fila= ui->tableView_Clientes->model()->rowCount() ;// indice.row();
+    int columna= ui->tableView_Clientes->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var += ui->tableView_Clientes->model()->data(ui->tableView_Clientes->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
+        }
+
+        lista_e<<var;
+    }
+
+
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
+
+   NCReport report;
+
+   report.setReportSource( NCReportSource::File );
+   report.setReportFile("reportes/lista_de_clientes.xml");
+   report.addStringList(lista_e,"mylist");
+
+   report.runReportToPDF("pdf/lista_de_clientes.pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
+    }
+    else
+    {
+
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
+
+
+
+
+
+
+
+
+
+
+   /* NCReport * report = new NCReport(this);
     report->setReportSource( NCReportSource::File );
     report->setReportFile("reportes/tabla_usuarios.xml");
     report->addItemModel("mymodel",ui->tableView_Clientes->model());
@@ -471,15 +528,78 @@ void ui_cliente::on_pushButton_imprimir_lista_clicked()
          pvf.deleteLater();// set attrib
          pvf.exec();  // run like modal dialog
      }
-
+    delete report;*/
 
 }
 
 
 void ui_cliente::on_pushButton_imprimir_lc_clicked()
 {
+        QStringList lista_e;
 
-    NCReport * report = new NCReport(this);
+        int fila= ui->tableView_compras->model()->rowCount() ;// indice.row();
+        int columna= ui->tableView_compras->model()->columnCount();
+
+        QString var;
+       for(int i=0;i<fila;i++)
+        {
+            var.clear();
+            for(int j=0;j<columna;j++)
+            {
+                var += ui->tableView_compras->model()->data(ui->tableView_compras->model()->index(i,j)).toString();
+                if(j<columna-1)
+                    var +=";";
+            }
+
+            lista_e<<var;
+        }
+
+
+       for(int i=0;i<lista_e.length();i++)
+            qDebug()<<lista_e.at(i)<<endl;
+
+       NCReport report;
+
+       report.setReportSource( NCReportSource::File );
+       report.setReportFile("reportes/lista_de_compras.xml");
+       report.addStringList(lista_e,"mylist");
+
+       report.runReportToPDF("pdf/lista_compras.pdf");
+       report.runReportToPreview();
+
+        if (report.hasError()) {
+
+            QMessageBox po;
+            po.setText(report.lastErrorMsg());
+            po.exec();
+        }
+        else
+        {
+
+            NCReportPreviewWindow pvf;
+            pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+            pvf.setReport(&report);
+            pvf.setWindowModality(Qt::NonModal );    // set modality
+            pvf.setAttribute( Qt::WA_QuitOnClose );
+            pvf.deleteLater();// set attrib
+            pvf.exec();  // run like modal dialog
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* NCReport * report = new NCReport();
     report->setReportSource( NCReportSource::File );
     report->setReportFile("reportes/tabla_usuarios.xml");
     report->addItemModel("mymodel",ui->tableView_compras->model());
@@ -503,5 +623,7 @@ void ui_cliente::on_pushButton_imprimir_lc_clicked()
          pvf.deleteLater();// set attrib
          pvf.exec();  // run like modal dialog
      }
-    delete report;
+    delete report;*/
+
+
 }

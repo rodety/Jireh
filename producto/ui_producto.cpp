@@ -4,6 +4,10 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QInputDialog>
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
 
 #include <iostream>
 using namespace std;
@@ -1914,11 +1918,60 @@ void ui_producto::configurarui(int index)
             ui->tableView_productos->setColumnWidth(16,150);//Accesorios
             ui->tableView_productos->setColumnWidth(17,80);//Observaciones
 
-
         }
-
 
     }
 
+}
+
+void ui_producto::on_pushButton_imprimir_2_clicked()
+{
+    QStringList lista_e;
+
+    int fila= ui->tableView_productos->model()->rowCount() ;// indice.row();
+    int columna= ui->tableView_productos->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var += ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
+        }
+        lista_e<<var;
+    }
+
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
+
+   NCReport report;
+
+   report.setReportSource( NCReportSource::File );
+   report.setReportFile("reportes/lista_de_monturas.xml");
+   report.addStringList(lista_e,"mylist");
+
+   report.runReportToPDF("pdf/lista_de_monturas.pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
+    }
+    else
+    {
+
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
 
 }

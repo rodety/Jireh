@@ -12,6 +12,8 @@ public:
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString empresa);
     void imprimir_usuarios(  QWidget * t);
+    void imprimir_compras( QWidget * t);
+    void imprimir_productos(QWidget * t);
 
 };
 
