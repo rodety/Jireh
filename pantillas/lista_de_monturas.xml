@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NCReport version="2.13.0" name="productos" type="report">
+    <options>
+        <encoding>UTF-8</encoding>
+        <language>00</language>
+        <langrole>0</langrole>
+        <orientation>landscape</orientation>
+        <pagesize width="297.000" height="210.000">A4</pagesize>
+        <topmargin>15</topmargin>
+        <bottommargin>15</bottommargin>
+        <leftmargin>10</leftmargin>
+        <rightmargin>10</rightmargin>
+        <backcolor>#ffffff</backcolor>
+        <columns>0</columns>
+        <columnspace>0</columnspace>
+        <zoneSpacing>0</zoneSpacing>
+        <zoneBreak>false</zoneBreak>
+        <fontname>Liberation Sans</fontname>
+        <fontsize>10</fontsize>
+        <fontstyle></fontstyle>
+        <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
+    </options>
+    <datasources>
+        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist"></datasource>
+    </datasources>
+    <variables/>
+    <pageheader id="PH" height="40.481">
+        <label id="NRBHD" zValue="0" posX="107.950" posY="1.587" width="55.827" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">LISTA DE MONTURAS</label>
+        <line id="QY5NV" zValue="1" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="1.587" fromY="39.688" toX="276.225" toY="39.688"/>
+        <label id="OC0VW" zValue="2" posX="0.000" posY="31.750" width="4.762" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">ID</label>
+        <label id="XTJB0" zValue="3" posX="7.938" posY="31.750" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Cod</label>
+        <label id="CIIY3" zValue="4" posX="26.987" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Descrip</label>
+        <label id="21EHP" zValue="5" posX="47.625" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Estado</label>
+        <label id="2MBMX" zValue="6" posX="63.500" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Compra</label>
+        <label id="68VH4" zValue="7" posX="79.375" posY="31.750" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Venta</label>
+        <label id="BS9HA" zValue="8" posX="93.662" posY="19.050" width="17.462" height="26.987" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Descuento</label>
+        <label id="REA6M" zValue="9" posX="103.188" posY="25.400" width="9.525" height="42.862" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">stock</label>
+        <label id="4FSQY" zValue="10" posX="115.887" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Marca</label>
+        <label id="SJINE" zValue="11" posX="134.938" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Forma</label>
+        <label id="JA9NL" zValue="12" posX="155.575" posY="31.750" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Color</label>
+        <label id="1X0XP" zValue="13" posX="174.625" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Tamaño</label>
+        <label id="7OSU3" zValue="14" posX="192.087" posY="31.750" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Calidad</label>
+        <label id="L2H02" zValue="15" posX="211.137" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Genero</label>
+        <label id="JSOI5" zValue="16" posX="228.600" posY="15.875" width="20.637" height="30.162" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Cont. Vitrina</label>
+        <label id="BUNBC" zValue="17" posX="239.712" posY="14.287" width="25.400" height="23.812" autoHeight="true" fontName="Liberation Sans" fontSize="10" alignment="1" rotation="90">Cont. Almacen</label>
+        <label id="7T7UH" zValue="18" posX="250.825" posY="23.812" width="26.987" height="23.812" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Acceso</label>
+        <label id="578FD" zValue="19" posX="263.525" posY="11.112" width="31.750" height="28.575" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Observaciones</label>
+    </pageheader>
+    <pagefooter id="PF" height="6.085"/>
+    <details>
+        <detail id="Detail1" height="15.081" datasource="s1">
+            <items>
+                <field id="2BOVU" zValue="0" posX="0.000" posY="0.000" width="6.350" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">0</field>
+                <field id="1PSR5" zValue="1" posX="7.938" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">1</field>
+                <field id="4A6KJ" zValue="2" posX="23.812" posY="0.000" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">2</field>
+                <field id="DSX86" zValue="3" posX="47.625" posY="0.000" width="12.700" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">3</field>
+                <field id="TR145" zValue="4" posX="66.675" posY="0.000" width="7.938" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">4</field>
+                <field id="LVSD0" zValue="5" posX="79.375" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">5</field>
+                <field id="4BRMH" zValue="6" posX="92.075" posY="0.000" width="7.938" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">6</field>
+                <field id="CD0UH" zValue="7" posX="103.188" posY="0.000" width="6.350" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">7</field>
+                <field id="W5XRW" zValue="8" posX="115.887" posY="0.000" width="15.875" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">8</field>
+                <field id="8QGVR" zValue="9" posX="133.350" posY="0.000" width="15.875" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">9</field>
+                <field id="WZ493" zValue="10" posX="152.400" posY="0.000" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">10</field>
+                <field id="QHT0Y" zValue="11" posX="176.212" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">11</field>
+                <field id="KHHWF" zValue="12" posX="190.500" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">12</field>
+                <field id="9ECZ0" zValue="13" posX="209.550" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">13</field>
+                <field id="WE2JC" zValue="14" posX="228.600" posY="0.000" width="7.938" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">14</field>
+                <field id="XVSB9" zValue="15" posX="239.712" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">15</field>
+                <field id="E39KF" zValue="16" posX="250.825" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">16
+</field>
+                <field id="BRPQM" zValue="17" posX="261.938" posY="0.000" width="15.875" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">17</field>
+            </items>
+        </detail>
+    </details>
+</NCReport>
