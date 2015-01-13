@@ -10,14 +10,21 @@
     <x>0</x>
     <y>0</y>
     <width>965</width>
-    <height>513</height>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_5">
-   <item row="1" column="0">
+   <item row="2" column="1">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QLabel" name="label_5">
@@ -119,17 +126,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_imprimir_2">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../Icons/Icons.qrc">
-         <normaloff>:/Icons/printer.png</normaloff>:/Icons/printer.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="pushButton_etiquetar">
        <property name="text">
         <string>Etiquetar</string>
@@ -170,17 +166,10 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
+   <item row="3" column="1">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="Tab1_2">
       <attribute name="title">
@@ -189,49 +178,8 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="2" column="0">
         <layout class="QGridLayout" name="gridLayout">
-         <item row="2" column="1">
-          <widget class="QLabel" name="label_select_2">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="MyComboBox" name="comboBox_select_2"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="MyComboBox" name="comboBox_select_1"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_select_1">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_valor_inicial">
-           <property name="text">
-            <string>M. Esfera</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_Inicio">
-           <property name="minimum">
-            <double>-20.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.250000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="label_cilindro">
-           <property name="text">
-            <string>M. Cilindro</string>
-           </property>
-          </widget>
+         <item row="3" column="2">
+          <widget class="MyComboBox" name="comboBox_select_4"/>
          </item>
          <item row="1" column="1">
           <widget class="QDoubleSpinBox" name="doubleSpinBox_Cilindro">
@@ -246,15 +194,18 @@
            </property>
           </widget>
          </item>
+         <item row="3" column="3">
+          <widget class="MyComboBox" name="comboBox_select_3"/>
+         </item>
+         <item row="3" column="4">
+          <widget class="MyComboBox" name="comboBox_select_5"/>
+         </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="pushButton_transponer">
            <property name="text">
             <string>Transponer</string>
            </property>
           </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="MyComboBox" name="comboBox_select_4"/>
          </item>
          <item row="2" column="2">
           <widget class="QLabel" name="label_select_4">
@@ -263,23 +214,13 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="3">
-          <widget class="QLabel" name="label_select_3">
-           <property name="text">
-            <string>TextLabel</string>
+         <item row="1" column="0">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_Inicio">
+           <property name="minimum">
+            <double>-20.000000000000000</double>
            </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="MyComboBox" name="comboBox_select_3"/>
-         </item>
-         <item row="3" column="4">
-          <widget class="MyComboBox" name="comboBox_select_5"/>
-         </item>
-         <item row="2" column="4">
-          <widget class="QLabel" name="label_select_5">
-           <property name="text">
-            <string>TextLabel</string>
+           <property name="singleStep">
+            <double>0.250000000000000</double>
            </property>
           </widget>
          </item>
@@ -289,9 +230,6 @@
             <string>TextLabel</string>
            </property>
           </widget>
-         </item>
-         <item row="3" column="5">
-          <widget class="MyComboBox" name="comboBox_select_6"/>
          </item>
          <item row="1" column="3" colspan="3">
           <spacer name="horizontalSpacer_4">
@@ -305,6 +243,57 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_valor_inicial">
+           <property name="text">
+            <string>M. Esfera</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_select_2">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="5">
+          <widget class="MyComboBox" name="comboBox_select_6"/>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLabel" name="label_select_5">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="MyComboBox" name="comboBox_select_2"/>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLabel" name="label_select_3">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_select_1">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_cilindro">
+           <property name="text">
+            <string>M. Cilindro</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="MyComboBox" name="comboBox_select_1"/>
          </item>
         </layout>
        </item>
@@ -434,25 +423,57 @@
          </item>
         </layout>
        </item>
-       <item row="4" column="0">
-        <widget class="QTableView" name="tableView_productos">
-         <property name="selectionMode">
-          <enum>QAbstractItemView::SingleSelection</enum>
-         </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
-         </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>130</number>
-         </attribute>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="Line" name="line_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
+       </item>
+       <item row="3" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QTableView" name="tableView_productos">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>130</number>
+           </attribute>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_imprimir_2">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/printer.png</normaloff>:/Icons/printer.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -708,7 +729,39 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QTableView" name="tableView_kardex"/>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QTableView" name="tableView_kardex"/>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_imprimir_kardex">
+             <property name="text">
+              <string>Imprimir</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Icons/Icons.qrc">
+               <normaloff>:/Icons/1349716426_print.png</normaloff>:/Icons/1349716426_print.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -717,34 +770,54 @@
        <string>Lista de Compras</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_13">
-       <item row="0" column="0">
+       <item row="1" column="0">
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="2" column="0">
-          <layout class="QGridLayout" name="gridLayout_8"/>
-         </item>
-         <item row="1" column="0">
+         <item row="2" column="0" colspan="3">
           <widget class="QTableView" name="tableView_compras">
            <property name="sortingEnabled">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_9">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Lista de Compras</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+         <item row="5" column="2">
+          <layout class="QGridLayout" name="gridLayout_8"/>
+         </item>
+         <item row="3" column="2">
+          <widget class="QPushButton" name="pushButton_imprimir_lc">
+           <property name="text">
+            <string>imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716391_monotone_printer_hardware.png</normaloff>:/Icons/1349716391_monotone_printer_hardware.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Lista de Compras</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -772,7 +845,6 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>comboBox_select_1</tabstop>
   <tabstop>comboBox_select_2</tabstop>
-  <tabstop>tableView_productos</tabstop>
   <tabstop>lineEdit_buscar</tabstop>
   <tabstop>pushButton_buscar</tabstop>
   <tabstop>btnToVitrina</tabstop>

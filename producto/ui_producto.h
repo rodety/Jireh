@@ -45,6 +45,11 @@ public:
     ~ui_producto();
     void set_index_combo_producto(int index);    
     void configurarVenta(int index);
+    void imprimir_tablas(QString filename, QTableView * t);
+
+
+
+
 private slots:
 
     void configurarCombos(int index);
@@ -126,6 +131,10 @@ private slots:
     void on_tableView_compras_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_imprimir_2_clicked();
+
+    void on_pushButton_imprimir_kardex_clicked();
+
+    void on_pushButton_imprimir_lc_clicked();
 
 public slots:
     void setComportamiento(int);

@@ -60,6 +60,60 @@ void ui_producto::configurarVenta(int index)
 
 }
 
+void ui_producto::imprimir_tablas(QString filename,QTableView * t)
+{
+    QStringList lista_e;
+
+    int fila= t->model()->rowCount() ;// indice.row();
+    int columna= t->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var += t->model()->data(t->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
+        }
+        lista_e<<var;
+    }
+
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
+
+   NCReport report;
+
+   report.setReportSource( NCReportSource::File );
+   report.setReportFile("reportes/"+filename+".xml");
+   report.addStringList(lista_e,"mylist");
+
+   report.runReportToPDF("pdf/"+filename+".pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
+    }
+    else
+    {
+
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
+}
+
+
+
+
 void ui_producto::on_comboBox_tipoProducto_currentIndexChanged(int index)
 {
 
@@ -1926,52 +1980,40 @@ void ui_producto::configurarui(int index)
 
 void ui_producto::on_pushButton_imprimir_2_clicked()
 {
-    QStringList lista_e;
+     switch (ui->comboBox_tipoProducto->currentIndex())
+     {
+        case 1:
+             imprimir_tablas("lista_de_lunas",ui->tableView_productos);
+         break;
+        case 2:
+             imprimir_tablas("lista_de_monturas",ui->tableView_productos);
+             break;
+        case 3:
+        imprimir_tablas("lista_de_lentescontacto",ui->tableView_productos);
+         break;
 
-    int fila= ui->tableView_productos->model()->rowCount() ;// indice.row();
-    int columna= ui->tableView_productos->model()->columnCount();
+        case 4:
+         imprimir_tablas("lista_de_otros",ui->tableView_productos);
+         break;
 
-    QString var;
-   for(int i=0;i<fila;i++)
-    {
-        var.clear();
-        for(int j=0;j<columna;j++)
-        {
-            var += ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(i,j)).toString();
-            if(j<columna-1)
-                var +=";";
-        }
-        lista_e<<var;
-    }
+        case 5:
+         imprimir_tablas("lista_de_trabajos_extras",ui->tableView_productos);
+         break;
 
-   for(int i=0;i<lista_e.length();i++)
-        qDebug()<<lista_e.at(i)<<endl;
+        case 6:
+          imprimir_tablas("lista_de_accesorios",ui->tableView_productos);
+          break;
+     }
 
-   NCReport report;
+}
 
-   report.setReportSource( NCReportSource::File );
-   report.setReportFile("reportes/lista_de_monturas.xml");
-   report.addStringList(lista_e,"mylist");
 
-   report.runReportToPDF("pdf/lista_de_monturas.pdf");
-   report.runReportToPreview();
+void ui_producto::on_pushButton_imprimir_kardex_clicked()
+{
+    imprimir_tablas("kardex",ui->tableView_kardex);
+}
 
-    if (report.hasError()) {
-
-        QMessageBox po;
-        po.setText(report.lastErrorMsg());
-        po.exec();
-    }
-    else
-    {
-
-        NCReportPreviewWindow pvf;
-        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
-        pvf.setReport(&report);
-        pvf.setWindowModality(Qt::NonModal );    // set modality
-        pvf.setAttribute( Qt::WA_QuitOnClose );
-        pvf.deleteLater();// set attrib
-        pvf.exec();  // run like modal dialog
-    }
-
+void ui_producto::on_pushButton_imprimir_lc_clicked()
+{
+    imprimir_tablas("lista_de_productos_compra",ui->tableView_compras   );
 }
