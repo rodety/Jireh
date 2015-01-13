@@ -18,8 +18,18 @@ TARGET = opticalManager
 TEMPLATE = app
 DEFINES += NCREPORT_IMPORT
 
+unix:!macx: LIBS += -L$$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/lib/ -lNCReportDebug
+
+INCLUDEPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+DEPENDPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+
+
+unix:!macx: LIBS += -L$$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/lib/ -lNCReport
+
+INCLUDEPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+DEPENDPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+
 unix {
-    LIBS += -lncreport -Llib -L/usr/local/bin
     LIBS += -lzint
     target.path = /usr/local/bin
 }
@@ -372,3 +382,5 @@ OTHER_FILES += \
  symbian: warning(This example might not fully work on Symbian platform)
  maemo5: warning(This example might not fully work on Maemo platform)
  simulator: warning(This example might not fully work on Simulator platform)
+
+
