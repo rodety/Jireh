@@ -431,7 +431,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2" rowspan="2">
+         <item row="0" column="2">
           <widget class="QLineEdit" name="lineEdit_pag">
            <property name="enabled">
             <bool>false</bool>
@@ -450,7 +450,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="3" rowspan="2">
+         <item row="0" column="3">
           <widget class="QPushButton" name="pushButton_anterior">
            <property name="enabled">
             <bool>false</bool>
@@ -460,7 +460,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="4" rowspan="2">
+         <item row="0" column="4">
           <widget class="QPushButton" name="pushButton_siguiente">
            <property name="enabled">
             <bool>false</bool>
@@ -470,57 +470,11 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_previsualizar">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Previsualizar</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../Icons/Icons.qrc">
-             <normaloff>:/Icons/1349716430_zoom.png</normaloff>:/Icons/1349716430_zoom.png</iconset>
-           </property>
-           <property name="shortcut">
-            <string>Ctrl+Alt+P</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_imprimir">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Imprimir</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../Icons/Icons.qrc">
-             <normaloff>:/Icons/1349716426_print.png</normaloff>:/Icons/1349716426_print.png</iconset>
-           </property>
-           <property name="shortcut">
-            <string>Ctrl+P</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
+         <item row="1" column="0" colspan="2">
           <widget class="QTableWidget" name="tableView_etiquetas">
            <property name="minimumSize">
             <size>
-             <width>400</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -560,7 +514,53 @@
            </column>
           </widget>
          </item>
-         <item row="2" column="2" colspan="3">
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_previsualizar">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Previsualizar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716430_zoom.png</normaloff>:/Icons/1349716430_zoom.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+Alt+P</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_imprimir">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Icons/Icons.qrc">
+             <normaloff>:/Icons/1349716426_print.png</normaloff>:/Icons/1349716426_print.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+P</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2" colspan="3">
           <widget class="QLabel" name="draw_label">
            <property name="frameShape">
             <enum>QFrame::WinPanel</enum>

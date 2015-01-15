@@ -1258,6 +1258,7 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         pm.fill(Qt::white);
     }
     ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
+
 }
 
 void ui_tienda::on_pushButton_imprimir_clicked()
