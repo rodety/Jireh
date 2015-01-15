@@ -4,42 +4,32 @@
 #
 #-------------------------------------------------
 
-
 QT      += sql
 QT      += network
 QT      += gui
 QT      += widgets
 QT      += printsupport
-QT       += core gui
+QT      += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = opticalManager
 TEMPLATE = app
-DEFINES += NCREPORT_IMPORT
 
-unix:!macx: LIBS += -L$$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/lib/ -lNCReportDebug
+unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lQZint
 
-INCLUDEPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
-DEPENDPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
 
+unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/lib/ -lNCReport
 
-unix:!macx: LIBS += -L$$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/lib/ -lNCReport
+INCLUDEPATH += $$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/include
+DEPENDPATH += $$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/include
 
-INCLUDEPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
-DEPENDPATH += $$PWD/lib/NCReport2.12.3.x86.Qt4.8.5.eval/include
+unix:!macx: LIBS += -L$$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/lib/ -lNCReportDebug
 
-unix {
-    LIBS += -lzint
-    target.path = /usr/local/bin
-}
-win32 {
-    LIBS += ../OpticalManager/lib/ncreport2.lib
-    LIBS += ../OpticalManager/Zint/zint.lib
-    release: LIBS += ../OpticalManager/nc/libncreport2.a
-    debug: LIBS += ../OpticalManager/nc/libncreportd2.a
-    target.path = bin
-}
+INCLUDEPATH += $$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/include
+DEPENDPATH += $$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/include
 
 
 INCLUDEPATH += include
@@ -177,7 +167,8 @@ SOURCES += main.cpp\
     producto/object_Lista.cpp \
     producto/object_Laboratorio.cpp \
     producto/ui_cantidad.cpp \
-    compra/object_proveedor.cpp
+    compra/object_proveedor.cpp \
+    persona/persona.cpp
 
 HEADERS  += mainwindow.h \
     configuracion/configprogram.h \
@@ -314,7 +305,8 @@ HEADERS  += mainwindow.h \
     producto/object_Laboratorio.h \
     producto/object_Lista.h \
     producto/ui_cantidad.h \
-    compra/object_proveedor.h
+    compra/object_proveedor.h \
+    persona/persona.h
 
 FORMS    += mainwindow.ui \
     producto/ui_producto.ui \
@@ -363,12 +355,8 @@ RESOURCES += \
     Icons/Icons.qrc \
 
 
-
-
-
 OTHER_FILES += \
     configuracion/config.ini
-
 
 # install
  target.path = $$[QT_INSTALL_EXAMPLES]/itemviews/spinboxdelegate
@@ -384,3 +372,7 @@ OTHER_FILES += \
  simulator: warning(This example might not fully work on Simulator platform)
 
 
+unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lzint
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
