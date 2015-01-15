@@ -3,7 +3,12 @@
 #include <vitrina/empresa.h>
 #include <cliente/object_Cliente.h>
 
-//Bienvenido Eddy Caceres Hucarpuma
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+
+
 uiventas::uiventas(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::uiventas)
@@ -1904,4 +1909,64 @@ void uiventas::on_buscar_venta_returnPressed()
     {
         calcularReporte(2);
     }
+}
+
+void uiventas::on_pushButton_Imprimir_clicked()
+{
+
+    QStringList lista_e, lista_2;
+
+    int fila= ui->tableView_Reporte_Ventas->model()->rowCount() ;// indice.row();
+    int columna= ui->tableView_Reporte_Ventas->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var += ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
+        }
+
+        lista_e<<var;
+    }
+
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
+
+
+   lista_2<<ui->label_Resultado->text();
+   NCReport report;
+
+
+   report.setReportSource( NCReportSource::File );
+   report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
+   report.addStringList(lista_e,"mylist");
+
+    report.addStringList(lista_2,"mylist2");
+
+
+   report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
+    }
+    else
+    {
+
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
+
 }

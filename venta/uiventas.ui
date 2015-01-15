@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -189,13 +189,6 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_Imprimir">
-           <property name="text">
-            <string>Imprimir</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QLabel" name="label_25">
            <property name="text">
             <string>Total...</string>
@@ -213,6 +206,18 @@
            </property>
            <property name="text">
             <string>RESULTADO</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_Imprimir">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <selectedon>:/Icons/1349716391_monotone_printer_hardware.png</selectedon>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -860,7 +865,6 @@
   <tabstop>comboBox_Empresa</tabstop>
   <tabstop>comboBox_Tienda</tabstop>
   <tabstop>comboBox_Documento</tabstop>
-  <tabstop>pushButton_Imprimir</tabstop>
   <tabstop>dateTimeEdit_Desde</tabstop>
  </tabstops>
  <resources>

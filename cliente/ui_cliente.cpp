@@ -585,20 +585,6 @@ void ui_cliente::on_pushButton_imprimir_lc_clicked()
             pvf.exec();  // run like modal dialog
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    /* NCReport * report = new NCReport();
     report->setReportSource( NCReportSource::File );
     report->setReportFile("reportes/tabla_usuarios.xml");
@@ -624,6 +610,5 @@ void ui_cliente::on_pushButton_imprimir_lc_clicked()
          pvf.exec();  // run like modal dialog
      }
     delete report;*/
-
 
 }

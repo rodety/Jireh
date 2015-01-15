@@ -108,6 +108,8 @@ private slots:
 
     void on_buscar_venta_returnPressed();
 
+    void on_pushButton_Imprimir_clicked();
+
 private:
     Ui::uiventas *ui;
     int count_row;
