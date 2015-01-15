@@ -236,6 +236,7 @@ void ui_producto::on_pushButton_editar_clicked()
     int fila=ui->tableView_productos->currentIndex().row();
     if(fila!=-1)
     {
+        //terminando
         if(posicion==0)
         {
             QMessageBox box;
