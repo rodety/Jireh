@@ -551,7 +551,7 @@ void compras::on_pushButton_imprimir_23_clicked()
 
     NCReport report;
     report.setReportSource( NCReportSource::File );
-    report.setReportFile("reportes/lista_de_adqusiciones.xml");
+    report.setReportFile("reportes/lista_de_adquisiciones.xml");
     report.addStringList(lista_e,"mylist");
 
 

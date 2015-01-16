@@ -21,25 +21,31 @@
         <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
     </options>
     <datasources>
-        <datasource id="s1" allowEmpty="true" type="model" openRole="begin" source="static" modelID="mymodel" parentID=""></datasource>
+        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="custom" customDelimChar=";" listID="mylist"></datasource>
     </datasources>
     <variables/>
     <pageheader id="PH" height="28.575">
-        <label id="XVSB9" zValue="0" posX="68.263" posY="1.587" width="54.694" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" forecolor="#000000">Lista de Adquisiciones</label>
-        <label id="BUNBC" zValue="1" posX="6.350" posY="20.637" width="7.938" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" forecolor="#000000">ID</label>
-        <label id="E39KF" zValue="2" posX="22.225" posY="20.637" width="17.462" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Fecha</label>
-        <label id="7T7UH" zValue="3" posX="42.862" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Numero</label>
-        <label id="BRPQM" zValue="4" posX="77.787" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Proveedor</label>
-        <label id="578FD" zValue="5" posX="112.712" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Total</label>
-        <label id="9X0R2" zValue="6" posX="147.637" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Documento</label>
-        <label id="HFMKP" zValue="7" posX="187.325" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Nombre</label>
+        <label id="XVSB9" zValue="0" posX="68.263" posY="1.587" width="54.769" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Lista de Adquisiciones</label>
+        <label id="BUNBC" zValue="1" posX="6.350" posY="20.637" width="7.938" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">ID</label>
+        <label id="E39KF" zValue="2" posX="20.637" posY="20.637" width="17.462" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Fecha</label>
+        <label id="7T7UH" zValue="3" posX="44.450" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Numero</label>
+        <label id="BRPQM" zValue="4" posX="115.887" posY="20.637" width="17.462" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Proveedor</label>
+        <label id="578FD" zValue="5" posX="169.862" posY="20.637" width="11.112" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Total</label>
+        <label id="9X0R2" zValue="6" posX="192.087" posY="20.637" width="22.225" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Documento</label>
+        <label id="HFMKP" zValue="7" posX="228.600" posY="20.637" width="23.812" height="5.027" fontName="Liberation Sans" fontSize="10" alignment="1">Nombre</label>
         <line id="YYQQW" zValue="8" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="25.400" toX="254.000" toY="25.400"/>
     </pageheader>
-    <pagefooter id="PF" height="10.000"/>
+    <pagefooter id="PF" height="9.790"/>
     <details>
-        <detail id="Detail1" height="38.629" datasource="s1">
+        <detail id="Detail1" height="7.408" datasource="s1">
             <items>
-                <table id="0DHCX" zValue="0" posX="0.000" posY="0.000" width="254.000" height="38.100" model="mymodel" tableView="myview" tableSpacing="0" cellSpacing="0" elidedMode="0" showBorder="1" showHeaderH="1" showHeaderV="1"/>
+                <field id="XVSB9" zValue="1" posX="3.175" posY="1.587" width="11.112" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" forecolor="#000000" type="txt" ftype="ds">0</field>
+                <field id="BUNBC" zValue="2" posX="19.050" posY="1.587" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" forecolor="#000000" type="txt" ftype="ds">1</field>
+                <field id="E39KF" zValue="3" posX="165.100" posY="1.587" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" type="txt" ftype="ds">4</field>
+                <field id="BRPQM" zValue="5" posX="42.862" posY="1.587" width="31.750" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" type="txt" ftype="ds">2</field>
+                <field id="578FD" zValue="6" posX="80.962" posY="1.587" width="80.962" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" type="txt" ftype="ds">3</field>
+                <field id="9X0R2" zValue="7" posX="190.500" posY="1.587" width="31.750" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" type="txt" ftype="ds">5</field>
+                <field id="HFMKP" zValue="8" posX="223.837" posY="1.587" width="30.162" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" type="txt" ftype="ds">6</field>
             </items>
         </detail>
     </details>
