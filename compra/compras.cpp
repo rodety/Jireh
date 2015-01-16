@@ -13,6 +13,11 @@
 #include <compra/object_Compra_has_Proveedor.h>
 #include <compra/object_Producto_has_Compra.h>
 
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+
 //Esta es una interfaz de compras
 compras::compras(QWidget *parent) :
     QWidget(parent),
@@ -512,5 +517,42 @@ void compras::loadCompra(QString idCompra)
 
 }
 
+void compras::on_pushButton_imprimir_clicked()
+{
 
 
+
+}
+
+void compras::on_pushButton_imprimir_23_clicked()
+{
+    qDebug()<<"holsa"<<endl;
+    NCReport * report = new NCReport(this);
+
+    report->setReportSource( NCReportSource::File );
+    report->setReportFile("reportes/lista_de_adquisiciones.xml");
+    report->addItemModel(ui->tableView_compras->model(),"mymodel");
+    report->addTableView(ui->tableView_compras,"myview");
+    report->runReportToPDF("pdf/lista_de_adquisiciones.pdf");
+    report->runReportToPreview();
+
+     if (report->hasError()) {
+
+         QMessageBox po;
+         po.setText(report->lastErrorMsg());
+         po.exec();
+     }
+     else
+     {
+
+         NCReportPreviewWindow pvf;
+         pvf.setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
+         pvf.setReport(report);
+         pvf.setWindowModality(Qt::NonModal );    // set modality
+         pvf.setAttribute( Qt::WA_QuitOnClose );
+         pvf.deleteLater();// set attrib
+         pvf.exec();  // run like modal dialog
+     }
+
+
+}

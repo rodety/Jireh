@@ -51,14 +51,15 @@ private slots:
 
     void on_pushButton_eliminar_compra_clicked();
 
-
     void on_tableWidget__items_productos_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_limpiar_clicked();
 
     void on_tableView_compras_doubleClicked(const QModelIndex &index);    
 
-
+    void on_pushButton_imprimir_clicked();
+    
+    void on_pushButton_imprimir_23_clicked();
 
 private:
     Ui::compras *ui;    
