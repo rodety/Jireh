@@ -63,6 +63,7 @@ void compras::on_pushButton_buscar_proveedor_clicked()
     ui_proveedores * form = new ui_proveedores;
     form->show();
     connect(form,SIGNAL(sentidProveedor(QString,QString,QString,QString)),this,SLOT(getProveedor(QString,QString,QString,QString)));
+    //hola
 
 }
 
