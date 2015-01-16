@@ -10,6 +10,7 @@ ui_reporte::ui_reporte(QWidget *parent) :
 
 ui_reporte::~ui_reporte()
 {
+    //hola
     delete ui;
 }
 
