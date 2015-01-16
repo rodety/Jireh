@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NCReport version="2.13.0" name="Adquisiciones" type="report">
+    <options>
+        <encoding>UTF-8</encoding>
+        <language>00</language>
+        <langrole>0</langrole>
+        <orientation>landscape</orientation>
+        <pagesize width="297.000" height="210.000">A4</pagesize>
+        <topmargin>15</topmargin>
+        <bottommargin>15</bottommargin>
+        <leftmargin>20</leftmargin>
+        <rightmargin>20</rightmargin>
+        <backcolor>#ffffff</backcolor>
+        <columns>0</columns>
+        <columnspace>0</columnspace>
+        <zoneSpacing>0</zoneSpacing>
+        <zoneBreak>false</zoneBreak>
+        <fontname>Liberation Sans</fontname>
+        <fontsize>10</fontsize>
+        <fontstyle></fontstyle>
+        <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
+    </options>
+    <datasources>
+        <datasource id="s1" allowEmpty="true" type="model" openRole="begin" source="static" modelID="mymodel" parentID=""></datasource>
+    </datasources>
+    <variables/>
+    <pageheader id="PH" height="28.575">
+        <label id="XVSB9" zValue="0" posX="68.263" posY="1.587" width="54.694" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" forecolor="#000000">Lista de Adquisiciones</label>
+        <label id="BUNBC" zValue="1" posX="6.350" posY="20.637" width="7.938" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" forecolor="#000000">ID</label>
+        <label id="E39KF" zValue="2" posX="22.225" posY="20.637" width="17.462" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Fecha</label>
+        <label id="7T7UH" zValue="3" posX="42.862" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Numero</label>
+        <label id="BRPQM" zValue="4" posX="77.787" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Proveedor</label>
+        <label id="578FD" zValue="5" posX="112.712" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Total</label>
+        <label id="9X0R2" zValue="6" posX="147.637" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Documento</label>
+        <label id="HFMKP" zValue="7" posX="187.325" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Nombre</label>
+        <line id="YYQQW" zValue="8" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="25.400" toX="254.000" toY="25.400"/>
+    </pageheader>
+    <pagefooter id="PF" height="10.000"/>
+    <details>
+        <detail id="Detail1" height="38.629" datasource="s1">
+            <items>
+                <table id="0DHCX" zValue="0" posX="0.000" posY="0.000" width="254.000" height="38.100" model="mymodel" tableView="myview" tableSpacing="0" cellSpacing="0" elidedMode="0" showBorder="1" showHeaderH="1" showHeaderV="1"/>
+            </items>
+        </detail>
+    </details>
+</NCReport>
