@@ -28,9 +28,6 @@ public:
     
 private slots:
 
-
-    void on_comboBox_currentIndexChanged(int index);
-
 private:
     Ui::ui_reporte *ui;
     void execute();

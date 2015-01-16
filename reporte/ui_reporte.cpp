@@ -18,7 +18,8 @@ ui_reporte::~ui_reporte()
 
 void execute();
 
-void ui_reporte::on_pushButton_calcular_clicked()
+/*void ui_reporte::on_pushButton_calcular_clicked()
 {
 
 }
+*/
