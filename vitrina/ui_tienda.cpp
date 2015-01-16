@@ -1192,7 +1192,7 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         etiquetas[i].etiquetar();
     }
 
-    QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
+    QPixmap pm(ui->draw_label->width(),ui->draw_label->height());
     pm.fill(Qt::white);
     QPainter p;
     //QFont font("times",16);

@@ -236,6 +236,7 @@ void ui_producto::on_pushButton_editar_clicked()
     int fila=ui->tableView_productos->currentIndex().row();
     if(fila!=-1)
     {
+        //terminando
         if(posicion==0)
         {
             QMessageBox box;
@@ -599,7 +600,7 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
     {
         etiqueta t;
         QString codigo,descripcion,marca,precio;
-
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         //BUSCANDO SI ESTA REPETIDO
         for(int i=0;i<etiquetas.size();i++)
             if(etiquetas[i].getCodigo()==codigo)
@@ -623,37 +624,16 @@ void ui_producto::agregar_etiqueta(const QModelIndex &model)
                 break;
             }
 
-        if(posicion==2)
+        if(posicion == 2 || posicion == 3 || posicion == 4 || posicion == 6 )
         {
-            /*
-            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();
+
+
+            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
             marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
             precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
-            */
-        }
-        if(posicion==3)
-        {
-            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString();//tinte visibilidad
-            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();//marca
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
-        }
-        if(posicion==4)
-        {
-            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
-            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString();
+
         }
 
-        if(posicion==6)
-        {
-            codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
-            descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString();
-            marca=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString();
-            precio=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
-        }
         t.setCodigo(codigo);
         t.setDescripcion(descripcion);
         t.setMarca(marca);
@@ -682,7 +662,7 @@ void ui_producto::on_pushButton_previsualizar_clicked()
         etiquetas[i].etiquetar();
     }
 
-    QPixmap pm(ui->draw_label->width()*4,ui->draw_label->height()*4);
+    QPixmap pm(ui->draw_label->width(),ui->draw_label->height());
     pm.fill(Qt::white);
     QPainter p;
     //QFont font("times",16);

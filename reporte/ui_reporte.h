@@ -10,7 +10,7 @@
 #include <producto/object_TipoLente.h>
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
-
+#include <reporte/reporte.h>
 namespace Ui {
 class ui_reporte;
 }
@@ -26,6 +26,11 @@ public:
 
     ~ui_reporte();
     
+private slots:
+
+
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::ui_reporte *ui;
     void execute();
