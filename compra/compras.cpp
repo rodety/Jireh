@@ -526,34 +526,54 @@ void compras::on_pushButton_imprimir_clicked()
 }
 
 void compras::on_pushButton_imprimir_23_clicked()
-{
-    qDebug()<<"holsa"<<endl;
-    NCReport * report = new NCReport(this);
+{    
+     QStringList lista_e;
 
-    report->setReportSource( NCReportSource::File );
-    report->setReportFile("reportes/lista_de_adquisiciones.xml");
-    report->addItemModel(ui->tableView_compras->model(),"mymodel");
-    report->addTableView(ui->tableView_compras,"myview");
-    report->runReportToPDF("pdf/lista_de_adquisiciones.pdf");
-    report->runReportToPreview();
+     int fila= ui->tableView_compras->model()->rowCount() ;// indice.row();
+     int columna= ui->tableView_compras->model()->columnCount();
 
-     if (report->hasError()) {
+     QString var;
+    for(int i=0;i<fila;i++)
+     {
+         var.clear();
+         for(int j=0;j<columna;j++)
+         {
+             var += ui->tableView_compras->model()->data(ui->tableView_compras->model()->index(i,j)).toString();
+             if(j<columna-1)
+                 var +=";";
+         }
+
+         lista_e<<var;
+     }
+
+    for(int i=0;i<lista_e.length();i++)
+         qDebug()<<lista_e.at(i)<<endl;
+
+    NCReport report;
+    report.setReportSource( NCReportSource::File );
+    report.setReportFile("reportes/lista_de_adqusiciones.xml");
+    report.addStringList(lista_e,"mylist");
+
+
+    report.runReportToPDF("pdf/lista_de_adqusiciones.pdf");
+    report.runReportToPreview();
+
+     if (report.hasError()) {
 
          QMessageBox po;
-         po.setText(report->lastErrorMsg());
+         po.setText(report.lastErrorMsg());
          po.exec();
      }
      else
      {
 
          NCReportPreviewWindow pvf;
-         pvf.setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
-         pvf.setReport(report);
+         pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+         pvf.setReport(&report);
          pvf.setWindowModality(Qt::NonModal );    // set modality
          pvf.setAttribute( Qt::WA_QuitOnClose );
          pvf.deleteLater();// set attrib
          pvf.exec();  // run like modal dialog
      }
 
-
-}
+ }
