@@ -11,6 +11,9 @@
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
 #include <reporte/reporte.h>
+#include <vitrina/object_Tienda.h>
+#include <colaborador/object_Colaborador.h>
+#include <cliente/object_Cliente.h>
 namespace Ui {
 class ui_reporte;
 }
@@ -28,12 +31,18 @@ public:
     
 private slots:
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::ui_reporte *ui;
     void execute();
     int id_raking;
     string time_desde;
     string time_hasta;
+    QStandardItemModel * seleccionados_model;
+    map<QString,QString> Tienda;
+    map<QString,QString> Colaborador;
+    map<QString,QString> Cliente;
 
 };
 

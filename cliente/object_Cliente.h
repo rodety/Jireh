@@ -71,6 +71,7 @@ public:
 	bool mf_add();
 	bool mf_update();
 	bool mf_remove();
+    QSqlQueryModel* mf_show_all();
 
 	~object_Cliente();
 };

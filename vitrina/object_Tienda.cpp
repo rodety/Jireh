@@ -374,3 +374,10 @@ QSqlQueryModel* object_Tienda::mf_show(QString idEmpresa)
     return model;
 }
 
+QSqlQueryModel *object_Tienda::mf_show_all()
+{
+    QSqlQueryModel* model=new QSqlQueryModel;
+    model->setQuery("SELECT idTienda,nombre FROM Tienda");
+    return model;
+}
+
