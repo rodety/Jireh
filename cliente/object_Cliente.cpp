@@ -495,7 +495,7 @@ bool object_Cliente::mf_remove()
 QSqlQueryModel *object_Cliente::mf_show_all()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCliente, CONCAT(nombre,' ',primer_apellido,' ',segundo_apellido  FROM Cliente");
+    model->setQuery("SELECT idCliente, CONCAT(nombres,' ',primer_apellido,' ',segundo_apellido)  FROM Cliente");
     return model;
 }
 

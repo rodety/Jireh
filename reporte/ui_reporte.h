@@ -33,6 +33,12 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_listView_entidad_clicked(const QModelIndex &index);
+
+    void on_comboBox_entidades_currentIndexChanged(int index);
+
+    void on_listView_entidad_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::ui_reporte *ui;
     void execute();
@@ -43,6 +49,10 @@ private:
     map<QString,QString> Tienda;
     map<QString,QString> Colaborador;
     map<QString,QString> Cliente;
+
+    QSqlQueryModel* get_reporte_producto(int tipo);
+
+
 
 };
 

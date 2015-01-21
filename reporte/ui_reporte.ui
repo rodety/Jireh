@@ -21,7 +21,7 @@
        <item>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0" colspan="2">
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="comboBox_entidades">
            <item>
             <property name="text">
              <string>Seleccione</string>
@@ -95,10 +95,10 @@
       </layout>
      </item>
      <item row="1" column="0">
-      <widget class="QListView" name="listView_principal"/>
+      <widget class="QTableView" name="tableView_principal"/>
      </item>
      <item row="1" column="1">
-      <widget class="QListView" name="listView_secundario"/>
+      <widget class="QTableView" name="tableView_Secundario"/>
      </item>
     </layout>
    </item>
