@@ -17,7 +17,7 @@
    <item row="1" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_vitrina">
       <attribute name="title">
@@ -26,8 +26,24 @@
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0">
+          <widget class="QTableWidget" name="grilla"/>
+         </item>
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="6">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="5" column="0">
             <widget class="QLabel" name="label">
              <property name="text">
@@ -74,30 +90,10 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="5">
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="6">
-            <widget class="QPushButton" name="btnImprimir">
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblVitrina">
              <property name="text">
-              <string>Imprimir</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../Icons/Icons.qrc">
-               <normaloff>:/Icons/Printer_Picture.png</normaloff>:/Icons/Printer_Picture.png</iconset>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
+              <string>Vitrina: </string>
              </property>
             </widget>
            </item>
@@ -108,11 +104,18 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="lblVitrina">
-             <property name="text">
-              <string>Vitrina: </string>
-             </property>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBox_vitrina">
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="0" column="3">
@@ -135,18 +138,11 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QComboBox" name="comboBox_vitrina">
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_cod">
+             <property name="text">
+              <string>Cod. Reponer</string>
+             </property>
             </widget>
            </item>
            <item row="1" column="2">
@@ -209,7 +205,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="6">
+           <item row="1" column="7">
             <widget class="QPushButton" name="pushButton_quitar">
              <property name="text">
               <string>Quitar</string>
@@ -263,6 +259,13 @@
              </property>
             </widget>
            </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblNivel">
+             <property name="text">
+              <string>Nivel:</string>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="4">
             <widget class="QPushButton" name="btnDeshabilitar_vitrina">
              <property name="sizePolicy">
@@ -283,7 +286,16 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="6">
+           <item row="3" column="1">
+            <widget class="QComboBox" name="comboBox_niveles">
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="7">
             <widget class="QPushButton" name="pushButton_traspaso">
              <property name="text">
               <string>A vitrina</string>
@@ -297,23 +309,10 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="lblNivel">
-             <property name="text">
-              <string>Nivel:</string>
-             </property>
-            </widget>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_empresa"/>
            </item>
-           <item row="3" column="1">
-            <widget class="QComboBox" name="comboBox_niveles">
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="3" column="6">
+           <item row="3" column="7">
             <widget class="QPushButton" name="button_traspaso_almacen">
              <property name="text">
               <string>A almacen</string>
@@ -327,8 +326,8 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_empresa"/>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEdit_cod_reponer"/>
            </item>
            <item row="0" column="2">
             <widget class="QPushButton" name="btnAgregar_empresa">
@@ -364,31 +363,7 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_cod_reponer"/>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_cod">
-             <property name="text">
-              <string>Cod. Reponer</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="6">
-            <widget class="QPushButton" name="pushButton_aceptar_traspaso">
-             <property name="text">
-              <string>Aceptar Traslado</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../Icons/Icons.qrc">
-               <normaloff>:/Icons/notification_done.png</normaloff>:/Icons/notification_done.png</iconset>
-             </property>
-             <property name="flat">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="6">
+           <item row="4" column="7">
             <widget class="QPushButton" name="pushButton_etiqueta">
              <property name="text">
               <string>Etiquetar</string>
@@ -402,10 +377,35 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="5">
+            <widget class="QPushButton" name="btnImprimir">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../Icons/Icons.qrc">
+               <normaloff>:/Icons/1349716426_print.png</normaloff>:/Icons/1349716426_print.png</iconset>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="7">
+            <widget class="QPushButton" name="pushButton_aceptar_traspaso">
+             <property name="text">
+              <string>Aceptar Traslado</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Icons/Icons.qrc">
+               <normaloff>:/Icons/notification_done.png</normaloff>:/Icons/notification_done.png</iconset>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
           </layout>
-         </item>
-         <item row="1" column="0">
-          <widget class="QTableWidget" name="grilla"/>
          </item>
         </layout>
        </item>

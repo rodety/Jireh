@@ -141,6 +141,7 @@ public:
     void setComportamiento(int tem);
     void setMovimiento(int mov);
     int getMovimiento();
+    QStringList llenar_listas(int nivel );
 
 
 public:
@@ -214,6 +215,7 @@ private slots:
     void on_pushButton_anterior_clicked();
 
     void on_pushButton_siguiente_clicked();
+
 
 public slots:
     void actualizar_combo_empresa();

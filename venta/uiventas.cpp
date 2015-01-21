@@ -1935,18 +1935,16 @@ void uiventas::on_pushButton_Imprimir_clicked()
 
    for(int i=0;i<lista_e.length();i++)
         qDebug()<<lista_e.at(i)<<endl;
-
-
    lista_2<<ui->label_Resultado->text();
+
+
    NCReport report;
 
 
    report.setReportSource( NCReportSource::File );
    report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
    report.addStringList(lista_e,"mylist");
-
     report.addStringList(lista_2,"mylist2");
-
 
    report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
    report.runReportToPreview();
