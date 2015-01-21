@@ -477,10 +477,14 @@ void agenda_ui::on_pushButton_imprimir_clicked()
 
    NCReport report;
 
+   report.addParameter("tienda",ui->comboBox_tienda->currentText());
+   report.addParameter("detalle",ui->comboBox_tipo_pendiente->currentText());
+   report.addParameter("desde",ui->dateEdit_inicio->text());
+   report.addParameter("hasta",ui->label_fecha_actual->text());
+
    report.setReportSource( NCReportSource::File );
    report.setReportFile("reportes/agenda.xml");
    report.addStringList(lista_e,"mylist");
-
    report.runReportToPDF("pdf/agenda.pdf");
    report.runReportToPreview();
 
