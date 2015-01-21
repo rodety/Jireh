@@ -39,6 +39,7 @@ ui_cliente::ui_cliente(QWidget *parent) :
 ui_cliente::~ui_cliente()
 {
     delete ui;
+
 }
 
 void ui_cliente::listar_clientes()

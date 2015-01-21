@@ -14,6 +14,13 @@
 #include "vitrina/object_Empresa.h"
 #include <QInputDialog>
 #include <QMessageBox>
+
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+
+
 class c_tienda;
 ui_tienda::ui_tienda(QWidget *parent) :
     QWidget(parent),
@@ -28,6 +35,16 @@ ui_tienda::ui_tienda(QWidget *parent) :
     ui->pushButton_reponer->setEnabled(false);
     ui->lineEdit_cod_reponer->setEnabled(false);
     ui->label_cod->setEnabled(false);
+
+    QTableView * v = new QTableView(this);
+    QTableView * s = new QTableView(v);
+    QTableView * f = new QTableView(s);
+
+   v->hide();
+   s->hide();
+   f->hide();
+
+
 }
 
 ui_tienda::~ui_tienda()
@@ -59,7 +76,6 @@ void ui_tienda::actualizar_combo_empresa()
 
 void ui_tienda::actualizar_combo_tienda(QString empresa)
 {
-
     if(empresa.size() > 0)
     {
         flag = false;
@@ -72,8 +88,6 @@ void ui_tienda::actualizar_combo_tienda(QString empresa)
             ui->comboBox_tienda->addItem(model->record(i).value(1).toString());
             Tiendas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
         }
-
-
         flag = true;
         if(model->rowCount()>0)
         {
@@ -81,14 +95,12 @@ void ui_tienda::actualizar_combo_tienda(QString empresa)
             this->actualizar_combo_vitrina(idTienda);
         }
     }
-
 }
 
 void ui_tienda::actualizar_grilla_productos()
 {
     actualizar_grilla();
 }
-
 void ui_tienda::remove_producto()
 {
     //BORRANDO CELDA
@@ -195,6 +207,7 @@ void ui_tienda::actualizar_grilla()
         QString idproducto = query.value(0).toString();
         int pos_fila = query.value(1).toInt();
         int pos_columna = query.value(2).toInt();
+
         QString state = query.value(4).toString();
         QString key = QString::number(pos_fila)+"-"+QString::number(pos_columna);
         idProductos[key] = idproducto;    
@@ -558,6 +571,7 @@ int ui_tienda::getMovimiento()
 {
     return movimiento;
 }
+
 
 
 
@@ -1032,7 +1046,60 @@ void ui_tienda::on_btnDeshabilitar_vitrina_clicked()
 void ui_tienda::on_btnImprimir_clicked()
 {
 
+    int num_niveles = 0;
+      QStringList lista;
+      num_niveles=ui->comboBox_niveles->count();
+      //qDebug()<<"numero de nieveles--- amn"<<num_niveles;
+      QList <QStringList> * tabla = new QList <QStringList>();
+     // qDebug()<<"numero de nieveles:"<<tabla->size();
+      for(int i=0; i<num_niveles; i++)
+      {
+          set_actual_nivel(i+1);
+          set_dimension_grilla();
+          actualizar_grilla();
+          lista+=llenar_listas(i+1);
+          //qDebug()<<"numero de niveles dentro :"<<tabla->at(i).length();
+      }
+      qDebug()<<"numero de niveles:"<<tabla->size();
+
+
+       NCReport * report = new NCReport(this);
+
+       //agregando datos de cabezera  *****************************************
+
+       report->addParameter("emp",ui->comboBox_empresa->currentText());
+       report->addParameter("tienda",ui->comboBox_tienda->currentText());
+       report->addParameter("vitrina",ui->comboBox_vitrina->currentText());
+       report->addParameter("hora",QDateTime::currentDateTime().toString());
+
+       //************************************************************************
+       report->setReportSource( NCReportSource::File );
+       report->setReportFile("reportes/lista_de_vitrinas.xml");
+       report->addStringList(lista,"mylist");
+       report->runReportToPDF("pdf/lista_de_vitrinas.pdf");
+       report->runReportToPreview();
+
+
+        if (report->hasError()) {
+
+            QMessageBox po;
+            po.setText(report->lastErrorMsg());
+            po.exec();
+        }
+        else
+        {
+
+            NCReportPreviewWindow pvf;
+            pvf.setOutput( (NCReportPreviewOutput*)report->output() );  // add output to the window
+            pvf.setReport(report);
+            pvf.setWindowModality(Qt::NonModal );    // set modality
+            pvf.setAttribute( Qt::WA_QuitOnClose );
+            pvf.deleteLater();// set attrib
+            pvf.exec();  // run like modal dialog
+        }
 }
+
+
 void ui_tienda::on_pushButton_reponer_clicked()
 {
 
@@ -1323,3 +1390,34 @@ void ui_tienda::on_pushButton_siguiente_clicked()
             ui->pushButton_siguiente->setDisabled(1);
     }
 }
+
+QStringList ui_tienda:: llenar_listas( int nivel)
+{
+    QStringList lista_e;
+    int fila= ui->grilla->model()->rowCount() ;// indice.row();
+    int columna= ui->grilla->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var.clear();
+            var += QString::number(nivel);
+            var +=";";
+            var += QString::number(i+1);
+            var +=";";
+            var += QString::number(j+1);
+            var +=";";
+            var += ui->grilla->model()->data(ui->grilla->model()->index(i,j)).toString();
+            qDebug()<<"data ::"<< var;
+            lista_e<<var;
+        }
+    }
+   return lista_e;
+}
+
+
+
+
