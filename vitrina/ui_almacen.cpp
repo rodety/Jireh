@@ -37,6 +37,8 @@ ui_almacen::ui_almacen(QWidget *parent) :
         ui->pushButton_editAlmacen->hide();
         ui->pushButton_editAndamio->hide();
     }
+    //Ubicacion
+    ui->comboBox_Empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
 }
 
 ui_almacen::~ui_almacen()
@@ -123,6 +125,8 @@ void ui_almacen::update_comboBox_Tienda(QString idEmpresa)
 
         ui->comboBox_Tienda->insertItem(c++,alias);
     }
+    //Ubicacion
+    ui->comboBox_Tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
 }
 
 void ui_almacen::update_comboBox_Almacen(QString idTienda)

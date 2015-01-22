@@ -40,16 +40,12 @@ agenda_ui::agenda_ui(QWidget *parent) :
 
     ui->label_fecha_actual->setText(fecha.toString(Qt::ISODate));
 
-    tipoColaborador = Sesion::getIdTypeColaborador();
+
     //SETEANDO LA UBICACION
-
     ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
-    //DESABILITANDO PARA LOS USUARIOS VENDEDORES
 
-    if( tipoColaborador== 2)
-    {
-        ui->comboBox_tienda->setEnabled(false);
-    }
+
+
     //LLENANDO TIPO PENDIENTE
 
     ui->comboBox_tipo_pendiente->addItem("---Todos---");
@@ -57,14 +53,15 @@ agenda_ui::agenda_ui(QWidget *parent) :
     ui->comboBox_tipo_pendiente->addItem("Pendiente de Entrega");
     ui->comboBox_tipo_pendiente->addItem("Pendiente de Registro Tarjeta");
     calcularReporte();
-
-    if(Sesion::getSesion()->get_Usuario()->get_tipoUsuario()==2)
+    //DESABILITANDO PARA LOS USUARIOS VENDEDORES
+    if(Sesion::getIdTypeColaborador()==2)
     {
         ui->label_Alert_General->hide();
         ui->pushButton_AlertaGeneral_changeColor->hide();
         ui->pushButton_Alert_General_add->hide();
         ui->pushButton_Alert_General_edit->hide();
         ui->pushButton_Alert_General_remove->hide();
+        ui->comboBox_tienda->setEnabled(false);
     }
 }
 
