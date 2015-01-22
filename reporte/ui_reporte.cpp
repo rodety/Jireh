@@ -178,3 +178,51 @@ QSqlQueryModel *ui_reporte::get_reporte_producto(int tipo)
     return model;
 
 }
+
+void ui_reporte::on_pushButton_imprimir_clicked()
+{
+
+    int fila= ui->tableView_principal->model()->rowCount() ;// indice.row();
+    int columna= ui->tableView_principal->model()->columnCount();
+    //***************llenando nombres de columnas ************************
+    QStringList  name;
+
+    for(int i=0;i<columna;i++)
+    {
+        //name<<ui->tableView_principal->
+    }
+    //ui->tableView_principal->
+    ofstream file;
+    QString var;
+    float width=31.750;
+    int zvalue=0;
+    QString id=0;
+
+
+    var="corazon, que se lleno de tii!!!.. ";
+    file.open("reportes/reporte_prueba.xml",ios::app);
+    if (file.is_open())
+    {
+        file<<"corazon, que se lleno de tii!!!.. "<<endl;
+
+        file<<"<pageheader id=\"PH\"" << "height=\"18.256\""<<">"<<endl;
+        file<<"<label id=\"XVSB9\" zValue=\"0\" posX=\"69.850\" posY=\"1.587\" width=\"22.225\" height=\"6.085\" fontName=\"Liberation Sans\" fontSize=\"14\" fontWeight=\"bold\" forecolor=\"#000000\">Reportes</label>"<<endl;
+        //********************* *****************************
+        //aqui imprimo los nombres de las columnas;
+        for(int i=0;i<columna;i++)
+        {
+
+          file<<"<label id=\"9X0R2\" zValue=\"3\" posX=\"0.000\" posY=\"20.637\" width=\"31.750\" height=\"4.762\" fontName=\"Liberation Sans\" fontSize=\"10\" fontWeight=\"bold\" forecolor=\"#000000\">n1</label>"<<endl;
+
+        }
+        file<<"</pageheader>"<<endl;
+
+
+    }
+    else
+    {
+        qDebug()<<"No se ha podido abrir el archivo"<<endl;
+    }
+    file.close();
+
+}

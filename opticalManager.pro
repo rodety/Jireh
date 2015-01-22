@@ -376,3 +376,13 @@ unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lzint
 
 INCLUDEPATH += $$PWD/../../../../../usr/local/include
 DEPENDPATH += $$PWD/../../../../../usr/local/include
+
+unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lzint
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
+
+unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lQZint
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
