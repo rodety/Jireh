@@ -1245,11 +1245,10 @@ void uiventas::configuracionReportes()
 
 
     ui->comboBox_Empresa->ActualizarItemsReporte(empresa::mostrar());
-    qDebug()<<"Cargo empresas"<<endl;
+    ui->comboBox_Empresa->removeItem(0);
+
 
     ui->comboBox_Colaborador->ActualizarItemsReporte(object_Colaborador::mf_show());
-    qDebug()<<"Cargo colaborador de nuevo"<<endl;
-
 
     ui->comboBox_Documento->addItem("---Todos---");
     ui->comboBox_Documento->addItem("Factura");
@@ -1267,13 +1266,20 @@ void uiventas::configuracionReportes()
     ui->dateTimeEdit_Desde->setDate(QDate::currentDate());
     ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());
 
-    ui->comboBox_Empresa->removeItem(0);
+
     ui->tableView_Reporte_Ventas->setColumnWidth(1,150);
     ui->tableView_Reporte_Ventas->setColumnWidth(3,280);
     calcularReporte(1);
     //activando busquedas
     flag_reporte = true;
 
+    //Ubicacion
+    ui->comboBox_Empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
+    //Ubicando Colaborador
+    if(Sesion::getIdTypeColaborador() == 2)
+        ui->comboBox_Colaborador->setCurrentIndex(Sesion::getIdColaborador()-1);
+    else
+        ui->comboBox_Colaborador->setCurrentIndex(Sesion::getIdColaborador());
 }
 
 void uiventas::on_dateTimeEdit_Desde_dateTimeChanged(const QDateTime &dateTime)
@@ -1326,7 +1332,8 @@ void uiventas::on_comboBox_Empresa_currentIndexChanged(const QString &arg1)
     QString idEmpresa = QString::number(ui->comboBox_Empresa->getId(arg1));
     ui->comboBox_Tienda->ActualizarItemsReporte(c_tienda::mostrar(idEmpresa));
     ui->comboBox_Tienda->removeItem(0);
-    qDebug()<<"LLamando a comobo empresa "<<endl;
+    //Ubicacion
+    ui->comboBox_Tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
 }
 
 

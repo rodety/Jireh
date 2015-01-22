@@ -36,13 +36,10 @@ ui_tienda::ui_tienda(QWidget *parent) :
     ui->lineEdit_cod_reponer->setEnabled(false);
     ui->label_cod->setEnabled(false);
 
-    QTableView * v = new QTableView(this);
-    QTableView * s = new QTableView(v);
-    QTableView * f = new QTableView(s);
+    //SETEANDO LA UBICACION
+    ui->comboBox_empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
+    ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
 
-   v->hide();
-   s->hide();
-   f->hide();
 
 
 }
@@ -88,7 +85,10 @@ void ui_tienda::actualizar_combo_tienda(QString empresa)
             ui->comboBox_tienda->addItem(model->record(i).value(1).toString());
             Tiendas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
         }
+        //Seteando Ubicacion
+        ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
         flag = true;
+
         if(model->rowCount()>0)
         {
             idTienda = Tiendas[ui->comboBox_tienda->currentText()];
