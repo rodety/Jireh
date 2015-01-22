@@ -14,6 +14,12 @@
 #include <vitrina/object_Tienda.h>
 #include <colaborador/object_Colaborador.h>
 #include <cliente/object_Cliente.h>
+
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace Ui {
 class ui_reporte;
 }
@@ -26,7 +32,6 @@ public:
     explicit ui_reporte(QWidget *parent = 0);
     void actualizar_combo_empresa();
     void actualizar_combo_tienda(QString empresa);
-
     ~ui_reporte();
     
 private slots:
@@ -38,6 +43,8 @@ private slots:
     void on_comboBox_entidades_currentIndexChanged(int index);
 
     void on_listView_entidad_doubleClicked(const QModelIndex &index);
+
+    void on_pushButton_imprimir_clicked();
 
 private:
     Ui::ui_reporte *ui;
