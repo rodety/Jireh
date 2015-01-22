@@ -56,6 +56,8 @@ private slots:
     void updateTable_Alert_Personal();
     void actualizar_combo_tienda();
     void actualizar_tiempo(const QDate &date);
+    void on_pushButton_imprimir_clicked();
+
 public slots:
     void calcularReporte();
 

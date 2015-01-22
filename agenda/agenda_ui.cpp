@@ -17,13 +17,19 @@
 #include <vitrina/tienda.h>
 #include <venta/uiventas.h>
 
+
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+
 agenda_ui::agenda_ui(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::agenda_ui)
 {
     //aqui son las modificaciones
     ui->setupUi(this);
-    fecha = QDate::currentDate();
+    fecha = QDate::currentDate() ;
     ui->calendarWidget->setSelectedDate(fecha);
     actualizar_combo_tienda();
     actualizar_tiempo(fecha);
@@ -441,4 +447,61 @@ bool agenda_ui::ActualizarRegistro(QString idVenta)
         return true;
     }
 
+}
+
+void agenda_ui::on_pushButton_imprimir_clicked()
+{
+    QStringList lista_e;
+
+
+
+    int fila= ui->tableView_Main_Alert->model()->rowCount() ;// indice.row();
+    int columna= ui->tableView_Main_Alert->model()->columnCount();
+
+    QString var;
+   for(int i=0;i<fila;i++)
+    {
+        var.clear();
+        for(int j=0;j<columna;j++)
+        {
+            var += ui->tableView_Main_Alert->model()->data(ui->tableView_Main_Alert->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
+        }
+
+        lista_e<<var;
+    }
+
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
+
+   NCReport report;
+
+   report.addParameter("tienda",ui->comboBox_tienda->currentText());
+   report.addParameter("detalle",ui->comboBox_tipo_pendiente->currentText());
+   report.addParameter("desde",ui->dateEdit_inicio->text());
+   report.addParameter("hasta",ui->label_fecha_actual->text());
+
+   report.setReportSource( NCReportSource::File );
+   report.setReportFile("reportes/agenda.xml");
+   report.addStringList(lista_e,"mylist");
+   report.runReportToPDF("pdf/agenda.pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
+    }
+    else
+    {
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
 }
