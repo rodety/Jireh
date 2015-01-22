@@ -50,14 +50,17 @@ private:
     Ui::ui_reporte *ui;
     void execute();
     int id_raking;
-    string time_desde;
-    string time_hasta;
+    QString time_desde;
+    QString time_hasta;
     QStandardItemModel * seleccionados_model;
     map<QString,QString> Tienda;
     map<QString,QString> Colaborador;
     map<QString,QString> Cliente;
 
     QSqlQueryModel* get_reporte_producto(int tipo);
+    QSqlQueryModel* get_reporte_tienda(QString index);
+    QSqlQueryModel* get_reporte_colaborador(QString index);
+    QSqlQueryModel* get_reporte_cliente(QString index);
 
 
 
