@@ -92,7 +92,7 @@ void impresion::setEntregaEfectivo(QString tmp)
 {
     Ticket1.LineasGuion(); // imprime una linea de guiones
     QString
-            text = "EFECTIVO S/."; text.append(tmp);
+            text = "CANCELADO EFECTIVO S/."; text.append(tmp);
     Ticket1.TextoIzquierda(text);
 
 }
@@ -100,7 +100,7 @@ void impresion::setEntregaEfectivo(QString tmp)
 void impresion::setEntregaTarjeta(QString tmp)
 {
     QString
-            text = "TARJETA  S/."; text.append(tmp);
+            text = "CANCELADO TARJETA  S/."; text.append(tmp);
     Ticket1.TextoIzquierda(text);
 }
 

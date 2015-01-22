@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>261</width>
-    <height>285</height>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -190,6 +190,7 @@
   <tabstop>lineEdit_Lote</tabstop>
   <tabstop>lineEdit_Monto</tabstop>
   <tabstop>lineEdit_Afiliacion</tabstop>
+  <tabstop>lineEdit_nombre_pagador</tabstop>
   <tabstop>pushButton_guardar</tabstop>
  </tabstops>
  <resources/>

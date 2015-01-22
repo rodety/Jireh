@@ -17,6 +17,7 @@ uiventas::uiventas(QWidget *parent) :
     configuracionesIniciaciales();
     configTableVentas();
     configuracionReportes();
+    configurarPermisos();
 }
 
 uiventas::~uiventas()
@@ -84,8 +85,7 @@ void uiventas::on_pushButton_buscarCliente_clicked()
 void uiventas::recojeCliente(cliente clienteAct)
 {
 
-    customer = clienteAct;
-    qDebug()<<"RUC "<<customer.getRuc()<<endl;
+    customer = clienteAct;    
     //VERIFICANDO SI LA VENTA ES CON BOLETA O FACTURA
     idCliente = customer.getIdCliente();
     if(!ventaBoleta() && (customer.getRazonSocial().size() ==0 || customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0))
@@ -1899,6 +1899,18 @@ void uiventas::updateSerieNumeroDocumento()
         ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieFactura().toInt()+1));
     if(ui->radioButton_cotizacion->isChecked())
         ui->label_numero_documento->setText(QString::number(configuracion.mf_get_serieCotizacion().toInt()+1));
+
+}
+
+void uiventas::configurarPermisos()
+{
+    if(Sesion::getIdTypeColaborador() == 2){
+        ui->pushButton_anular->hide();
+    }
+    else{
+        ui->pushButton_anular->show();
+        ui->pushButton_anular->setEnabled(true);
+    }
 
 }
 

@@ -163,6 +163,7 @@ private:
     void updateSerieNumeroDocumento();
     cliente customer;
     bool entregado;
+    void configurarPermisos();
 
 
 

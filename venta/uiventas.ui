@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -449,13 +449,6 @@
              </item>
              <item row="7" column="0" colspan="4">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QPushButton" name="pushButton_compras">
-                 <property name="text">
-                  <string>Compras</string>
-                 </property>
-                </widget>
-               </item>
                <item>
                 <widget class="QPushButton" name="pushButton_anular">
                  <property name="text">

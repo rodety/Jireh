@@ -1218,6 +1218,8 @@ void ui_producto::configurarCombos(int index)
     ui->lineEdit_buscar->hide();
     ui->pushButton_buscar->hide();
 
+    ui->pushButton_imprimir_2->hide();
+
     //DESHABILITANDO LOS TABS
     ui->tabWidget->setTabEnabled(1,0);
     ui->tabWidget->setTabEnabled(2,0);
@@ -1275,7 +1277,8 @@ void ui_producto::configurarCombos(int index)
         ui->pushButton_agregar_2->show();
         ui->pushButton_editar->show();
         ui->pushButton_eliminar->show();
-        ui->label_4->show();
+
+        ui->pushButton_imprimir_2->show();
 
 
         break;
@@ -1322,7 +1325,7 @@ void ui_producto::configurarCombos(int index)
         ui->label_4->show();
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
-
+        ui->pushButton_imprimir_2->show();
 
 
 
@@ -1358,7 +1361,7 @@ void ui_producto::configurarCombos(int index)
         ui->label_4->show();
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
-
+        ui->pushButton_imprimir_2->show();
         break;
     case 4:
         ui->label_select_1->setText("Marca");
@@ -1400,7 +1403,7 @@ void ui_producto::configurarCombos(int index)
         ui->label_4->show();
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
-
+        ui->pushButton_imprimir_2->show();
         break;
 
 
@@ -1414,6 +1417,7 @@ void ui_producto::configurarCombos(int index)
         ui->label_4->show();
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
+        ui->pushButton_imprimir_2->show();
 
         break;
     case 6:
@@ -1455,7 +1459,7 @@ void ui_producto::configurarCombos(int index)
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
 
-
+        ui->pushButton_imprimir_2->show();
         break;
     }
 
