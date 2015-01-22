@@ -226,7 +226,7 @@ void ui_reporte::on_pushButton_imprimir_clicked()
         qDebug()<<"No se ha podido abrir el archivo"<<endl;
     }
     file.close();
-
+}
 QSqlQueryModel *ui_reporte::get_reporte_tienda(QString index)
 {
     QSqlQueryModel* model=new QSqlQueryModel;
