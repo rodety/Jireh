@@ -96,9 +96,9 @@ void ui_reporte::on_listView_entidad_doubleClicked(const QModelIndex &index)
 {
     time_desde = ui->dateTimeEdit_desde->dateTime().toString(Qt::ISODate);
     time_hasta = ui->dateTimeEdit_hasta->dateTime().toString(Qt::ISODate);
+    ui->label_total->clear();
 
-    int index_entidades = ui->comboBox_entidades->currentIndex();
-    QString id;
+    int index_entidades = ui->comboBox_entidades->currentIndex();    
     if(index_entidades == 0){
 
     }
@@ -106,33 +106,38 @@ void ui_reporte::on_listView_entidad_doubleClicked(const QModelIndex &index)
     if(index_entidades == 1){
         if(index.row() == 0){
             ui->tableView_principal->setModel(get_reporte_producto(1));
+            calcular_total(7);
         }
         if(index.row() == 1){
             ui->tableView_principal->setModel(get_reporte_producto(2));
+            calcular_total(7);
         }
         if(index.row() == 2){
             ui->tableView_principal->setModel(get_reporte_producto(3));
+            calcular_total(6);
         }
         if(index.row() == 3){
             ui->tableView_principal->setModel(get_reporte_producto(4));
+            calcular_total(8);
         }
         if(index.row() == 4){
             ui->tableView_principal->setModel(get_reporte_producto(5));
+            calcular_total(7);
         }
 
     }
     if(index_entidades == 2){
 
         ui->tableView_principal->setModel(get_reporte_tienda(Tienda[seleccionados_model->item(index.row(),0)->text()]));
-
+        calcular_total(5);
     }
     if(index_entidades == 3){
         ui->tableView_principal->setModel(get_reporte_colaborador(Colaborador[seleccionados_model->item(index.row(),0)->text()]));
-
+        calcular_total(5);
     }
     if(index_entidades == 4){
         ui->tableView_principal->setModel(get_reporte_cliente(Cliente[seleccionados_model->item(index.row(),0)->text()]));
-
+        calcular_total(5);
     }
 }
 
@@ -199,4 +204,13 @@ QSqlQueryModel *ui_reporte::get_reporte_cliente(QString index)
     QSqlQueryModel* model=new QSqlQueryModel;
     model->setQuery("select Producto.idProducto 'id' ,Producto.codigo, Producto.descripcion, Marca.nombre, Producto.stock ,SUM(Venta_has_Producto.precio) as 'Total' from Producto INNER JOIN Venta_has_Producto INNER JOIN Venta INNER JOIN Marca INNER JOIN Cliente  WHERE Producto.idProducto = Venta_has_Producto.Producto_idProducto AND Venta.idVenta = Venta_has_Producto.Venta_idVenta AND  Producto.Marca_idMarca = Marca.idMarca AND Cliente.idCliente = Venta.Cliente_idCliente AND Cliente.idCliente = '"+index+"' AND Venta.fechaCancelacion >= '"+time_desde+"' AND Venta.fechaCancelacion <= '"+time_hasta+"' GROUP BY Producto.idProducto ORDER BY SUM(Venta_has_Producto.Precio) DESC");
     return model;
+}
+
+void ui_reporte::calcular_total(int index)
+{
+    float total =0;
+    for(int i =0; i<seleccionados_model->rowCount();i++){
+        total+=ui->tableView_principal->model()->index(i,index).data().toFloat();
+    }
+    ui->label_total->setText("Suma Total :"+QString::number(total));
 }
