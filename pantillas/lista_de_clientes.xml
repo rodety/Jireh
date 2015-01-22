@@ -26,37 +26,38 @@
     <variables/>
     <pageheader id="PH" height="16.933">
         <label id="2DA8H" zValue="0" posX="73.025" posY="0.000" width="57.150" height="6.085" fontName="Arial" fontSize="14" fontWeight="bold" alignment="1">Lista de Clientes-Optica</label>
-        <label id="9X0R2" zValue="1" posX="82.550" posY="7.938" width="18.715" height="4.762" fontName="Liberation Sans" fontSize="10">Ap. Materno</label>
-        <label id="HFMKP" zValue="2" posX="6.350" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10">Documento</label>
-        <label id="YYQQW" zValue="3" posX="42.862" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10">Nombres</label>
-        <label id="0DHCX" zValue="4" posX="61.912" posY="7.938" width="18.140" height="4.762" fontName="Liberation Sans" fontSize="10">Ap. Paterno</label>
-        <label id="BOLF6" zValue="5" posX="25.400" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10">Nro. Doc</label>
-        <label id="EERC7" zValue="6" posX="0.000" posY="7.938" width="4.762" height="4.762" fontName="Liberation Sans" fontSize="10">ID</label>
-        <label id="DPZCS" zValue="7" posX="182.562" posY="7.938" width="20.236" height="4.762" fontName="Liberation Sans" fontSize="10">Razon Social</label>
-        <label id="P3I0M" zValue="9" posX="106.362" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10">Telefono</label>
-        <label id="YA4X2" zValue="10" posX="147.637" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10">Ruc</label>
-        <label id="ZUDL7" zValue="11" posX="125.412" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10">Celular</label>
-        <label id="MGW2G" zValue="13" posX="215.900" posY="7.938" width="26.987" height="4.762" fontName="Liberation Sans" fontSize="10">Direccion</label>
-        <line id="FNUOX" zValue="14" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="14.287" toX="247.650" toY="14.287"/>
+        <label id="9X0R2" zValue="1" posX="82.550" posY="7.938" width="18.785" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Ap. Materno</label>
+        <label id="HFMKP" zValue="2" posX="6.350" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Documento</label>
+        <label id="YYQQW" zValue="3" posX="42.862" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Nombres</label>
+        <label id="0DHCX" zValue="4" posX="61.912" posY="7.938" width="18.256" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Ap. Paterno</label>
+        <label id="BOLF6" zValue="5" posX="25.400" posY="7.938" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Nro. Doc</label>
+        <label id="EERC7" zValue="6" posX="0.000" posY="7.938" width="4.762" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">ID</label>
+        <label id="DPZCS" zValue="7" posX="182.562" posY="7.938" width="20.108" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Razon Social</label>
+        <label id="P3I0M" zValue="8" posX="106.362" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Telefono</label>
+        <label id="YA4X2" zValue="9" posX="147.637" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Ruc</label>
+        <label id="ZUDL7" zValue="10" posX="125.412" posY="7.938" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Celular</label>
+        <label id="MGW2G" zValue="11" posX="215.900" posY="7.938" width="26.987" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Direccion</label>
+        <line id="FNUOX" zValue="12" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="14.287" toX="247.650" toY="14.287"/>
     </pageheader>
-    <pagefooter id="PF" height="5.821">
+    <pagefooter id="PF" height="12.435">
         <line id="4BZLT" zValue="0" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="1.587" fromY="4.762" toX="250.825" toY="4.762"/>
+        <field id="REA6M" typeId="131074" zValue="1" posX="238.125" posY="6.350" width="14.287" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" type="txt" ftype="sys" arg="page %1">pageno</field>
     </pagefooter>
     <details>
         <detail id="Detail1" height="6.350" datasource="s1">
             <items>
-                <field id="3" zValue="0" posX="42.862" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">3</field>
-                <field id="5" zValue="1" posX="84.137" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">5</field>
-                <field id="1" zValue="2" posX="11.112" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">1
+                <field id="3" zValue="0" posX="42.862" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">3</field>
+                <field id="5" zValue="1" posX="84.137" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">5</field>
+                <field id="1" zValue="2" posX="11.112" posY="0.000" width="9.525" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">1
 </field>
-                <field id="4" zValue="3" posX="61.912" posY="0.000" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">4</field>
-                <field id="6" zValue="4" posX="104.775" posY="0.000" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">6</field>
-                <field id="2" zValue="5" posX="26.987" posY="0.000" width="12.700" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">2</field>
-                <field id="578FD" zValue="6" posX="0.000" posY="0.000" width="7.938" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">0</field>
-                <field id="7" zValue="7" posX="125.412" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">7</field>
-                <field id="8" zValue="8" posX="144.463" posY="0.000" width="23.812" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">8</field>
-                <field id="9" zValue="9" posX="168.275" posY="0.000" width="49.212" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">9</field>
-                <field id="11" zValue="10" posX="217.487" posY="0.000" width="38.100" height="4.762" resource="datasource" fontName="Arial" fontSize="9" type="txt" ftype="ds">10</field>
+                <field id="4" zValue="3" posX="61.912" posY="0.000" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">4</field>
+                <field id="6" zValue="4" posX="104.775" posY="0.000" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">6</field>
+                <field id="2" zValue="5" posX="26.987" posY="0.000" width="12.700" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">2</field>
+                <field id="578FD" zValue="6" posX="0.000" posY="0.000" width="7.938" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">0</field>
+                <field id="7" zValue="7" posX="125.412" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">7</field>
+                <field id="8" zValue="8" posX="144.463" posY="0.000" width="23.812" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">8</field>
+                <field id="9" zValue="9" posX="168.275" posY="0.000" width="49.212" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">9</field>
+                <field id="11" zValue="10" posX="217.487" posY="0.000" width="38.100" height="4.762" resource="datasource" fontName="Arial" fontSize="9" alignment="1" type="txt" ftype="ds">10</field>
             </items>
         </detail>
     </details>

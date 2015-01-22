@@ -1,6 +1,11 @@
 #include "ui_reporte.h"
 #include "ui_ui_reporte.h"
 
+#include "ncreport.h"
+#include "ncreportoutput.h"
+#include "ncreportpreviewoutput.h"
+#include "ncreportpreviewwindow.h"
+
 ui_reporte::ui_reporte(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ui_reporte)
@@ -94,6 +99,7 @@ void ui_reporte::on_comboBox_entidades_currentIndexChanged(int index)
 
 void ui_reporte::on_listView_entidad_doubleClicked(const QModelIndex &index)
 {
+    current_index = index;
     time_desde = ui->dateTimeEdit_desde->dateTime().toString(Qt::ISODate);
     time_hasta = ui->dateTimeEdit_hasta->dateTime().toString(Qt::ISODate);
     ui->label_total->clear();
@@ -102,7 +108,6 @@ void ui_reporte::on_listView_entidad_doubleClicked(const QModelIndex &index)
     if(index_entidades == 0){
 
     }
-
     if(index_entidades == 1){
         if(index.row() == 0){
             ui->tableView_principal->setModel(get_reporte_producto(1));
@@ -188,50 +193,67 @@ QSqlQueryModel *ui_reporte::get_reporte_producto(int tipo)
 
 void ui_reporte::on_pushButton_imprimir_clicked()
 {
-
+    QStringList lista_e;
     int fila= ui->tableView_principal->model()->rowCount() ;// indice.row();
     int columna= ui->tableView_principal->model()->columnCount();
-    //***************llenando nombres de columnas ************************
-    QStringList  name;
 
-    for(int i=0;i<columna;i++)
-    {
-        //name<<ui->tableView_principal->
-    }
-    //ui->tableView_principal->
-    ofstream file;
     QString var;
-    float width=31.750;
-    int zvalue=0;
-    QString id=0;
-
-
-    var="corazon, que se lleno de tii!!!.. ";
-    file.open("reportes/reporte_prueba.xml",ios::app);
-    if (file.is_open())
+   for(int i=0;i<fila;i++)
     {
-        file<<"corazon, que se lleno de tii!!!.. "<<endl;
-
-        file<<"<pageheader id=\"PH\"" << "height=\"18.256\""<<">"<<endl;
-        file<<"<label id=\"XVSB9\" zValue=\"0\" posX=\"69.850\" posY=\"1.587\" width=\"22.225\" height=\"6.085\" fontName=\"Liberation Sans\" fontSize=\"14\" fontWeight=\"bold\" forecolor=\"#000000\">Reportes</label>"<<endl;
-        //********************* *****************************
-        //aqui imprimo los nombres de las columnas;
-        for(int i=0;i<columna;i++)
+        var.clear();
+        for(int j=0;j<columna;j++)
         {
-
-          file<<"<label id=\"9X0R2\" zValue=\"3\" posX=\"0.000\" posY=\"20.637\" width=\"31.750\" height=\"4.762\" fontName=\"Liberation Sans\" fontSize=\"10\" fontWeight=\"bold\" forecolor=\"#000000\">n1</label>"<<endl;
-
+            var += ui->tableView_principal->model()->data(ui->tableView_principal->model()->index(i,j)).toString();
+            if(j<columna-1)
+                var +=";";
         }
-        file<<"</pageheader>"<<endl;
+        lista_e<<var;
+    }
+   for(int i=0;i<lista_e.length();i++)
+        qDebug()<<lista_e.at(i)<<endl;
 
+   NCReport report;
 
+   report.addParameter("tipo",ui->comboBox_entidades->currentText());
+   report.addParameter("nombre",ui->listView_entidad->model()->index(current_index.row(),0).data().toString());
+   //->model()->data(ui->listView_entidad->model()->data(ui->listView_entidad->currentIndex().model()).toString();
+   report.addParameter("desde",ui->dateTimeEdit_desde->text());
+   report.addParameter("hasta",ui->dateTimeEdit_hasta->text());
+
+   report.setReportSource( NCReportSource::File);
+
+   if(ui->comboBox_entidades->currentIndex()!=1)
+   {
+       report.setReportFile("reportes/reportes_6espacios.xml");
     }
     else
     {
-        qDebug()<<"No se ha podido abrir el archivo"<<endl;
+       report.setReportFile("reportes/reporte_"+ui->listView_entidad->model()->index(current_index.row(),0).data().toString()+".xml");
+   }
+
+
+   report.addStringList(lista_e,"mylist");
+   report.runReportToPDF("pdf/reportes_6espacios.pdf");
+   report.runReportToPreview();
+
+    if (report.hasError()) {
+
+        QMessageBox po;
+        po.setText(report.lastErrorMsg());
+        po.exec();
     }
-    file.close();
+    else
+    {
+        NCReportPreviewWindow pvf;
+        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+        pvf.setReport(&report);
+        pvf.setWindowModality(Qt::NonModal );    // set modality
+        pvf.setAttribute( Qt::WA_QuitOnClose );
+        pvf.deleteLater();// set attrib
+        pvf.exec();  // run like modal dialog
+    }
 }
+
 QSqlQueryModel *ui_reporte::get_reporte_tienda(QString index)
 {
     QSqlQueryModel* model=new QSqlQueryModel;

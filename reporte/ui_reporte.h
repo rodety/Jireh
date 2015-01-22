@@ -62,6 +62,7 @@ private:
     QSqlQueryModel* get_reporte_colaborador(QString index);
     QSqlQueryModel* get_reporte_cliente(QString index);
     void calcular_total(int index);
+    QModelIndex current_index;
 
 
 

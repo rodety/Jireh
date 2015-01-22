@@ -452,9 +452,6 @@ bool agenda_ui::ActualizarRegistro(QString idVenta)
 void agenda_ui::on_pushButton_imprimir_clicked()
 {
     QStringList lista_e;
-
-
-
     int fila= ui->tableView_Main_Alert->model()->rowCount() ;// indice.row();
     int columna= ui->tableView_Main_Alert->model()->columnCount();
 
