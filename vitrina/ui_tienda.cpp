@@ -1076,7 +1076,7 @@ void ui_tienda::on_btnImprimir_clicked()
        report->setReportSource( NCReportSource::File );
        report->setReportFile("reportes/lista_de_vitrinas.xml");
        report->addStringList(lista,"mylist");
-       report->runReportToPDF("pdf/lista_de_vitrinas.pdf");
+       //report->runReportToPDF("pdf/lista_de_vitrinas.pdf");
        report->runReportToPreview();
 
 
