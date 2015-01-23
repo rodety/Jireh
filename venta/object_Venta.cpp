@@ -549,7 +549,8 @@ QSqlQueryModel* object_Venta::mf_show(int tipo)
         // PENDIENTE DE ENTREGA
         case 9:
         {
-            consulta = "SELECT v.idVenta as 'Id', v.fechaEntrega as 'Fecha Entrega',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaEntrega >= '"+md_o_dateFrom+"' AND c.idCliente = v.Cliente_idCliente AND v.Entregado = '0' AND v.Anulado != '1' ORDER BY v.fechaEntrega";
+            consulta = "SELECT v.idVenta as 'Id', v.fechaEntrega as 'Fecha Entrega',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v, Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaEntrega >= '"+md_o_dateFrom+"' AND c.idCliente = v.Cliente_idCliente AND v.Entregado = '0' AND v.Anulado != '1' ORDER BY v.fechaEntrega";
+            qDebug()<<consulta<<endl;
             break;
         }
         // PENDIENTE DE REGISTRO DE TARJETA

@@ -1625,8 +1625,7 @@ void uiventas::loadVenta(QString idVenta)
     ui->dateTimeEdit_fecha_preventa->setMinimumDateTime(QDateTime::currentDateTime());
     ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::currentDateTime());
 
-    idVentaActual = venta.mf_get_idVenta();
-    qDebug()<<venta.mf_get_fechaPreVenta()<<endl;
+    idVentaActual = venta.mf_get_idVenta();    
     ui->dateTimeEdit_entrega->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->dateTimeEdit_entrega->setDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->lineEdit_restante->setText(QString::number(venta.mf_get_montoTotal().toDouble() - venta.mf_get_montoAdelanto().toDouble()));
@@ -1708,33 +1707,40 @@ void uiventas::loadVenta(QString idVenta)
     ui->label_efectivo->setText(QString::number(acumulado_efectivo));
     ui->label_tarjeta->setText(QString::number(acumulado_tarjeta));
 
-
-    //DESABILITANDO INTERFACE SI TODO ESTA CANCELADO
+    //Se desactiva spin box descuento despues de realizada la venta
+    ui->doubleSpinBox_descuento->hide();
+    ui->label_11->hide();
 
     //GRABANDO ADELANTOS
-
     efectivo_pasado = ui->label_efectivo->text().toDouble();
     tarjeta_pasado = ui->label_tarjeta->text().toDouble();
-
     calculaprecio(efectivo_pasado + tarjeta_pasado);
-
     //ACTIVANDO BOTONES
     ui->pushButton_anular->setEnabled(true);
-
-    comportamiento = false;
+    comportamiento = false;    
     habilitar_editar();
+    //DESABILITANDO INTERFACE SI TODO ESTA CANCELADO
+    if(ui->lineEdit_total->text().toDouble() == ui->lineEdit_total_cancelado->text().toDouble() && EntregadoProducto() == true)
+    {
+        qDebug()<<"Entregado :"<<EntregadoProducto()<<endl;
+        ui->dateTimeEdit_entrega->setEnabled(false);
+        ui->tableView_Productos->setEnabled(false);
+        ui->lineEdit_tarjeta->setEnabled(false);
+        ui->lineEdit_efectivo->setEnabled(false);
+        ui->dateTimeEdit_fecha_preventa->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
+        ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
+        ui->pushButton_guardar->setEnabled(false);
+    }
     if(ui->lineEdit_total->text().toDouble() == ui->lineEdit_total_cancelado->text().toDouble())
     {
         ui->lineEdit_tarjeta->setEnabled(false);
         ui->lineEdit_efectivo->setEnabled(false);
-
         ui->dateTimeEdit_fecha_preventa->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
         ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
     }
     //SETEANDO EL NUMERO DE DOCUMENTO
     ui->label_serie->setText(venta.mf_get_serieDocumento());
     ui->label_numero_documento->setText(venta.mf_get_numeroDocumento());
-
 }
 
 void uiventas::loadListaPagos()
@@ -1870,7 +1876,7 @@ bool uiventas::EntregadoProducto()
     {
         entrega = seleccionados_model->item(i,5)->text();
 
-        if( entrega == "no" || entrega != "No" && entrega == "NO" )
+        if( entrega == "no" || entrega == "No" || entrega == "NO" )
         {
             return false;
         }
