@@ -216,34 +216,40 @@ void ui_reporte::on_pushButton_imprimir_clicked()
 
    report.addParameter("tipo",ui->comboBox_entidades->currentText());
    report.addParameter("nombre",ui->listView_entidad->model()->index(current_index.row(),0).data().toString());
-   //->model()->data(ui->listView_entidad->model()->data(ui->listView_entidad->currentIndex().model()).toString();
    report.addParameter("desde",ui->dateTimeEdit_desde->text());
    report.addParameter("hasta",ui->dateTimeEdit_hasta->text());
-
+   report.addParameter("total",QString::number(total));
    report.setReportSource( NCReportSource::File);
 
    if(ui->comboBox_entidades->currentIndex()!=1)
    {
        report.setReportFile("reportes/reportes_6espacios.xml");
-    }
+   }
     else
     {
        report.setReportFile("reportes/reporte_"+ui->listView_entidad->model()->index(current_index.row(),0).data().toString()+".xml");
-   }
-
-
+    }
    report.addStringList(lista_e,"mylist");
    report.runReportToPDF("pdf/reportes_6espacios.pdf");
    report.runReportToPreview();
 
-    if (report.hasError()) {
+    if (lista_e.isEmpty())
+    {
+        QString var;
+        for(int i=0;i<fila;i++)
+             var+="";
+        lista_e<<var;
+        report.addStringList(lista_e,"mylist");
+        report.runReportToPDF("pdf/reportes_6espacios.pdf");
+        report.runReportToPreview();
 
+    }
+    if(report.hasError())
+    {
         QMessageBox po;
         po.setText(report.lastErrorMsg());
         po.exec();
     }
-    else
-    {
         NCReportPreviewWindow pvf;
         pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
         pvf.setReport(&report);
@@ -251,7 +257,7 @@ void ui_reporte::on_pushButton_imprimir_clicked()
         pvf.setAttribute( Qt::WA_QuitOnClose );
         pvf.deleteLater();// set attrib
         pvf.exec();  // run like modal dialog
-    }
+
 }
 
 QSqlQueryModel *ui_reporte::get_reporte_tienda(QString index)
@@ -277,7 +283,7 @@ QSqlQueryModel *ui_reporte::get_reporte_cliente(QString index)
 
 void ui_reporte::calcular_total(int index)
 {
-    float total =0;
+    total =0;
     for(int i =0; i<seleccionados_model->rowCount();i++){
         total+=ui->tableView_principal->model()->index(i,index).data().toFloat();
     }

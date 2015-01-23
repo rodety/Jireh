@@ -46,9 +46,11 @@
         <label id="7T7UH" zValue="18" posX="250.825" posY="23.812" width="26.987" height="23.812" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Acceso</label>
         <label id="578FD" zValue="19" posX="263.525" posY="11.112" width="31.750" height="28.575" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Observaciones</label>
     </pageheader>
-    <pagefooter id="PF" height="6.085"/>
+    <pagefooter id="PF" height="7.938">
+        <field id="GJHU8" typeId="131074" zValue="0" posX="239.712" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
+    </pagefooter>
     <details>
-        <detail id="Detail1" height="15.081" datasource="s1">
+        <detail id="Detail1" height="5.027" datasource="s1">
             <items>
                 <field id="2BOVU" zValue="0" posX="0.000" posY="0.000" width="6.350" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">0</field>
                 <field id="1PSR5" zValue="1" posX="7.938" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="8" alignment="1" type="txt" ftype="ds">1</field>

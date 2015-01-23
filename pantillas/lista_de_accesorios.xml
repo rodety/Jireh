@@ -47,7 +47,7 @@
         <label id="0VD86" zValue="19" posX="104.775" posY="22.225" width="9.525" height="42.862" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">stock</label>
     </pageheader>
     <pagefooter id="PF" height="10.319">
-        <field id="2MBMX" typeId="131074" zValue="0" posX="260.350" posY="3.175" width="14.287" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="sys" arg="page %1">pageno</field>
+        <field id="DC0HQ" typeId="131074" zValue="1" posX="257.175" posY="3.175" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
     </pagefooter>
     <details>
         <detail id="Detail1" height="7.673" datasource="s1">

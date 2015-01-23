@@ -36,7 +36,7 @@
         <line id="YYQQW" zValue="8" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="25.400" toX="254.000" toY="25.400"/>
     </pageheader>
     <pagefooter id="PF" height="9.790">
-        <field id="BS9HA" typeId="131074" zValue="0" posX="239.712" posY="1.587" width="14.287" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="sys" arg="page %1">pageno</field>
+        <field id="4P5BB" typeId="131074" zValue="1" posX="234.950" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
     </pagefooter>
     <details>
         <detail id="Detail1" height="7.408" datasource="s1">

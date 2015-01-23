@@ -39,9 +39,8 @@
         <label id="MGW2G" zValue="11" posX="215.900" posY="7.938" width="26.987" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Direccion</label>
         <line id="FNUOX" zValue="12" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="14.287" toX="247.650" toY="14.287"/>
     </pageheader>
-    <pagefooter id="PF" height="12.435">
-        <line id="4BZLT" zValue="0" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="1.587" fromY="4.762" toX="250.825" toY="4.762"/>
-        <field id="REA6M" typeId="131074" zValue="1" posX="238.125" posY="6.350" width="14.287" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" type="txt" ftype="sys" arg="page %1">pageno</field>
+    <pagefooter id="PF" height="8.202">
+        <field id="NX26X" typeId="131074" zValue="2" posX="234.950" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
     </pagefooter>
     <details>
         <detail id="Detail1" height="6.350" datasource="s1">

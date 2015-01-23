@@ -21,15 +21,12 @@
         <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
     </options>
     <datasources>
-        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist"></datasource>
-        <datasource id="s2" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist2"></datasource>
+        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="Mylist"></datasource>
     </datasources>
-    <variables>
-        <variable id="total_value" type="num" funcType="sum" scope="group" initValue="0">s1.col5</variable>
-    </variables>
-    <pageheader id="PH" height="28.046">
+    <variables/>
+    <pageheader id="PH" height="27.781">
         <label id="XVSB9" zValue="0" posX="104.775" posY="1.587" width="43.921" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Reporte de Ventas</label>
-        <label id="BUNBC" zValue="1" posX="1.587" posY="20.637" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">ID</label>
+        <label id="BUNBC" zValue="1" posX="1.587" posY="20.637" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">ID</label>
         <label id="7T7UH" zValue="2" posX="201.612" posY="20.637" width="17.727" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Reg Tarjeta</label>
         <label id="BRPQM" zValue="3" posX="15.875" posY="20.637" width="20.902" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Fecha y Hora</label>
         <label id="578FD" zValue="4" posX="41.275" posY="20.637" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Num. de Documento</label>
@@ -39,32 +36,22 @@
         <label id="0DHCX" zValue="8" posX="120.650" posY="20.637" width="17.727" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Monto Total</label>
         <line id="BOLF6" zValue="9" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="26.987" toX="247.650" toY="26.987"/>
     </pageheader>
-    <pagefooter id="PF" height="5.821">
-        <field id="P3I0M" typeId="131074" zValue="1" posX="233.362" posY="0.000" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
+    <pagefooter id="PF" height="7.938">
+        <field id="1YD03" typeId="131074" zValue="0" posX="233.362" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
     </pagefooter>
     <details>
-        <detail id="Detail1" height="5.027" datasource="s1" datasource2="d1">
+        <detail id="Detail1" height="4.762" datasource="s1">
             <items>
-                <field id="EERC7" zValue="0" posX="0.000" posY="0.000" width="11.112" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="ds">0
+                <field id="EERC7" zValue="0" posX="0.000" posY="0.000" width="11.112" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">0
 </field>
                 <field id="4BZLT" zValue="1" posX="17.462" posY="0.000" width="19.050" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">1</field>
                 <field id="YZDB5" zValue="2" posX="41.275" posY="0.000" width="23.812" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">2</field>
                 <field id="Z0JDC" zValue="3" posX="76.200" posY="0.000" width="39.688" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">3</field>
-                <field id="7O6XD" zValue="4" posX="122.237" posY="0.000" width="14.287" height="4.762" resource="datasource" pinToRight="true" fontName="Liberation Sans" fontSize="10" alignment="1" type="num" ftype="ds" formatting="true" numwidth="0" format="f" precision="5" localized="false">col4</field>
-                <field id="S3AC5" zValue="5" posX="144.463" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="num" ftype="ds">col5</field>
+                <field id="7O6XD" zValue="4" posX="122.237" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">4</field>
+                <field id="S3AC5" zValue="5" posX="142.875" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">5</field>
                 <field id="2DA8H" zValue="6" posX="171.450" posY="0.000" width="14.287" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">6</field>
                 <field id="27174" zValue="7" posX="201.612" posY="0.000" width="25.400" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">7</field>
             </items>
-            <groups>
-                <group id="grupo0" groupExp="%CONST" resetVariables="total_value" reprintHeader="false" startsOnNewPage="false">
-                    <groupheader id="GH_grupo0" height="0.000"/>
-                    <groupfooter id="GF_grupo0" height="10.054">
-                        <line id="BUNBC" zValue="0" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="1.587" toX="255.587" toY="1.587"/>
-                        <label id="7T7UH" zValue="1" posX="193.675" posY="3.175" width="25.400" height="6.085" fontName="Liberation Sans" fontSize="14" alignment="1">Valor total:</label>
-                        <field id="BRPQM" typeId="131074" zValue="2" posX="219.075" posY="3.175" width="31.750" height="4.762" resource="var" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1" type="num" ftype="var">total_value</field>
-                    </groupfooter>
-                </group>
-            </groups>
         </detail>
     </details>
 </NCReport>

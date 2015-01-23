@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NCReport version="2.13.0" name="Vitrina" type="report">
+    <options>
+        <encoding>UTF-8</encoding>
+        <language>00</language>
+        <langrole>0</langrole>
+        <orientation>portrait</orientation>
+        <pagesize width="210.000" height="297.000">A4</pagesize>
+        <topmargin>15</topmargin>
+        <bottommargin>15</bottommargin>
+        <leftmargin>20</leftmargin>
+        <rightmargin>20</rightmargin>
+        <backcolor>#ffffff</backcolor>
+        <columns>0</columns>
+        <columnspace>0</columnspace>
+        <zoneSpacing>0</zoneSpacing>
+        <zoneBreak>false</zoneBreak>
+        <fontname>Liberation Sans</fontname>
+        <fontsize>10</fontsize>
+        <fontstyle></fontstyle>
+        <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
+    </options>
+    <datasources>
+        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist0"></datasource>
+        <datasource id="s2" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist1"></datasource>
+        <datasource id="s3" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist2"></datasource>
+    </datasources>
+    <variables/>
+    <pageheader id="PH" height="50.006">
+        <label id="XVSB9" zValue="0" posX="42.862" posY="3.175" width="58.737" height="7.938" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Productos en Vitrina</label>
+        <label id="BUNBC" zValue="1" posX="1.587" posY="19.050" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Empresa:</label>
+        <label id="7T7UH" zValue="2" posX="1.587" posY="38.100" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Nivel:</label>
+        <label id="BRPQM" zValue="3" posX="1.587" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Vitrina:</label>
+        <label id="578FD" zValue="4" posX="1.587" posY="25.400" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Tienda:</label>
+        <line id="BOLF6" zValue="5" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="-66.675" fromY="46.037" toX="188.912" toY="46.037"/>
+        <label id="EERC7" zValue="6" posX="98.425" posY="38.100" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hora:</label>
+        <field id="XVSB9" zValue="8" posX="20.637" posY="19.050" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="par">emp</field>
+        <field id="E39KF" zValue="9" posX="20.637" posY="25.400" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="par">tienda</field>
+        <field id="BRPQM" zValue="10" posX="20.637" posY="31.750" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="par">vitrina</field>
+        <field id="578FD" zValue="11" posX="20.637" posY="38.100" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="par">nivel</field>
+        <field id="9X0R2" zValue="12" posX="112.712" posY="38.100" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="par">hora</field>
+    </pageheader>
+    <pagefooter id="PF" height="5.560">
+        <field id="4BZLT" zValue="0" posX="234.950" posY="1.587" width="15.875" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="num" ftype="sys" arg="page %1">pageno</field>
+    </pagefooter>
+    <details>
+        <detail id="Detail1" height="7.938" datasource="s1">
+            <items>
+                <field id="2DA8H" zValue="7" posX="3.175" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">0</field>
+                <field id="27174" zValue="8" posX="26.987" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">1</field>
+                <field id="B61FD" zValue="9" posX="49.212" posY="1.587" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">2</field>
+                <field id="58J40" zValue="10" posX="74.612" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">3</field>
+                <line id="CH0Y6" zValue="13" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="152.400" toY="0.000"/>
+                <line id="D6QCO" zValue="14" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="0.000" toX="47.625" toY="7.938"/>
+                <line id="RB4FW" zValue="15" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="0.000" toX="73.025" toY="7.938"/>
+                <line id="YEG5J" zValue="16" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="0.000" toX="100.012" toY="7.938"/>
+                <line id="NL60E" zValue="17" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="0.000" toX="23.812" toY="7.938"/>
+                <line id="QSPYE" zValue="18" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="0.000" toY="7.938"/>
+                <field id="DPDUL" zValue="19" posX="101.600" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">4</field>
+                <field id="6NXXS" zValue="20" posX="128.588" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">5</field>
+                <line id="NP70I" zValue="21" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="0.000" toX="125.412" toY="7.938"/>
+                <line id="6Y3QQ" zValue="22" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="0.000" toX="152.400" toY="7.938"/>
+                <line id="06ISZ" zValue="23" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="7.938" toX="0.000" toY="7.938"/>
+            </items>
+            <groups>
+                <group id="grupo0" groupExp="" resetVariables="" reprintHeader="false" startsOnNewPage="false">
+                    <groupheader height="7.673">
+                        <text id="JVI0Y" zValue="0" posX="3.175" posY="1.587" width="17.462" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="IPHHA" zValue="1" posX="47.625" posY="1.587" width="25.400" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="DC0HQ" zValue="2" posX="23.812" posY="1.587" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="4P5BB" zValue="3" posX="76.200" posY="1.587" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="FVVZQ" zValue="13" posX="128.588" posY="1.587" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="M76X9" zValue="14" posX="101.600" posY="1.587" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="OCOXS" zValue="15" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="152.400" toY="0.000"/>
+                        <line id="6CBEQ" zValue="16" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="0.000" toY="7.938"/>
+                        <line id="O4LD5" zValue="17" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="0.000" toX="23.812" toY="7.938"/>
+                        <line id="WVAEO" zValue="18" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="0.000" toX="47.625" toY="7.938"/>
+                        <line id="REBWJ" zValue="19" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="0.000" toX="73.025" toY="7.938"/>
+                        <line id="I3WOI" zValue="20" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="0.000" toX="100.012" toY="7.938"/>
+                        <line id="TT6VK" zValue="21" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="0.000" toX="125.412" toY="7.938"/>
+                        <line id="GSMYT" zValue="22" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="0.000" toX="152.400" toY="9.525"/>
+                    </groupheader>
+                </group>
+            </groups>
+        </detail>
+        <detail id="Detail2" height="7.938" datasource="s2">
+            <items>
+                <line id="NXBF7" zValue="36" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="7.938" toX="0.000" toY="7.938"/>
+                <field id="DG96K" zValue="37" posX="101.600" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">4</field>
+                <line id="FCOMH" zValue="38" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="152.400" toY="0.000"/>
+                <line id="I39IO" zValue="39" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="0.000" toX="100.012" toY="7.938"/>
+                <field id="MBR91" zValue="40" posX="128.588" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">5</field>
+                <field id="PM7AU" zValue="41" posX="26.987" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">1</field>
+                <line id="GD9ZJ" zValue="42" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="0.000" toX="73.025" toY="7.938"/>
+                <field id="475RW" zValue="43" posX="3.175" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">0</field>
+                <line id="XOQI2" zValue="44" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="0.000" toX="47.625" toY="7.938"/>
+                <line id="UMJMW" zValue="45" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="0.000" toX="152.400" toY="7.938"/>
+                <line id="2GHLT" zValue="46" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="0.000" toX="23.812" toY="7.938"/>
+                <line id="KRR6Q" zValue="47" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="0.000" toX="125.412" toY="7.938"/>
+                <line id="14O70" zValue="48" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="0.000" toY="7.938"/>
+                <field id="K1QDM" zValue="49" posX="74.612" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">3</field>
+                <field id="GA3I0" zValue="50" posX="49.212" posY="1.587" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">2</field>
+            </items>
+            <groups>
+                <group id="grupo0" groupExp="" resetVariables="" reprintHeader="false" startsOnNewPage="false">
+                    <groupheader height="17.462">
+                        <line id="4WGDJ" zValue="12" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="9.525" toX="47.625" toY="17.462"/>
+                        <line id="H7GBN" zValue="13" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="9.525" toX="23.812" toY="17.462"/>
+                        <text id="E59GG" zValue="14" posX="23.812" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="7SMD3" zValue="15" posX="128.588" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="SQF86" zValue="16" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="9.525" toX="152.400" toY="9.525"/>
+                        <line id="GMFPG" zValue="17" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="9.525" toX="73.025" toY="17.462"/>
+                        <line id="JFQXT" zValue="18" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="9.525" toX="0.000" toY="17.462"/>
+                        <text id="SJ623" zValue="19" posX="101.600" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="X1SGQ" zValue="20" posX="76.200" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="K4FD6" zValue="21" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="9.525" toX="125.412" toY="17.462"/>
+                        <line id="FD12A" zValue="22" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="9.525" toX="152.400" toY="19.050"/>
+                        <line id="HD9Z6" zValue="23" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="9.525" toX="100.012" toY="17.462"/>
+                        <text id="8SKU4" zValue="24" posX="47.625" posY="11.112" width="25.400" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="IBXOI" zValue="25" posX="3.175" posY="11.112" width="17.462" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <label id="SP2LY" zValue="26" posX="1.587" posY="1.587" width="31.750" height="4.762" fontName="Arial" fontSize="10" fontWeight="bold">Nivel:   2</label>
+                    </groupheader>
+                </group>
+            </groups>
+        </detail>
+        <detail id="Detail3" height="7.938" datasource="s3">
+            <items>
+                <line id="OPA3M" zValue="22" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="0.000" toX="100.012" toY="7.938"/>
+                <field id="DSPO1" zValue="23" posX="49.212" posY="1.587" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">2</field>
+                <field id="AFQY6" zValue="24" posX="3.175" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">0</field>
+                <line id="NCU7P" zValue="25" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="0.000" toX="47.625" toY="7.938"/>
+                <line id="N3JYY" zValue="26" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="0.000" toX="152.400" toY="7.938"/>
+                <line id="KWMVQ" zValue="27" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="0.000" toX="73.025" toY="7.938"/>
+                <field id="2B1FA" zValue="28" posX="26.987" posY="1.587" width="17.462" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">1</field>
+                <line id="253P0" zValue="29" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="0.000" toX="23.812" toY="7.938"/>
+                <line id="OLYD3" zValue="30" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="0.000" toY="7.938"/>
+                <line id="310LY" zValue="31" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="0.000" toX="125.412" toY="7.938"/>
+                <field id="B340Q" zValue="32" posX="128.588" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">5</field>
+                <field id="5FG99" zValue="33" posX="74.612" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">3</field>
+                <field id="C35P8" zValue="34" posX="101.600" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" alignment="1" type="txt" ftype="ds">4</field>
+                <line id="84TBG" zValue="35" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="152.400" toY="0.000"/>
+                <line id="H98JZ" zValue="36" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="7.938" toX="152.400" toY="7.938"/>
+            </items>
+            <groups>
+                <group id="grupo0" groupExp="" resetVariables="" reprintHeader="false" startsOnNewPage="false">
+                    <groupheader height="17.198">
+                        <text id="C8XBK" zValue="16" posX="76.200" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <label id="QMJIB" zValue="17" posX="3.175" posY="1.587" width="31.750" height="4.762" fontName="Arial" fontSize="10" fontWeight="bold">Nivel:   3</label>
+                        <line id="E0ARA" zValue="18" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="23.812" fromY="9.525" toX="23.812" toY="17.462"/>
+                        <text id="01STS" zValue="19" posX="3.175" posY="11.112" width="17.462" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="53HFY" zValue="20" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="152.400" fromY="9.525" toX="152.400" toY="19.050"/>
+                        <line id="GYCIZ" zValue="21" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="100.012" fromY="9.525" toX="100.012" toY="17.462"/>
+                        <line id="80PQE" zValue="22" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="47.625" fromY="9.525" toX="47.625" toY="17.462"/>
+                        <text id="OIUV5" zValue="23" posX="23.812" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="QTRTQ" zValue="24" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="9.525" toX="0.000" toY="17.462"/>
+                        <text id="DM9NY" zValue="25" posX="128.588" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <text id="S4O2S" zValue="26" posX="101.600" posY="11.112" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="QNCBL" zValue="27" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="9.525" toX="152.400" toY="9.525"/>
+                        <text id="GEKCR" zValue="28" posX="47.625" posY="11.112" width="25.400" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+                        <line id="I0HLB" zValue="29" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="125.412" fromY="9.525" toX="125.412" toY="17.462"/>
+                        <line id="F079P" zValue="30" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="73.025" fromY="9.525" toX="73.025" toY="17.462"/>
+                    </groupheader>
+                </group>
+            </groups>
+        </detail>
+    </details>
+</NCReport>
