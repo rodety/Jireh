@@ -15,6 +15,7 @@ ui_reporte::ui_reporte(QWidget *parent) :
     ui->listView_entidad->setModel(seleccionados_model);
     ui->dateTimeEdit_desde->setDateTime(QDateTime::currentDateTime());
     ui->dateTimeEdit_hasta->setDateTime(QDateTime::currentDateTime().addDays(1));
+    ui->pushButton_imprimir->setEnabled(false);
 }
 
 ui_reporte::~ui_reporte()
@@ -99,6 +100,7 @@ void ui_reporte::on_comboBox_entidades_currentIndexChanged(int index)
 
 void ui_reporte::on_listView_entidad_doubleClicked(const QModelIndex &index)
 {
+    ui->pushButton_imprimir->setEnabled(true);
     current_index = index;
     time_desde = ui->dateTimeEdit_desde->dateTime().toString(Qt::ISODate);
     time_hasta = ui->dateTimeEdit_hasta->dateTime().toString(Qt::ISODate);
