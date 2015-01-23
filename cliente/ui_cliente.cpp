@@ -564,8 +564,7 @@ void ui_cliente::on_pushButton_imprimir_lc_clicked()
        report.setReportSource( NCReportSource::File );
        report.setReportFile("reportes/lista_de_compras.xml");
        report.addStringList(lista_e,"mylist");
-
-       report.runReportToPDF("pdf/lista_compras.pdf");
+       //report.runReportToPDF("pdf/lista_compras.pdf");
        report.runReportToPreview();
 
         if (report.hasError()) {

@@ -138,6 +138,21 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButton_imprimir_lc">
+       <property name="text">
+        <string>imprimir</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <selectedon>:/Icons/1349716391_monotone_printer_hardware.png</selectedon>
+        </iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="1" column="0">
@@ -769,34 +784,6 @@
            </property>
            <property name="text">
             <string>Lista de Compras</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_imprimir_lc">
-           <property name="text">
-            <string>imprimir</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <selectedon>:/Icons/1349716391_monotone_printer_hardware.png</selectedon>
-            </iconset>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
