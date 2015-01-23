@@ -26,14 +26,14 @@
     <variables/>
     <pageheader id="PH" height="27.781">
         <label id="XVSB9" zValue="0" posX="104.775" posY="1.587" width="43.921" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Reporte de Ventas</label>
-        <label id="BUNBC" zValue="1" posX="1.587" posY="20.637" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">ID</label>
-        <label id="7T7UH" zValue="2" posX="201.612" posY="20.637" width="17.727" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Reg Tarjeta</label>
-        <label id="BRPQM" zValue="3" posX="15.875" posY="20.637" width="20.902" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Fecha y Hora</label>
-        <label id="578FD" zValue="4" posX="41.275" posY="20.637" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Num. de Documento</label>
-        <label id="9X0R2" zValue="5" posX="171.450" posY="20.637" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Estado</label>
-        <label id="HFMKP" zValue="6" posX="76.200" posY="20.637" width="41.275" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Razón Social</label>
-        <label id="YYQQW" zValue="7" posX="142.875" posY="20.637" width="24.077" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Monto Adelanto</label>
-        <label id="0DHCX" zValue="8" posX="120.650" posY="20.637" width="17.727" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Monto Total</label>
+        <label id="BUNBC" zValue="1" posX="1.587" posY="20.637" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">ID</label>
+        <label id="7T7UH" zValue="2" posX="201.612" posY="20.637" width="18.723" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Reg Tarjeta</label>
+        <label id="BRPQM" zValue="3" posX="15.875" posY="20.637" width="21.841" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Fecha y Hora</label>
+        <label id="578FD" zValue="4" posX="41.275" posY="20.637" width="33.412" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Num. de Documento</label>
+        <label id="9X0R2" zValue="5" posX="171.450" posY="20.637" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Estado</label>
+        <label id="HFMKP" zValue="6" posX="76.200" posY="20.637" width="41.275" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Razón Social</label>
+        <label id="YYQQW" zValue="7" posX="142.875" posY="20.637" width="25.966" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Monto Adelanto</label>
+        <label id="0DHCX" zValue="8" posX="120.650" posY="20.637" width="19.224" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Monto Total</label>
         <line id="BOLF6" zValue="9" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="26.987" toX="247.650" toY="26.987"/>
     </pageheader>
     <pagefooter id="PF" height="7.938">

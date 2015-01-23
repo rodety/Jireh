@@ -33,7 +33,7 @@
         <label id="0DHCX" zValue="5" posX="127.000" posY="42.862" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Stock</label>
         <label id="BOLF6" zValue="6" posX="158.750" posY="42.862" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Total</label>
         <label id="2DA8H" zValue="7" posX="7.938" posY="30.162" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Nombre:</label>
-        <label id="27174" zValue="8" posX="7.938" posY="20.637" width="31.750" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Clasificion:</label>
+        <label id="27174" zValue="8" posX="7.938" posY="20.637" width="31.750" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold">Tipo:</label>
         <label id="B61FD" zValue="9" posX="174.625" posY="20.637" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Desde:</label>
         <label id="58J40" zValue="10" posX="174.625" posY="30.162" width="31.750" height="5.027" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hasta:</label>
         <field id="HS9CR" zValue="11" posX="30.162" posY="20.637" width="31.750" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">tipo</field>

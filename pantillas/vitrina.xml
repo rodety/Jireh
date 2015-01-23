@@ -34,11 +34,11 @@
         <label id="578FD" zValue="4" posX="1.587" posY="25.400" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Tienda:</label>
         <line id="BOLF6" zValue="5" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="1.587" fromY="46.037" toX="257.175" toY="46.037"/>
         <label id="EERC7" zValue="6" posX="166.688" posY="38.100" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hora:</label>
-        <field id="XVSB9" zValue="7" posX="20.637" posY="19.050" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">emp</field>
-        <field id="E39KF" zValue="8" posX="20.637" posY="25.400" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">tienda</field>
-        <field id="BRPQM" zValue="9" posX="20.637" posY="31.750" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">vitrina</field>
-        <field id="578FD" zValue="10" posX="20.637" posY="38.100" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">nivel</field>
-        <field id="9X0R2" zValue="11" posX="180.975" posY="38.100" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">hora</field>
+        <field id="XVSB9" zValue="7" posX="20.637" posY="19.050" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">emp</field>
+        <field id="E39KF" zValue="8" posX="20.637" posY="25.400" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">tienda</field>
+        <field id="BRPQM" zValue="9" posX="20.637" posY="31.750" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">vitrina</field>
+        <field id="578FD" zValue="10" posX="20.637" posY="38.100" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">nivel</field>
+        <field id="9X0R2" zValue="11" posX="180.975" posY="38.100" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">hora</field>
     </pageheader>
     <pagefooter id="PF" height="5.556">
         <field id="FNUOX" typeId="131074" zValue="1" posX="236.537" posY="0.000" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>

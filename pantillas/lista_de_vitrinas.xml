@@ -29,11 +29,11 @@
         <label id="BUNBC" zValue="1" posX="-3.175" posY="30.162" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Vitrina:</label>
         <label id="E39KF" zValue="2" posX="100.012" posY="22.225" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hora:</label>
         <label id="7T7UH" zValue="3" posX="-3.175" posY="17.462" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Empresa:</label>
-        <field id="BRPQM" zValue="4" posX="15.875" posY="17.462" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">emp</field>
-        <field id="578FD" zValue="5" posX="114.300" posY="22.225" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">hora</field>
+        <field id="BRPQM" zValue="4" posX="15.875" posY="17.462" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">emp</field>
+        <field id="578FD" zValue="5" posX="114.300" posY="22.225" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">hora</field>
         <label id="9X0R2" zValue="6" posX="60.325" posY="1.587" width="58.737" height="7.938" fontName="Liberation Sans" fontSize="14" fontWeight="bold" fontUnderline="true" alignment="1">Productos en Vitrina</label>
-        <field id="0DHCX" zValue="7" posX="15.875" posY="23.812" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">tienda</field>
-        <field id="BOLF6" zValue="8" posX="15.875" posY="30.162" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">vitrina</field>
+        <field id="0DHCX" zValue="7" posX="15.875" posY="23.812" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">tienda</field>
+        <field id="BOLF6" zValue="8" posX="15.875" posY="30.162" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="par">vitrina</field>
         <label id="4BZLT" zValue="9" posX="28.575" posY="42.862" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Fila</label>
         <label id="7O6XD" zValue="10" posX="6.350" posY="42.862" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Nivel</label>
         <label id="S3AC5" zValue="11" posX="50.800" posY="42.862" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Columna</label>
