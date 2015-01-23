@@ -24,22 +24,24 @@
         <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist"></datasource>
     </datasources>
     <variables/>
-    <pageheader id="PH" height="23.283">
-        <label id="GWLV0" zValue="0" posX="71.438" posY="4.762" width="49.419" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold">TRABAJOS EXTRAS</label>
-        <label id="FU9C7" zValue="1" posX="4.762" posY="17.462" width="17.462" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold">Código</label>
-        <label id="55VV7" zValue="2" posX="50.800" posY="17.462" width="31.750" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold">Descripción</label>
-        <label id="SY3PE" zValue="3" posX="114.300" posY="17.462" width="14.287" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold">Precio</label>
-        <label id="U41BP" zValue="4" posX="138.112" posY="17.462" width="20.637" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold">Descuento</label>
+    <pageheader id="PH" height="23.280">
+        <label id="GWLV0" zValue="0" posX="71.438" posY="4.762" width="49.477" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">TRABAJOS EXTRAS</label>
+        <label id="FU9C7" zValue="1" posX="4.762" posY="17.462" width="17.462" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Código</label>
+        <label id="55VV7" zValue="2" posX="50.800" posY="17.462" width="31.750" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Descripción</label>
+        <label id="SY3PE" zValue="3" posX="114.300" posY="17.462" width="14.287" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Precio</label>
+        <label id="U41BP" zValue="4" posX="138.112" posY="17.462" width="20.637" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Descuento</label>
         <line id="4ACUJ" zValue="5" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="22.225" toX="166.688" toY="22.225"/>
     </pageheader>
-    <pagefooter id="PF" height="35.190"/>
+    <pagefooter id="PF" height="7.673">
+        <field id="ZUDL7" typeId="131074" zValue="1" posX="149.225" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
+    </pagefooter>
     <details>
-        <detail id="Detail1" height="7.938" datasource="s1">
+        <detail id="Detail1" height="5.027" datasource="s1">
             <items>
-                <field id="CBKE3" zValue="0" posX="0.000" posY="0.000" width="26.987" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="ds">0</field>
-                <field id="WK4PW" zValue="1" posX="26.987" posY="0.000" width="85.725" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="ds">1</field>
-                <field id="RHUQL" zValue="2" posX="112.712" posY="0.000" width="22.225" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="ds">2</field>
-                <field id="8IZBI" zValue="3" posX="134.938" posY="0.000" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" type="txt" ftype="ds">3</field>
+                <field id="CBKE3" zValue="0" posX="0.000" posY="0.000" width="26.987" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="ds">0</field>
+                <field id="WK4PW" zValue="1" posX="26.987" posY="0.000" width="85.725" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="ds">1</field>
+                <field id="RHUQL" zValue="2" posX="112.712" posY="0.000" width="22.225" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="ds">2</field>
+                <field id="8IZBI" zValue="3" posX="134.938" posY="0.000" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="ds">3</field>
             </items>
         </detail>
     </details>

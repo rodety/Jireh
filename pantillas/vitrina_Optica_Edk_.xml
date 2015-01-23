@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NCReport version="2.13.0" name="vitrina" type="report">
+    <options>
+        <encoding>UTF-8</encoding>
+        <language>00</language>
+        <langrole>0</langrole>
+        <orientation>portrait</orientation>
+        <pagesize width="210.000" height="297.000">A4</pagesize>
+        <topmargin>15</topmargin>
+        <bottommargin>15</bottommargin>
+        <leftmargin>20</leftmargin>
+        <rightmargin>20</rightmargin>
+        <backcolor>#ffffff</backcolor>
+        <columns>0</columns>
+        <columnspace>0</columnspace>
+        <zoneSpacing>0</zoneSpacing>
+        <zoneBreak>false</zoneBreak>
+        <fontname>Liberation Sans</fontname>
+        <fontsize>10</fontsize>
+        <fontstyle></fontstyle>
+        <htmlBodyStyle>{DEFAULT}</htmlBodyStyle>
+    </options>
+    <datasources>
+        <datasource id="s1" allowEmpty="true" type="list" openRole="begin" source="static" columnDelimiter="semicolon" listID="mylist"></datasource>
+    </datasources>
+    <variables/>
+    <pageheader id="PH" height="57.944">
+        <label id="S4YBI" zValue="21" posX="3.175" posY="26.987" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Tienda:</label>
+        <field id="C00HJ" zValue="22" posX="117.475" posY="39.688" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">hora</field>
+        <label id="JW91O" zValue="23" posX="63.500" posY="6.350" width="58.737" height="7.938" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Productos en Vitrina</label>
+        <label id="Z2Y8N" zValue="24" posX="3.175" posY="33.337" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Vitrina:</label>
+        <field id="L65JS" zValue="25" posX="22.225" posY="20.637" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">emp</field>
+        <field id="DWKXC" zValue="26" posX="22.225" posY="39.688" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">nivel</field>
+        <field id="TIKNM" zValue="27" posX="22.225" posY="26.987" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">tienda</field>
+        <label id="JR366" zValue="28" posX="103.188" posY="39.688" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hora:</label>
+        <label id="BOA47" zValue="29" posX="3.175" posY="20.637" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Empresa:</label>
+        <field id="RYWX5" zValue="32" posX="22.225" posY="33.337" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">vitrina</field>
+        <label id="CC3PH" zValue="33" posX="3.175" posY="39.688" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Nivel:</label>
+        <text id="16V4O" zValue="34" posX="0.000" posY="52.387" width="20.637" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+        <text id="YJMGD" zValue="35" posX="85.725" posY="52.387" width="22.225" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+        <text id="ZBL4I" zValue="36" posX="55.562" posY="52.387" width="25.400" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+        <text id="HY9PL" zValue="37" posX="23.812" posY="52.387" width="25.400" height="5.027" useFont="true" fontName="Arial" fontSize="10" forecolor="#000000">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</text>
+        <line id="UO6V2" zValue="38" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="50.800" toX="109.537" toY="50.800"/>
+        <line id="JCTZ1" zValue="40" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="109.537" fromY="50.800" toX="109.537" toY="57.150"/>
+        <line id="EITL9" zValue="41" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="82.550" fromY="50.800" toX="82.550" toY="57.150"/>
+        <line id="VWGQZ" zValue="43" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="52.387" fromY="50.800" toX="52.387" toY="58.737"/>
+        <line id="KPU7M" zValue="44" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="22.225" fromY="50.800" toX="22.225" toY="57.150"/>
+    </pageheader>
+    <pagefooter id="PF" height="7.673">
+        <field id="A869U" typeId="131074" zValue="0" posX="136.525" posY="1.587" width="31.750" height="4.762" resource="sysvar" fontName="Arial" fontSize="10" type="num" ftype="sys" arg="page %1">pageno</field>
+    </pagefooter>
+    <details>
+        <detail id="Detail1" height="8.202" datasource="s1">
+            <items>
+                <line id="QL51V" zValue="4" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="109.537" toY="0.000"/>
+                <line id="CS5E2" zValue="5" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="109.537" fromY="0.000" toX="109.537" toY="9.525"/>
+                <line id="3C90U" zValue="6" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="0.000" toX="0.000" toY="7.938"/>
+                <field id="I31PS" zValue="7" posX="1.587" posY="1.587" width="19.050" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">1</field>
+                <field id="K9WRT" zValue="8" posX="26.987" posY="1.587" width="22.225" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">2</field>
+                <field id="WLTNZ" zValue="9" posX="55.562" posY="1.587" width="23.812" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">3</field>
+                <field id="663ZM" zValue="10" posX="84.137" posY="1.587" width="23.812" height="4.762" resource="datasource" fontName="Arial" fontSize="10" type="txt" ftype="ds">4</field>
+                <line id="LXEXQ" zValue="11" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="22.225" fromY="0.000" toX="22.225" toY="9.525"/>
+                <line id="SMU69" zValue="12" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="52.387" fromY="0.000" toX="52.387" toY="9.525"/>
+                <line id="WNTZT" zValue="13" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="82.550" fromY="-1.587" toX="82.550" toY="7.938"/>
+            </items>
+        </detail>
+    </details>
+</NCReport>

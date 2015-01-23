@@ -25,21 +25,23 @@
     </datasources>
     <variables/>
     <pageheader id="PH" height="32.015">
-        <label id="1YD03" zValue="0" posX="114.300" posY="1.587" width="42.147" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" forecolor="#000000">Lista de Compras</label>
-        <label id="P3I0M" zValue="1" posX="109.537" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" forecolor="#000000">Número</label>
-        <label id="ZUDL7" zValue="3" posX="3.175" posY="23.812" width="6.350" height="4.762" fontName="Liberation Sans" fontSize="10">ID</label>
-        <label id="MGW2G" zValue="5" posX="20.637" posY="23.812" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10">Fecha</label>
-        <label id="NRBHD" zValue="8" posX="46.037" posY="23.812" width="19.050" height="4.762" fontName="Liberation Sans" fontSize="10">Monto Total</label>
-        <label id="QY5NV" zValue="9" posX="71.438" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10">Anulado</label>
-        <label id="AJATW" zValue="10" posX="92.075" posY="23.812" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10">Serie</label>
-        <label id="2BOVU" zValue="11" posX="130.175" posY="23.812" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10">Cantidad</label>
-        <label id="1PSR5" zValue="12" posX="153.987" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10">Precio</label>
-        <label id="4A6KJ" zValue="13" posX="179.387" posY="23.812" width="20.637" height="4.762" fontName="Liberation Sans" fontSize="10">Descripción</label>
-        <line id="DSX86" zValue="14" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="30.162" toX="211.137" toY="30.162"/>
+        <label id="1YD03" zValue="0" posX="114.300" posY="1.587" width="42.069" height="6.085" fontName="Liberation Sans" fontSize="14" fontWeight="bold" alignment="1">Lista de Compras</label>
+        <label id="P3I0M" zValue="1" posX="109.537" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Número</label>
+        <label id="ZUDL7" zValue="2" posX="3.175" posY="23.812" width="6.350" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">ID</label>
+        <label id="MGW2G" zValue="3" posX="20.637" posY="23.812" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Fecha</label>
+        <label id="NRBHD" zValue="4" posX="46.037" posY="23.812" width="19.050" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Monto Total</label>
+        <label id="QY5NV" zValue="5" posX="71.438" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Anulado</label>
+        <label id="AJATW" zValue="6" posX="92.075" posY="23.812" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Serie</label>
+        <label id="2BOVU" zValue="7" posX="130.175" posY="23.812" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Cantidad</label>
+        <label id="1PSR5" zValue="8" posX="153.987" posY="23.812" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Precio</label>
+        <label id="4A6KJ" zValue="9" posX="179.387" posY="23.812" width="20.637" height="4.762" fontName="Liberation Sans" fontSize="10" alignment="1">Descripción</label>
+        <line id="DSX86" zValue="10" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="0.000" fromY="30.162" toX="211.137" toY="30.162"/>
     </pageheader>
-    <pagefooter id="PF" height="10.000"/>
+    <pagefooter id="PF" height="6.085">
+        <field id="DPZCS" typeId="131074" zValue="0" posX="249.237" posY="0.000" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
+    </pagefooter>
     <details>
-        <detail id="Detail1" height="6.350" datasource="s1">
+        <detail id="Detail1" height="5.027" datasource="s1">
             <items>
                 <field id="9ECZ0" zValue="0" posX="42.862" posY="0.000" width="20.637" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">2</field>
                 <field id="WE2JC" zValue="1" posX="127.000" posY="0.000" width="17.462" height="4.762" resource="datasource" fontName="Liberation Sans" fontSize="10" alignment="1" type="txt" ftype="ds">6</field>
