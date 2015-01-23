@@ -30,7 +30,7 @@
         <label id="YE37Z" zValue="2" posX="188.912" posY="14.287" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Desde:</label>
         <label id="QY5NV" zValue="3" posX="4.762" posY="14.287" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Tienda:</label>
         <label id="2BOVU" zValue="4" posX="125.412" posY="1.587" width="22.225" height="7.938" fontName="Liberation Sans" fontSize="14" fontWeight="bold" fontUnderline="true" alignment="1">Alertas</label>
-        <label id="4A6KJ" zValue="5" posX="4.762" posY="20.637" width="15.875" height="6.085" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Detalle:</label>
+        <label id="4A6KJ" zValue="5" posX="4.762" posY="22.225" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Detalle:</label>
         <field id="DSX86" zValue="6" posX="23.812" posY="22.225" width="60.325" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">detalle</field>
         <label id="TR145" zValue="7" posX="188.912" posY="22.225" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Hasta:</label>
         <field id="LVSD0" zValue="8" posX="204.787" posY="22.225" width="47.625" height="4.762" resource="param" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="par">hasta</field>
@@ -39,7 +39,7 @@
         <label id="WE2JC" zValue="11" posX="61.912" posY="44.450" width="32.544" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Num de Documento</label>
         <label id="OC0VW" zValue="12" posX="104.775" posY="44.450" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Razón Social</label>
         <label id="XTJB0" zValue="13" posX="149.225" posY="28.575" width="19.315" height="20.637" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Monto Total</label>
-        <label id="CIIY3" zValue="14" posX="165.100" posY="28.575" width="26.987" height="22.225" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Monto Total</label>
+        <label id="CIIY3" zValue="14" posX="165.100" posY="22.225" width="26.987" height="26.987" fontName="Liberation Sans" fontSize="10" fontWeight="bold" rotation="90">Monto Adelanto</label>
         <label id="21EHP" zValue="15" posX="179.387" posY="44.450" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Estado</label>
         <label id="68VH4" zValue="16" posX="201.612" posY="44.450" width="31.750" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Registro/tarjeta</label>
         <line id="REA6M" zValue="17" lineColor="#000000" lineStyle="solid" lineWidth="0.100" fromX="6.350" fromY="49.212" toX="233.362" toY="49.212"/>

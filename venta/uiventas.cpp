@@ -1938,7 +1938,6 @@ void uiventas::on_buscar_venta_returnPressed()
 
 void uiventas::on_pushButton_Imprimir_clicked()
 {
-
     QStringList lista_e, lista_2;
 
     int fila= ui->tableView_Reporte_Ventas->model()->rowCount() ;// indice.row();
@@ -1961,13 +1960,17 @@ void uiventas::on_pushButton_Imprimir_clicked()
    for(int i=0;i<lista_e.length();i++)
         qDebug()<<lista_e.at(i)<<endl;
    lista_2<<ui->label_Resultado->text();
-
-
    NCReport report;
-
-
    report.setReportSource( NCReportSource::File );
    report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
+   report.addParameter("tienda",ui->comboBox_Tienda->currentText());
+   report.addParameter("documento",ui->comboBox_Documento->currentText());
+   report.addParameter("pago",ui->comboBox_Forma_Pago->currentText());
+   report.addParameter("colaborador",ui->comboBox_Colaborador->currentText());
+   report.addParameter("desde",ui->dateTimeEdit_Desde->text());
+   report.addParameter("hasta",ui->dateTimeEdit_Hasta->text());
+   report.addParameter("total",ui->label_Resultado->text());
+
    report.addStringList(lista_e,"mylist");
     report.addStringList(lista_2,"mylist2");
 

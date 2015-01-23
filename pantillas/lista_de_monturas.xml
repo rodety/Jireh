@@ -31,8 +31,8 @@
         <label id="XTJB0" zValue="3" posX="7.938" posY="31.750" width="11.112" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Cod</label>
         <label id="CIIY3" zValue="4" posX="26.987" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Descrip</label>
         <label id="21EHP" zValue="5" posX="47.625" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Estado</label>
-        <label id="2MBMX" zValue="6" posX="63.500" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Compra</label>
-        <label id="68VH4" zValue="7" posX="79.375" posY="31.750" width="9.525" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Venta</label>
+        <label id="2MBMX" zValue="6" posX="66.675" posY="19.050" width="17.004" height="17.462" fontName="Liberation Sans" fontSize="10" fontWeight="bold" rotation="90">P. Compra</label>
+        <label id="68VH4" zValue="7" posX="79.375" posY="22.225" width="13.192" height="17.462" fontName="Liberation Sans" fontSize="10" fontWeight="bold" rotation="90">P. Venta</label>
         <label id="BS9HA" zValue="8" posX="93.662" posY="19.050" width="17.462" height="26.987" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Descuento</label>
         <label id="REA6M" zValue="9" posX="103.188" posY="25.400" width="9.525" height="42.862" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">stock</label>
         <label id="4FSQY" zValue="10" posX="115.887" posY="31.750" width="12.700" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Marca</label>
@@ -42,12 +42,12 @@
         <label id="7OSU3" zValue="14" posX="192.087" posY="31.750" width="15.875" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Calidad</label>
         <label id="L2H02" zValue="15" posX="211.137" posY="31.750" width="14.287" height="4.762" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1">Genero</label>
         <label id="JSOI5" zValue="16" posX="228.600" posY="15.875" width="20.637" height="30.162" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Cont. Vitrina</label>
-        <label id="BUNBC" zValue="17" posX="239.712" posY="14.287" width="25.400" height="23.812" autoHeight="true" fontName="Liberation Sans" fontSize="10" alignment="1" rotation="90">Cont. Almacen</label>
+        <label id="BUNBC" zValue="17" posX="239.712" posY="14.287" width="25.400" height="23.812" autoHeight="true" fontName="Liberation Sans" fontSize="10" fontWeight="bold" rotation="90">Cant. Almacen</label>
         <label id="7T7UH" zValue="18" posX="250.825" posY="23.812" width="26.987" height="23.812" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Acceso</label>
         <label id="578FD" zValue="19" posX="263.525" posY="11.112" width="31.750" height="28.575" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" rotation="90">Observaciones</label>
     </pageheader>
     <pagefooter id="PF" height="7.938">
-        <field id="GJHU8" typeId="131074" zValue="0" posX="239.712" posY="1.587" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
+        <field id="GJHU8" typeId="131074" zValue="0" posX="241.300" posY="3.175" width="19.050" height="4.762" resource="sysvar" fontName="Liberation Sans" fontSize="10" fontWeight="bold" alignment="1" type="txt" ftype="sys" arg="página %1">pageno</field>
     </pagefooter>
     <details>
         <detail id="Detail1" height="5.027" datasource="s1">
