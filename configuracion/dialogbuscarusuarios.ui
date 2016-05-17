@@ -10,6 +10,11 @@
     <height>179</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -89,16 +94,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>label</zorder>
-  <zorder>le_nombre</zorder>
-  <zorder>label_2</zorder>
-  <zorder>le_apellido</zorder>
-  <zorder>label_3</zorder>
-  <zorder>le_dni</zorder>
-  <zorder>label_4</zorder>
-  <zorder>le_nick</zorder>
-  <zorder>buttonBox</zorder>
-  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections>

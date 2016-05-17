@@ -29,10 +29,10 @@ private:
 public:
     CreaTicket()
     {
-        m_max = 60;
-        t_izquierda = 60;
-        t_derecha = 60;
-        t_centro = 60;
+        m_max = 55;
+        t_izquierda = 55;
+        t_derecha = 55;
+        t_centro = 55;
         t_extremo = 18;//18
         t_totales = 25;
         t_descripcion = 36;//antes 16
@@ -298,8 +298,9 @@ public:
              QPainter painter;
              painter.begin(&printer);
              painter.setPen(Qt::black);
-             painter.setFont(QFont("Arial", 10));
-             painter.drawText(0,0,500,500, Qt::AlignLeft|Qt::AlignTop, impresora);
+             //TAMANO DE FUENTE CALIBRADA PARA TMU220PA
+             painter.setFont(QFont("Arial",9));
+             painter.drawText(0,0,1000,1000, Qt::AlignLeft|Qt::AlignTop, impresora);
              painter.end();
              qDebug()<<impresora<<endl;
          }

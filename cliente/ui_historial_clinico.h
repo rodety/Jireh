@@ -5,7 +5,7 @@
 #include <cliente/historialclinico.h>
 #include <cliente/cliente.h>
 #include <QMessageBox>
-
+#include <share_typedef.h>
 namespace Ui {
 class ui_historial_clinico;
 }

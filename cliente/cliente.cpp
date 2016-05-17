@@ -248,7 +248,7 @@ bool cliente::eliminar()
 QSqlQueryModel* cliente::mostrar()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Num. Documento',nombres as 'Nombres',primer_apellido as 'Ap. Paterno',segundo_apellido as 'Ap. Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1");
+    model->setQuery("SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Num. Documento',nombres as 'Nombres',primer_apellido as 'Ap. Paterno',segundo_apellido as 'Ap. Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud()));
     return model;
 }
 
@@ -329,9 +329,9 @@ QSqlQueryModel* cliente::buscarCliente(QString _item)
     QSqlQueryModel *model = new QSqlQueryModel;
     QString query;
     if(_item.size() != 0)
-        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND ( nombres REGEXP '"+_item+"' OR primer_apellido REGEXP '"+_item+"' OR segundo_apellido REGEXP '"+_item+"' OR numeroDocumento REGEXP '"+_item+"' )";
+        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND ( nombres REGEXP '"+_item+"' OR primer_apellido REGEXP '"+_item+"' OR segundo_apellido REGEXP '"+_item+"' OR numeroDocumento REGEXP '"+_item+"' ) ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
     else
-        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1";
+        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
     model->setQuery(query);
     qDebug()<<query<<endl;
     return model;

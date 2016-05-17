@@ -47,6 +47,7 @@ ui_configuracion::ui_configuracion(QWidget *parent) :
     ui->comboBox_Documento->setTipo("documento");
 
     ui->comboBox_estadoProductos->setTipo("estado");
+    loadTableConfiguracion();
 
 }
 
@@ -156,6 +157,40 @@ void ui_configuracion::saveConfiguration()
 
 void ui_configuracion::on_btn_saveConfiguration_clicked()
 {
+    QMessageBox msgBox;
+    if(ui->lineEdit_IGV->text().size() ==0)
+    {
+        msgBox.setText("Ingrese el IGV");
+        msgBox.exec();
+        return;
+    }
+    if(ui->lineEdit_boleta->text().size() ==0)
+    {
+        msgBox.setText("Ingrese serie Boleta");
+        msgBox.exec();
+        return;
+    }
+    if(ui->lineEdit_serieFactura->text().size() ==0)
+    {
+        msgBox.setText("Ingrese serie facruta");
+        msgBox.exec();
+        return;
+    }
+    if(ui->lineEdit_serieCotizacion->text().size() ==0)
+    {
+        msgBox.setText("Ingrese serie contizacion");
+        msgBox.exec();
+        return;
+    }
+    if(ui->lineEdit_cod_pos->text().size() ==0)
+    {
+        msgBox.setText("Ingrese el codigo de ma maquina POS");
+        msgBox.exec();
+        ui->lineEdit_cod_pos->setCursor(this->cursor());
+        return;
+    }
+
+
     QValidator * validator = new QIntValidator(this);
     ui->lineEdit_IGV->setValidator(validator);
     ui->lineEdit_serieFactura->setValidator(validator);
@@ -189,17 +224,24 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
 
     }
     else
-    {        
-        query.prepare("INSERT INTO Configuracion (Tienda_idTienda,igv,serieBoleta,serieFactura,serieCotizacion) VALUES (?,?,?,?,?)");
+    {
+
+        query.prepare("INSERT INTO Configuracion (Tienda_idTienda,igv,serieBoleta,serieFactura,serieCotizacion,codigoPos) VALUES (?,?,?,?,?,?)");
         query.bindValue(0,currentIdTienda);
         query.bindValue(1,igv);
         query.bindValue(2,serieBoleta);
         query.bindValue(3,serieFactura);
         query.bindValue(4,serieCotizacion);
         query.bindValue(5,codpos);
+        qDebug()<<currentIdTienda<<" "<<igv<<" "<<serieBoleta<<" "<<serieFactura<<" "<<serieCotizacion<<" "<<codpos<<endl;
 
     }
-    query.exec();
+    if(!query.exec())
+    {
+        msgBox.setText("No logro guardar la configuracion");
+        msgBox.exec();
+        return;
+    }
 
     QString ip = ui->lineEdit_ipdatabase->text();
     QString db = ui->lineEdit_nameDatabase->text();
@@ -207,38 +249,8 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     QString pass = ui->lineEdit_passwordUser->text();
     QString port = ui->lineEdit_portDatabase->text();
     config->guardarConfiguracion(ip,db,user,pass,port,currentIdEmpresa,currentIdTienda);
-    QMessageBox msgBox;
-    if(ui->lineEdit_IGV->text().size() ==0)
-    {
-        msgBox.setText("Ingrese el IGV");
-        msgBox.exec();
-        return;
-    }
-    if(ui->lineEdit_boleta->text().size() ==0)
-    {
-        msgBox.setText("Ingrese serie Boleta");
-        msgBox.exec();
-        return;
-    }
-    if(ui->lineEdit_serieFactura->text().size() ==0)
-    {
-        msgBox.setText("Ingrese serie facruta");
-        msgBox.exec();
-        return;
-    }
-    if(ui->lineEdit_serieCotizacion->text().size() ==0)
-    {
-        msgBox.setText("Ingrese serie contizacion");
-        msgBox.exec();
-        return;
-    }
-    if(ui->lineEdit_cod_pos->text().size() ==0)
-    {
-        msgBox.setText("Ingrese el codigo de ma maquina POS");
-        msgBox.exec();
-        ui->lineEdit_cod_pos->setCursor(this->cursor());
-        return;
-    }
+
+
     //Iniciando MainWindows
 
     msgBox.setText("Cierre el Programa y vuelva a abrilrlo para actualizar su ubicacion");
@@ -377,5 +389,86 @@ void ui_configuracion::on_btnAgregar_Tienda_clicked()
 
 void ui_configuracion::on_btn_backup_clicked()
 {
+/*    QSqlQuery query;
+
+    query.exec("INSERT INTO `Modulo` VALUES (1,'Modulo General','Para Pruebas')");
+    query.exec("INSERT INTO `Documento` VALUES (1,'DNI','DNI'),(2,'Carnet de Extrangeria','CE'),(3,'Pasaporte','PP')");
+    query.exec("INSERT INTO `TipoColaborador` VALUES (1,'Administrador'),(2,'Ventas')");
+    query.exec("INSERT INTO `Colaborador` VALUES ('Administrador','apellido1','apellido2',1,'admin',1,1,'123456778','',1,'1993-05-15','34235463','','354354','354354',1,'','63a9f0ea7bb98050796b649e85481845',1),('carlos','Siu','Escobedo',1,'sui',1,1,'71631189','teniente rodrigues 1205 miraflores',1,'1995-01-17','956336676','s4ujv_138@hotmail.com','','',1,'Primer Usuario','81dc9bdb52d04dc20036dbd8313ed055',2)");
+    query.exec("INSERT INTO `FuncionModulo` VALUES (1,1,'Producto','pro'),(2,1,'Usuario','usu'),(3,1,'Cliente','cli'),(4,1,'Vitrina','vit'),(5,1,'Almacen','alm'),(6,1,'Compras','comp'),(7,1,'Reportes','rep'),(8,1,'Ventas','ven'),(9,1,'Configuracion','con'),(10,1,'Agenda','age')");
+    query.exec("INSERT INTO `Permiso` VALUES (1,1,1,1,'2013-07-21'),(2,1,2,1,'2013-07-21'),(3,1,3,1,'2013-07-21'),(4,1,4,1,'2013-07-21'),(5,1,5,1,'2013-07-21'),(6,1,6,1,'2013-07-21'),(7,1,7,1,'2013-07-21'),(8,1,8,1,'2013-07-21'),(9,1,9,1,'2013-07-21'),(10,1,10,1,'2013-07-21'),(11,2,10,1,'2013-09-25'),(12,2,5,1,'2013-09-25'),(13,2,3,1,'2013-09-25'),(14,2,6,1,'2013-09-25'),(15,2,9,0,'2013-09-25'),(16,2,1,1,'2013-09-25'),(17,2,7,0,'2013-09-25'),(18,2,2,0,'2013-09-25'),(19,2,8,1,'2013-09-25'),(20,2,4,1,'2013-09-25')");
+    query.exec("INSERT INTO `SiNo` VALUES (0,'No','F'),(1,'Si','M')");
+    query.exec("INSERT INTO `Estado` VALUES (1,'Activo'),(2,'Inactivo')");
+    query.exec("insert into Programa(nombre,tipo,dato) values('Logitud de Respuesta','entero','10')");
+    */
+
+    actualizar_descuento();
+
+}
+
+void ui_configuracion::loadTableConfiguracion()
+{
+
+    ui->tableView_configuracion->setModel(Programa::getPrograma()->mf_show());
+}
+
+void ui_configuracion::on_pushButton_EditConfiguracion_clicked()
+{
+
+    bool ok;
+    int max_numero_mover = ui->tableView_configuracion->indexAt(QPoint(index.row(),3)).data().toInt();
+    int id = ui->tableView_configuracion->indexAt(QPoint(index.row(),0)).data().toInt();
+    int cant = QInputDialog::getInt(this,tr("Ingrese Cantidad"),tr("Cantidad"),max_numero_mover,1,10000,1,&ok);
+    if(ok)
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE Programa SET dato= ? where idPrograma = ?");
+        query.bindValue(0,cant);
+        query.bindValue(1,id);
+        if (query.exec())
+        {
+            loadTableConfiguracion();
+            Programa::getPrograma()->setLogitud(cant);
+        }
+
+        else{
+            QMessageBox msgBox;
+            msgBox.setText("Fallo al actualizar cantidad");
+            msgBox.exec();
+        }
+
+    }
+
+
+}
+
+void ui_configuracion::on_tableView_configuracion_clicked(const QModelIndex &index)
+{
+    this->index = index;
+}
+bool ui_configuracion::actualizar_descuento(){
+
+    QSqlQuery query, query1;
+    query.prepare("SELECT idProducto,precioVenta FROM Producto WHERE tipo = 1 OR tipo = 2");
+    double precio,descuento;
+    if (!query.exec())
+    {
+        qDebug()<<"Error en la consulta SQL"<<endl;
+    }
+    while(query.next())
+    {
+        query1.prepare("UPDATE Producto SET precioDescuento = ? WHERE idProducto = ?");
+        query1.bindValue(0,query.value(0));
+        precio = query.value(1).toDouble();
+        descuento = precio -(precio * 1.10);
+        query1.bindValue(1,descuento);
+        if(!query1.exec())
+        {
+            qDebug()<<"fallo al actualizar precio"<<endl;
+        }
+
+    }
+
+
 
 }

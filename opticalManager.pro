@@ -16,20 +16,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = opticalManager
 TEMPLATE = app
 
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lQZint
 
-INCLUDEPATH += $$PWD/../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../usr/local/include
-
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/lib/ -lNCReport
-
-INCLUDEPATH += $$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/include
-DEPENDPATH += $$PWD/../../../../../usr/local/lib/ncreport_qt5.2.1/include
-
-unix:!macx: LIBS += -L$$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/lib/ -lNCReportDebug
-
-INCLUDEPATH += $$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/include
-DEPENDPATH += $$PWD/../OpticalManager/lib/NCReport2.13.0.x64.Qt5.2.1.eval/include
+win32 {
+    release: LIBS += ../Jireh/Zint/zint.lib
+    release: LIBS += ../lib/libNCReport2.a
+    debug: LIBS += ../lib/libNCReportDebug2.a
+    target.path = bin
+}
 
 
 INCLUDEPATH += include
@@ -40,7 +33,7 @@ SOURCES += main.cpp\
     objetopersistente.cpp \
     producto/producto.cpp \
     producto/montura.cpp \
-    producto/estado.cpp \    
+    producto/estado.cpp \
     producto/forma.cpp \
     producto/color.cpp \
     producto/tamanio.cpp \
@@ -168,7 +161,8 @@ SOURCES += main.cpp\
     producto/object_Laboratorio.cpp \
     producto/ui_cantidad.cpp \
     compra/object_proveedor.cpp \
-    persona/persona.cpp
+    persona/persona.cpp \
+    configuracion/programa.cpp
 
 HEADERS  += mainwindow.h \
     configuracion/configprogram.h \
@@ -176,7 +170,7 @@ HEADERS  += mainwindow.h \
     objetopersistente.h \
     producto/producto.h \
     producto/montura.h \
-    producto/estado.h \    
+    producto/estado.h \
     producto/forma.h \
     producto/color.h \
     producto/tamanio.h \
@@ -306,7 +300,8 @@ HEADERS  += mainwindow.h \
     producto/object_Lista.h \
     producto/ui_cantidad.h \
     compra/object_proveedor.h \
-    persona/persona.h
+    persona/persona.h \
+    configuracion/programa.h
 
 FORMS    += mainwindow.ui \
     producto/ui_producto.ui \
@@ -357,32 +352,3 @@ RESOURCES += \
 
 OTHER_FILES += \
     configuracion/config.ini
-
-# install
- target.path = $$[QT_INSTALL_EXAMPLES]/itemviews/spinboxdelegate
- sources.files = $$SOURCES $$HEADERS *.pro
- sources.path = $$[QT_INSTALL_EXAMPLES]/itemviews/spinboxdelegate
- INSTALLS += target sources
-
- symbian: include($$QT_SOURCE_TREE/examples/symbianpkgrules.pri)
- maemo5: include($$QT_SOURCE_TREE/examples/maemo5pkgrules.pri)
-
- symbian: warning(This example might not fully work on Symbian platform)
- maemo5: warning(This example might not fully work on Maemo platform)
- simulator: warning(This example might not fully work on Simulator platform)
-
-
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lzint
-
-INCLUDEPATH += $$PWD/../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../usr/local/include
-
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lzint
-
-INCLUDEPATH += $$PWD/../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../usr/local/include
-
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lQZint
-
-INCLUDEPATH += $$PWD/../../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../../usr/local/include

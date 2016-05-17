@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>479</width>
-    <height>214</height>
+    <width>719</width>
+    <height>278</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -68,7 +73,7 @@
      </item>
      <item row="0" column="0">
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QLabel" name="label_20">
          <property name="text">
           <string>Ojos</string>
@@ -78,7 +83,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="3">
+       <item row="8" column="3">
         <widget class="QLineEdit" name="lineEdit_cci">
          <property name="text">
           <string>0</string>
@@ -88,7 +93,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="5">
+       <item row="8" column="6">
         <widget class="QLineEdit" name="lineEdit_dci">
          <property name="text">
           <string>0</string>
@@ -98,7 +103,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="2">
+       <item row="8" column="2">
         <widget class="QLineEdit" name="lineEdit_eci">
          <property name="text">
           <string>0</string>
@@ -108,14 +113,14 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="6">
+       <item row="1" column="0" colspan="7">
         <widget class="Line" name="line_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="3" column="5">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Eje</string>
@@ -125,7 +130,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="3">
+       <item row="7" column="3">
         <widget class="QLineEdit" name="lineEdit_ccd">
          <property name="text">
           <string>0</string>
@@ -135,7 +140,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
+       <item row="7" column="2">
         <widget class="QLineEdit" name="lineEdit_ecd">
          <property name="text">
           <string>0</string>
@@ -145,7 +150,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="3" column="2">
         <widget class="QLabel" name="label_32">
          <property name="text">
           <string>Esferico</string>
@@ -155,7 +160,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="3" column="3">
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>Cilindrico</string>
@@ -165,7 +170,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="5">
+       <item row="7" column="6">
         <widget class="QLineEdit" name="lineEdit_dcd">
          <property name="text">
           <string>0</string>
@@ -175,7 +180,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="1">
         <widget class="QLabel" name="label_38">
          <property name="text">
           <string>Ojo  Derecho</string>
@@ -185,7 +190,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="4">
+       <item row="8" column="5">
         <widget class="QLineEdit" name="lineEdit_ejci">
          <property name="text">
           <string>0</string>
@@ -195,7 +200,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_33">
          <property name="text">
           <string>Distancia</string>
@@ -215,7 +220,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <widget class="QLabel" name="label_39">
          <property name="text">
           <string>Ojo Izquierdo</string>
@@ -225,7 +230,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="4">
+       <item row="7" column="5">
         <widget class="QLineEdit" name="lineEdit_ejcd">
          <property name="text">
           <string>0</string>
@@ -235,7 +240,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="7" column="0">
         <widget class="QLabel" name="label_34">
          <property name="text">
           <string>Cerca</string>
@@ -245,14 +250,14 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="6">
+       <item row="4" column="0" colspan="7">
         <widget class="Line" name="line_5">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="label_35">
          <property name="text">
           <string>Cerca</string>
@@ -262,7 +267,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="5">
+       <item row="3" column="6">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Distancia Pupilar</string>
@@ -272,7 +277,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="5">
+       <item row="0" column="6">
         <widget class="QDateEdit" name="dateEdit_fecha">
          <property name="maximumDateTime">
           <datetime>
@@ -289,7 +294,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="4">
+       <item row="0" column="5">
         <widget class="QLabel" name="label_43">
          <property name="text">
           <string>Fecha</string>
@@ -302,7 +307,7 @@
        <item row="0" column="1" colspan="3">
         <widget class="QLineEdit" name="lineEdit_doctor"/>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="label_36">
          <property name="text">
           <string>Lejos</string>
@@ -312,7 +317,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QLabel" name="label_40">
          <property name="text">
           <string>Ojo  Derecho</string>
@@ -322,7 +327,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
+       <item row="5" column="2">
         <widget class="QLineEdit" name="lineEdit_eld">
          <property name="text">
           <string>0</string>
@@ -332,7 +337,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="3">
+       <item row="5" column="3">
         <widget class="QLineEdit" name="lineEdit_cld">
          <property name="text">
           <string>0</string>
@@ -342,7 +347,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="4">
+       <item row="5" column="5">
         <widget class="QLineEdit" name="lineEdit_ejld">
          <property name="text">
           <string>0</string>
@@ -352,7 +357,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="5">
+       <item row="5" column="6">
         <widget class="QLineEdit" name="lineEdit_dld">
          <property name="text">
           <string>0</string>
@@ -362,7 +367,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="label_37">
          <property name="text">
           <string>Lejos</string>
@@ -372,7 +377,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="6" column="1">
         <widget class="QLabel" name="label_41">
          <property name="text">
           <string>Ojo Izquierdo</string>
@@ -382,7 +387,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
+       <item row="6" column="2">
         <widget class="QLineEdit" name="lineEdit_eli">
          <property name="text">
           <string>0</string>
@@ -392,7 +397,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="3">
+       <item row="6" column="3">
         <widget class="QLineEdit" name="lineEdit_cli">
          <property name="text">
           <string>0</string>
@@ -402,7 +407,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="4">
+       <item row="6" column="5">
         <widget class="QLineEdit" name="lineEdit_ejli">
          <property name="text">
           <string>0</string>
@@ -412,13 +417,44 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="5">
+       <item row="6" column="6">
         <widget class="QLineEdit" name="lineEdit_dli">
          <property name="text">
           <string>0</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Origen de la medicion</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QRadioButton" name="radioButton_externa">
+         <property name="text">
+          <string>Externa</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QRadioButton" name="radioButton_cortesia">
+         <property name="text">
+          <string>Cortesia</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QRadioButton" name="radioButton_pago">
+         <property name="text">
+          <string>Pago</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -431,6 +467,9 @@
  <tabstops>
   <tabstop>lineEdit_doctor</tabstop>
   <tabstop>dateEdit_fecha</tabstop>
+  <tabstop>radioButton_pago</tabstop>
+  <tabstop>radioButton_externa</tabstop>
+  <tabstop>radioButton_cortesia</tabstop>
   <tabstop>lineEdit_eld</tabstop>
   <tabstop>lineEdit_cld</tabstop>
   <tabstop>lineEdit_ejld</tabstop>

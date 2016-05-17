@@ -1,6 +1,7 @@
 #include "montura.h"
 #include <producto/genero.h>
 #include <configuracion/sesion.h>
+#include <share_include.h>
 class Sesion;
 montura::montura()
 {
@@ -102,8 +103,33 @@ bool montura::agregar()
 }
 bool montura::actualizar()
 {
-    Sesion* s=Sesion::getSesion();
     QSqlQuery query;
+    Sesion* s=Sesion::getSesion();
+    int stock_en_tienda =0;
+    query.prepare("SELECT SUM(total) AS stock FROM(SELECT COUNT(*) as total FROM Producto p, Tienda t, Vitrina v, Producto_has_Vitrina pv WHERE p.idProducto = ? AND v.Tienda_idTienda = t.idTienda AND v.Ubicacion_idUbicacion = pv.Vitrina_Ubicacion_idUbicacion AND pv.Producto_idProducto = ? UNION SELECT COUNT(*) as total FROM Producto p, Tienda t,Almacen a, Andamio an, Contenedor co, Contenedor_has_Producto cp, Colaborador c WHERE p.idProducto = ? AND co.idContenedor = cp.Contenedor_idContenedor AND an.idAndamio = co.Andamio_idAndamio AND a.idAlmacen = an.Almacen_idAlmacen AND t.idTienda = a.Tienda_idTienda AND cp.Producto_idProducto = ?)AS xx");
+    query.bindValue(0,idProducto);
+    query.bindValue(1,idProducto);
+    query.bindValue(2,idProducto);
+    query.bindValue(3,idProducto);
+    if(query.exec()){
+        query.next();
+        stock_en_tienda = query.value(0).toInt();
+    }
+
+    if(stock.toInt() < stock_en_tienda){
+
+        QMessageBox box;
+        box.setIcon(QMessageBox::Warning);
+        box.setWindowTitle("Advertencia");
+        box.setText("No se puede reducir el stock si existen productos en vitrina o almacen");
+        box.setStandardButtons(QMessageBox::Ok);
+        box.exec();
+
+        return false;
+    }
+
+
+
     query.prepare("UPDATE Producto SET codigo=?,descripcion=?,precioCompra=?,precioVenta=?,precioDescuento=?,accesorios=?,stock=?,observaciones=?,Estado_idEstado=?,Marca_idMarca=?,idColaborador=?  WHERE idProducto=?");
     query.bindValue(0,codigo);
     query.bindValue(1,descripcion);
@@ -128,14 +154,22 @@ bool montura::actualizar()
 
         }
 
+
+        QString motivo;
         if(stock.toInt() < stock_last.toInt())
         {
-            if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),"Decremento de Stock",2))
-            {
-                return false;
-            }
+            //MOTIVO DE DECREMENTO DE STOCK
+            bool ok;
+             motivo = "Reduccion de stock "+QInputDialog::getText(parent,"Motivo de la reduccion de Stock","Motivo:",QLineEdit::Normal,"",&ok);
+
 
         }
+
+        if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
+        {
+            return false;
+        }
+
         query.clear();
         query.prepare("UPDATE Montura SET Forma_idForma=?,Color_idColor=?,Tamanio_idTamanio=?,Calidad_idCalidad=?,Genero_idGenero=? WHERE Producto_idProducto=?");
         query.bindValue(0,pForma.getIdForma());

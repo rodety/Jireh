@@ -16,6 +16,7 @@ typedef vector<vector<QVariant> > TUPLES;
 
 enum opciones_categoria{articulo1,proveedor,banco,tienda,comprobante,general,base_datos};
 enum opciones_articulo{marca,medida,grupo};
+enum origen_medicion{pago,externa,cortesia};
 
 //MACROS DEL SISTEMA
 

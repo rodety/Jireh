@@ -10,6 +10,11 @@
     <height>436</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -261,7 +266,7 @@
     <string>Aceptar Traspaso</string>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset resource="../Icons/Icons.qrc">
      <normaloff>:/Icons/notification_done.png</normaloff>:/Icons/notification_done.png</iconset>
    </property>
    <property name="flat">
@@ -270,7 +275,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="Icons/Icons.qrc"/>
+  <include location="../Icons/Icons.qrc"/>
  </resources>
  <connections/>
 </ui>

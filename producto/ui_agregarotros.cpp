@@ -238,6 +238,7 @@ void ui_agregarOtros::on_pushButton_agregar_clicked()
     pOtros.setCalidad(pCalidad);
     pOtros.setTipoOtros(pTipoOtros);
     pOtros.setGenero(pGenero);
+    pOtros.setUiParent(this);
 
     if(modo==0)//agrego
     {

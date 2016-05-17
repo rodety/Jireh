@@ -38,7 +38,7 @@ ui_almacen::ui_almacen(QWidget *parent) :
         ui->pushButton_editAndamio->hide();
     }
     //Ubicacion
-    ui->comboBox_Empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
+    ui->comboBox_Empresa->setCurrentIndex(posComboboxEmpresa[Sesion::getUbicacion().first]);
 }
 
 ui_almacen::~ui_almacen()
@@ -101,6 +101,7 @@ void ui_almacen::update_comboBox_Empresa()
         QString raz_social = query.value(1).toString();
 
         Empresas[raz_social] = idempresa;
+        posComboboxEmpresa[idempresa.toInt()] = c;
         ui->comboBox_Empresa->insertItem(c++,raz_social);
     }
 }
@@ -122,11 +123,12 @@ void ui_almacen::update_comboBox_Tienda(QString idEmpresa)
         QString alias = query.value(1).toString();
 
         Tiendas[alias] = idtienda;
+        posComboboxTienda[idtienda.toInt()]=c;
 
         ui->comboBox_Tienda->insertItem(c++,alias);
     }
     //Ubicacion
-    ui->comboBox_Tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
+    ui->comboBox_Tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
 }
 
 void ui_almacen::update_comboBox_Almacen(QString idTienda)

@@ -216,6 +216,8 @@ void ui_reporte::on_pushButton_imprimir_clicked()
 
    NCReport report;
 
+   qDebug()<<"Version "<<report.version()<<endl;
+
    report.addParameter("tipo",ui->comboBox_entidades->currentText());
    report.addParameter("nombre",ui->listView_entidad->model()->index(current_index.row(),0).data().toString());
    report.addParameter("desde",ui->dateTimeEdit_desde->text());

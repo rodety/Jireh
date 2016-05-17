@@ -197,6 +197,9 @@ bool object_Venta_has_Producto::mf_add()
     str_query += ", ?";
     str_query += ")";
 
+    qDebug()<<str_query.c_str()<<endl;
+    qDebug()<<"holaaa"<<endl;
+
     query.prepare(QString(str_query.c_str()));
     int integer = 0;
     if (md_o_idVenta_has_Producto != "")
@@ -222,6 +225,13 @@ bool object_Venta_has_Producto::mf_add()
     }else{
         //state FAILED
         //w!
+        qDebug()<<md_o_Venta_idVenta<<" "
+               <<md_o_Producto_idProducto<<" "
+              <<md_o_cantidad<<" "
+             <<md_o_precio<<" "
+            <<md_o_descuento<<" "
+              <<md_o_descripcion<<endl;
+
 
         return false;
     }

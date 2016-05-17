@@ -39,6 +39,9 @@ ui_producto::ui_producto(QWidget *parent) :
     ui->tabWidget->setTabEnabled(3,0);
     ui->tabWidget->setTabEnabled(4,0);
     ui->tabWidget->setCurrentIndex(0);
+
+    //PONIENDO CODIGO DE PRODUCTO EN GENERAL
+    ui->lineEdit_buscar->setText(Programa::getPrograma()->getCodigo());
 }
 
 
@@ -129,110 +132,17 @@ void ui_producto::on_comboBox_tipoProducto_currentIndexChanged(int index)
 
 }
 
-void ui_producto::on_pushButton_agregar_2_clicked()
+void ui_producto::cargar_producto(bool comportamiento)
 {
-    if(posicion==0)
-    {
-        QMessageBox box;
-        box.setIcon(QMessageBox::Warning);
-        box.setWindowTitle("Advertencia");
-        box.setText("Seleccione un tipo de Pruducto producto");
-        box.setStandardButtons(QMessageBox::Ok);
-        box.exec();
-        ui->comboBox_tipoProducto->setCursor(this->cursor());
-        return;
-    }
-    if(posicion==1)
-    {
-       /* ui_agregarLuna* form=new ui_agregarLuna;
-        form->setWindowTitle("Nueva Luna");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));*/
-
-        int fila=ui->tableView_productos->currentIndex().row();
-        if(fila!=-1)
-        {
-            luna productoActual;
-            productoActual.setIdProducto(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
-            productoActual.setDescripcion(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString());
-            estado pEstado;pEstado.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString());
-            productoActual.setPrecioCompra(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString());
-            productoActual.setPrecioVenta(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString());
-            productoActual.setPrecioDescuento(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,5)).toString());
-            productoActual.setStock(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString());
-            diametro pDiametro;pDiametro.setValor(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toString());
-            calidadluna pCalidad;pCalidad.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,8)).toString());
-            tipoLuna pTipoLuna;pTipoLuna.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,9)).toString());
-            tratamiento pTratamiento;pTratamiento.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,10)).toString());
-            productoActual.setValorInicial(ui->tableView_productos->model()->index(fila,11).data().toString());
-            productoActual.setValorFinal(ui->tableView_productos->model()->index(fila,12).data().toString());
-            productoActual.setCilindro(ui->tableView_productos->model()->index(fila,13).data().toString());
-            productoActual.setCilindro_final(ui->tableView_productos->model()->index(fila,14).data().toString());
-            productoActual.setPrecio(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,15)).toString());
-            productoActual.setObservaciones(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,16)).toString());
-            productoActual.setEstado(pEstado);
-            productoActual.setDiametro(pDiametro);
-            productoActual.setCalidad(pCalidad);
-            productoActual.setTipoLuna(pTipoLuna);
-            productoActual.setTratamiento(pTratamiento);
+    //COMPORTAMIENTO FALSE NUEVO PRODUCTO, TRUE EDITAR PRODUCTO
+    QString titulo;
+    if(comportamiento)
+        titulo="Editar Producto";
+    else
+        titulo="Nuevo Producto";
 
 
 
-            ui_agregarLuna* form=new ui_agregarLuna;
-            //form->setModo(true);
-            form->setLuna(&productoActual);
-            form->setWindowTitle("Nueva Luna");
-            form->show();
-            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-        }
-        else
-        {
-            ui_agregarLuna* form=new ui_agregarLuna;
-            form->setWindowTitle("Nueva Luna");
-            form->show();
-            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-        }
-
-    }
-    if(posicion==2)
-    {
-        ui_agregarMontura* form=new ui_agregarMontura;
-        form->setWindowTitle("Nueva Montura");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-    }
-    if(posicion==3)
-    {
-        ui_agregarLente* form=new ui_agregarLente;
-        form->setWindowTitle("Nuevo Lente de Contacto");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-    }
-    if(posicion==4)
-    {
-        ui_agregarOtros* form=new ui_agregarOtros;
-        form->setWindowTitle("Nuevo Producto");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-    }
-    if(posicion==5)
-    {
-        ui_trabajosExtras* form=new ui_trabajosExtras;
-        form->setWindowTitle("Nuevo Trabajo Extra");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-    }
-    if(posicion==6)
-    {
-        ui_agregaraccesorios* form=new ui_agregaraccesorios;
-        form->setWindowTitle("Nuevo Accesorio");
-        form->show();
-        connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
-    }
-}
-
-void ui_producto::on_pushButton_editar_clicked()
-{
     int fila=ui->tableView_productos->currentIndex().row();
     if(fila!=-1)
     {
@@ -283,9 +193,9 @@ void ui_producto::on_pushButton_editar_clicked()
 
 
             ui_agregarLuna* form=new ui_agregarLuna;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setLuna(&productoActual);
-            form->setWindowTitle("Editar Luna");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
@@ -308,7 +218,7 @@ void ui_producto::on_pushButton_editar_clicked()
             calidad pCalidad;pCalidad.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString());
             genero pGenero;pGenero.setNombre(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString());
             productoActual.setCantidadVitrina(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,14)).toInt());
-            productoActual.setCantidadAlmacen(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,15)).toInt());            
+            productoActual.setCantidadAlmacen(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,15)).toInt());
             productoActual.setAccesorios(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,16)).toString());
             productoActual.setObservaciones(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,17)).toString());
 
@@ -323,9 +233,9 @@ void ui_producto::on_pushButton_editar_clicked()
 
             ui_agregarMontura* form=new ui_agregarMontura;
             //MODO TRUE EDITAR, FALSE NUEVO
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setMontura(&productoActual);
-            form->setWindowTitle("Editar Montura");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
@@ -367,9 +277,9 @@ void ui_producto::on_pushButton_editar_clicked()
 
 
             ui_agregarLente* form=new ui_agregarLente;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setLenteContacto(&productoActual);
-            form->setWindowTitle("Editar Lente de Contacto");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
@@ -406,9 +316,9 @@ void ui_producto::on_pushButton_editar_clicked()
 
 
             ui_agregarOtros* form=new ui_agregarOtros;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setOtros(&productoActual);
-            form->setWindowTitle("Editar Producto Otro");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
@@ -416,16 +326,17 @@ void ui_producto::on_pushButton_editar_clicked()
         if(posicion==5)
         {
             trabajosExtras actual;
-            actual.setIdTrabajosExtras(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
+            actual.setIdProducto(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
+            //actual.setIdTrabajosExtras(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
             actual.setDescripcion(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString());
             actual.setPrecio(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString());
             actual.setDescuento(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString());
 
 
             ui_trabajosExtras* form=new ui_trabajosExtras;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setTrabajosExtras(&actual);
-            form->setWindowTitle("Editar Trabajo Extra");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
@@ -462,11 +373,22 @@ void ui_producto::on_pushButton_editar_clicked()
             ui_agregaraccesorios* form=new ui_agregaraccesorios;
             form->setModo(true);
             form->setAccesorio(productoActual);
-            form->setWindowTitle("Editar Accesorio");
+            form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
     }
+
+}
+
+void ui_producto::on_pushButton_agregar_2_clicked()
+{
+    cargar_producto(false);
+}
+
+void ui_producto::on_pushButton_editar_clicked()
+{
+    cargar_producto(true);
 }
 
 void ui_producto::on_pushButton_eliminar_clicked()
@@ -528,7 +450,7 @@ void ui_producto::on_pushButton_eliminar_clicked()
                 if(posicion==5)
                 {
                     trabajosExtras actual;                    
-                    actual.setIdTrabajosExtras(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
+                    actual.setIdProducto(ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString());
                     actual.eliminar();
 
                 }
@@ -549,7 +471,7 @@ void ui_producto::on_pushButton_eliminar_clicked()
 }
 
 
-/// #etiquetas ////////////////////////////////////////
+    /// #etiquetas ////////////////////////////////////////
 
 void ui_producto::agregar_etiqueta(const QModelIndex &model)
 {
@@ -934,12 +856,13 @@ void ui_producto::actualizarListaProductos()
 
 void ui_producto::enviar_productoCompra(const QModelIndex & model)
 {
-    QString codigo,descripcion,precioVenta,descuento,tipoLuna,tratamiento,valorInicial,ValorFinal,marca,forma,color,tamano,calidad,presentacion,
+    QString id,codigo,descripcion,precioVenta,descuento,tipoLuna,tratamiento,valorInicial,ValorFinal,marca,forma,color,tamano,calidad,presentacion,
             tinte,contacuoso,diseno,tipoLente,potencia,curva,diametro,tiempouso,material,genero, mtalla,mtipo;
     int fila = model.row();
-    codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
+    id=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,0)).toString();
 
-    if(codigo.size()==0)
+
+    if(id.size()==0)
         return;
     if(posicion==0)
     {
@@ -978,11 +901,12 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
         tamano=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
         calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString();
-        descripcion+= " Marca: " +marca+", forma: "+forma+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
+        descripcion+= "Codigo: "+codigo+" Marca: " +marca+", forma: "+forma+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
     }
     //Lentes de Contacto
     if(posicion==3)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
@@ -998,13 +922,14 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
         diametro=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,16)).toString();
         tiempouso=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,17)).toString();
         material=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,18)).toString();
-        descripcion+= " Marca:" +marca+", present."+presentacion+", tinte: "+tinte+", C. Acuoso: "+contacuoso+", diseño: "+diseno+", tipo: "+tipoLente+", potencia: "+potencia+
+        descripcion+= "Codigo: "+codigo+" Marca:" +marca+", present."+presentacion+", tinte: "+tinte+", C. Acuoso: "+contacuoso+", diseño: "+diseno+", tipo: "+tipoLente+", potencia: "+potencia+
                 ", curv. "+curva+", diam. "+diametro+", tiempo uso: "+tiempouso+", material: "+material;
 
     }
     //Otros
     if(posicion==4)
     {
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         descripcion=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,2)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toString();
@@ -1014,7 +939,7 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
         calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
         mtipo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString();
-        descripcion+= " Marca: " +marca+", color: "+color+", talla: "+mtalla+", calidad: "+calidad+", tipo: "+mtipo+", genero: "+genero;
+        descripcion+= "Codigo: "+codigo+" Marca: " +marca+", color: "+color+", talla: "+mtalla+", calidad: "+calidad+", tipo: "+mtipo+", genero: "+genero;
     }
     //Trabajos Extras
     if(posicion==5)
@@ -1026,6 +951,7 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
     if(posicion==6)
     {
 
+        codigo=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,1)).toString();
         precioVenta=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toString();
 
@@ -1035,14 +961,15 @@ void ui_producto::enviar_productoCompra(const QModelIndex & model)
         calidad=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,11)).toString();
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
 
-        descripcion+= " Marca: " +marca+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
+        descripcion+= "Codigo: "+codigo+" Marca: " +marca+", color: "+color+", tamaño: "+tamano+", calidad: "+calidad+", genero: "+genero;
     }
 
     ui_cantidad* pcantidad = new ui_cantidad;
-    pcantidad->setDatos(codigo,descripcion);
+    pcantidad->setDatos(id,descripcion);
     connect(pcantidad,SIGNAL(enviarCantidad(QString,QString,int,double)),this,SLOT(recogerCantidad(QString,QString,int,double)));
     pcantidad->show();
 
+    qDebug()<<"Codigo de producto enviado"<<id<<endl;
 
 }
 
@@ -1082,7 +1009,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,6)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString();
         //estamos sacando el stock
-        descripcion+= " Luna: \n Codigo:"+codigo+" \n Tipo: " +tipoLuna+"\n tratamiento: "+tratamiento;
+        descripcion+= " Luna: , Codigo:"+codigo+" , Tipo: " +tipoLuna+", tratamiento: "+tratamiento;
     }
     //Monturas
     if(posicion==2)
@@ -1100,7 +1027,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         accesorios=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,16)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Lentes: \n Codigo:"+codigo+ "\n Marca: "+marca+"\n Forma: "+forma+"\n Color: "+color+"\n Calidad: "+calidad+"\n Accesorios: "+accesorios;
+        descripcion+= " Lentes: , Codigo:"+codigo+ ", Marca: "+marca+", Forma: "+forma+", Color: "+color+", Calidad: "+calidad+", Accesorios: "+accesorios;
     }
     //Lentes de Contacto
     if(posicion==3)
@@ -1123,7 +1050,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         material=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,18)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= " Lente de Contacto: \n Codigo: "+codigo+"\n Marca:" +marca+"\n present."+presentacion+"\n tinte: "+tinte+"\n C. Acuoso: "+contacuoso+"\n diseño: "+diseno+"\n tipo: "+tipoLente+"\n tiempo uso: "+tiempouso+"\n material: "+material;
+        descripcion+= "Codigo: "+codigo+", Marca:" +marca+", present."+presentacion+", tinte: "+tinte+", C. Acuoso: "+contacuoso+", diseño: "+diseno+", tipo: "+tipoLente+", tiempo uso: "+tiempouso+", material: "+material;
 
     }
     //Otros
@@ -1141,7 +1068,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,13)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion= " "+mtipo+": \n Codigo: "+codigo+" Marca: " +marca+"\n color: "+color+"\n talla: "+mtalla+"\n calidad: "+calidad;
+        descripcion= " "+mtipo+": , Codigo: "+codigo+" Marca: " +marca+", color: "+color+", talla: "+mtalla+", calidad: "+calidad;
     }
     //Trabajos Extras
     if(posicion==5)
@@ -1152,7 +1079,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         descuento=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,3)).toString();
         stock_producto = 0;
         precioCompra = "0";
-        descripcion+="\n Codigo: "+codigo;
+
     }
 
     if(posicion==6)
@@ -1169,7 +1096,7 @@ void ui_producto::enviar_venta(const QModelIndex &model, int cant, QString pos, 
         genero=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,12)).toString();
         stock_producto = ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,7)).toInt();
         precioCompra=ui->tableView_productos->model()->data(ui->tableView_productos->model()->index(fila,4)).toString();
-        descripcion+= "\n Codigo: "+codigo+"\n Marca: " +marca+"\n color: "+color+"\n tamaño: "+tamano+"\n calidad: "+calidad+"\n genero: "+genero;
+        descripcion+= ", Codigo: "+codigo+", Marca: " +marca+", color: "+color+", tam: "+tamano+", calidad: "+calidad+", genero: "+genero;
     }
 
     emit sentProductoVenta(id,descripcion,precioVenta,descuento,cant,pos,tipo,stock_producto,precioCompra);
@@ -1810,7 +1737,7 @@ void ui_producto::on_tableView_productos_doubleClicked(const QModelIndex &index)
         else
         {
             bool ok;
-            int cant = QInputDialog::getInt(this,tr("Ingrese Cantidad"),tr("Cantidad"),0,0,max,1,&ok);
+            int cant = QInputDialog::getInt(this,tr("Ingrese Cantidad"),tr("Cantidad"),1,1,max,1,&ok);
             if(ok)
             {
                //id_Contenedor_has_Producto = "0";

@@ -46,6 +46,7 @@ protected:
     int cantidadVitrina;
     int cantidadAlmacen;
     QString stock_last;
+    QWidget *parent;
 
     //colaborador
 public:
@@ -94,6 +95,7 @@ public:
     void setCantidadAlmacen(int cant);
     int getCantidadVitrina();
     int getCantidadAlmacen();
+    void setUiParent(QWidget *parent);
 
     bool agregar();
     bool actualizar();

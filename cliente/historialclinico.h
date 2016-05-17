@@ -10,6 +10,7 @@ private:
     QString idCliente;
     QString doctor;
     QString fecha;
+    QString origen;
     medidasHistorial mCercaDerecha;
     medidasHistorial mCercaIzquierda;
     medidasHistorial mLejosDerecha;
@@ -23,6 +24,7 @@ public:
     QString getIdCliente();
     QString getDoctor();
     QString getFecha();
+    QString getOrigenMedicion();
     medidasHistorial& getMedidasCercaDerecha();
     medidasHistorial& getMedidasCercaIzquierda();
     medidasHistorial& getMedidasLejosDerecha();
@@ -32,10 +34,12 @@ public:
     void setIdCliente(QString);
     void setDoctor(QString);
     void setFecha(QString);
+    void setOrigenMedicion(QString);
     void setMedidasCercaDerecha(medidasHistorial);
     void setMedidasCercaIzquierda(medidasHistorial);
     void setMedidasLejosDerecha(medidasHistorial);
     void setMedidasLejosIzquierda(medidasHistorial);
+
     void setFlag(bool);
 
     bool agregar();

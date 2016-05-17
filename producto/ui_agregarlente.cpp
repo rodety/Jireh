@@ -279,6 +279,7 @@ void ui_agregarLente::on_pushButton_aceptar_clicked()
     pLenteContacto.setDiametro(pDiametro);
     pLenteContacto.setTiempoUso(pTiempoUso);
     pLenteContacto.setMaterial(pMaterial);
+    pLenteContacto.setUiParent(this);
     if(modo==0)//agrego
     {                
         if(pLenteContacto.agregar())

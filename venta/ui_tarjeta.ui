@@ -10,6 +10,11 @@
     <height>346</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Registro de tarjeta</string>
   </property>

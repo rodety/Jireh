@@ -2,11 +2,12 @@
 #define COMPRAS_H
 
 #include <QWidget>
-#include<QTableWidgetItem>
-#include<map>
+#include <QTableWidgetItem>
+#include <map>
 #include <compra/compra.h>
 #include <QSqlRelationalTableModel>
 #include <compra/object_proveedor.h>
+#include <share_include.h>
 using namespace std;
 
 namespace Ui {
@@ -60,6 +61,9 @@ private slots:
     void on_pushButton_imprimir_clicked();
     
     void on_pushButton_imprimir_23_clicked();
+
+
+    void on_pushButton_buscar_compras_clicked();
 
 private:
     Ui::compras *ui;    

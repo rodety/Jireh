@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>307</height>
+    <width>652</width>
+    <height>328</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -569,16 +574,27 @@
   <tabstop>doubleSpinBox_Final</tabstop>
   <tabstop>doubleSpinBox_Cilindro</tabstop>
   <tabstop>doubleSpinBox_Cilindro_final</tabstop>
+  <tabstop>lineEdit_precioCompra</tabstop>
+  <tabstop>lineEdit_precioVenta</tabstop>
+  <tabstop>lineEdit_precioDescuento</tabstop>
   <tabstop>comboBox_diametro</tabstop>
-  <tabstop>pushButton_xDiametro</tabstop>
   <tabstop>comboBox_calidad</tabstop>
-  <tabstop>pushButton_xCalidad</tabstop>
   <tabstop>comboBox_tipoLuna</tabstop>
-  <tabstop>pushButton_xTipoLuna</tabstop>
   <tabstop>comboBox_tratamiento</tabstop>
-  <tabstop>pushButton_xTratamiento</tabstop>
+  <tabstop>comboBox_laboratorio</tabstop>
+  <tabstop>comboBox_lista</tabstop>
+  <tabstop>comboBox_estado</tabstop>
+  <tabstop>lineEdit_observaciones</tabstop>
+  <tabstop>lineEdit_descripcion</tabstop>
   <tabstop>pushButton_aceptar</tabstop>
   <tabstop>pushButton_cancelar</tabstop>
+  <tabstop>pushButton_xDiametro</tabstop>
+  <tabstop>pushButton_xCalidad</tabstop>
+  <tabstop>pushButton_xTipoLuna</tabstop>
+  <tabstop>pushButton_xTratamiento</tabstop>
+  <tabstop>pushButton_xLaboratorio</tabstop>
+  <tabstop>pushButton_xLista_precio</tabstop>
+  <tabstop>pushButton_xEstado</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/Icons.qrc"/>

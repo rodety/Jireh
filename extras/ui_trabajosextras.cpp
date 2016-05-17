@@ -52,10 +52,11 @@ void ui_trabajosExtras::on_pushButton_agregar_clicked()
 {
     if(!verificarRestricciones())
         return;
+
     pTrabajosExtras.setDescripcion(ui->lineEdit_descripcion->text());
     pTrabajosExtras.setPrecio(ui->lineEdit_precio->text());
     pTrabajosExtras.setDescuento(ui->lineEdit_Descuento->text());
-    if(modo==0)//agrego
+    if(modo==false)//agrego
     {
         if(pTrabajosExtras.agregar())
         {

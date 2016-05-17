@@ -73,6 +73,8 @@ private:
     map<QString,QString> descripcion;
     map<QString,QString> marca;
     map<QString,QString> costo;
+    map<int,int> posComboboxEmpresa;
+    map<int,int> posComboboxTienda;
 
     ui_tienda_agregar* tienda_agregar;
     QModelIndex current_index;

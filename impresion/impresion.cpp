@@ -144,7 +144,7 @@ void impresion::setNombreColaborador(QString tmp)
 
 void impresion::setFirmaCliente(QString nombreCliente1)
 {
-    Ticket1.TextoMensaje("\n\n\n\n\n\n");
+    Ticket1.TextoMensaje("\n\n");
     Ticket1.LineasGuion(); // imprime una linea de guiones
     QString firma = "Firma: "; firma.append(nombreCliente1);
     Ticket1.TextoCentro(firma);

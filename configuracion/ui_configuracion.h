@@ -5,7 +5,7 @@
 #include <map>
 #include <vitrina/ui_agregar_empresa.h>
 #include <vitrina/ui_tienda_agregar.h>
-
+#include <configuracion/programa.h>
 class ui_agregar_empresa;
 using namespace std;
 namespace Ui {
@@ -25,6 +25,7 @@ public:
     QString get_currentIdTienda();
     void set_currentIdEmpresa(QString);
     void set_currentIdTienda(QString);    
+    void loadTableConfiguracion();
 public slots:
     void update_comboBox_Empresa();
     void update_comboBox_Tienda(QString idEmpresa);
@@ -56,6 +57,12 @@ private slots:
     void on_btnAgregar_Tienda_clicked();
 
     void on_btn_backup_clicked();
+    void on_pushButton_EditConfiguracion_clicked();
+
+    void on_tableView_configuracion_clicked(const QModelIndex &index);
+
+    bool actualizar_descuento();
+
 signals:
     void closeparent();
 
@@ -72,6 +79,8 @@ private:
     void controlbotones(bool a);
     ui_agregar_empresa* add_empresa;
     ui_tienda_agregar* tienda_agregar;
+    QModelIndex index;
+    int id;
 
 };
 

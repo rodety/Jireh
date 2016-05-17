@@ -2,8 +2,10 @@
 #define TRABAJOSEXTRAS_H
 
 #include <objetopersistente.h>
+#include "producto/producto.h"
+#include <configuracion/sesion.h>
 
-class trabajosExtras:public ObjetoPersistente
+class trabajosExtras:public producto
 {
 private:
     QString idTrabajosExtras;

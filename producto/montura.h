@@ -11,6 +11,7 @@ private:
     tamanio pTamanio;
     calidad pCalidad;
     genero pGenero;
+
 public:
     montura();
 
@@ -34,6 +35,7 @@ public:
     static QSqlQueryModel* mostrar();
     static QSqlQueryModel* mostrarcod();
     bool completar();
+
 };
 
 #endif // MONTURA_H

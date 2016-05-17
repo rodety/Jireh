@@ -136,14 +136,16 @@ private slots:
 
     void on_pushButton_imprimir_lc_clicked();
 
+
 public slots:
     void setComportamiento(int);
     void actualizarListaProductos();
     void recogerCantidad(QString,QString,int,double);
+    void cargar_producto(bool comportamiento);
 
 signals:
-    void sentProductoCompra(QString,QString,QString,int);//codigo,descripcion,precioCompra,cantidad
-    //codigo,descripcion,precioVenta,Descuento,cant,IdUbicacion,tipo de Producto,Stock del Producto,Precio Compra por lo del Kardex
+    void sentProductoCompra(QString,QString,QString,int);//id,codigo,descripcion,precioCompra,cantidad
+    //id,codigo,descripcion,precioVenta,Descuento,cant,IdUbicacion,tipo de Producto,Stock del Producto,Precio Compra por lo del Kardex
     void sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString);
 
 

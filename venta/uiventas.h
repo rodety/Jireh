@@ -44,6 +44,7 @@ public:
     void loadVenta(QString id_venta);
 public slots:
     void loadListaPagos();
+    void mostrarVentanaLunas();
 signals:
     void actualizarListaAgenda();
 
@@ -102,13 +103,25 @@ private slots:
 
     void on_tableView_Productos_clicked(const QModelIndex &index);
 
-    void on_doubleSpinBox_descuento_valueChanged(double arg1);
-
     void on_pushButton_buscar_clicked();
 
     void on_buscar_venta_returnPressed();
 
     void on_pushButton_Imprimir_clicked();
+
+    void on_pushButton_eliminarProducto_clicked();
+
+    void on_tableView_Productos_entered(const QModelIndex &index);
+
+
+
+    void on_lineEdit_precio_editingFinished();
+
+    void on_pushButton_Reimprimir_clicked();
+
+    void on_tableView_Productos_activated(const QModelIndex &index);
+
+    void on_comboBox_buscar_producto_activated(const QString &arg1);
 
 private:
     Ui::uiventas *ui;
@@ -164,6 +177,10 @@ private:
     cliente customer;
     bool entregado;
     void configurarPermisos();
+    map<int,int> posComboboxTienda;
+    map<int,int> posComboboxEmpresa;
+    bool ingresarMedida;
+    bool recuperarVenta;
 
 
 

@@ -22,6 +22,7 @@ public:
     void setLuna(luna* l);
     bool verificarRestricciones();
 
+
     
 signals:
     void guardado();
@@ -37,7 +38,8 @@ private slots:
 private:
     Ui::ui_agregarLuna *ui;
     bool modo;//0 agregar 1 actualizar
-    luna pLuna;    
+    luna pLuna;
+
 };
 
 #endif // UI_AGREGARLUNA_H

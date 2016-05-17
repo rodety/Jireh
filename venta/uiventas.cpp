@@ -18,6 +18,7 @@ uiventas::uiventas(QWidget *parent) :
     configTableVentas();
     configuracionReportes();
     configurarPermisos();
+    limpiarInterfazVenta();
 }
 
 uiventas::~uiventas()
@@ -58,6 +59,7 @@ void uiventas::configuracionesIniciaciales()
 
     //DESABILITANDO BOTON DE TARJETA
     ui->pushButton_anular->setEnabled(false);
+    ui->pushButton_Reimprimir->setEnabled(false);
     ui->lineEdit_total->setEnabled(false);
     ui->lineEdit_total_cancelado->setEnabled(false);
     ui->lineEdit_usuario->setEnabled(false);
@@ -71,6 +73,15 @@ void uiventas::configuracionesIniciaciales()
     //DESACTIVANDOP LOS LINE EDIT
     ui->lineEdit_efectivo->setEnabled(false);
     ui->lineEdit_tarjeta->setEnabled(false);
+
+    //DESACTIVANDO BOTONES
+    ui->pushButton_anular->hide();
+    ui->pushButton_Reimprimir->hide();
+    ui->pushButton_eliminarProducto->setEnabled(false);
+    ui->radioButton_cotizacion->hide();
+    //contro de ingreso de medidad una sola vez
+    ingresarMedida = true;
+    recuperarVenta = false;
 
 }
 void uiventas::on_pushButton_buscarCliente_clicked()
@@ -146,7 +157,7 @@ bool uiventas::ventaBoleta()
 
 void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioVenta,QString precioDescuento,int cant,QString pos,int tipo,int stock_producto,QString precioCompra)
 {
-    float subtotal_item = cant*(precioVenta.toDouble()-precioDescuento.toDouble());
+    float subtotal_item = cant*(precioVenta.toDouble());
     /*total_venta += subtotal_item;
     monto_igv = total_venta -(total_venta / ((igv/100)+1));
     ui->lineEdit_total->setText(QString::number(total_venta));
@@ -155,10 +166,10 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
 
 
 
-    QStandardItem* enabledItem = new QStandardItem();
-    QList<QStandardItem*> optionList;
-    optionList << new QStandardItem("Enabled") << new QStandardItem("Disabled");
-    enabledItem->appendRows(optionList);
+    //QStandardItem* enabledItem = new QStandardItem();
+    //QList<QStandardItem*> optionList;
+    //optionList << new QStandardItem("Enabled") << new QStandardItem("Disabled");
+    //enabledItem->appendRows(optionList);
     //seleccionados_model->setItem(rowCount - 1, 2, enabledItem);
 
     /*QStandardItem* statusItem = new QStandardItem(status);
@@ -167,7 +178,13 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     seleccionados_model->setItem(count_row,0,new QStandardItem(codigo));
     seleccionados_model->setItem(count_row,1,new QStandardItem(descripcion));
     seleccionados_model->setItem(count_row,2,new QStandardItem(precioVenta));
-    seleccionados_model->setItem(count_row,3,new QStandardItem(precioDescuento));
+    if(recuperarVenta){
+        seleccionados_model->setItem(count_row,3,new QStandardItem(precioDescuento));//DESCUENTO
+    }
+    else{
+        seleccionados_model->setItem(count_row,3,new QStandardItem("0"));//DESCUENTO
+    }
+
     seleccionados_model->setItem(count_row,4,new QStandardItem(QString::number(cant)));
     seleccionados_model->setItem(count_row,5,new QStandardItem(""));//entregado
     seleccionados_model->setItem(count_row,6,new QStandardItem(QString::number(subtotal_item)));
@@ -187,11 +204,11 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     seleccionados_model->setHeaderData(4,Qt::Horizontal,"Cantidad");
     seleccionados_model->setHeaderData(5,Qt::Horizontal,"Entregado");
     seleccionados_model->setHeaderData(6,Qt::Horizontal,"Sub Total");
-    ui->tableView_Productos->setRowHeight(count_row,150);
+    //ui->tableView_Productos->setRowHeight(count_row,150);
     count_row++;
     //OCULTANDO ALGUNAS COLUMNAS
     ui->tableView_Productos->setColumnWidth(0,0);//idProducto
-    ui->tableView_Productos->setColumnWidth(1,300);//Descripcion Resumida del Producto
+    ui->tableView_Productos->setColumnWidth(1,500);//Descripcion Resumida del Producto
     ui->tableView_Productos->setColumnWidth(7,0);//idUbicacicion o IdContenedor
     ui->tableView_Productos->setColumnWidth(8,0);//Tipo de Producto
     ui->tableView_Productos->setColumnWidth(9,0); //Stock Producto
@@ -199,6 +216,8 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     ui->tableView_Productos->setColumnWidth(11,0); //Fuente de Producto
     ui->tableView_Productos->setColumnWidth(12,0); //Copia del Descuento
     //ANCHANDO LAS FILAS
+    ui->tableView_Productos->setRowHeight(count_row,10);
+
 
 
     ui->lineEdit_efectivo->setEnabled(true);
@@ -467,7 +486,7 @@ void uiventas::on_radioButton_cotizacion_clicked()
 void uiventas::on_pushButton_guardar_clicked()
 {
     //Validaciones Basicas
-    if(ui->lineEdit_razonSocial->text().size() == 0)
+    if(ui->lineEdit_razonSocial->text().size() <= 3)
     {   QMessageBox msgBox;
         msgBox.setText("Inserte Razon Social");
         msgBox.exec();
@@ -668,7 +687,14 @@ void uiventas::on_pushButton_guardar_clicked()
             object_EntregaProducto entregado;
             entregado.mf_set_Cliente_idCliente(idCliente);
             entregado.mf_set_Colaborador_idColaborador(IdColaborador);
-            entregado.mf_set_Producto_idProducto(seleccionados_model->item(i,0)->text());
+            if(seleccionados_model->item(i,0)->text() == "1")
+            {
+                entregado.mf_set_Producto_idProducto(NULL);
+            }
+            else
+            {
+                entregado.mf_set_Producto_idProducto(seleccionados_model->item(i,0)->text());
+            }
             entregado.mf_set_Venta_idVenta(venta.mf_get_lastIdVenta());
             QString estadoEntrega = seleccionados_model->item(i,5)->text();
             if(estadoEntrega == "Si" || estadoEntrega == "SI" || estadoEntrega == "si" || estadoEntrega == "sI")
@@ -781,14 +807,18 @@ void uiventas::on_pushButton_guardar_clicked()
 
         /**
          *FUENTE 0 SELECCIONE PRODUCTO
-         *FUENTE 1 PRODUCTOS
-         *FUENTE 2 VITRINA
-         *FUENTE 3 ALMACEN
+         *FUENTE 1 VITRINAS (MONTURAS)
+         *FUENTE 2 PRODUCTOS GENERAL (LUNAS)
+         *FUENTE 3 PRODUCTOS GENERAL (LENTES DE CONTACTO)
+         *FUENTE 4 PRODUCTOS GENERAL (ACCESORIOS)
+         *FUENTE 5 PRODUCTOS GENERAL (TRABAJOS EXTRAS)
+         *FUENTE 6 PRODUCTOS GENERAL (OTROS)
          **/
 
 
         for(int i = 0; i<count_row;i++)
         {
+
             int tipo = seleccionados_model->item(i,8)->text().toInt();
             int fuente_producto = seleccionados_model->item(i,11)->text().toInt();
 
@@ -806,11 +836,15 @@ void uiventas::on_pushButton_guardar_clicked()
                 if(ui->radioButton_cotizacion->isChecked())
                     descripcion += "cotizacion: "+ui->label_numero_documento->text();
 
+                //AGREGANDO TIENDA A LA DESCRIPCION
+                descripcion+= "Tienda: "+ui->label_nombre_Tienda->text();
+
                 producto myProducto;
 
                 myProducto.setIdProducto(id);
                 myProducto.setStock(QString::number(stock_producto));
                 myProducto.setPrecioCompra(precioCompra);
+                //SI SE TRATA DE UNA LUNA (TIPO 1)SE DEBERA AUTO COMPRAR PARA QUE NO FALTE STOCK
                 if(tipo == 1)
                 {
 
@@ -823,7 +857,7 @@ void uiventas::on_pushButton_guardar_clicked()
                     }
 
 
-                    if(!myProducto.registrarKardex(cant,stock_producto,"Aumento de Stock por Compra",1))
+                    if(!myProducto.registrarKardex(cant,stock_producto,"Aumento de Stock por Compra automatica.",1))
                     {
                         QMessageBox msgBox;
                         msgBox.setText(QString("No se logro registrar kardex del producto con id: "+id));
@@ -847,9 +881,12 @@ void uiventas::on_pushButton_guardar_clicked()
                     msgBox.exec();
                     return;
                 }
+                //SI SE TRATA DE UN PRODUCTO QUE VIENE DE VITRINA (FUENTE 1)
 
-                if(fuente_producto == 2)
+                if(fuente_producto == 1)
                 {
+
+
                     object_Producto_has_Vitrina producto_vitrina;
                     QString idVitrina_Producto_old = seleccionados_model->item(i,7)->text();
                     producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto_old);
@@ -885,6 +922,8 @@ void uiventas::on_pushButton_guardar_clicked()
                     }
                 }
 
+                //ANULANDO ALMACEN
+                /*
                 if(fuente_producto == 3)
                 {
                     //DISMINUIMOS LA CANTIDAD DE ALMACEN EN PRODUCTOS
@@ -912,7 +951,7 @@ void uiventas::on_pushButton_guardar_clicked()
                         return;
                     }
 
-                }
+                }*/
 
             }
         }
@@ -1092,10 +1131,10 @@ void uiventas::configTableVentas()
 {
 
     seleccionados_model = new QStandardItemModel(this);
-    ComboBoxDelegate* delegate = new ComboBoxDelegate;
-    delegate1 = new QComboBoxItemDelegate(this);
+    //ComboBoxDelegate* delegate = new ComboBoxDelegate;
+    //delegate1 = new QComboBoxItemDelegate(this);
     ui->tableView_Productos->setModel(seleccionados_model);
-    ui->tableView_Productos->setItemDelegate(delegate1);
+    //ui->tableView_Productos->setItemDelegate(delegate1);
     //ui->tableView_Productos->setItemDelegateForColumn(5, delegate);
 }
 
@@ -1184,7 +1223,7 @@ void uiventas::imprimir(bool pendiente)//pendiente de pago
         myimpresion.setSaldo(ui->lineEdit_restante->text());
     }
     myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
-    myimpresion.setNombreColaborador(ui->lineEdit_usuario->text());
+    myimpresion.setNombreColaborador(QString::number(Sesion::getIdColaborador()));
     if(EntregadoProducto()){
         myimpresion.setFirmaCliente(ui->lineEdit_razonSocial->text());
     }
@@ -1197,30 +1236,19 @@ void uiventas::imprimir(bool pendiente)//pendiente de pago
 
 void uiventas::on_tableView_Productos_doubleClicked(const QModelIndex &index)
 {
-   if(index.column() != 5 && comportamiento)
-    {
-        double total = ui->tableView_Productos->currentIndex().data().toDouble();
-        total_venta -= total;
-        seleccionados_model->removeRow(index.row());
-        ui->tableView_Productos->hideRow(index.row());
+    indiceProducto = index;
 
-        if(seleccionados_model->rowCount() == 0)
-        {
-            //Reseteando la Venta
-            total_venta = 0;
-            ui->lineEdit_efectivo->setEnabled(false);
-            ui->lineEdit_tarjeta->setEnabled(false);
-        }
-        count_row--;
-        /*
-        monto_igv = total_venta -(total_venta / ((igv/100)+1));
-        ui->lineEdit_total->setText(QString::number(total_venta));
-        //Recalculando el precio de venta
-        double total_adelanto = ui->lineEdit_tarjeta->text().toDouble() +  ui->lineEdit_efectivo->text().toDouble();
-        calculaprecio(total_adelanto);*/
+    if(index.column() != 5){
 
-        calcularSubtotal();
-    }
+        ui->lineEdit_efectivo->setCursor(ui->tableView_Productos->cursor());
+
+
+        QMessageBox msgBox;
+        msgBox.setText("No se pude editar estos datos");
+        msgBox.exec();
+
+
+  }
 
 }
 
@@ -1244,8 +1272,14 @@ void uiventas::configuracionReportes()
     //LLENANDO LOS COMBOBOX
 
 
-    ui->comboBox_Empresa->ActualizarItemsReporte(empresa::mostrar());
+    QSqlQueryModel* model = empresa::mostrar();
+    ui->comboBox_Empresa->ActualizarItemsReporte(model);
     ui->comboBox_Empresa->removeItem(0);
+    for(int i=0;i<model->rowCount();i++)
+    {
+        posComboboxEmpresa[model->record(i).value(0).toInt()] = i;
+    }
+
 
 
     ui->comboBox_Colaborador->ActualizarItemsReporte(object_Colaborador::mf_show());
@@ -1274,7 +1308,7 @@ void uiventas::configuracionReportes()
     flag_reporte = true;
 
     //Ubicacion
-    ui->comboBox_Empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
+    ui->comboBox_Empresa->setCurrentIndex(posComboboxEmpresa[Sesion::getUbicacion().first]);
     //Ubicando Colaborador
     if(Sesion::getIdTypeColaborador() == 2)
         ui->comboBox_Colaborador->setCurrentIndex(Sesion::getIdColaborador()-1);
@@ -1329,11 +1363,18 @@ void uiventas::calcularReporte(int tipo)
 
 void uiventas::on_comboBox_Empresa_currentIndexChanged(const QString &arg1)
 {
+
     QString idEmpresa = QString::number(ui->comboBox_Empresa->getId(arg1));
-    ui->comboBox_Tienda->ActualizarItemsReporte(c_tienda::mostrar(idEmpresa));
+    QSqlQueryModel* model = c_tienda::mostrar(idEmpresa);
+    ui->comboBox_Tienda->ActualizarItemsReporte(model);
     ui->comboBox_Tienda->removeItem(0);
+    for(int i=0;i<model->rowCount();i++)
+    {
+        posComboboxTienda[model->record(i).value(0).toInt()] = i;
+    }
+
     //Ubicacion
-    ui->comboBox_Tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
+    ui->comboBox_Tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
 }
 
 
@@ -1407,12 +1448,18 @@ void uiventas::limpiarInterfazVenta()
     monto_igv = 0;
     ui->label_tarjeta->setText("0");
     ui->label_efectivo->setText("0");
+    ui->lineEdit_precio->setText("0");
     configuracionesIniciaciales();
 
     habilitar_nuevo();
     flag_reporte = true;
-    ui->doubleSpinBox_descuento->setValue(0);
-    ui->doubleSpinBox_descuento->setEnabled(false);
+
+    ui->lineEdit_precio->setEnabled(false);
+    ui->pushButton_eliminarProducto->setEnabled(false);
+
+    ingresarMedida = true;
+    recuperarVenta = false;
+
 
 
 }
@@ -1429,30 +1476,39 @@ void uiventas::habilitar_editar()
     ui->radioButton_Factura->setEnabled(false);
 
     ui->pushButton_anular->setEnabled(true);
+    ui->pushButton_Reimprimir->setEnabled(true);
     ui->dateTimeEdit_entrega->setEnabled(true);
+    ui->pushButton_anular->show();
     comportamiento = false;
 
 }
 
 void uiventas::habilitar_nuevo()
 {
-    ui->pushButton_buscarCliente->setEnabled(true);
-    ui->comboBox_buscar_producto->setEnabled(true);    
-    ui->lineEdit_codProducto->setEnabled(true);
-    ui->lineEdit_efectivo->setEnabled(true);
-    ui->lineEdit_tarjeta->setEnabled(true);
-    ui->pushButton_guardar->setEnabled(true);
-    ui->tableView_Productos->setEnabled(true);
-    ui->dateTimeEdit_entrega->setEnabled(true);
 
-    //LA FECHA DE VENTA NO PUEDE EDITARSE DADO QUE LA BOLETA SE PUDO IMPRIMIR
-    ui->dateTimeEdit_fecha_preventa->setEnabled(false);
-    ui->pushButton_anular->setEnabled(false);
-    ui->radioButton_Boleta->setEnabled(true);
-    ui->radioButton_cotizacion->setEnabled(true);
-    ui->radioButton_Factura->setEnabled(true);
-    comportamiento = true;
-    flag_reporte = true;
+        ui->pushButton_buscarCliente->setEnabled(true);
+        ui->comboBox_buscar_producto->setEnabled(true);
+        ui->lineEdit_codProducto->setEnabled(true);
+        ui->lineEdit_efectivo->setEnabled(true);
+        ui->lineEdit_tarjeta->setEnabled(true);
+        ui->pushButton_guardar->setEnabled(true);
+        ui->tableView_Productos->setEnabled(true);
+        ui->dateTimeEdit_entrega->setEnabled(true);
+
+        //LA FECHA DE VENTA NO PUEDE EDITARSE DADO QUE LA BOLETA SE PUDO IMPRIMIR
+        ui->dateTimeEdit_fecha_preventa->setEnabled(false);
+        ui->pushButton_anular->setEnabled(false);
+        ui->pushButton_Reimprimir->setEnabled(false);
+        ui->radioButton_Boleta->setEnabled(true);
+        ui->radioButton_cotizacion->setEnabled(true);
+        ui->radioButton_Factura->setEnabled(true);
+        comportamiento = true;
+        flag_reporte = true;
+
+
+
+
+
 }
 
 void uiventas::on_dateTimeEdit_Desde_editingFinished()
@@ -1507,10 +1563,23 @@ void uiventas::on_pushButton_anular_clicked()
 }
 void uiventas::on_comboBox_buscar_producto_activated(int index)
 {
+
+
+    /* FUENTE 1 VITRINA
+       FUENTE 2,3,4,5,6 BASE PRODUCTOS
+       */
+
+    if(ui->lineEdit_razonSocial->text().size() < 3){
+        ui->pushButton_buscarCliente->click();
+        return;
+    }
+
+
+    ui_tienda* form = new ui_tienda;
     fuente = index;
     if(index == 1)
     {
-        ui_tienda* form = new ui_tienda;
+
         form->setWindowTitle("Seleccione Monturas o Gafas");
         form->setComportamiento(1);
      //   form->configurarVenta();
@@ -1520,14 +1589,32 @@ void uiventas::on_comboBox_buscar_producto_activated(int index)
         connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
         form->show();
     }
-    if(index == 2 || index == 3 || index == 4 || index == 5 || index == 6)
+    if(index == 2)
+    {
+        cliente cliente_selec;
+        cliente_selec.setIdCliente(customer.getIdCliente());
+        if(ingresarMedida){
+            ui_historial_clinico * historial = new ui_historial_clinico;
+            historial->setWindowTitle("Nuevo Historial");
+            historial->setCliente(&cliente_selec);
+            historial->show();
+            connect(historial,SIGNAL(guarde()),this,SLOT(mostrarVentanaLunas()));
+
+        }
+        else{
+            mostrarVentanaLunas();
+        }
+
+    }
+
+
+
+
+    if(index == 3 || index == 4 || index == 5 || index == 6)
     {
         ui_producto* form=new ui_producto;
         form->setComportamiento(2);
-        if(index == 2){
-            form->setWindowTitle("Seleccione Lunas");
-            form->configurarVenta(1);
-        }
+
         if(index == 3){
             form->setWindowTitle("Seleccione Lentes de Contacto");
             form->configurarVenta(3);
@@ -1619,16 +1706,20 @@ void uiventas::loadVenta(QString idVenta)
     limpiarInterfazVenta();
     object_Venta venta;
     venta.mf_load(idVenta);
+    recuperarVenta = true;
 
     //COMPLETANDO DATOS DE LA TABLA VENTAS
 
-    ui->dateTimeEdit_fecha_preventa->setMinimumDateTime(QDateTime::currentDateTime());
-    ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::currentDateTime());
+
 
     idVentaActual = venta.mf_get_idVenta();    
     ui->dateTimeEdit_entrega->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->dateTimeEdit_entrega->setDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->lineEdit_restante->setText(QString::number(venta.mf_get_montoTotal().toDouble() - venta.mf_get_montoAdelanto().toDouble()));
+
+
+    ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
+
 
     //TIPO DE DOCUMENTO
     if(venta.mf_get_tipoDocumento() == "1")
@@ -1708,7 +1799,7 @@ void uiventas::loadVenta(QString idVenta)
     ui->label_tarjeta->setText(QString::number(acumulado_tarjeta));
 
     //Se desactiva spin box descuento despues de realizada la venta
-    ui->doubleSpinBox_descuento->hide();
+    ui->lineEdit_precio->setEnabled(false);
     ui->label_11->hide();
 
     //GRABANDO ADELANTOS
@@ -1717,6 +1808,9 @@ void uiventas::loadVenta(QString idVenta)
     calculaprecio(efectivo_pasado + tarjeta_pasado);
     //ACTIVANDO BOTONES
     ui->pushButton_anular->setEnabled(true);
+    ui->pushButton_Reimprimir->setEnabled(true);
+    ui->pushButton_Reimprimir->show();
+
     comportamiento = false;    
     habilitar_editar();
     //DESABILITANDO INTERFACE SI TODO ESTA CANCELADO
@@ -1760,6 +1854,7 @@ void uiventas::loadListaPagos()
 
         totalefectivo+= ui->tableView_pagos->model()->index(i,4).data().toFloat();
         totaltarjeta+= ui->tableView_pagos->model()->index(i,5).data().toFloat();
+
     }
     ui->lineEdit_pagos_efectivo->setText(QString::number(totalefectivo));
     ui->lineEdit_pagos_tarjeta->setText(QString::number(totaltarjeta));
@@ -1810,31 +1905,24 @@ void uiventas::anularVenta()
 
 void uiventas::on_tableView_Productos_clicked(const QModelIndex &index)
 {
+    ui->pushButton_eliminarProducto->setEnabled(true);
 
     indiceProducto = index;
     double descuento = ui->tableView_Productos->model()->index(index.row(),12).data().toDouble();
-    double total = ui->tableView_Productos->model()->index(index.row(),2).data().toDouble();
-    if(total > 0 && descuento > 0)
+    double total = ui->tableView_Productos->model()->index(index.row(),6).data().toDouble();
+    if(total > 0 && descuento >= 0)
     {
-        double maximo = (descuento/total)*100;
-        ui->doubleSpinBox_descuento->setMaximum(maximo);
-        ui->doubleSpinBox_descuento->setEnabled(true);
+
+        ui->lineEdit_precio->setText(QString::number(total));
+        ui->lineEdit_precio->setEnabled(true);
     }
     else
     {
-        ui->doubleSpinBox_descuento->setEnabled(false);
+        ui->lineEdit_precio->setEnabled(false);
     }
 }
 
-void uiventas::on_doubleSpinBox_descuento_valueChanged(double arg1)
-{
-    double pVenta = ui->tableView_Productos->model()->index(indiceProducto.row(),2).data().toDouble();
-    int cantidadProducto = ui->tableView_Productos->model()->index(indiceProducto.row(),4).data().toInt();
-    double descuento = pVenta * arg1/100;
-    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(descuento)));
-    seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number((pVenta-descuento)*cantidadProducto)));
-    calcularSubtotal();
-}
+
 
 void uiventas::calcularSubtotal()
 {
@@ -1916,6 +2004,8 @@ void uiventas::configurarPermisos()
     else{
         ui->pushButton_anular->show();
         ui->pushButton_anular->setEnabled(true);
+        ui->pushButton_Reimprimir->show();
+        ui->pushButton_Reimprimir->setEnabled(true);
     }
 
 }
@@ -1994,5 +2084,143 @@ void uiventas::on_pushButton_Imprimir_clicked()
         pvf.deleteLater();// set attrib
         pvf.exec();  // run like modal dialog
     }
+
+}
+
+void uiventas::on_pushButton_eliminarProducto_clicked()
+{
+    QModelIndex index = indiceProducto;
+    if(index.column() != 5 && comportamiento)
+     {
+         double total = ui->tableView_Productos->currentIndex().data().toDouble();
+         total_venta -= total;
+         seleccionados_model->removeRow(index.row());
+         ui->tableView_Productos->hideRow(index.row());
+
+         if(seleccionados_model->rowCount() == 0)
+         {
+             //Reseteando la Venta
+             total_venta = 0;
+             ui->lineEdit_efectivo->setEnabled(false);
+             ui->lineEdit_tarjeta->setEnabled(false);
+         }
+         count_row--;
+         /*
+         monto_igv = total_venta -(total_venta / ((igv/100)+1));
+         ui->lineEdit_total->setText(QString::number(total_venta));
+         //Recalculando el precio de venta
+         double total_adelanto = ui->lineEdit_tarjeta->text().toDouble() +  ui->lineEdit_efectivo->text().toDouble();
+         calculaprecio(total_adelanto);*/
+
+         calcularSubtotal();
+     }
+
+}
+
+void uiventas::on_tableView_Productos_entered(const QModelIndex &index)
+{
+
+
+}
+
+
+void uiventas::on_lineEdit_precio_editingFinished()
+{
+    double pVenta = ui->tableView_Productos->model()->index(indiceProducto.row(),2).data().toDouble();
+    int cantidadProducto = ui->tableView_Productos->model()->index(indiceProducto.row(),4).data().toInt();
+    double descuento = ui->tableView_Productos->model()->index(indiceProducto.row(),12).data().toDouble();
+    double maxDescuento = cantidadProducto*(pVenta-descuento);
+    double precio_descuento = ui->lineEdit_precio->text().toDouble();
+    double total_descuento = (pVenta-precio_descuento)/cantidadProducto;
+            if( precio_descuento < maxDescuento)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(QString("El minimo precio es de: "+QString::number(maxDescuento)));
+        msgBox.exec();
+        ui->lineEdit_precio->setText(QString::number(maxDescuento));
+        ui->lineEdit_precio->setFocus();
+    }
+    else{
+                //SI EL PRECIO ES SUPERIOR AL PRECIO DE VENTA ENTONCES PONEMOS EL DESCUENTO EN CERO Y REEMPLAZAMOS LOS PRECIOS
+                if(total_descuento <0)
+                {
+                    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem("0"));
+                    seleccionados_model->setItem(indiceProducto.row(),2,new QStandardItem(QString::number(precio_descuento)));
+                }
+                else{
+                    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(total_descuento)));
+                    seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number(precio_descuento)));
+                }
+
+
+
+
+        calcularSubtotal();
+    }
+
+}
+
+void uiventas::on_pushButton_Reimprimir_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Reimpresion de Comprobante.");
+    msgBox.setInformativeText("Desea volver a imprimir el comprobante de pago?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+    int ret = msgBox.exec();
+
+    switch (ret) {
+      case QMessageBox::Yes:
+          // Yes was clicked
+            imprimir(validarCancelado());
+          break;
+      case QMessageBox::No:
+          // Don't Save was clicked
+          break;
+      default:
+          // should never be reached
+          break;
+    }
+
+    limpiarInterfazVenta();
+    ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());
+}
+
+void uiventas::on_tableView_Productos_activated(const QModelIndex &index)
+{
+    indiceProducto = index;
+
+    if(index.column() != 5){
+
+        ui->lineEdit_efectivo->setCursor(ui->tableView_Productos->cursor());
+
+
+
+        QMessageBox msgBox;
+        msgBox.setText("No se pude editar estos datos");
+        msgBox.exec();
+
+
+  }
+
+
+}
+
+void uiventas::on_comboBox_buscar_producto_activated(const QString &arg1)
+{
+
+
+}
+
+void uiventas::mostrarVentanaLunas()
+{
+    ui_producto* form=new ui_producto;
+    form->setWindowTitle("Seleccione Lunas");
+    form->configurarVenta(1);
+    form->setComportamiento(2);
+    form->show();
+    connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
+    connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
+    ingresarMedida = false;
 
 }

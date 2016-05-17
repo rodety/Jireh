@@ -577,3 +577,9 @@ void compras::on_pushButton_imprimir_23_clicked()
      }
 
  }
+
+
+void compras::on_pushButton_buscar_compras_clicked()
+{
+
+}

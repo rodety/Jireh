@@ -108,10 +108,11 @@ bool historialClinico::agregar()
 
     if(mCercaDerecha.agregar()&&mCercaIzquierda.agregar()&&mLejosDerecha.agregar()&&mLejosIzquierda.agregar())
     {
-        query.prepare("INSERT INTO HistorialClinico(idCliente,doctor,fecha) VALUES (?,?,?);");
+        query.prepare("INSERT INTO HistorialClinico(idCliente,doctor,fecha,origen) VALUES (?,?,?,?);");
         query.bindValue(0,idCliente);
         query.bindValue(1,doctor);
         query.bindValue(2,fecha);
+        query.bindValue(3,origen);
         if(query.exec())
         {
             query.clear();
@@ -177,10 +178,11 @@ bool historialClinico::actualizar()
         query.clear();
         if(mCercaDerecha.actualizar()&&mCercaIzquierda.actualizar()&&mLejosDerecha.actualizar()&&mLejosIzquierda.actualizar())
         {
-            query.prepare("UPDATE HistorialClinico SET doctor=?,fecha=? where idHistorialClinico=?");
+            query.prepare("UPDATE HistorialClinico SET doctor=?,fecha=?,origen=? where idHistorialClinico=?");
             query.bindValue(0,doctor);
-            query.bindValue(1,fecha);
-            query.bindValue(2,idHistorialClinico);
+            query.bindValue(1,fecha);            
+            query.bindValue(2,origen);
+            query.bindValue(3,idHistorialClinico);
             if(query.exec())
                 return true;
             else
@@ -191,9 +193,11 @@ bool historialClinico::actualizar()
     {
         if(mCercaDerecha.actualizar()&&mCercaIzquierda.actualizar()&&mLejosDerecha.actualizar()&&mLejosIzquierda.actualizar())
         {
-            query.prepare("UPDATE HistorialClinico SET doctor=? where idHistorialClinico=?");
-            query.bindValue(0,doctor);
-            query.bindValue(1,idHistorialClinico);
+            query.prepare("UPDATE HistorialClinico SET doctor=?,origen=? where idHistorialClinico=?");
+            query.bindValue(0,doctor);            
+            query.bindValue(1,origen);
+            query.bindValue(2,idHistorialClinico);
+
             if(query.exec())
                 return true;
             else
@@ -247,6 +251,7 @@ bool historialClinico::buscar()
         {
             query.first();
             idHistorialClinico=query.value(0).toString();
+            origen = query.value(4).toString();
             query.clear();
             query.prepare("select idMedidaHistorial from HistorialClinico_has_MedidaHistorial where idHistorialClinico=? and distancia=? and ojo=?");
             query.bindValue(0,idHistorialClinico);
@@ -289,4 +294,14 @@ bool historialClinico::buscar()
     else
         return false;
     return false;
+}
+
+QString historialClinico::getOrigenMedicion()
+{
+    return origen;
+}
+
+void historialClinico::setOrigenMedicion(QString origen)
+{
+    this->origen = origen;
 }

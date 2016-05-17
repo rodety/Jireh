@@ -10,14 +10,24 @@
     <height>443</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
     <widget class="QTabWidget" name="tabWidget">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_vitrina">
       <attribute name="title">
@@ -27,12 +37,25 @@
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="1" column="0">
-          <widget class="QTableWidget" name="grilla"/>
+          <widget class="QTableWidget" name="grilla">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout">
            <item row="0" column="6">
             <spacer name="horizontalSpacer">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -46,6 +69,11 @@
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Estado</string>
              </property>
@@ -53,6 +81,11 @@
            </item>
            <item row="1" column="1">
             <widget class="QComboBox" name="comboBox_tienda">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <item>
               <property name="text">
                <string/>
@@ -62,13 +95,24 @@
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="lblEmpresa">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Empresa: </string>
              </property>
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QLineEdit" name="lineEdit_estado"/>
+            <widget class="QLineEdit" name="lineEdit_estado">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="0" column="4">
             <widget class="QPushButton" name="btnDeshabilitar_empresa">
@@ -77,6 +121,11 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>
@@ -92,6 +141,11 @@
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="lblVitrina">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Vitrina: </string>
              </property>
@@ -99,6 +153,11 @@
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="lblTienda">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Tienda: </string>
              </property>
@@ -106,6 +165,11 @@
            </item>
            <item row="2" column="1">
             <widget class="QComboBox" name="comboBox_vitrina">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <item>
               <property name="text">
                <string/>
@@ -126,6 +190,11 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -140,6 +209,11 @@
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_cod">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Cod. Reponer</string>
              </property>
@@ -152,6 +226,11 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>
@@ -173,6 +252,11 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -193,6 +277,11 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -207,6 +296,11 @@
            </item>
            <item row="1" column="7">
             <widget class="QPushButton" name="pushButton_quitar">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Quitar</string>
              </property>
@@ -226,6 +320,11 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>
@@ -247,6 +346,11 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -261,6 +365,11 @@
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="lblNivel">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Nivel:</string>
              </property>
@@ -273,6 +382,11 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>
@@ -288,6 +402,11 @@
            </item>
            <item row="3" column="1">
             <widget class="QComboBox" name="comboBox_niveles">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <item>
               <property name="text">
                <string/>
@@ -297,6 +416,11 @@
            </item>
            <item row="2" column="7">
             <widget class="QPushButton" name="pushButton_traspaso">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>A vitrina</string>
              </property>
@@ -310,10 +434,21 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_empresa"/>
+            <widget class="QComboBox" name="comboBox_empresa">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="3" column="7">
             <widget class="QPushButton" name="button_traspaso_almacen">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>A almacen</string>
              </property>
@@ -327,7 +462,13 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_cod_reponer"/>
+            <widget class="QLineEdit" name="lineEdit_cod_reponer">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
            <item row="0" column="2">
             <widget class="QPushButton" name="btnAgregar_empresa">
@@ -336,6 +477,11 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>
@@ -351,6 +497,11 @@
            </item>
            <item row="4" column="2">
             <widget class="QPushButton" name="pushButton_reponer">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -365,6 +516,11 @@
            </item>
            <item row="4" column="7">
             <widget class="QPushButton" name="pushButton_etiqueta">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Etiquetar</string>
              </property>
@@ -379,6 +535,11 @@
            </item>
            <item row="0" column="7">
             <widget class="QPushButton" name="pushButton_aceptar_traspaso">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Aceptar Traslado</string>
              </property>
@@ -393,6 +554,11 @@
            </item>
            <item row="5" column="7">
             <widget class="QPushButton" name="btnImprimir">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Imprimir</string>
              </property>
@@ -572,8 +738,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>42</width>
-            <height>39</height>
+            <width>389</width>
+            <height>340</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_7">

@@ -90,7 +90,7 @@ bool ui_agregarMontura::verificarRestricciones()
         query.exec();
         if(query.next())
         {
-            box.setText("El Codigo ya existe");
+            box.setText("El Codigo"+query.value(0).toString()+" ya existe");
             box.exec();
 
             ui->lineEdit_codigo->setFocus();
@@ -228,6 +228,7 @@ void ui_agregarMontura::on_pushButton_agregar_clicked()
     pMontura.setTamanio(pTamanio);
     pMontura.setCalidad(pCalidad);
     pMontura.setGenero(pGenero);
+    pMontura.setUiParent(this);
     if(modo==0)//agrego
     {
         /*pEstado.setNombre("activo");pEstado.completar();

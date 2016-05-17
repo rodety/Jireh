@@ -37,6 +37,7 @@ public:
 
 
 
+
     void setDiametro(diametro tmp);
     void setCalidad(calidadluna tmp);
     void setTipoLuna(tipoLuna tmp);

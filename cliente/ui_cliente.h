@@ -44,6 +44,8 @@ private slots:
 
     void on_pushButton_imprimir_lc_clicked();
 
+    void on_tableView_Historia_clicked(const QModelIndex &index);
+
 public slots:
     void setComportamiento(int a);
 signals:

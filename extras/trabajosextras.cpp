@@ -41,34 +41,49 @@ void trabajosExtras::setDescuento(QString tmp)
 
 bool trabajosExtras::agregar()
 {
+    Sesion* s=Sesion::getSesion();
     QSqlQuery query;
-    query.prepare("INSERT INTO TrabajosExtras(descripcion,precio,descuento) VALUES(?,?,?)");
+    query.prepare("INSERT INTO Producto(descripcion,precioCompra,precioVenta,precioDescuento,stock,observaciones,Estado_idEstado,idColaborador,tipo) VALUES(?,?,?,?,?,?,?,?,?)");
     query.bindValue(0,descripcion);
-    query.bindValue(1,precio);
-    query.bindValue(2,descuento);
+    query.bindValue(1,"0");
+    query.bindValue(2,precio);
+    query.bindValue(3,descuento);
+    query.bindValue(4,"1");
+    query.bindValue(5,"a");
+    query.bindValue(6,"1");
+    query.bindValue(7,s->getIdColaborador());
+    query.bindValue(8,"7");
+
     if(query.exec())
-        return true;
+    {
+          return true;
+    }
     else
-        return false;
+          return false;
+
 }
 bool trabajosExtras::actualizar()
 {
+    Sesion* s=Sesion::getSesion();
     QSqlQuery query;
-    query.prepare("UPDATE TrabajosExtras SET descripcion=?,precio=?,descuento=? WHERE idTrabajosExtras=?");
+    query.prepare("UPDATE Producto SET descripcion=?,precioVenta=?,precioDescuento=?,idColaborador=?  WHERE idProducto=?");
     query.bindValue(0,descripcion);
     query.bindValue(1,precio);
     query.bindValue(2,descuento);
-    query.bindValue(3,idTrabajosExtras);
+    query.bindValue(3,s->getIdColaborador());
+    query.bindValue(4,idProducto);
     if(query.exec())
+    {
         return true;
+    }
     else
         return false;
 }
 bool trabajosExtras::eliminar()
 {
     QSqlQuery query;
-    query.prepare("DELETE FROM TrabajosExtras WHERE idTrabajosExtras=?");
-    query.bindValue(0,idTrabajosExtras);
+    query.prepare("DELETE FROM Producto WHERE idProducto=?");
+    query.bindValue(0,idProducto);
     if(query.exec())
         return true;
     else
@@ -78,26 +93,11 @@ bool trabajosExtras::eliminar()
 QSqlQueryModel* trabajosExtras::mostrar()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTrabajosExtras as 'Codigo',descripcion as 'Descripcion',precio as 'Precio', descuento as 'Descuento' FROM TrabajosExtras");
+    //model->setQuery("SELECT idTrabajosExtras as 'Codigo',descripcion as 'Descripcion',precio as 'Precio', descuento as 'Descuento' FROM TrabajosExtras");
+    model->setQuery("SELECT idProducto as 'Codigo',descripcion as 'Descripcion',precioVenta as 'Precio',precioDescuento as 'Descuento' FROM Producto WHERE tipo = 7 ORDER BY idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud()));
     return model;
 }
 bool trabajosExtras::completar()
 {
-    QSqlQuery query;
-    query.prepare("SELECT idTrabajosExtras FROM TrabajosExtras WHERE descripcion=? AND precio=?");
-    query.bindValue(0,descripcion);
-    query.bindValue(1,precio);
-    if(query.exec())
-    {
-        if(query.size()!=0)
-        {
-            query.first();
-            idTrabajosExtras=query.value(0).toString();
-            return true;
-        }
-        else
-            return false;
-    }
-    else
-        return false;
+
 }

@@ -25,6 +25,13 @@ void ui_historial_clinico::setHistorial(historialClinico * tmp)
 {
     historial_act=*tmp;
     historial_act.setFlag(false);
+    if(historial_act.getOrigenMedicion() =="1")
+        ui->radioButton_pago->setChecked(true);
+    if(historial_act.getOrigenMedicion() =="2")
+        ui->radioButton_externa->setChecked(true);
+    if(historial_act.getOrigenMedicion() =="3")
+        ui->radioButton_cortesia->setChecked(true);
+
     ui->lineEdit_ecd->setText(historial_act.getMedidasCercaDerecha().getEsferico());
     ui->lineEdit_ccd->setText(historial_act.getMedidasCercaDerecha().getCilindrico());
     ui->lineEdit_ejcd->setText(historial_act.getMedidasCercaDerecha().getEje());
@@ -305,10 +312,24 @@ void ui_historial_clinico::on_pushButton_Aceptar_2_clicked()
 {
     historial_act.setIdCliente(cliente_act.getIdCliente());
     historial_act.setDoctor(ui->lineEdit_doctor->text());
+
     QString year;year=year.setNum(ui->dateEdit_fecha->date().year());
     QString month;month=month.setNum(ui->dateEdit_fecha->date().month());
     QString day;day=day.setNum(ui->dateEdit_fecha->date().day());
     QString fecha;fecha.append(year);fecha.append("-");fecha.append(month);fecha.append("-");fecha.append(day);
+
+    //ORIGEN DE MEDICION 1 PAGO, 2 EXTERNA, 3 CORTESIA
+
+    if(ui->radioButton_pago->isChecked()){
+        historial_act.setOrigenMedicion(QString::number(1));
+    }
+    if(ui->radioButton_cortesia->isChecked()){
+        historial_act.setOrigenMedicion(QString::number(3));
+    }
+    if(ui->radioButton_externa->isChecked()){
+        historial_act.setOrigenMedicion(QString::number(2));
+    }
+
 
     if(!verificaRestriccionesHistorial())
         return;

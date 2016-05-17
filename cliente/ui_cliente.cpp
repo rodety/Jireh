@@ -109,6 +109,16 @@ void ui_cliente::medidas_historial(const QModelIndex &model)
         historial.setIdCliente(clt_his.getIdCliente());
         if(historial.buscar())
         {
+            qDebug()<<"origen medicion "<<historial.getOrigenMedicion()<<endl;
+            if(historial.getOrigenMedicion() == "0")
+                ui->label_origen_medicion->setText("No definido");
+            if(historial.getOrigenMedicion() == "1")
+                ui->label_origen_medicion->setText("Pago");
+            if(historial.getOrigenMedicion() == "2")
+                ui->label_origen_medicion->setText("Externa");
+            if(historial.getOrigenMedicion() == "3")
+                ui->label_origen_medicion->setText("Cortesia");
+
             ui->lineEdit_ecd->setText(historial.getMedidasCercaDerecha().getEsferico());
             ui->lineEdit_eci->setText(historial.getMedidasCercaIzquierda().getEsferico());
             ui->lineEdit_eld->setText(historial.getMedidasLejosDerecha().getEsferico());
@@ -610,5 +620,10 @@ void ui_cliente::on_pushButton_imprimir_lc_clicked()
          pvf.exec();  // run like modal dialog
      }
     delete report;*/
+
+}
+
+void ui_cliente::on_tableView_Historia_clicked(const QModelIndex &index)
+{
 
 }

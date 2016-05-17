@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <zint.h>
-#include <zlib.h>
+//#include <zlib.h>
 #include <QSqlQuery>
 #include <QDebug>
 

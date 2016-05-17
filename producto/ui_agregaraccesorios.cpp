@@ -178,6 +178,7 @@ void ui_agregaraccesorios::on_pushButton_agregar_clicked()
     tuaccesorio.setTamanio(pTamanio);
     tuaccesorio.setCalidad(pCalidad);
     tuaccesorio.setGenero(pGenero);
+    tuaccesorio.setUiParent(this);
 
     if(modo==0)
     {

@@ -53,5 +53,6 @@ using namespace std;
 #include "share_typedef.h"
 #include "object_general.h"
 #include "producto/object_Producto.h"
+#include "configuracion/programa.h"
 
 #endif // SHARE_INCLUDE_H

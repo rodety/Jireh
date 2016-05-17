@@ -34,6 +34,7 @@ public:
 private:
     Ui::agenda_ui *ui;
     map<QString,QString> Tiendas;
+    map<int,int> posComboboxTienda;
     QDate fecha;
     int tipoColaborador;
 

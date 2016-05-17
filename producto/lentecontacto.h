@@ -16,6 +16,7 @@ private:
     diametro pDiametro;
     tiempoUso pTiempoUso;
     material pMaterial;
+
 public:
     lenteContacto();
 
@@ -48,6 +49,7 @@ public:
     static QSqlQueryModel* mostrar();
     static QSqlQueryModel* mostrarcod();
     bool completar();
+
 };
 
 #endif // LENTECONTACTO_H

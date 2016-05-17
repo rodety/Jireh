@@ -17,6 +17,7 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QObject>
+#include <configuracion/programa.h>
 class app : public QObject
 {
     Q_OBJECT

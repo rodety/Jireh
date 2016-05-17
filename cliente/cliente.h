@@ -3,6 +3,7 @@
 
 #include <objetopersistente.h>
 #include <cliente/documento.h>
+#include <share_include.h>
 
 class cliente:ObjetoPersistente
 {

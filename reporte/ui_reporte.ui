@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>697</width>
+    <width>809</width>
     <height>473</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -18,6 +23,11 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QComboBox" name="comboBox_entidades">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <item>
         <property name="text">
          <string>Seleccione</string>
@@ -53,13 +63,18 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_total">
        <property name="font">
         <font>
-         <pointsize>17</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -73,6 +88,11 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Desde</string>
        </property>
@@ -80,6 +100,11 @@
      </item>
      <item row="0" column="2">
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Hasta</string>
        </property>
@@ -87,6 +112,11 @@
      </item>
      <item row="0" column="5">
       <widget class="QPushButton" name="pushButton_imprimir">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Imprimir</string>
        </property>
@@ -98,6 +128,11 @@
      </item>
      <item row="0" column="4">
       <spacer name="horizontalSpacer">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -111,16 +146,33 @@
      </item>
      <item row="1" column="0" colspan="6">
       <widget class="QTableView" name="tableView_principal">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="sortingEnabled">
         <bool>false</bool>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QDateTimeEdit" name="dateTimeEdit_desde"/>
+      <widget class="QDateTimeEdit" name="dateTimeEdit_desde">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QDateTimeEdit" name="dateTimeEdit_hasta"/>
+      <widget class="QDateTimeEdit" name="dateTimeEdit_hasta">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

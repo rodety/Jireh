@@ -37,8 +37,8 @@ ui_tienda::ui_tienda(QWidget *parent) :
     ui->label_cod->setEnabled(false);
 
     //SETEANDO LA UBICACION
-    ui->comboBox_empresa->setCurrentIndex(Sesion::getUbicacion().first-1);
-    ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
+    ui->comboBox_empresa->setCurrentIndex(posComboboxEmpresa[Sesion::getUbicacion().first]);
+    ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
 
 
 
@@ -59,6 +59,7 @@ void ui_tienda::actualizar_combo_empresa()
     {
         ui->comboBox_empresa->addItem(model->record(i).value(1).toString());
         Empresas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
+        posComboboxEmpresa[model->record(i).value(0).toInt()] = i;
     }
 
     flag = true;
@@ -84,9 +85,10 @@ void ui_tienda::actualizar_combo_tienda(QString empresa)
         {
             ui->comboBox_tienda->addItem(model->record(i).value(1).toString());
             Tiendas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
+            posComboboxTienda[model->record(i).value(0).toInt()] = i;
         }
         //Seteando Ubicacion
-        ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
+        ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
         flag = true;
 
         if(model->rowCount()>0)
@@ -95,6 +97,7 @@ void ui_tienda::actualizar_combo_tienda(QString empresa)
             this->actualizar_combo_vitrina(idTienda);
         }
     }
+
 }
 
 void ui_tienda::actualizar_grilla_productos()
@@ -140,6 +143,7 @@ void ui_tienda::actualizar_combo_vitrina(QString vitrin)
         idVitrina = Vitrinas[ui->comboBox_vitrina->currentText()];
         this->actualizar_combo_niveles(idVitrina);
     }
+    ui->comboBox_vitrina->setCurrentIndex(0);
 }
 
 void ui_tienda::actualizar_combo_niveles(QString vitrin)
@@ -160,7 +164,7 @@ void ui_tienda::actualizar_combo_niveles(QString vitrin)
         ui->comboBox_niveles->insertItem(i,str.append(QString("%1").arg(i+1)));
     }
     flag = true;
-    this->on_comboBox_niveles_currentIndexChanged(0);
+    this->on_comboBox_niveles_currentIndexChanged(0);    
 
 }
 
@@ -182,11 +186,15 @@ void ui_tienda::set_dimension_grilla()      //podria recibir de frente filas y c
 
     ui->grilla->setColumnCount(columna);
     ui->grilla->setRowCount(fila);
+    for(int i=0;i<columna;i++){
+        ui->grilla->setColumnWidth(i,150);
+    }
 }
 
 void ui_tienda::actualizar_grilla()
 {
     ui->grilla->clear();
+
     idProductos.clear();
     idVitrina_Producto.clear();
     estado.clear();
@@ -219,13 +227,14 @@ void ui_tienda::actualizar_grilla()
         QString act_descripcion=query.value(7).toString();
         descripcion[key]=act_descripcion;
         costo[key] = query.value(8).toString();
+        QString act_marca = query.value(9).toString();
         marca[key] = query.value(9).toString();
         if(state == "P"){
-            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem(codigo+"-"+act_descripcion));
+            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem(codigo+"-"+act_marca));
 
         }
         if(state == "V"){
-            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem("Vendido"));
+            ui->grilla->setItem(pos_fila-1,pos_columna-1,new QTableWidgetItem("Vendido "+codigo+"-"+act_marca));
 
         }
     }
@@ -660,8 +669,8 @@ void ui_tienda::on_pushButton_aceptar_traspaso_clicked()
         msgBox.exec();
         return;
     }
-    int row=ui->grilla->currentRow()+1;
-    int col=ui->grilla->currentColumn()+1;
+    int row=current_index.row()+1;
+    int col=current_index.column()+1;
     int level=actual_nivel;
     object_Producto_has_Vitrina producto_vitrina;
     producto_vitrina.mf_set_Producto_idProducto(idTraspaso);
@@ -693,7 +702,7 @@ void ui_tienda::on_pushButton_aceptar_traspaso_clicked()
         }
         else
         {
-            QString key = QString::number(row)+"-"+QString::number(col);
+
             producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto[key]);
             if(!producto_vitrina.mf_update())
             {
@@ -762,7 +771,7 @@ void ui_tienda::on_pushButton_aceptar_traspaso_clicked()
         }
         else//ACTUALIZAR
         {
-            QString key = QString::number(row)+"-"+QString::number(col);
+
             producto_vitrina.mf_set_idProducto_has_Vitrina(idVitrina_Producto[key]);
             if(!producto_vitrina.mf_update())
             {
@@ -877,6 +886,9 @@ void ui_tienda::on_grilla_clicked(const QModelIndex &index)
         ui->pushButton_etiqueta->setEnabled(false);
     }
 
+    //ACTUALIZANDO CODIGO DE TRABAJO PARA EL PROGRAMA EN GENERAL
+    Programa::getPrograma()->setCodigo(cod_producto[key]);
+
 }
 
 void ui_tienda::on_pushButton_quitar_clicked()
@@ -923,6 +935,10 @@ void ui_tienda::on_pushButton_quitar_clicked()
 
 void ui_tienda::on_grilla_doubleClicked(const QModelIndex &index)
 {
+    QString estado = ui->grilla->item(index.row(),index.column())->text();
+    if(estado == "Vendido")
+        return;
+
     QString key = QString::number(index.row()+1)+"-"+QString::number(index.column()+1);
     QString codigo = idProductos[key];
     QString idUbicacion = idVitrina_Producto[key];
@@ -931,6 +947,7 @@ void ui_tienda::on_grilla_doubleClicked(const QModelIndex &index)
     myProducto.mf_load(codigo);
     //1 LUNA, 2 MONTURA, 3 LENTE DE CONTACTO, 4 OTROS, 5 TRABAJOS EXTRAS 6 ACCESORIOS
     //Signals codigo,descripcion,precioVenta,Descuento,cant,IdUbicacion,tipo de Producto,Stock del Producto,Precio Compra por lo del Kardex
+
     if(comportamiento == 1) //1  COMPORTAMIENTO VENTA
     {
         if(myProducto.mf_get_tipo() == "1")
@@ -950,7 +967,10 @@ void ui_tienda::on_grilla_doubleClicked(const QModelIndex &index)
             myCalidad.mf_load(myMontura.mf_get_Calidad_idCalidad());
             object_Color myColor;
             myColor.mf_load(myMontura.mf_get_Color_idColor());
-            descripcion += myProducto.mf_get_codigo()+", "+myProducto.mf_get_descripcion()+", "+myCalidad.mf_get_nombre()+", "+myColor.mf_get_nombre()+", Acces. "+myProducto.mf_get_accesorios();
+            object_Marca myMarca;
+            myMarca.mf_load(myProducto.mf_get_Marca_idMarca());
+
+            descripcion += myProducto.mf_get_codigo()+", "+myMarca.mf_get_nombre()+", "+myCalidad.mf_get_nombre()+", "+myColor.mf_get_nombre()+", Acces. "+myProducto.mf_get_accesorios();
         }
         if(myProducto.mf_get_tipo() == "3")
         {
@@ -977,7 +997,7 @@ void ui_tienda::on_grilla_doubleClicked(const QModelIndex &index)
             myMarca.mf_load(myProducto.mf_get_Marca_idMarca());
             object_Color myColor;
             myColor.mf_load(myOtros.mf_get_Color_idColor());
-            descripcion += myProducto.mf_get_codigo()+", "+myTipoOtros.mf_get_nombre()+", "+myCalidad.mf_get_nombre()+", "+myMarca.mf_get_nombre()+", "+myColor.mf_get_nombre();
+            descripcion += myProducto.mf_get_codigo()+", "+myMarca.mf_get_nombre()+", "+myTipoOtros.mf_get_nombre()+", "+myCalidad.mf_get_nombre()+", "+myColor.mf_get_nombre();
         }
         if(myProducto.mf_get_tipo() == "6")
         {
@@ -1159,8 +1179,8 @@ void ui_tienda::on_pushButton_reponer_clicked()
     }
     if(estado[key] == "")
     {
-        int row=ui->grilla->currentRow()+1;
-        int col=ui->grilla->currentColumn()+1;
+        int row=current_index.row()+1;
+        int col=current_index.column()+1;
         int level=actual_nivel;
         producto_vitrina.mf_set_Vitrina_Ubicacion_idUbicacion(idVitrina);
         producto_vitrina.mf_set_Colaborador_Persona_idPersona(QString::number(Sesion::getIdColaborador()));
@@ -1261,11 +1281,11 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
 
     QPixmap pm(ui->draw_label->width(),ui->draw_label->height());
     pm.fill(Qt::white);
-    QPainter p;
+    QPainter painter;
     //QFont font("times",16);
     QFont font("times",8);
-    p.begin(&pm);
-    p.setFont(font);
+    painter.begin(&pm);
+    painter.setFont(font);
 
     int j=0;
     int k=0;
@@ -1278,11 +1298,11 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         //QImage imagen=tmp.scaledToHeight(60);
         //Escalando Imagen
         QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
-        p.drawImage((200*k)+60,(100*j)+30,imagen);
-        p.drawText((200*k)+60,(100*j)+90,etiquetas[i].getDescripcion());
-        p.drawText((200*k)+130,(100*j)+90,etiquetas[i].getMarca());
-        p.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
-        p.drawText((200*k)+130,(100*j)+106,"S/."+etiquetas[i].getPrecio());
+        painter.drawImage((200*k)+60,(100*j)+30,imagen);
+        painter.drawText((200*k)+60,(100*j)+90,etiquetas[i].getCodigo());
+        painter.drawText((200*k)+180,(100*j)+90,etiquetas[i].getMarca());
+        painter.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
+        painter.drawText((200*k)+180,(100*j)+106,"S/."+etiquetas[i].getPrecio());
         /*p.drawImage((500*k)+220,(100*j)+30,imagen);
         p.drawText((500*k)+440,(100*j)+46,etiquetas[i].getCodigo());
         p.drawText((500*k)+440,(100*j)+62,etiquetas[i].getColor());
@@ -1315,7 +1335,7 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         if(this->act+1==pag)
             ui->pushButton_siguiente->setDisabled(1);
         QImage act("etiquetas/0.png");
-        p.drawImage(0,0,act);
+        painter.drawImage(0,0,act);
     }
     else
     {
@@ -1325,6 +1345,14 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         pm.fill(Qt::white);
     }
     ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
+
+    QImage image(800,600,QImage::Format_RGB32);
+    QPainter paint;
+    paint.begin(&image);
+    paint.drawRect(10,10,50,50);
+    paint.end();
+    image.save("image.bmp");
+
 
 }
 
@@ -1417,7 +1445,5 @@ QStringList ui_tienda:: llenar_listas( int nivel)
     }
    return lista_e;
 }
-
-
 
 

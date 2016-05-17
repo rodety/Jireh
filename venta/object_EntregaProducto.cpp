@@ -223,6 +223,9 @@ bool object_EntregaProducto::mf_add()
         //state FAILED
         //w!
 
+        qDebug()<<md_o_Cliente_idCliente<<" "<<md_o_Colaborador_idColaborador<<" "<<" "<<md_o_Producto_idProducto<<" "<<
+                  " "<<md_o_Venta_idVenta<<" "<<md_o_estado<<" "<<md_o_fecha<<" "<< str_query.c_str()<<endl;
+
         return false;
     }
 }

@@ -42,7 +42,7 @@ agenda_ui::agenda_ui(QWidget *parent) :
 
 
     //SETEANDO LA UBICACION
-    ui->comboBox_tienda->setCurrentIndex(Sesion::getUbicacion().second-1);
+    ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
 
 
 
@@ -238,15 +238,20 @@ void agenda_ui::updateTable_Alert_Personal()
 
 void agenda_ui::actualizar_combo_tienda()
 {
-    ui->comboBox_tienda->ActualizarItemsReporte(c_tienda::mostrar());
+    QSqlQueryModel* model = c_tienda::mostrar();
+
+    ui->comboBox_tienda->ActualizarItemsReporte(model);
     ui->comboBox_tienda->removeItem(0);
 
-    //FIJANDO LA TIENDA ACTUAL DADO QUE NO SE PODRA EDITAR
-    if(tipoColaborador == 2)
-    {
-        ui->comboBox_tienda->setCurrentIndex(1);
 
+
+    for(int i=0;i<model->rowCount();i++)
+    {
+        posComboboxTienda[model->record(i).value(0).toInt()] = i;
     }
+    //Seteando Ubicacion
+    ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
+    qDebug()<<"Ubicacion de tienda "<<Sesion::getUbicacion().second<<endl;
 
 
 }

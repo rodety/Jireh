@@ -20,12 +20,15 @@ void app::exec()
     //Creando una clase clase configurador con el nombre del archivo de configuracion
 
     configurador config("config.ini");
+
     if(config.conectar_db())
     {
         Sesion::Configurar(3,10,6000);
         DialogLogin * log = new DialogLogin;
         connect(log,SIGNAL(logOk()),this,SLOT(loadMainWindow()));
         log->show();
+        //CARGANDO CONFIGURACION DE PROGRAMA
+        Programa::getPrograma()->loadData();
     }
     else
     {

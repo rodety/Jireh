@@ -10,6 +10,11 @@
     <height>336</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -485,21 +490,21 @@
   <tabstop>lineEdit_accesorios</tabstop>
   <tabstop>lineEdit_observaciones</tabstop>
   <tabstop>comboBox_marca</tabstop>
-  <tabstop>pushButton_xmarca</tabstop>
   <tabstop>comboBox_tamanio</tabstop>
-  <tabstop>pushButton_xtamanio</tabstop>
   <tabstop>comboBox_forma</tabstop>
-  <tabstop>pushButton_xforma</tabstop>
   <tabstop>comboBox_calidad</tabstop>
-  <tabstop>pushButton_xcalidad</tabstop>
   <tabstop>comboBox_color</tabstop>
-  <tabstop>pushButton_xcolor</tabstop>
   <tabstop>comboBox_genero</tabstop>
-  <tabstop>pushButton_xgenero</tabstop>
   <tabstop>comboBox_estado</tabstop>
-  <tabstop>pushButton_xestado</tabstop>
   <tabstop>pushButton_agregar</tabstop>
   <tabstop>pushButton_cancelar</tabstop>
+  <tabstop>pushButton_xmarca</tabstop>
+  <tabstop>pushButton_xtamanio</tabstop>
+  <tabstop>pushButton_xforma</tabstop>
+  <tabstop>pushButton_xcalidad</tabstop>
+  <tabstop>pushButton_xcolor</tabstop>
+  <tabstop>pushButton_xgenero</tabstop>
+  <tabstop>pushButton_xestado</tabstop>
  </tabstops>
  <resources>
   <include location="../Icons/Icons.qrc"/>

@@ -41,6 +41,8 @@ private:
     map<QString,QString> Almacenes;
     map<QString,QString> Andamios;
     map<QString,QString> Contenedor;
+    map<int,int> posComboboxEmpresa;
+    map<int,int> posComboboxTienda;
     QModelIndex indice;
     bool actualizar_cantidad_vitrina(int cant, QString id);
     bool actualizar_cantidad_almacen(int cant, QString id);

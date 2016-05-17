@@ -345,3 +345,8 @@ QString producto::getidMarca()
 {
     return idMarca;
 }
+
+void producto::setUiParent(QWidget *parent)
+{
+    this->parent = parent;
+}

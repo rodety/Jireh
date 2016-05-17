@@ -363,7 +363,10 @@ QSqlQueryModel* object_Kardex::mf_show()
     str_query += ", IF(k.tipo = 1, 'Entrada', 'Salida') as 'Tipo'";
     str_query += " FROM Kardex k, Colaborador c WHERE Producto_idProducto = ";
     str_query += md_o_Producto_idProducto.toStdString();
-    str_query += " AND c.idColaborador = k.Colaborador_idColaborador order by k.idKardex";
+    str_query += " AND c.idColaborador = k.Colaborador_idColaborador";
+    str_query += " ORDER BY k.idKardex DESC LIMIT ";
+    QString longitud = QString::number(Programa::getPrograma()->getLongitud());
+    str_query += longitud.toStdString();
 
     model->setQuery(str_query.c_str());
     return model;

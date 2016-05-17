@@ -220,6 +220,7 @@ void ui_agregarLuna::on_pushButton_aceptar_clicked()
     pLuna.setTratamiento(pTratamiento);
     pLuna.setLaboratorio(pLaboratorio);
     pLuna.setLista(pLista);
+    pLuna.setUiParent(this);
 
 
     if(modo==0)//agrego
@@ -227,7 +228,15 @@ void ui_agregarLuna::on_pushButton_aceptar_clicked()
         if(pLuna.agregar())
         {
            emit guardado();
-           this->close();
+           QMessageBox box;
+           box.setIcon(QMessageBox::Information);
+           box.setWindowTitle("Guardado");
+           box.setText("El producto se guardo correctamente");
+           box.setStandardButtons(QMessageBox::Ok);
+           box.setDefaultButton(QMessageBox::Ok);
+           box.exec();
+
+           //this->close();
         }
         else
         {
@@ -285,4 +294,6 @@ void ui_agregarLuna::on_pushButton_xEstado_clicked()
 {
     ui->comboBox_estado->eliminar();
 }
+
+
 
