@@ -16,6 +16,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = opticalManager
 TEMPLATE = app
 
+DEFINES += NCREPORT_IMPORT
+
+unix {
+    LIBS += -lncreport -Llib -L/usr/local/bin
+    LIBS += -lzint
+    target.path = /usr/local/bin
+}
 
 win32 {
     release: LIBS += ../Jireh/Zint/zint.lib
