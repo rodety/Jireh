@@ -73,6 +73,6 @@ bool tiempoUso::completar()
 QSqlQueryModel * tiempoUso::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTiempoUso,valor FROM TiempoUso");
+    model->setQuery("SELECT idTiempoUso,valor FROM TiempoUso ORDER BY valor ASC");
     return model;
 }

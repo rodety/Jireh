@@ -48,7 +48,7 @@ void uiventas::configuracionesIniciaciales()
 
 
     //Nombre de Tienda
-    ui->label_nombre_Tienda->setText(tienda_actual.mf_get_nombre());    
+    ui->label_nombre_Tienda->setText(tienda_actual.mf_get_nombre());
 
     updateSerieNumeroDocumento();
 
@@ -68,7 +68,7 @@ void uiventas::configuracionesIniciaciales()
     comportamiento = true;
     //Desactivando calcular reporte
     flag_reporte = false;
-    ui->pushButton_registro_tarjeta->setEnabled(false);    
+    ui->pushButton_registro_tarjeta->setEnabled(false);
 
     //DESACTIVANDOP LOS LINE EDIT
     ui->lineEdit_efectivo->setEnabled(false);
@@ -96,7 +96,7 @@ void uiventas::on_pushButton_buscarCliente_clicked()
 void uiventas::recojeCliente(cliente clienteAct)
 {
 
-    customer = clienteAct;    
+    customer = clienteAct;
     //VERIFICANDO SI LA VENTA ES CON BOLETA O FACTURA
     idCliente = customer.getIdCliente();
     if(!ventaBoleta() && (customer.getRazonSocial().size() ==0 || customer.getRuc().size() ==0 || customer.getDireccion2().size() ==0))
@@ -229,216 +229,61 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
 
 void uiventas::on_lineEdit_efectivo_textChanged(const QString &arg1)
 {
-    //COMPORTAMIENTO 1 AGREGAR NUEVO 0 EDITAR
-    double total_adelanto = 0;
+    double total,adelanto_efectivo,adelanto_tarjeta,monto_efectivo,monto_tarjeta;
+    adelanto_efectivo = ui->label_efectivo->text().toDouble(0);
+    adelanto_tarjeta = ui->label_tarjeta->text().toDouble(0);
+    monto_efectivo = ui->lineEdit_efectivo->text().toDouble(0);
+    monto_tarjeta = ui->lineEdit_tarjeta->text().toDouble(0);
+    total = adelanto_efectivo+adelanto_tarjeta+monto_efectivo+monto_tarjeta;
     if(comportamiento)
     {
-        double adelantoEfectivo = arg1.toDouble();
-        total_adelanto = adelantoEfectivo + ui->label_tarjeta->text().toDouble();
-        if(adelantoEfectivo <=0)
-        {
-            qDebug()<<"regresando"<<endl;
+        calculaprecio(total);
 
-            ui->label_efectivo->setText("0");
-            calculaprecio(ui->label_tarjeta->text().toDouble());
-            return;
-        }
-
-
-        if(total_adelanto >= total_venta) //SUPERADO
-        {
-            if(adelantoEfectivo >= total_venta) //SOLO EL ADELANTO
-            {
-                ui->label_efectivo->setText(QString::number(total_venta));
-                ui->lineEdit_tarjeta->setText("0");
-                ui->label_tarjeta->setText("0");
-
-                calculaprecio(adelantoEfectivo);
-            }
-            if(ui->label_tarjeta->text().toDouble() >= total_venta)
-            {
-                ui->label_tarjeta->setText(QString::number(total_venta));
-                ui->lineEdit_efectivo->setText("0");
-                ui->label_efectivo->setText("0");
-                calculaprecio(adelantoEfectivo);
-            }
-            else
-            {
-                if((total_adelanto - total_venta) > 0)//SI EXISTE VUELTO
-                {
-                    ui->label_efectivo->setText(QString::number(adelantoEfectivo-(total_adelanto - total_venta))); //MENOS EL VUELTO
-
-                    calculaprecio(total_adelanto);
-                }
-                else
-                {
-                    ui->label_efectivo->setText(QString::number(adelantoEfectivo)); //MENOS EL VUELTO
-
-                    calculaprecio(total_adelanto);
-                }
-            }
-
-        }
-        else
-        {
-            ui->label_efectivo->setText(QString::number(adelantoEfectivo));
-
-            calculaprecio(total_adelanto);
-        }
 
     }
     else
     {
-        double adelantoEfectivo = arg1.toDouble();
-        double adelantoOtro = ui->lineEdit_tarjeta->text().toDouble();
-        double adelantoVentaAnterior = efectivo_pasado + tarjeta_pasado;
-        total_adelanto = adelantoEfectivo + adelantoVentaAnterior;
+        calculaprecio(total);
 
-        if(total_adelanto >= (total_venta - adelantoVentaAnterior)) //SUPERADO
-        {
-            if(adelantoEfectivo >= (total_venta - adelantoVentaAnterior)) //SOLO EL ADELANTO
-            {
-                ui->label_efectivo->setText(QString::number(total_venta-efectivo_pasado));
-                ui->lineEdit_tarjeta->setText("0");
-
-                calculaprecio(adelantoEfectivo + adelantoVentaAnterior);
-            }
-            if(adelantoOtro >= (total_venta - adelantoVentaAnterior))
-            {
-                ui->label_tarjeta->setText(QString::number(total_venta-efectivo_pasado));
-                ui->lineEdit_efectivo->setText("0");
-                ui->label_efectivo->setText("0");
-                calculaprecio(adelantoOtro + adelantoVentaAnterior);
-            }
-            else
-            {
-                if((total_adelanto - total_venta) > 0)//SI EXISTE VUELTO
-                {
-                    ui->label_efectivo->setText(QString::number(adelantoEfectivo-(total_adelanto - total_venta))); //MENOS EL VUELTO
-
-                    calculaprecio(total_adelanto);
-                }
-                else
-                {
-                    ui->label_efectivo->setText(QString::number(adelantoEfectivo+tarjeta_pasado)); //MENOS EL VUELTO                    
-                    calculaprecio(total_adelanto);
-                }
-            }
-
-        }
-        else
-        {
-            ui->label_efectivo->setText(QString::number(adelantoEfectivo + efectivo_pasado));
-            calculaprecio(total_adelanto);
-        }
     }
 
 }
 
 void uiventas::on_lineEdit_tarjeta_textChanged(const QString &arg1)
 {
-    double total_adelanto = 0;
+    //COMPORTAMIENTO 1 AGREGAR NUEVO 0 EDITAR
+    double total,adelanto_efectivo,adelanto_tarjeta,monto_efectivo,monto_tarjeta;
+    adelanto_efectivo = ui->label_efectivo->text().toDouble(0);
+    adelanto_tarjeta = ui->label_tarjeta->text().toDouble(0);
+    monto_efectivo = ui->lineEdit_efectivo->text().toDouble(0);
+    monto_tarjeta = ui->lineEdit_tarjeta->text().toDouble(0);
+    total = adelanto_efectivo+adelanto_tarjeta+monto_efectivo+monto_tarjeta;
     if(comportamiento)
     {
-        double adelantoTarjeta = arg1.toDouble();
+        calculaprecio(total);
 
-        if(adelantoTarjeta<=0){
-
-            ui->label_tarjeta->setText("0");
-            calculaprecio(ui->label_efectivo->text().toDouble());
-            return;
-        }
-        total_adelanto = adelantoTarjeta + ui->label_efectivo->text().toDouble();
-
-
-        if(total_adelanto >= total_venta)
-        {
-            if(adelantoTarjeta >= total_venta) // SOLO EL ADELANTO ES MAYOR
-            {
-                ui->label_tarjeta->setText(QString::number(total_venta));
-                ui->lineEdit_efectivo->setText("0");
-                ui->label_efectivo->setText("0");                
-                calculaprecio(adelantoTarjeta);
-                qDebug()<<"Entro a delanto mayor"<<endl;
-            }
-            if(ui->label_efectivo->text().toDouble() >= total_venta)
-            {
-                ui->label_efectivo->setText(QString::number(total_venta));
-                ui->lineEdit_tarjeta->setText("0");
-                ui->label_tarjeta->setText("0");
-                calculaprecio(adelantoTarjeta);
-            }
-            else
-            {
-                if((total_adelanto - total_venta) > 0)//SI EXISTE VUELTO
-                {
-                    ui->label_tarjeta->setText(QString::number(adelantoTarjeta-(total_adelanto - total_venta))); //MENOS EL VUELTO                    
-                    calculaprecio(total_adelanto);
-                }
-                else
-                {
-                    ui->label_tarjeta->setText(QString::number(adelantoTarjeta)); //MENOS EL VUELTO                    
-                    calculaprecio(total_adelanto);
-                }
-
-            }
-        }
-        else
-        {
-            ui->label_tarjeta->setText(QString::number(adelantoTarjeta));            
-            calculaprecio(total_adelanto);
-        }
 
     }
     else
     {
-
-        double adelantoEfectivo = arg1.toDouble();
-        double adelantoOtro = ui->lineEdit_efectivo->text().toDouble();
-        double adelantoVentaAnterior = efectivo_pasado + tarjeta_pasado;
-        total_adelanto = adelantoEfectivo + adelantoVentaAnterior;
-
-        if(total_adelanto >= (total_venta - adelantoVentaAnterior)) //SUPERADO
-        {
-            if(adelantoEfectivo >= (total_venta - adelantoVentaAnterior)) //SOLO EL ADELANTO
-            {
-                ui->label_tarjeta->setText(QString::number(total_venta-efectivo_pasado));
-                ui->lineEdit_efectivo->clear();
-
-                calculaprecio(adelantoEfectivo + adelantoVentaAnterior);
-            }
-            if(adelantoOtro >= (total_venta - adelantoVentaAnterior))
-            {
-                ui->label_efectivo->setText(QString::number(total_venta-efectivo_pasado));
-                ui->lineEdit_tarjeta->setText("0");
-                ui->label_tarjeta->setText("0");
-                calculaprecio(adelantoOtro + adelantoVentaAnterior);
-            }
-            else
-            {
-                if((total_adelanto - total_venta) > 0)//SI EXISTE VUELTO
-                {
-                    ui->label_tarjeta->setText(QString::number(adelantoEfectivo-(total_adelanto - total_venta))); //MENOS EL VUELTO
-
-                    calculaprecio(total_adelanto);
-                }
-                else
-                {
-                    ui->label_tarjeta->setText(QString::number(adelantoEfectivo+tarjeta_pasado)); //MENOS EL VUELTO
-
-                    calculaprecio(total_adelanto);
-                }
-            }
-
-        }
-        else
-        {
-            ui->label_tarjeta->setText(QString::number(adelantoEfectivo + efectivo_pasado));
-
-            calculaprecio(total_adelanto);
-        }
+        calculaprecio(total);
 
     }
+
+}
+void uiventas::calcular_monto_venta(double adelanto)
+{
+    adelanto = adelanto -(ui->label_tarjeta->text().toDouble(0)+ui->label_efectivo->text().toDouble(0));
+    double t_igv = Sesion::getIgv();
+    m_igv = adelanto -(adelanto/(t_igv/100+1));
+    m_subTotal = adelanto-m_igv;
+    m_total = adelanto;
+
+    qDebug()<<"*******SUBTOTALES*********"<<endl;
+    qDebug()<<"SUBTOTAL... "<<m_subTotal<<endl;
+    qDebug()<<"IGV... "<<m_igv<<endl;
+    qDebug()<<"TOTAL... "<<m_total<<endl;
+    qDebug()<<"**************************"<<endl;
 }
 
 void uiventas::calculaprecio(double total_adelanto)
@@ -459,6 +304,8 @@ void uiventas::calculaprecio(double total_adelanto)
         ui->lineEdit_restante->setText(QString::number(total_venta - total_adelanto));
     }
     ui->lineEdit_total_cancelado->setText(QString::number(total_adelanto));
+    calcular_monto_venta(total_adelanto);
+
 }
 
 void uiventas::on_radioButton_Boleta_clicked()
@@ -570,7 +417,7 @@ void uiventas::on_pushButton_guardar_clicked()
 
 
     fechaPreventa = ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::ISODate);
-    fechaCancelacion = ui->dateTimeEdit_entrega->dateTime().toString(Qt::ISODate);    
+    fechaCancelacion = ui->dateTimeEdit_entrega->dateTime().toString(Qt::ISODate);
     //Si existe nuevo pago
 
     if(validar_montoEntregado()){
@@ -664,6 +511,7 @@ void uiventas::on_pushButton_guardar_clicked()
     venta.mf_set_tipoDocumento(tipoDocumento);
 
     //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
+    /**********************************************************************/
     if(comportamiento)
     {
         if(!validar_montoEntregado())
@@ -736,11 +584,20 @@ void uiventas::on_pushButton_guardar_clicked()
         //AGREGANDO TARJETA SI LA UBIERE
         object_Venta_has_Tarjeta v_tarjeta;
         object_VentaPlazo v_plazo;
+        if(ui->label_cambiante->text() =="Vuelto")
+        {
+            v_plazo.mf_set_montoEfectivo(ui->lineEdit_total_cancelado->text());
+            v_plazo.mf_set_montoTarjeta("0");
+        }
+        else{
+            v_plazo.mf_set_montoEfectivo(ui->lineEdit_efectivo->text());
+            v_plazo.mf_set_montoTarjeta(ui->lineEdit_tarjeta->text());
+        }
 
-        if(ui->lineEdit_tarjeta->text().size() > 0 && ui->lineEdit_tarjeta->text() != "0")
+        if(ui->lineEdit_tarjeta->text().size() > 0 && ui->lineEdit_tarjeta->text() != "0" && ui->label_cambiante->text() != "Vuelto")
         {
 
-              v_tarjeta.mf_set_monto(ui->label_tarjeta->text());
+              v_tarjeta.mf_set_monto(ui->lineEdit_tarjeta->text());
               v_plazo.mf_set_registro("FALSE");
               if(!v_tarjeta.mf_add())
               {
@@ -765,12 +622,23 @@ void uiventas::on_pushButton_guardar_clicked()
         v_plazo.mf_set_Venta_has_Tarjeta_idVenta_has_Tarjeta(v_tarjeta.mf_get_lastIdVenta_has_Tarjeta());
 
         v_plazo.mf_set_Colaborador_idColaborador(IdColaborador);
-        qDebug()<<"Colaborador "<<_idColaborador<<endl;
+
         v_plazo.mf_set_Tienda_idTienda(idTienda);
 
-        v_plazo.mf_set_montoEfectivo(ui->label_efectivo->text());
+        //EN CASO DE QUE EXISTA VUELTO SOLO CONSIDERAMOS COMO MONTO CANCELADO EL TOTAL DE LA VENTA MONTO CON TARJETA SE PONDRA EN 0
+        if(ui->label_cambiante->text() =="Vuelto")
+        {
+            v_plazo.mf_set_montoEfectivo(ui->lineEdit_total_cancelado->text());
+            v_plazo.mf_set_montoTarjeta("0");
+        }
+        else{
+            v_plazo.mf_set_montoEfectivo(ui->lineEdit_efectivo->text());
+            v_plazo.mf_set_montoTarjeta(ui->lineEdit_tarjeta->text());
+        }
 
-        v_plazo.mf_set_montoTarjeta(ui->label_tarjeta->text());
+
+
+        v_plazo.mf_set_montoTarjeta(ui->lineEdit_tarjeta->text());
 
         v_plazo.mf_set_fecha(fechaPreventa);
 
@@ -981,11 +849,13 @@ void uiventas::on_pushButton_guardar_clicked()
         }
 
         limpiarInterfazVenta();
-        ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());        
+        ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());
     }
      // ACTUALIZAR VENTA
+    /***************************************************************************************************/
+
     else
-    {        
+    {
         venta.mf_set_idVenta(idVentaActual);
 
         if(!venta.mf_update())
@@ -1002,7 +872,7 @@ void uiventas::on_pushButton_guardar_clicked()
         for(int i=0;i<salida.size();i++)
         {
             if(v_entregado.mf_load(salida[i]))
-            {                
+            {
                 if(seleccionados_model->item(i,5)->text() == "No")
                     v_entregado.mf_set_estado("0");
                 else
@@ -1031,7 +901,7 @@ void uiventas::on_pushButton_guardar_clicked()
             //AGREGANDO TARJETA SI LA UBIERE
             object_Venta_has_Tarjeta v_tarjeta;
             object_VentaPlazo v_plazo;
-            if(ui->lineEdit_tarjeta->text().size() > 0 && ui->lineEdit_tarjeta->text() != "0")
+            if(ui->lineEdit_tarjeta->text().size() > 0 && ui->lineEdit_tarjeta->text() != "0" && ui->label_cambiante->text() != "Vuelto")
             {
                   v_tarjeta.mf_set_monto(ui->lineEdit_tarjeta->text());
                   v_plazo.mf_set_registro("0");
@@ -1053,8 +923,8 @@ void uiventas::on_pushButton_guardar_clicked()
 
             //AGREGANDO VENTA A PLAZO
 
-            v_plazo.mf_set_Venta_idVenta(idVentaActual);            
-            v_plazo.mf_set_Venta_has_Tarjeta_idVenta_has_Tarjeta(v_tarjeta.mf_get_lastIdVenta_has_Tarjeta());            
+            v_plazo.mf_set_Venta_idVenta(idVentaActual);
+            v_plazo.mf_set_Venta_has_Tarjeta_idVenta_has_Tarjeta(v_tarjeta.mf_get_lastIdVenta_has_Tarjeta());
             v_plazo.mf_set_Colaborador_idColaborador(IdColaborador);
             v_plazo.mf_set_Tienda_idTienda(idTienda);
 
@@ -1063,10 +933,19 @@ void uiventas::on_pushButton_guardar_clicked()
             if(ui->lineEdit_tarjeta->text().size() == 0)
                 ui->lineEdit_tarjeta->setText("0");
 
-            v_plazo.mf_set_montoEfectivo(ui->lineEdit_efectivo->text());
-            v_plazo.mf_set_montoTarjeta(ui->lineEdit_tarjeta->text());
+            if(ui->label_cambiante->text() == "Vuelto"){
+                ui->lineEdit_tarjeta->setText("0");
+                v_plazo.mf_set_montoEfectivo(QString::number(ui->lineEdit_efectivo->text().toDouble(0)-ui->lineEdit_restante->text().toDouble(0)));
+            }
+            else{
+                v_plazo.mf_set_montoEfectivo(ui->lineEdit_efectivo->text());
+                v_plazo.mf_set_montoTarjeta(ui->lineEdit_tarjeta->text());
+            }
+
+
+
             v_plazo.mf_set_fecha(QDateTime::currentDateTime().toString(Qt::ISODate));
-            v_plazo.mf_set_numeroDocumento(numeroDocumento);            
+            v_plazo.mf_set_numeroDocumento(numeroDocumento);
             v_plazo.mf_set_serieDocumento(serieDocumento);
 
             if(!v_plazo.mf_add())
@@ -1165,71 +1044,79 @@ bool uiventas::validar_montoEntregado()
 void uiventas::imprimir(bool pendiente)//pendiente de pago
 {
     impresion myimpresion;
-    myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
-    myimpresion.setDireccionTienda(tienda_actual.mf_get_direccion());
-    myimpresion.setRucTienda_Telefono(tienda_actual.mf_get_ruc(),tienda_actual.mf_get_telefono());
-    //DIFERENCIANDO ENTRE BOLETA Y FACTURA
+        myimpresion.setNombreTienda(ui->label_nombre_Tienda->text(),tienda_actual.mf_get_razonSocial());
+        myimpresion.setDireccionTienda(tienda_actual.mf_get_direccion());
+        myimpresion.setRucTienda_Telefono(tienda_actual.mf_get_ruc(),tienda_actual.mf_get_telefono());
 
-    if(ui->radioButton_Factura->isChecked())
-        myimpresion.setNumeroFactura_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
-    else
-        myimpresion.setNumeroTicket_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+        //DIFERENCIANDO ENTRE BOLETA Y FACTURA
 
-    myimpresion.setNombreCliente(ui->lineEdit_razonSocial->text());
-    myimpresion.setRucCliente(ui->lineEdit_ruc->text());
-    myimpresion.setDireccionCliente(ui->lineEdit_direccion->text());
+        if(ui->radioButton_Factura->isChecked())
+            myimpresion.setNumeroFactura_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+        else
+            myimpresion.setNumeroTicket_Fecha(ui->label_serie->text()+"-"+ui->label_numero_documento->text(),ui->dateTimeEdit_fecha_preventa->dateTime().toString(Qt::SystemLocaleShortDate));
+        //
+        myimpresion.setAutorizacionSunat(QString(configuracion.mf_get_autorizacion()));
+        myimpresion.setSerieImpresora(QString(configuracion.mf_get_codigoPos()));
 
-    //CREANDO LISTA DE PRODUCTOS VENDIDOS
-    QVector<articulo> art;
-    for(int i = 0; i<count_row;i++)
-    {
-        articulo myarticulo;
-        myarticulo.set_t_articulo(seleccionados_model->item(i,1)->text());
+        myimpresion.setNombreCliente(ui->lineEdit_razonSocial->text());
+        myimpresion.setRucCliente(ui->lineEdit_ruc->text());
+        myimpresion.setDireccionCliente(ui->lineEdit_direccion->text());
 
-        //Si el descuento es negativo (le aumento el precio)
-        if((seleccionados_model->item(i,3)->text().toDouble()) <0){
-            myarticulo.set_p_unitario((seleccionados_model->item(i,6)->text()));
-            myarticulo.set_descuento("0");
+        //CREANDO LISTA DE PRODUCTOS VENDIDOS
+        QVector<articulo> art;
+        for(int i = 0; i<count_row;i++)
+        {
+            articulo myarticulo;
+            myarticulo.set_t_articulo(seleccionados_model->item(i,1)->text());
+
+            //Si el descuento es negativo (le aumento el precio)
+            if((seleccionados_model->item(i,3)->text().toDouble()) <0){
+                myarticulo.set_p_unitario((seleccionados_model->item(i,6)->text()));
+                myarticulo.set_descuento("0");
+            }
+            else {
+                myarticulo.set_p_unitario((seleccionados_model->item(i,2)->text()));
+                myarticulo.set_descuento((seleccionados_model->item(i,3)->text()));
+            }
+            myarticulo.set_cantidad((seleccionados_model->item(i,4)->text()));
+            myarticulo.set_t_entregado(seleccionados_model->item(i,5)->text());
+            myarticulo.set_importe((seleccionados_model->item(i,6)->text()));
+
+            art.push_back(myarticulo);
+        }
+
+        myimpresion.setArticuloVector(art);
+        /********CALCULO PROPIO DE SUTOTALES***************/
+        myimpresion.setSubTotal(QString::number(m_subTotal));
+        myimpresion.setIgv(QString::number(m_igv));
+        myimpresion.setTotal(QString::number(m_total));
+
+        myimpresion.setTotalVenta(QString::number(total_venta));
+        //No esta pendiente de pago
+        if(!pendiente){
+            myimpresion.setAdelantoEfectivo(QString::number(ui->label_efectivo->text().toDouble(0)+ui->lineEdit_efectivo->text().toDouble(0)));
+            myimpresion.setAdelantoTarjeta(QString::number(ui->label_tarjeta->text().toDouble(0)+ui->lineEdit_tarjeta->text().toDouble(0)));
+        }
+        else{
+            myimpresion.setEntregaEfectivo(QString::number(ui->label_efectivo->text().toDouble(0)+ui->lineEdit_efectivo->text().toDouble(0)));
+            myimpresion.setEntregaTarjeta(QString::number(ui->label_tarjeta->text().toDouble(0)+ui->lineEdit_tarjeta->text().toDouble(0)));
+        }
+
+        if(ui->lineEdit_total_cancelado->text().toDouble() >= ui->lineEdit_total->text().toDouble()){
+            myimpresion.setSaldo("0");
         }
         else {
-            myarticulo.set_p_unitario((seleccionados_model->item(i,2)->text()));
-            myarticulo.set_descuento((seleccionados_model->item(i,3)->text()));
+            myimpresion.setSaldo(ui->lineEdit_restante->text());
         }
-        myarticulo.set_cantidad((seleccionados_model->item(i,4)->text()));
-        myarticulo.set_t_entregado(seleccionados_model->item(i,5)->text());
-        myarticulo.set_importe((seleccionados_model->item(i,6)->text()));
+        myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
+        myimpresion.setNombreColaborador(QString::number(Sesion::getIdColaborador()));
+        if(EntregadoProducto()){
+            myimpresion.setFirmaCliente(ui->lineEdit_razonSocial->text());
+        }
+        myimpresion.setMensajeVenta(tienda_actual.mf_get_mensaje_compra());
+        myimpresion.setMensajeFinal(tienda_actual.mf_get_mensaje_cliente());
+        myimpresion.imprimir();
 
-        art.push_back(myarticulo);        
-    }
-
-    myimpresion.setArticuloVector(art);
-    myimpresion.setSubTotal(QString::number(total_venta));
-    myimpresion.setIgv(QString::number(monto_igv));
-    myimpresion.setTotal(ui->lineEdit_total->text());
-    //No esta pendiente de pago
-    if(!pendiente){
-        myimpresion.setAdelantoEfectivo(ui->label_efectivo->text());
-        myimpresion.setAdelantoTarjeta(ui->label_tarjeta->text());
-    }
-    else{
-        myimpresion.setEntregaEfectivo(ui->label_efectivo->text());
-        myimpresion.setEntregaTarjeta(ui->label_tarjeta->text());
-    }
-
-    if(ui->lineEdit_total_cancelado->text().toDouble() >= ui->lineEdit_total->text().toDouble()){
-        myimpresion.setSaldo("0");
-    }
-    else {
-        myimpresion.setSaldo(ui->lineEdit_restante->text());
-    }
-    myimpresion.setFechaEntrega(ui->dateTimeEdit_entrega->dateTime().toString(Qt::SystemLocaleShortDate));
-    myimpresion.setNombreColaborador(QString::number(Sesion::getIdColaborador()));
-    if(EntregadoProducto()){
-        myimpresion.setFirmaCliente(ui->lineEdit_razonSocial->text());
-    }
-    myimpresion.setMensajeVenta(tienda_actual.mf_get_mensaje_compra());
-    myimpresion.setMensajeFinal(tienda_actual.mf_get_mensaje_cliente());
-    myimpresion.imprimir();
 }
 
 
@@ -1390,7 +1277,7 @@ void uiventas::on_comboBox_Empresa_currentIndexChanged(int index)
 }
 
 void uiventas::on_comboBox_Tienda_currentIndexChanged(int index)
-{    
+{
     if(flag_reporte)
     {
         calcularReporte(1);
@@ -1408,7 +1295,7 @@ void uiventas::on_comboBox_Documento_currentIndexChanged(int index)
 }
 
 void uiventas::on_comboBox_Forma_Pago_currentIndexChanged(int index)
-{    
+{
     if(flag_reporte)
     {
         calcularReporte(1);
@@ -1437,7 +1324,7 @@ void uiventas::limpiarInterfazVenta()
     ui->lineEdit_tarjeta->clear();
     ui->lineEdit_restante->clear();
     ui->lineEdit_total->clear();
-    ui->lineEdit_total_cancelado->clear();    
+    ui->lineEdit_total_cancelado->clear();
 
 
 
@@ -1712,13 +1599,13 @@ void uiventas::loadVenta(QString idVenta)
 
 
 
-    idVentaActual = venta.mf_get_idVenta();    
+    idVentaActual = venta.mf_get_idVenta();
     ui->dateTimeEdit_entrega->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->dateTimeEdit_entrega->setDateTime(QDateTime::fromString(venta.mf_get_fechaEntrega(),Qt::ISODate));
     ui->lineEdit_restante->setText(QString::number(venta.mf_get_montoTotal().toDouble() - venta.mf_get_montoAdelanto().toDouble()));
 
 
-    ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
+
 
 
     //TIPO DE DOCUMENTO
@@ -1811,7 +1698,7 @@ void uiventas::loadVenta(QString idVenta)
     ui->pushButton_Reimprimir->setEnabled(true);
     ui->pushButton_Reimprimir->show();
 
-    comportamiento = false;    
+    comportamiento = false;
     habilitar_editar();
     //DESABILITANDO INTERFACE SI TODO ESTA CANCELADO
     if(ui->lineEdit_total->text().toDouble() == ui->lineEdit_total_cancelado->text().toDouble() && EntregadoProducto() == true)
@@ -1831,6 +1718,9 @@ void uiventas::loadVenta(QString idVenta)
         ui->lineEdit_efectivo->setEnabled(false);
         ui->dateTimeEdit_fecha_preventa->setMinimumDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
         ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::fromString(venta.mf_get_fechaPreVenta(),Qt::ISODate));
+    }
+    else{
+        ui->dateTimeEdit_fecha_preventa->setDateTime(QDateTime::currentDateTime());
     }
     //SETEANDO EL NUMERO DE DOCUMENTO
     ui->label_serie->setText(venta.mf_get_serieDocumento());

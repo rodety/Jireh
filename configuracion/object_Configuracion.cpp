@@ -89,6 +89,20 @@ void object_Configuracion::mf_set_codigoPos(_QSTR codigoPos)
 
 	md_o_codigoPos = codigoPos;
 }
+void object_Configuracion::mf_set_autorizacion(_QSTR autorizacion)
+{
+        //function mf_set_autorizacion
+        //w!
+
+        md_o_autorizacion = autorizacion;
+}
+void object_Configuracion::mf_set_codigoDoc(_QSTR codigoDoc)
+{
+        //function mf_set_codigoDoc
+        //w!
+
+        md_o_codigoDoc = codigoDoc;
+}
 
 _QSTR object_Configuracion::mf_get_idConfiguracion()
 {
@@ -139,7 +153,20 @@ _QSTR object_Configuracion::mf_get_codigoPos()
 
 	return md_o_codigoPos;
 }
+_QSTR object_Configuracion::mf_get_autorizacion()
+{
+        //function mf_get_autorizacion
+        //w!
 
+        return md_o_autorizacion;
+}
+_QSTR object_Configuracion::mf_get_codigoDoc()
+{
+        //function mf_get_codigoDoc
+        //w!
+
+        return md_o_codigoDoc;
+}
 bool object_Configuracion::mf_load(_QSTR pk)
 {
 
@@ -160,6 +187,8 @@ bool object_Configuracion::mf_load(_QSTR pk)
 		md_o_serieFactura = query.value(4).toString();
 		md_o_serieCotizacion = query.value(5).toString();
 		md_o_codigoPos = query.value(6).toString();
+                md_o_autorizacion = query.value(7).toString();
+                md_o_codigoDoc = query.value(8).toString();
 
 		//state OK
 		//w!
@@ -187,9 +216,13 @@ bool object_Configuracion::mf_add()
 	str_query += ", serieFactura";
 	str_query += ", serieCotizacion";
 	str_query += ", codigoPos";
+        str_query += ", autorizacion";
+        str_query += ", codigoDoc";
 	str_query += ") VALUES(";
 	str_query += "?";
 	str_query += ", ?";
+        str_query += ", ?";
+        str_query += ", ?";
 	str_query += ", ?";
 	str_query += ", ?";
 	str_query += ", ?";
@@ -211,6 +244,8 @@ bool object_Configuracion::mf_add()
 	query.bindValue(integer++, md_o_serieFactura);
 	query.bindValue(integer++, md_o_serieCotizacion);
 	query.bindValue(integer++, md_o_codigoPos);
+        query.bindValue(integer++, md_o_autorizacion);
+        query.bindValue(integer++, md_o_codigoDoc);
 
 	if(query.exec())
 	{
@@ -234,14 +269,16 @@ bool object_Configuracion::mf_update()
 
 	QSqlQuery query;
 
-	query.prepare("UPDATE Configuracion SET Tienda_idTienda = ?, igv = ?, serieBoleta = ?, serieFactura = ?, serieCotizacion = ?, codigoPos = ? WHERE idConfiguracion = ?");
+        query.prepare("UPDATE Configuracion SET Tienda_idTienda = ?, igv = ?, serieBoleta = ?, serieFactura = ?, serieCotizacion = ?, codigoPos = ?, autorizacion = ?, codigoDoc = ? WHERE idConfiguracion = ?");
 	query.bindValue(0, md_o_Tienda_idTienda);
 	query.bindValue(1, md_o_igv);
 	query.bindValue(2, md_o_serieBoleta);
 	query.bindValue(3, md_o_serieFactura);
 	query.bindValue(4, md_o_serieCotizacion);
 	query.bindValue(5, md_o_codigoPos);
-	query.bindValue(6, md_o_idConfiguracion);
+        query.bindValue(6, md_o_autorizacion);
+        query.bindValue(7, md_o_codigoDoc);
+        query.bindValue(8, md_o_idConfiguracion);
 
 	if(query.exec())
 	{

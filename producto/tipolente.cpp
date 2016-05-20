@@ -72,6 +72,6 @@ bool tipoLente::completar()
 QSqlQueryModel * tipoLente::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTipoLente,nombre FROM TipoLente");
+    model->setQuery("SELECT idTipoLente,nombre FROM TipoLente ORDER BY nombre ASC");
     return model;
 }

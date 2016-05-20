@@ -154,14 +154,15 @@ bool otros::actualizar()
             //MOTIVO DE DECREMENTO DE STOCK
             bool ok;
              motivo = "Reduccion de stock "+QInputDialog::getText(parent,"Motivo de la reduccion de Stock","Motivo:",QLineEdit::Normal,"",&ok);
+             if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
+             {
+                 return false;
+             }
 
 
         }
 
-        if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
-        {
-            return false;
-        }
+
 
         query.clear();
         query.prepare("UPDATE Otros SET Color_idColor=?,Talla_idTalla=?,Calidad_idCalidad=?,TipoOtros_idTipoOtros=?,Genero_idGenero=? WHERE Producto_idProducto=?");

@@ -72,6 +72,6 @@ bool genero::completar()
 QSqlQueryModel * genero::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idGenero,nombre FROM Genero");
+    model->setQuery("SELECT idGenero,nombre FROM Genero ORDER BY nombre ASC");
     return model;
 }

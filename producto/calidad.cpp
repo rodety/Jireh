@@ -73,6 +73,6 @@ bool calidad::completar()
 QSqlQueryModel * calidad::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCalidad,nombre FROM Calidad");
+    model->setQuery("SELECT idCalidad,nombre FROM Calidad ORDER BY nombre ASC");
     return model;
 }

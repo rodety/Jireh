@@ -52,7 +52,7 @@ bool calidadluna::eliminar()
 QSqlQueryModel* calidadluna::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCalidadLuna,nombre FROM CalidadLuna");
+    model->setQuery("SELECT idCalidadLuna,nombre FROM CalidadLuna ORDER BY nombre ASC;");
     return model;
 }
 

@@ -23,12 +23,15 @@ void impresion::setRucTienda_Telefono(QString tmp, QString tmp1)
 
 void impresion::setNumeroTicket_Fecha(QString tmp, QString tmp1)
 {
-    Ticket1.TextoExtremos("Ticket nro: "+tmp,tmp1);
+    Ticket1.TextoIzquierda("Ticket Boleta "+tmp);
+    Ticket1.TextoIzquierda("Fecha: "+tmp1);
 }
 
 void impresion::setNumeroFactura_Fecha(QString tmp, QString tmp1)
 {
-    Ticket1.TextoExtremos("Factura nro: "+tmp,tmp1);
+    Ticket1.TextoIzquierda("Ticket Factura "+tmp);
+    Ticket1.TextoIzquierda("Fecha: "+tmp1);
+
 }
 
 void impresion::setNombreCliente(QString tmp)
@@ -56,7 +59,7 @@ void impresion::setArticuloVector(QVector<articulo> art)
     for(int i=0;i<art.size();i++)
     {
         Ticket1.Descripcion();
-        Ticket1.TextoAutoFormateado(art[i].get_t_articulo());
+        Ticket1.TextoMensaje(art[i].get_t_articulo());
         Ticket1.EncabezadoVenta(); // imprime encabezados
         Ticket1.AgregaArticulo(art[i].get_t_entregado(),art[i].get_cantidad().toInt(),art[i].get_p_unitario().toDouble(),art[i].get_descuento().toDouble(),art[i].get_importe().toDouble()); //imprime una linea de descripcion
         Ticket1.LineasGuion(); // imprime una linea de guiones
@@ -69,7 +72,7 @@ void impresion::setArticuloVector(QVector<articulo> art)
 void impresion::setSubTotal(QString tmp)
 {
     QString
-            text = "VENTA S/. "; text.append(tmp);
+            text = "SUB TOTAL S/. "; text.append(tmp);
     Ticket1.TextoDerecha(text);
 
 }
@@ -90,7 +93,7 @@ void impresion::setTotal(QString tmp)
 
 void impresion::setEntregaEfectivo(QString tmp)
 {
-    Ticket1.LineasGuion(); // imprime una linea de guiones
+
     QString
             text = "CANCELADO EFECTIVO S/."; text.append(tmp);
     Ticket1.TextoIzquierda(text);
@@ -106,7 +109,7 @@ void impresion::setEntregaTarjeta(QString tmp)
 
 void impresion::setAdelantoEfectivo(QString tmp)
 {
-    Ticket1.LineasGuion(); // imprime una linea de guiones
+
     QString
             text = "ADELANTO EFECTIVO S/."; text.append(tmp);
     Ticket1.TextoIzquierda(text);
@@ -163,6 +166,24 @@ void impresion::setMensajeFinal(QString tmp)
 void impresion::imprimir()
 {
     Ticket1.imprime();
+}
+
+void impresion::setAutorizacionSunat(QString tmp)
+{
+    Ticket1.TextoIzquierda(tmp);
+}
+
+void impresion::setSerieImpresora(QString tmp)
+{
+    Ticket1.TextoIzquierda(tmp);
+}
+
+void impresion::setTotalVenta(QString tmp)
+{
+    Ticket1.LineasGuion(); // imprime una linea de guiones
+    QString
+            text = "VALOR DE VENTA POR S/. "; text.append(tmp);
+    Ticket1.TextoIzquierda(text);
 }
 
 

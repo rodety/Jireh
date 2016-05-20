@@ -53,7 +53,7 @@ bool potencia::eliminar()
 QSqlQueryModel* potencia::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idPotencia,nombre FROM Potencia");
+    model->setQuery("SELECT idPotencia,nombre FROM Potencia ORDER BY nombre ASC");
     return model;
 }
 

@@ -74,6 +74,6 @@ bool tratamiento::completar()
 QSqlQueryModel * tratamiento::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTratamiento,nombre FROM Tratamiento");
+    model->setQuery("SELECT idTratamiento,nombre FROM Tratamiento ORDER BY nombre ASC");
     return model;
 }

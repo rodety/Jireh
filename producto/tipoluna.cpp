@@ -52,7 +52,7 @@ bool tipoLuna::eliminar()
 QSqlQueryModel* tipoLuna::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTipoLuna,nombre FROM TipoLuna");
+    model->setQuery("SELECT idTipoLuna,nombre FROM TipoLuna ORDER BY nombre ASC");
     return model;
 }
 

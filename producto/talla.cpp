@@ -75,6 +75,6 @@ bool talla::completar()
 QSqlQueryModel * talla::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTalla,nombre FROM Talla");
+    model->setQuery("SELECT idTalla,nombre FROM Talla ORDER BY nombre ASC");
     return model;
 }

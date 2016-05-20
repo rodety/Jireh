@@ -53,7 +53,7 @@ bool estado::eliminar()
 QSqlQueryModel* estado::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idEstado,nombre FROM Estado");
+    model->setQuery("SELECT idEstado,nombre FROM Estado ORDER BY nombre ASC");
     return model;
 }
 bool estado::completar()

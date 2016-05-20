@@ -50,7 +50,7 @@ bool material::eliminar()
 QSqlQueryModel* material::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idMaterial,nombre FROM Material");
+    model->setQuery("SELECT idMaterial,nombre FROM Material ORDER BY nombre ASC");
     return model;
 }
 

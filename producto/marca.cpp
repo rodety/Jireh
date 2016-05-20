@@ -74,6 +74,6 @@ bool m_marca::completar()
 QSqlQueryModel * m_marca::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idMarca,nombre FROM Marca");
+    model->setQuery("SELECT idMarca,nombre FROM Marca ORDER BY nombre ASC");
     return model;
 }

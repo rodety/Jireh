@@ -37,7 +37,7 @@ class uiventas;
 class uiventas : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     explicit uiventas(QWidget *parent = 0);
     ~uiventas();
@@ -56,6 +56,7 @@ private slots:
     void recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString);
     void on_lineEdit_efectivo_textChanged(const QString &arg1);
     void on_lineEdit_tarjeta_textChanged(const QString &arg1);
+    void calcular_monto_venta(double adelanto);
 
     void on_radioButton_Boleta_clicked();
 
@@ -63,7 +64,7 @@ private slots:
 
     void on_radioButton_cotizacion_clicked();
 
-    void on_pushButton_guardar_clicked();    
+    void on_pushButton_guardar_clicked();
 
     void on_tableView_Productos_doubleClicked(const QModelIndex &index);
 
@@ -87,7 +88,7 @@ private slots:
 
     void on_tableView_Reporte_Ventas_doubleClicked(const QModelIndex &index);
 
-    void on_pushButton_limpiar_clicked();    
+    void on_pushButton_limpiar_clicked();
 
     void on_pushButton_anular_clicked();
 
@@ -134,6 +135,7 @@ private:
     double sub_total;
     double monto_igv;
     double igv;
+    double pago_actual;
     void calculaprecio(double);
     void configuracionesIniciaciales();
     void configuracionReportes();
@@ -181,6 +183,10 @@ private:
     map<int,int> posComboboxEmpresa;
     bool ingresarMedida;
     bool recuperarVenta;
+
+    double m_subTotal;
+    double m_igv;
+    double m_total;
 
 
 

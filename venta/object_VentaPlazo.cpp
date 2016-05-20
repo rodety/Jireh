@@ -269,8 +269,8 @@ bool object_VentaPlazo::mf_add()
     str_query += ", "+md_o_montoTarjeta;
     str_query += ", '"+md_o_fecha;
     str_query += "', "+md_o_numeroDocumento;
-    str_query += ", "+md_o_serieDocumento;
-    str_query += ", "+md_o_registro;
+    str_query += ", '"+md_o_serieDocumento;
+    str_query += "', "+md_o_registro;
     str_query += ")";
 
 

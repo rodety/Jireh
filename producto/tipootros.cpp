@@ -73,6 +73,6 @@ bool tipoOtros::completar()
 QSqlQueryModel * tipoOtros::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTipoOtros,nombre FROM TipoOtros");
+    model->setQuery("SELECT idTipoOtros,nombre FROM TipoOtros ORDER BY nombre ASC");
     return model;
 }

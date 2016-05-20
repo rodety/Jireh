@@ -181,7 +181,7 @@ bool object_Lista::mf_remove()
 QSqlQueryModel * object_Lista::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idLista, nombre FROM Lista");
+    model->setQuery("SELECT idLista, nombre FROM Lista ORDER BY nombre ASC");
     return model;
 }
 

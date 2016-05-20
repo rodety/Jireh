@@ -181,7 +181,7 @@ bool object_Laboratorio::mf_remove()
 QSqlQueryModel * object_Laboratorio::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idLaboratorio, nombre FROM Laboratorio");
+    model->setQuery("SELECT idLaboratorio, nombre FROM Laboratorio ORDER BY nombre ASC");
     return model;
 }
 

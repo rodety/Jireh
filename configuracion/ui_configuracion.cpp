@@ -14,6 +14,7 @@
 #include "configuracion/configurador.h"
 #include "configuracion/dialoglogin.h"
 #include "configuracion/ui_configuracion.h"
+#include "configuracion/ui_precios.h"
 
 
 
@@ -98,7 +99,7 @@ void ui_configuracion::update_comboBox_Empresa()
     ui->comboBox_empresa->clear();
 
     QSqlQuery query;
-    query.prepare("SELECT idEmpresa,razonSocial FROM Empresa");
+    query.prepare("SELECT idEmpresa,razonSocial FROM Empresa ORDER BY razonSocial ASC");
     query.exec();
 
     int c = 0;
@@ -119,7 +120,7 @@ void ui_configuracion::update_comboBox_Tienda(QString idEmpresa)
     ui->comboBox_tienda->clear();
 
     QSqlQuery query;
-    query.prepare("SELECT idTienda,nombre FROM Tienda WHERE Empresa_idEmpresa=?");
+    query.prepare("SELECT idTienda,nombre FROM Tienda WHERE Empresa_idEmpresa=? ORDER BY nombre ASC");
     query.bindValue(0,idEmpresa);
     query.exec();
 
@@ -184,7 +185,7 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     }
     if(ui->lineEdit_cod_pos->text().size() ==0)
     {
-        msgBox.setText("Ingrese el codigo de ma maquina POS");
+        msgBox.setText("Ingrese la serie de impresora");
         msgBox.exec();
         ui->lineEdit_cod_pos->setCursor(this->cursor());
         return;
@@ -206,6 +207,8 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     QString serieFactura = ui->lineEdit_serieFactura->text();
     QString serieCotizacion = ui->lineEdit_serieCotizacion->text();
     QString codpos = ui->lineEdit_cod_pos->text();
+    QString autorizacion = ui->lineEdit_autorizacion->text();
+    QString codigoDoc = ui->lineEdit_codigo_documento->text();
     QSqlQuery query;
     query.prepare("SELECT idConfiguracion FROM Configuracion WHERE Tienda_idTienda = ?");
     query.bindValue(0,currentIdTienda);
@@ -214,25 +217,30 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     if(query.next())
     {
         QString id = query.value(0).toString();
-        query.prepare("UPDATE Configuracion SET igv = ?,serieBoleta = ?,serieFactura = ?,serieCotizacion = ?, codigoPos = ? WHERE (idConfiguracion = ?)");
+        query.prepare("UPDATE Configuracion SET igv = ?,serieBoleta = ?,serieFactura = ?,serieCotizacion = ?, codigoPos = ?,autorizacion = ?,codigoDoc = ? WHERE (idConfiguracion = ?)");
         query.bindValue(0,igv);
         query.bindValue(1,serieBoleta);
         query.bindValue(2,serieFactura);
         query.bindValue(3,serieCotizacion);
         query.bindValue(4,codpos);
-        query.bindValue(5,id);
+        query.bindValue(5,autorizacion);
+        query.bindValue(6,codigoDoc);
+        query.bindValue(7,id);
 
     }
     else
     {
 
-        query.prepare("INSERT INTO Configuracion (Tienda_idTienda,igv,serieBoleta,serieFactura,serieCotizacion,codigoPos) VALUES (?,?,?,?,?,?)");
+        query.prepare("INSERT INTO Configuracion (Tienda_idTienda,igv,serieBoleta,serieFactura,serieCotizacion,codigoPos,autorizacion,codigoDoc) VALUES (?,?,?,?,?,?,?,?)");
         query.bindValue(0,currentIdTienda);
         query.bindValue(1,igv);
         query.bindValue(2,serieBoleta);
         query.bindValue(3,serieFactura);
         query.bindValue(4,serieCotizacion);
         query.bindValue(5,codpos);
+        query.bindValue(6,autorizacion);
+        query.bindValue(7,codigoDoc);
+
         qDebug()<<currentIdTienda<<" "<<igv<<" "<<serieBoleta<<" "<<serieFactura<<" "<<serieCotizacion<<" "<<codpos<<endl;
 
     }
@@ -279,7 +287,7 @@ void ui_configuracion::on_comboBox_tienda_currentIndexChanged(const QString &arg
 {
     set_currentIdTienda(Tiendas[arg1]);
     QSqlQuery query;
-    query.prepare("SELECT igv,serieBoleta,serieFactura,serieCotizacion,codigoPos FROM Configuracion WHERE (Tienda_idTienda = ?)");
+    query.prepare("SELECT igv,serieBoleta,serieFactura,serieCotizacion,codigoPos,autorizacion,codigoDoc FROM Configuracion WHERE (Tienda_idTienda = ?)");
     query.bindValue(0,currentIdTienda);
     query.exec();
     query.next();
@@ -288,6 +296,8 @@ void ui_configuracion::on_comboBox_tienda_currentIndexChanged(const QString &arg
     ui->lineEdit_serieFactura->setText(query.value(2).toString());
     ui->lineEdit_serieCotizacion->setText(query.value(3).toString());
     ui->lineEdit_cod_pos->setText(query.value(4).toString());
+    ui->lineEdit_autorizacion->setText(query.value(5).toString());
+    ui->lineEdit_codigo_documento->setText(query.value(6).toString());
 }
 
 void ui_configuracion::on_btn_eliminar_ducumento_clicked()
@@ -402,7 +412,9 @@ void ui_configuracion::on_btn_backup_clicked()
     query.exec("insert into Programa(nombre,tipo,dato) values('Logitud de Respuesta','entero','10')");
     */
 
-    actualizar_descuento();
+    ui_precios* precio = new ui_precios;
+    precio->show();
+
 
 }
 
@@ -449,22 +461,29 @@ void ui_configuracion::on_tableView_configuracion_clicked(const QModelIndex &ind
 bool ui_configuracion::actualizar_descuento(){
 
     QSqlQuery query, query1;
-    query.prepare("SELECT idProducto,precioVenta FROM Producto WHERE tipo = 1 OR tipo = 2");
+    query.prepare("SELECT idProducto,precioVenta FROM Producto");
     double precio,descuento;
     if (!query.exec())
     {
         qDebug()<<"Error en la consulta SQL"<<endl;
     }
+    else{
+        qDebug()<<"Termino consulto"<<endl;
+
+    }
     while(query.next())
     {
         query1.prepare("UPDATE Producto SET precioDescuento = ? WHERE idProducto = ?");
-        query1.bindValue(0,query.value(0));
+        query1.bindValue(0,query.value(0).toString());
         precio = query.value(1).toDouble();
-        descuento = precio -(precio * 1.10);
+        descuento = (precio * 1.10)-precio;
         query1.bindValue(1,descuento);
         if(!query1.exec())
         {
             qDebug()<<"fallo al actualizar precio"<<endl;
+        }
+        else{
+            qDebug()<<"id "<<query.value(0).toString()<<" "<<descuento<<endl;
         }
 
     }

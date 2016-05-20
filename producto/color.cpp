@@ -73,6 +73,6 @@ bool color::completar()
 QSqlQueryModel * color::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idColor,nombre FROM Color");
+    model->setQuery("SELECT idColor,nombre FROM Color ORDER BY nombre ASC");
     return model;
 }

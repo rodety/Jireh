@@ -55,7 +55,7 @@ bool diametro::eliminar()
 QSqlQueryModel* diametro::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idDiametro,valor FROM Diametro");
+    model->setQuery("SELECT idDiametro,valor FROM Diametro ORDER BY valor ASC");
     return model;
 }
 

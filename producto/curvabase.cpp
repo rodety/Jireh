@@ -55,7 +55,7 @@ bool curvaBase::eliminar()
 QSqlQueryModel* curvaBase::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idCurvaBase,valor FROM CurvaBase");
+    model->setQuery("SELECT idCurvaBase,valor FROM CurvaBase ORDER BY valor ASC");
     return model;
 }
 

@@ -74,6 +74,6 @@ bool forma::completar()
 QSqlQueryModel * forma::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idForma,nombre FROM Forma");
+    model->setQuery("SELECT idForma,nombre FROM Forma ORDER BY nombre ASC");
     return model;
 }

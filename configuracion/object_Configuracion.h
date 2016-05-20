@@ -15,6 +15,8 @@ private:
 	_QSTR md_o_serieFactura;
 	_QSTR md_o_serieCotizacion;
 	_QSTR md_o_codigoPos;
+        _QSTR md_o_autorizacion;
+        _QSTR md_o_codigoDoc;
 
 public:
 	object_Configuracion();
@@ -28,6 +30,8 @@ public:
 	void mf_set_serieFactura(_QSTR serieFactura);
 	void mf_set_serieCotizacion(_QSTR serieCotizacion);
 	void mf_set_codigoPos(_QSTR codigoPos);
+        void mf_set_autorizacion(_QSTR autorizacion);
+        void mf_set_codigoDoc(_QSTR codigoDoc);
 
 	_QSTR mf_get_idConfiguracion();
 	_QSTR mf_get_Tienda_idTienda();
@@ -36,6 +40,8 @@ public:
 	_QSTR mf_get_serieFactura();
 	_QSTR mf_get_serieCotizacion();
 	_QSTR mf_get_codigoPos();
+        _QSTR mf_get_autorizacion();
+        _QSTR mf_get_codigoDoc();
 
 	bool mf_load(_QSTR pk);
 	bool mf_add();

@@ -20,6 +20,8 @@ public:
 
     void setNumeroTicket_Fecha(QString tmp,QString tmp1);
     void setNumeroFactura_Fecha(QString tmp,QString tmp1);
+    void setAutorizacionSunat(QString tmp);
+    void setSerieImpresora(QString tmp);
 
     void setNombreCliente(QString tmp);
     void setRucCliente(QString tmp);
@@ -28,6 +30,7 @@ public:
     void setSubTotal(QString tmp);
     void setIgv(QString tmp);
     void setTotal(QString tmp);
+    void setTotalVenta(QString tmp);
     void setEntregaEfectivo(QString tmp);
     void setEntregaTarjeta(QString tmp);
     void setAdelantoEfectivo(QString tmp);

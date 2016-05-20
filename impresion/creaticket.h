@@ -29,14 +29,14 @@ private:
 public:
     CreaTicket()
     {
-        m_max = 55;
-        t_izquierda = 55;
-        t_derecha = 55;
-        t_centro = 55;
+        m_max = 50;
+        t_izquierda = 60;
+        t_derecha = 60;
+        t_centro = 60;
         t_extremo = 18;//18
         t_totales = 25;
         t_descripcion = 36;//antes 16
-        t_longitud = 45;
+        t_longitud = 40;
         t_articulo = 40;
     }
      void LineasGuion()

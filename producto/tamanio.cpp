@@ -75,6 +75,6 @@ bool tamanio::completar()
 QSqlQueryModel * tamanio::mostrarId()
 {
     QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("SELECT idTamanio,nombre FROM Tamanio");
+    model->setQuery("SELECT idTamanio,nombre FROM Tamanio ORDER BY nombre ASC");
     return model;
 }

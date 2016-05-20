@@ -176,13 +176,15 @@ bool luna:: actualizar()
             bool ok;
              motivo = "Reduccion de stock "+QInputDialog::getText(parent,"Motivo de la reduccion de Stock","Motivo:",QLineEdit::Normal,"",&ok);
 
+             if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
+             {
+                 return false;
+             }
+
 
         }
 
-        if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
-        {
-            return false;
-        }
+
 
         query.clear();
         query.prepare("UPDATE Luna SET Diametro_idDiametro=?,CalidadLuna_idCalidadLuna=?,TipoLuna_idTipoLuna=?,Tratamiento_idTratamiento=?,valorInicial=?,valorFinal=?,precio=?,cilindro=?,cilindrof=?, Laboratorio_idLaboratorio=?,Lista_idLista=? WHERE Producto_idProducto=?");

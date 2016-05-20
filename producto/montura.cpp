@@ -155,20 +155,22 @@ bool montura::actualizar()
         }
 
 
-        QString motivo;
+        QString motivo = "Reduccion de stock ";
         if(stock.toInt() < stock_last.toInt())
         {
             //MOTIVO DE DECREMENTO DE STOCK
             bool ok;
-             motivo = "Reduccion de stock "+QInputDialog::getText(parent,"Motivo de la reduccion de Stock","Motivo:",QLineEdit::Normal,"",&ok);
+             motivo +=QInputDialog::getText(parent,"Motivo de la reduccion de Stock","Motivo:",QLineEdit::Normal,"",&ok);
+
+             if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
+             {
+                 return false;
+             }
 
 
         }
 
-        if(!registrarKardex(stock_last.toInt() - stock.toInt(),stock_last.toInt(),motivo,2))
-        {
-            return false;
-        }
+
 
         query.clear();
         query.prepare("UPDATE Montura SET Forma_idForma=?,Color_idColor=?,Tamanio_idTamanio=?,Calidad_idCalidad=?,Genero_idGenero=? WHERE Producto_idProducto=?");
