@@ -170,7 +170,8 @@ SOURCES += main.cpp\
     compra/object_proveedor.cpp \
     persona/persona.cpp \
     configuracion/programa.cpp \
-    configuracion/ui_precios.cpp
+    configuracion/ui_precios.cpp \
+    vitrina/visualizadoretiquetas.cpp
 
 HEADERS  += mainwindow.h \
     configuracion/configprogram.h \
@@ -310,7 +311,8 @@ HEADERS  += mainwindow.h \
     compra/object_proveedor.h \
     persona/persona.h \
     configuracion/programa.h \
-    configuracion/ui_precios.h
+    configuracion/ui_precios.h \
+    vitrina/visualizadoretiquetas.h
 
 FORMS    += mainwindow.ui \
     producto/ui_producto.ui \
@@ -354,7 +356,8 @@ FORMS    += mainwindow.ui \
     venta/ui_busca_producto.ui \
     vitrina/almacen_datos.ui \
     producto/ui_cantidad.ui \
-    configuracion/ui_precios.ui
+    configuracion/ui_precios.ui \
+    vitrina/visualizadoretiquetas.ui
 
 RESOURCES += \
     Icons/Icons.qrc \
