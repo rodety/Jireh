@@ -28,6 +28,7 @@
 #include <producto/object_TipoOtros.h>
 #include <producto/object_Accesorios_n.h>
 #include <extras/etiqueta.h>
+#include <vitrina/visualizadoretiquetas.h>
 class ui_tienda_agregar;
 
 class ui_agregar_empresa;

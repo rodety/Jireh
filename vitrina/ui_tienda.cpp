@@ -1298,19 +1298,20 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
         //QImage imagen=tmp.scaledToHeight(60);
         //Escalando Imagen
         QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
-        painter.drawImage((200*k)+60,(100*j)+30,imagen);
-        painter.drawText((200*k)+60,(100*j)+90,etiquetas[i].getCodigo());
-        painter.drawText((200*k)+180,(100*j)+90,etiquetas[i].getMarca());
-        painter.drawText((200*k)+60,(100*j)+106,etiquetas[i].getUbicacion());
-        painter.drawText((200*k)+180,(100*j)+106,"S/."+etiquetas[i].getPrecio());
-        /*p.drawImage((500*k)+220,(100*j)+30,imagen);
-        p.drawText((500*k)+440,(100*j)+46,etiquetas[i].getCodigo());
-        p.drawText((500*k)+440,(100*j)+62,etiquetas[i].getColor());
-        p.drawText((500*k)+510,(100*j)+62,etiquetas[i].getCalidad());
-        p.drawText((500*k)+440,(100*j)+78,etiquetas[i].getUbicacion());
-        p.drawText((500*k)+510,(100*j)+78,"S/."+etiquetas[i].getPrecio());*/
+        painter.drawImage((170*k)+60,(120*j)+30,imagen);
+        painter.drawText((170*k)+60,(120*j)+110,etiquetas[i].getCodigo());
+        painter.drawText((170*k)+120,(120*j)+110,etiquetas[i].getMarca());
+        painter.drawText((170*k)+60,(120*j)+126,etiquetas[i].getUbicacion());
+        painter.drawText((170*k)+120,(120*j)+126,"S/."+etiquetas[i].getPrecio());
 
-        if(k==1)
+        /*painter.drawImage((200*k)+60,(100*j)+30,imagen);
+        painter.drawText((200*k)+60,(100*j)+90,etiquetas[i].getCodigo());
+        painter.drawText((200*k)+440,(100*j)+62,etiquetas[i].getMarca());
+        painter.drawText((200*k)+440,(100*j)+78,etiquetas[i].getUbicacion());
+        painter.drawText((200*k)+510,(100*j)+78,"S/."+etiquetas[i].getPrecio());*/
+
+        //CANTIDAD COLUMNAS EN HOJA
+        if(k==3)
         {
             k=-1;
             j++;
@@ -1346,12 +1347,15 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
     }
     ui->draw_label->setPixmap(pm.scaled(ui->draw_label->width(),ui->draw_label->height()));
 
-    QImage image(800,600,QImage::Format_RGB32);
+    QImage image(595,842,QImage::Format_RGB32);
     QPainter paint;
     paint.begin(&image);
     paint.drawRect(10,10,50,50);
     paint.end();
-    image.save("image.bmp");
+    image.save("image.png");
+    /*VisualizadorEtiquetas* previsualizador = new VisualizadorEtiquetas;
+    previsualizador->setImage(ui->draw_label);
+    previsualizador->show();*/
 
 
 }
