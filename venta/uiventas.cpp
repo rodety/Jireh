@@ -1933,12 +1933,13 @@ void uiventas::on_pushButton_Imprimir_clicked()
             if(j<columna-1)
                 var +=";";
         }
+        qDebug()<<var<<endl;
 
         lista_e<<var;
     }
 
    for(int i=0;i<lista_e.length();i++)
-        qDebug()<<lista_e.at(i)<<endl;
+        //qDebug()<<lista_e.at(i)<<endl;
    lista_2<<ui->label_Resultado->text();
    NCReport report;
    report.setReportSource( NCReportSource::File );

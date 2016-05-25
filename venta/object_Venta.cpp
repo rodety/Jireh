@@ -562,6 +562,7 @@ QSqlQueryModel* object_Venta::mf_show(int tipo)
         case 11:
         {
         consulta = "SELECT v.idVenta as 'Id', v.fechaPreventa as 'Fecha - Hora',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v, Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaPreventa >= '"+md_o_dateFrom+"' AND v.tipoDocumento like '"+md_o_tipoDocumento+"' AND v.formaPago like '"+md_o_formaPago+"' AND v.Colaborador_idColaborador like '"+md_o_Colaborador_idColaborador+"' AND c.idCliente = v.Cliente_idCliente AND v.Anulado != '1' ORDER BY v.idVenta";
+        qDebug()<<consulta<<endl;
             break;
         }
         case 12:
