@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
-    <height>495</height>
+    <width>721</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="font">
@@ -581,7 +581,7 @@
       <attribute name="title">
        <string>Etiqueta</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>210</x>
@@ -669,14 +669,14 @@
         <rect>
          <x>210</x>
          <y>80</y>
-         <width>750</width>
-         <height>10100</height>
+         <width>595</width>
+         <height>1042</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>595</width>
-         <height>1042</height>
+         <height>842</height>
         </size>
        </property>
        <property name="frameShape">
@@ -686,7 +686,7 @@
         <string/>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>

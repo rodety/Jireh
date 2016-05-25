@@ -51,9 +51,11 @@ void etiqueta::etiquetar()
     struct zint_symbol *my_symbol;
     my_symbol = ZBarcode_Create();
     strcpy(my_symbol->outfile,path.toStdString().c_str());
-    my_symbol->symbology=BARCODE_CODE128B;
-    my_symbol->input_mode=DATA_MODE;
-    my_symbol->output_options=BARCODE_BOX;
+    my_symbol->height = 25;
+    my_symbol->scale = 0.5;
+    //my_symbol->symbology=BARCODE_CODE128B;
+    //my_symbol->input_mode=DATA_MODE;
+    //my_symbol->output_options=BARCODE_BOX;
     int error;
     error = ZBarcode_Encode_and_Print(my_symbol,(unsigned char*)codigo.toStdString().c_str(), 0, 0);
     qDebug()<<codigo<<endl;

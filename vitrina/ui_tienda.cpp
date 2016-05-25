@@ -1294,15 +1294,17 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
 
     for(int i=0;i<etiquetas.size();i++)
     {
-        QImage tmp("etiquetas/imagenes/"+etiquetas[i].getCodigo()+".png");
+        QImage imagen("etiquetas/imagenes/"+etiquetas[i].getCodigo()+".png");
         //QImage imagen=tmp.scaledToHeight(60);
         //Escalando Imagen
-        QImage imagen=tmp.scaled(130,40,Qt::IgnoreAspectRatio,Qt::FastTransformation);
+        //QImage imagen=tmp.scaledToWidth(120,Qt::FastTransformation);
         painter.drawImage((170*k)+60,(120*j)+30,imagen);
         painter.drawText((170*k)+60,(120*j)+110,etiquetas[i].getCodigo());
         painter.drawText((170*k)+120,(120*j)+110,etiquetas[i].getMarca());
         painter.drawText((170*k)+60,(120*j)+126,etiquetas[i].getUbicacion());
         painter.drawText((170*k)+120,(120*j)+126,"S/."+etiquetas[i].getPrecio());
+
+
 
         /*painter.drawImage((200*k)+60,(100*j)+30,imagen);
         painter.drawText((200*k)+60,(100*j)+90,etiquetas[i].getCodigo());
@@ -1362,25 +1364,25 @@ void ui_tienda::on_pushButton_previsualizar_clicked()
 
 void ui_tienda::on_pushButton_imprimir_clicked()
 {
-    QPrinter printer(QPrinter::HighResolution);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setFullPage(QPrinter::A4);
-    printer.setOutputFileName("etiquetas.pdf");
-    QPainter painter;
-    if (! painter.begin(&printer))
-        qWarning("failed to open file, is it writable?");
-    QImage act("etiquetas/0.png");
-    act=act.scaledToWidth(9000);
-    painter.drawImage(0,0,act);
-    painter.end();
-    QTextEdit parent;
-    QPrintDialog*dlg = new QPrintDialog(&printer,&parent);
-    dlg->setWindowTitle(QObject::tr("Print Document"));
+    QPrinter printer;
 
-    if(dlg->exec() == QDialog::Accepted) {
-        parent.print(&printer);
+    QPrintDialog *dialog = new QPrintDialog(&printer);
+    dialog->setWindowTitle("Imprimir Etiquetas");
+
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        QImage act("etiquetas/0.png");
+        act=act.scaledToWidth(9000);
+        QPainter painter;
+        if (! painter.begin(&printer))
+                qWarning("failed to open file, is it writable?");
+        //TAMANO DE FUENTE CALIBRADA PARA TMU220PA
+        painter.drawImage(0,0,act);
+        if(!painter.end())
+        {
+            qWarning("No termino painter");
+        }
     }
-    delete dlg;
 }
 
 void ui_tienda::on_pushButton_anterior_clicked()
