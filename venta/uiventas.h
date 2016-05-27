@@ -124,6 +124,8 @@ private slots:
 
     void on_comboBox_buscar_producto_activated(const QString &arg1);
 
+
+
 private:
     Ui::uiventas *ui;
     int count_row;

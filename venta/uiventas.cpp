@@ -1918,64 +1918,86 @@ void uiventas::on_buscar_venta_returnPressed()
 
 void uiventas::on_pushButton_Imprimir_clicked()
 {
-    QStringList lista_e, lista_2;
+    QStringList lista_e, lista_2, lista_3;
 
-    int fila= ui->tableView_Reporte_Ventas->model()->rowCount() ;// indice.row();
-    int columna= ui->tableView_Reporte_Ventas->model()->columnCount();
+        int fila= ui->tableView_Reporte_Ventas->model()->rowCount() ;// indice.row();
+        int columna= ui->tableView_Reporte_Ventas->model()->columnCount();
 
-    QString var;
-   for(int i=0;i<fila;i++)
-    {
-        var.clear();
-        for(int j=0;j<columna;j++)
+        QString var,id;
+        QStringList ids;
+       for(int i=0;i<fila;i++)
         {
-            var += ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
-            if(j<columna-1)
-                var +=";";
+            var.clear();
+            for(int j=0;j<columna;j++)
+            {
+                var += ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+                if(j<columna-1)
+                    var +=";";
+                if(j==0)
+                   id=var;
+            }
+            qDebug()<<var<<endl;
+            lista_e<<var;
+            ids<<id;
         }
-        qDebug()<<var<<endl;
+       for(int i=0;i<lista_e.length();i++)
+            qDebug()<<lista_e.at(i)<<endl;
+       qDebug()<<"antes de entrar for"<<endl;
+       for(int i=0;i<ids.length();i++)
+            qDebug()<<ids.at(i)<<endl;
 
-        lista_e<<var;
-    }
 
-   for(int i=0;i<lista_e.length();i++)
-        //qDebug()<<lista_e.at(i)<<endl;
-   lista_2<<ui->label_Resultado->text();
-   NCReport report;
-   report.setReportSource( NCReportSource::File );
-   report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
-   report.addParameter("tienda",ui->comboBox_Tienda->currentText());
-   report.addParameter("documento",ui->comboBox_Documento->currentText());
-   report.addParameter("pago",ui->comboBox_Forma_Pago->currentText());
-   report.addParameter("colaborador",ui->comboBox_Colaborador->currentText());
-   report.addParameter("desde",ui->dateTimeEdit_Desde->text());
-   report.addParameter("hasta",ui->dateTimeEdit_Hasta->text());
-   report.addParameter("total",ui->label_Resultado->text());
+       lista_2<<ui->label_Resultado->text();
 
-   report.addStringList(lista_e,"mylist");
-    report.addStringList(lista_2,"mylist2");
+       //llenado de variables: uno x uno
+       NCReport report;
+       report.setReportSource( NCReportSource::File );
+       report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
+       report.addParameter("tienda",ui->comboBox_Tienda->currentText());
+       report.addParameter("documento",ui->comboBox_Documento->currentText());
+       report.addParameter("pago",ui->comboBox_Forma_Pago->currentText());
+       report.addParameter("colaborador",ui->comboBox_Colaborador->currentText());
+       report.addParameter("desde",ui->dateTimeEdit_Desde->text());
+       report.addParameter("hasta",ui->dateTimeEdit_Hasta->text());
+       report.addParameter("total",ui->label_Resultado->text());
 
-   report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
-   report.runReportToPreview();
+       report.addStringList(lista_e,"mylist");
+       report.addStringList(lista_2,"mylist2");
 
-    if (report.hasError()) {
+       QSqlQuery query;
 
-        QMessageBox po;
-        po.setText(report.lastErrorMsg());
-        po.exec();
-    }
-    else
-    {
+       query.prepare("select descripcion, cantidad, precio,descuento from Venta_has_Producto where Venta_idVenta = ?");
+       query.bindValue(0, 113);
+       query.exec();
+       while(query.next())
+       {
+            lista_3<<(query.value(0).toString());
+       }
 
-        NCReportPreviewWindow pvf;
-        pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
-        pvf.setReport(&report);
-        pvf.setWindowModality(Qt::NonModal );    // set modality
-        pvf.setAttribute( Qt::WA_QuitOnClose );
-        pvf.deleteLater();// set attrib
-        pvf.exec();  // run like modal dialog
-    }
 
+
+
+
+       report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
+       report.runReportToPreview();
+
+        if (report.hasError()) {
+
+            QMessageBox po;
+            po.setText(report.lastErrorMsg());
+            po.exec();
+        }
+        else
+        {
+
+            NCReportPreviewWindow pvf;
+            pvf.setOutput( (NCReportPreviewOutput*)report.output() );  // add output to the window
+            pvf.setReport(&report);
+            pvf.setWindowModality(Qt::NonModal );    // set modality
+            pvf.setAttribute( Qt::WA_QuitOnClose );
+            pvf.deleteLater();// set attrib
+            pvf.exec();  // run like modal dialog
+        }
 }
 
 void uiventas::on_pushButton_eliminarProducto_clicked()
@@ -2115,3 +2137,5 @@ void uiventas::mostrarVentanaLunas()
     ingresarMedida = false;
 
 }
+
+
