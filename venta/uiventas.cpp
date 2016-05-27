@@ -1975,9 +1975,6 @@ void uiventas::on_pushButton_Imprimir_clicked()
        }
 
 
-
-
-
        report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
        report.runReportToPreview();
 
