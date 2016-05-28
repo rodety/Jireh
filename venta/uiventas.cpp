@@ -829,7 +829,7 @@ void uiventas::on_pushButton_guardar_clicked()
 
 
         QMessageBox msgBox;
-        msgBox.setText("Venta Guarda.");
+        msgBox.setText("Venta Guardada.");
         msgBox.setInformativeText("Desea imprimir el comprobante de pago?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::Yes);
@@ -1243,7 +1243,7 @@ void uiventas::calcularReporte(int tipo)
     float total =0;
     for(int i = 0;i<ui->tableView_Reporte_Ventas->model()->rowCount();i++)
     {
-        total+= ui->tableView_Reporte_Ventas->model()->index(i,5).data().toFloat();
+        total+= ui->tableView_Reporte_Ventas->model()->index(i,3).data().toFloat();
     }
     ui->label_Resultado->setText(QString::number(total));
 }
@@ -1919,40 +1919,71 @@ void uiventas::on_buscar_venta_returnPressed()
 void uiventas::on_pushButton_Imprimir_clicked()
 {
     QStringList lista_e, lista_2, lista_3;
-
         int fila= ui->tableView_Reporte_Ventas->model()->rowCount() ;// indice.row();
         int columna= ui->tableView_Reporte_Ventas->model()->columnCount();
-
         QString var,id;
         QStringList ids;
+        QString adelanto, total;
        for(int i=0;i<fila;i++)
         {
-            var.clear();
-            for(int j=0;j<columna;j++)
+            var.clear();int y=0;
+            for(int j=0 ;j<columna;j++)
             {
-                var += ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
-                if(j<columna-1)
-                    var +=";";
-                if(j==0)
-                   id=var;
+                if(j==0 || j==3 || j==4){
+                   if(j==4)
+                       adelanto= ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+                    if(j==3)
+                        total=ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+                    if(j==0)
+                       id=ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+                }
+                else
+                {
+                    var+=ui->tableView_Reporte_Ventas->model()->data(ui->tableView_Reporte_Ventas->model()->index(i,j)).toString();
+                    if(j<columna-1)
+                        var +=";";
+                }
             }
-            qDebug()<<var<<endl;
+            //qDebug()<<var<<endl;
             lista_e<<var;
-            ids<<id;
+            QSqlQuery query;
+            query.prepare("select descripcion, cantidad, precio,descuento from Venta_has_Producto where Venta_idVenta = ?");
+            query.bindValue(0, id);
+            query.exec();
+            QString tmp;
+            int subtot,cont=1;
+            while(query.next())
+            {
+                 int precio= (query.value(2).toInt());
+                 int descuento = (query.value(3).toInt());
+                 subtot = precio-descuento;
+                 tmp= QString::number(cont)+";"+query.value(0).toString()+";"+"cant: "+(query.value(1).toString())+';'+"P: "+(query.value(2).toString())+';'+"Desc: "+(query.value(3).toString())+';'+"Sub: "+QString::number(subtot);
+                 lista_e<<tmp;
+                 cont++;
+            }
+            QString last1;
+            last1= " ; ; ; ;ADELANTO: ;"+adelanto;
+            lista_e<<last1;
+            last1= " ; ; ; ;TOTAL: ;"+total;
+            lista_e<<last1;
         }
        for(int i=0;i<lista_e.length();i++)
             qDebug()<<lista_e.at(i)<<endl;
-       qDebug()<<"antes de entrar for"<<endl;
+
+
+
+       /*qDebug()<<"antes de entrar for"<<endl;
        for(int i=0;i<ids.length();i++)
-            qDebug()<<ids.at(i)<<endl;
+            qDebug()<<ids.at(i)<<endl;*/
 
 
-       lista_2<<ui->label_Resultado->text();
+       //lista_2<<ui->label_Resultado->text();
 
        //llenado de variables: uno x uno
        NCReport report;
        report.setReportSource( NCReportSource::File );
-       report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
+       //report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
+       report.setReportFile("reportes/prueba.xml");
        report.addParameter("tienda",ui->comboBox_Tienda->currentText());
        report.addParameter("documento",ui->comboBox_Documento->currentText());
        report.addParameter("pago",ui->comboBox_Forma_Pago->currentText());
@@ -1961,22 +1992,16 @@ void uiventas::on_pushButton_Imprimir_clicked()
        report.addParameter("hasta",ui->dateTimeEdit_Hasta->text());
        report.addParameter("total",ui->label_Resultado->text());
 
-       report.addStringList(lista_e,"mylist");
-       report.addStringList(lista_2,"mylist2");
+           /*qDebug()<<"imprimiendo consultas.... !!!"<<endl;
+           for(int i=0;i<lista_3.length();i++)
+                qDebug()<<lista_3.at(i)<<endl;*/
 
-       QSqlQuery query;
+          // report.addStringList(lista_3,"mylist3");
+           report.addStringList(lista_e,"mylist");
+           //report.addStringList(lista_2,"mylist2");
 
-       query.prepare("select descripcion, cantidad, precio,descuento from Venta_has_Producto where Venta_idVenta = ?");
-       query.bindValue(0, 113);
-       query.exec();
-       while(query.next())
-       {
-            lista_3<<(query.value(0).toString());
-       }
-
-
-       report.runReportToPDF("pdf/lista_de_Reporte_Ventas.pdf");
-       report.runReportToPreview();
+           report.runReportToPDF("pdf/prueba.pdf");
+           report.runReportToPreview();
 
         if (report.hasError()) {
 

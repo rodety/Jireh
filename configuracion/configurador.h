@@ -17,7 +17,7 @@ public:
     configurador(QString);
     ~configurador();
 
-    bool actualizarConfiguracion(QString,QString,QString,QString,QString);
+    void actualizarConfiguracion(QString,QString,QString,QString,QString);
     bool conectar_db();
     bool leerConfiguracion();
     void guardarConfiguracion(QString,QString,QString,QString,QString,QString,QString);

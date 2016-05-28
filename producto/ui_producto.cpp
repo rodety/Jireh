@@ -378,7 +378,79 @@ void ui_producto::cargar_producto(bool comportamiento)
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
         }
     }
+    else{
+        if(posicion==0)
+        {
+            QMessageBox box;
+            box.setIcon(QMessageBox::Warning);
+            box.setWindowTitle("Advertencia");
+            box.setText("Seleccione un tipo de Pruducto producto");
+            box.setStandardButtons(QMessageBox::Ok);
+            box.exec();
+            ui->comboBox_tipoProducto->setCursor(this->cursor());
+            return;
+        }
+        //Lunas
+        if(posicion==1)
+        {
+            ui_agregarLuna* form=new ui_agregarLuna;
+            form->setModo(comportamiento);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+        }
+        //Monturas
+        if(posicion==2)
+        {
+            ui_agregarMontura* form=new ui_agregarMontura;
+            //MODO TRUE EDITAR, FALSE NUEVO
+            form->setModo(comportamiento);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+        }
+        //Lente de Contacto
+        if(posicion==3)
+        {
 
+            ui_agregarLente* form=new ui_agregarLente;
+            form->setModo(comportamiento);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+        }
+        //Otros
+        if(posicion==4)
+        {
+
+            ui_agregarOtros* form=new ui_agregarOtros;
+            form->setModo(comportamiento);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+        }
+        //Trabajos Extras
+        if(posicion==5)
+        {
+
+
+            ui_trabajosExtras* form=new ui_trabajosExtras;
+            form->setModo(comportamiento);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+        }
+        if(posicion==6)
+        {
+
+            ui_agregaraccesorios* form=new ui_agregaraccesorios;
+            form->setModo(true);
+            form->setWindowTitle(titulo);
+            form->show();
+            connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));
+
+        }
+    }
 }
 
 void ui_producto::on_pushButton_agregar_2_clicked()

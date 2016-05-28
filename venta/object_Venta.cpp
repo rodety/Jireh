@@ -559,20 +559,21 @@ QSqlQueryModel* object_Venta::mf_show(int tipo)
         consulta = "SELECT v.idVenta as 'Id', v.fechaEntrega as 'Fecha Entrega',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v, Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaEntrega >= '"+md_o_dateFrom+"' AND c.idCliente = v.Cliente_idCliente AND v.pendiente = '0' AND v.Anulado != '1' ORDER BY v.fechaEntrega";
             break;
         }
+        //CONSULTAS ESPECIFICAS DE REPORTE DE VENTA
         case 11:
         {
-        consulta = "SELECT v.idVenta as 'Id', v.fechaPreventa as 'Fecha - Hora',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v, Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaPreventa >= '"+md_o_dateFrom+"' AND v.tipoDocumento like '"+md_o_tipoDocumento+"' AND v.formaPago like '"+md_o_formaPago+"' AND v.Colaborador_idColaborador like '"+md_o_Colaborador_idColaborador+"' AND c.idCliente = v.Cliente_idCliente AND v.Anulado != '1' ORDER BY v.idVenta";
+        consulta = "SELECT v.idVenta as 'Id', v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', v.fechaPreventa as 'Fecha Preventa',v.fechaCancelacion as 'Fecha Cancelacion', if(v.formaPago = '0','Contado','Credito') as 'Forma Pago', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v, Cliente c WHERE  v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.fechaPreventa >= '"+md_o_dateFrom+"' AND v.tipoDocumento like '"+md_o_tipoDocumento+"' AND v.formaPago like '"+md_o_formaPago+"' AND v.Colaborador_idColaborador like '"+md_o_Colaborador_idColaborador+"' AND c.idCliente = v.Cliente_idCliente AND v.Anulado != '1' ORDER BY v.idVenta";
         qDebug()<<consulta<<endl;
             break;
         }
         case 12:
         {
-        consulta = "SELECT v.idVenta as 'Id', v.fechaPreventa as 'Fecha - Hora',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v INNER JOIN Cliente c ON v.Cliente_idCliente =c.idCliente WHERE v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.numeroDocumento = "+md_o_numeroDocumento+" ORDER BY v.idVenta";
+        consulta = "SELECT v.idVenta as 'Id', v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', v.fechaPreventa as 'Fecha Preventa',v.fechaCancelacion as 'Fecha Cancelacion', if(v.formaPago = '0','Contado','Credito') as 'Forma Pago', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v INNER JOIN Cliente c ON v.Cliente_idCliente =c.idCliente WHERE v.Tienda_idTienda = "+md_o_Tienda_idTienda+" AND v.numeroDocumento = "+md_o_numeroDocumento+" ORDER BY v.idVenta";
             break;
         }
         case 13:
         {
-        consulta = "SELECT v.idVenta as 'Id', v.fechaPreventa as 'Fecha - Hora',v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v INNER JOIN Cliente c ON v.Cliente_idCliente =c.idCliente WHERE v.Cliente_idCliente = '"+md_o_Cliente_idCliente+"' ORDER BY v.idVenta";
+        consulta = "SELECT v.idVenta as 'Id', v.numeroDocumento as 'Num Doc.', CONCAT(c.nombres,', ',c.primer_apellido) as 'Raz. Social', v.montoTotal as 'M. Total', v.montoAdelanto as 'M. Adelanto', v.fechaPreventa as 'Fecha Preventa',v.fechaCancelacion as 'Fecha Cancelacion', if(v.formaPago = '0','Contado','Credito') as 'Forma Pago', if(v.Entregado = '0','No Entregado','Entregado') as 'Estado', if(v.pendiente = '0', 'No Registrado','Registrado') as 'Reg. Tarjeta' FROM Venta v INNER JOIN Cliente c ON v.Cliente_idCliente =c.idCliente WHERE v.Cliente_idCliente = '"+md_o_Cliente_idCliente+"' ORDER BY v.idVenta";
             break;
         }
 

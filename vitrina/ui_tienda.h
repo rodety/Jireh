@@ -236,6 +236,7 @@ private:
     bool flag; //Control de actualizacion de Lista de tiendas
     int act;
     int pag;
+
 };
 
 #endif // UI_TIENDA_H

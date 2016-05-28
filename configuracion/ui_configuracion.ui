@@ -242,7 +242,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QComboBox" name="comboBox_empresa">
+        <widget class="MyComboBox" name="comboBox_empresa">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -288,7 +288,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QComboBox" name="comboBox_tienda">
+        <widget class="MyComboBox" name="comboBox_tienda">
          <property name="font">
           <font>
            <pointsize>12</pointsize>

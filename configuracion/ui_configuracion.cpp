@@ -26,29 +26,32 @@ ui_configuracion::ui_configuracion(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    controlbotones(false);
+    controlbotones(true);
 
     config = new configurador("config.ini");
 
     if(config->leerConfiguracion())
     {
-
         res = config->getConfig();
         loadConfiguration();
-
     }
     else
     {
-        qDebug()<<"No logro abrir el fichero"<<endl;
-
+        QMessageBox *msgBox =new QMessageBox;
+        msgBox->setText("No se logra abrir el fichero de configuracion");
+        msgBox->exec();
     }
 
     ui->comboBox_tipoUsuario->setTipo("tusuario");
-
     ui->comboBox_Documento->setTipo("documento");
-
     ui->comboBox_estadoProductos->setTipo("estado");
     loadTableConfiguracion();
+    conexion = false;
+    update_comboBox_Empresa();
+    //SETEANDO LA UBICACION
+    ui->comboBox_empresa->setCurrentIndex(posComboboxEmpresa[Sesion::getUbicacion().first]);
+    ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
+    on_comboBox_tienda_currentIndexChanged(idEmpresa);
 
 }
 
@@ -67,28 +70,42 @@ void ui_configuracion::on_btn_testConexion_clicked()
     QString port = ui->lineEdit_portDatabase->text();
 
     config->actualizarConfiguracion(ip,db,user,pass,port);
-    if(config->conectar_db())
-    {
-        ui->label_result->setText("Conexion exitosa");
-        update_comboBox_Empresa();
-        controlbotones(true);
 
-        currentIdEmpresa = res[5];
-        currentIdTienda = res[6];
-        QString id_Empresa = (res[5]);
-        QString id_Tienda =  (res[6]);
-        ui->comboBox_empresa->setCurrentIndex(id_Empresa.toInt(0));
-        ui->comboBox_tienda->setCurrentIndex(id_Tienda.toInt(0));
-        ui->comboBox_tipoUsuario->ActualizarItems(tusuario::mostrar());
-        ui->comboBox_Documento->ActualizarItems(documento::mostrarId());
-        ui->comboBox_estadoProductos->ActualizarItems(estado::mostrarId());
-
-
+    if(conexion == true){
+        config->guardarConfiguracion(ip,db,user,pass,port,QString::number(Sesion::getUbicacion().first),QString::number((Sesion::getUbicacion().second)));
     }
-    else
-    {
-        ui->label_result->setText("No se logro conectar con la base de datos revise lo datos");
-        return;
+    else{
+
+        if(config->conectar_db())
+        {
+            ui->label_result->setText("Conexion exitosa");
+            ui->btn_testConexion->setText("Guardar");
+            conexion = true;
+            update_comboBox_Empresa();
+            //SETEANDO LA UBICACION
+            ui->comboBox_empresa->setCurrentIndex(posComboboxEmpresa[Sesion::getUbicacion().first]);
+            ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
+
+            /*update_comboBox_Empresa();
+            controlbotones(true);
+
+            idEmpresa = res[5];
+            idTienda = res[6];
+            QString id_Empresa = (res[5]);
+            QString id_Tienda =  (res[6]);
+            ui->comboBox_empresa->setCurrentIndex(id_Empresa.toInt(0));
+            ui->comboBox_tienda->setCurrentIndex(id_Tienda.toInt(0));
+            ui->comboBox_tipoUsuario->ActualizarItems(tusuario::mostrar());
+            ui->comboBox_Documento->ActualizarItems(documento::mostrarId());
+            ui->comboBox_estadoProductos->ActualizarItems(estado::mostrarId());*/
+
+
+        }
+        else
+        {
+            ui->label_result->setText("No se logro conectar con la base de datos revise lo datos");
+            return;
+        }
     }
 
 }
@@ -96,7 +113,7 @@ void ui_configuracion::on_btn_testConexion_clicked()
 
 void ui_configuracion::update_comboBox_Empresa()
 {
-    ui->comboBox_empresa->clear();
+    /*ui->comboBox_empresa->clear();
 
     QSqlQuery query;
     query.prepare("SELECT idEmpresa,razonSocial FROM Empresa ORDER BY razonSocial ASC");
@@ -111,13 +128,34 @@ void ui_configuracion::update_comboBox_Empresa()
 
         Empresas[raz_social] = idempresa;
         ui->comboBox_empresa->insertItem(c++,raz_social);
+    }*/
+
+    object_Empresa empresas;
+    QSqlQueryModel* model = empresas.mf_show();
+    ui->comboBox_empresa->clear();
+
+    for(int i=0;i<model->rowCount();i++)
+    {
+        ui->comboBox_empresa->addItem(model->record(i).value(1).toString());
+        Empresas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
+        posComboboxEmpresa[model->record(i).value(0).toInt()] = i;
     }
+
+
+    if(model->rowCount()>0)
+    {
+        idEmpresa = Empresas[ui->comboBox_empresa->currentText()];
+        this->update_comboBox_Tienda(idEmpresa);
+
+
+    }
+
 
 }
 
-void ui_configuracion::update_comboBox_Tienda(QString idEmpresa)
+void ui_configuracion::update_comboBox_Tienda(QString empresa)
 {
-    ui->comboBox_tienda->clear();
+    /*ui->comboBox_tienda->clear();
 
     QSqlQuery query;
     query.prepare("SELECT idTienda,nombre FROM Tienda WHERE Empresa_idEmpresa=? ORDER BY nombre ASC");
@@ -132,6 +170,29 @@ void ui_configuracion::update_comboBox_Tienda(QString idEmpresa)
         QString alias = query.value(1).toString();
         Tiendas[alias] = idtienda;
         ui->comboBox_tienda->insertItem(c++,alias);
+    }*/
+
+    if(empresa.size() > 0)
+    {
+
+        ui->comboBox_tienda->clear();
+        object_Tienda tienda;
+        QSqlQueryModel* model = tienda.mf_show(empresa);
+
+        for(int i=0;i<model->rowCount();i++)
+        {
+            ui->comboBox_tienda->addItem(model->record(i).value(1).toString());
+            Tiendas[model->record(i).value(1).toString()] = model->record(i).value(0).toString();
+            posComboboxTienda[model->record(i).value(0).toInt()] = i;
+        }
+        //Seteando Ubicacion
+        ui->comboBox_tienda->setCurrentIndex(posComboboxTienda[Sesion::getUbicacion().second]);
+
+
+        if(model->rowCount()>0)
+        {
+            idTienda = Tiendas[ui->comboBox_tienda->currentText()];
+        }
     }
 }
 
@@ -139,15 +200,16 @@ void ui_configuracion::update_comboBox_Tienda(QString idEmpresa)
 
 void ui_configuracion::on_comboBox_empresa_currentIndexChanged(const QString &arg1)
 {
-    set_currentIdEmpresa(Empresas[arg1]);
-    update_comboBox_Tienda(get_currentIdEmpresa());
+    set_idEmpresa(Empresas[arg1]);
+    //update_comboBox_Tienda(get_idEmpresa());
+    on_comboBox_tienda_currentIndexChanged(idEmpresa);
 }
 
-QString ui_configuracion::get_currentIdEmpresa(){return currentIdEmpresa;}
-QString ui_configuracion::get_currentIdTienda(){return currentIdTienda;}
+QString ui_configuracion::get_idEmpresa(){return idEmpresa;}
+QString ui_configuracion::get_idTienda(){return idTienda;}
 
-void ui_configuracion::set_currentIdEmpresa(QString e){currentIdEmpresa = e;}
-void ui_configuracion::set_currentIdTienda(QString t){currentIdTienda = t;}
+void ui_configuracion::set_idEmpresa(QString e){idEmpresa = e;}
+void ui_configuracion::set_idTienda(QString t){idTienda = t;}
 
 void ui_configuracion::saveConfiguration()
 {
@@ -199,8 +261,8 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     ui->lineEdit_serieCotizacion->setValidator(validator);
 
 
-    set_currentIdEmpresa(Empresas[ui->comboBox_empresa->currentText()]);
-    set_currentIdTienda(Tiendas[ui->comboBox_tienda->currentText()]);
+    set_idEmpresa(Empresas[ui->comboBox_empresa->currentText()]);
+    set_idTienda(Tiendas[ui->comboBox_tienda->currentText()]);
 
     QString igv = ui->lineEdit_IGV->text();
     QString serieBoleta = ui->lineEdit_boleta->text();
@@ -211,7 +273,7 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     QString codigoDoc = ui->lineEdit_codigo_documento->text();
     QSqlQuery query;
     query.prepare("SELECT idConfiguracion FROM Configuracion WHERE Tienda_idTienda = ?");
-    query.bindValue(0,currentIdTienda);
+    query.bindValue(0,idTienda);
     query.exec();
 
     if(query.next())
@@ -232,7 +294,7 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     {
 
         query.prepare("INSERT INTO Configuracion (Tienda_idTienda,igv,serieBoleta,serieFactura,serieCotizacion,codigoPos,autorizacion,codigoDoc) VALUES (?,?,?,?,?,?,?,?)");
-        query.bindValue(0,currentIdTienda);
+        query.bindValue(0,idTienda);
         query.bindValue(1,igv);
         query.bindValue(2,serieBoleta);
         query.bindValue(3,serieFactura);
@@ -241,7 +303,7 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
         query.bindValue(6,autorizacion);
         query.bindValue(7,codigoDoc);
 
-        qDebug()<<currentIdTienda<<" "<<igv<<" "<<serieBoleta<<" "<<serieFactura<<" "<<serieCotizacion<<" "<<codpos<<endl;
+        qDebug()<<idTienda<<" "<<igv<<" "<<serieBoleta<<" "<<serieFactura<<" "<<serieCotizacion<<" "<<codpos<<endl;
 
     }
     if(!query.exec())
@@ -256,7 +318,7 @@ void ui_configuracion::on_btn_saveConfiguration_clicked()
     QString user = ui->lineEdit_userDatabase->text();
     QString pass = ui->lineEdit_passwordUser->text();
     QString port = ui->lineEdit_portDatabase->text();
-    config->guardarConfiguracion(ip,db,user,pass,port,currentIdEmpresa,currentIdTienda);
+    config->guardarConfiguracion(ip,db,user,pass,port,idEmpresa,idTienda);
 
 
     //Iniciando MainWindows
@@ -280,15 +342,15 @@ void ui_configuracion::loadConfiguration()
 
 void ui_configuracion::on_comboBox_tienda_currentTextChanged(const QString &arg1)
 {
-    set_currentIdTienda(Tiendas[arg1]);
+    set_idTienda(Tiendas[arg1]);
 }
 
 void ui_configuracion::on_comboBox_tienda_currentIndexChanged(const QString &arg1)
 {
-    set_currentIdTienda(Tiendas[arg1]);
+    set_idTienda(Tiendas[arg1]);
     QSqlQuery query;
     query.prepare("SELECT igv,serieBoleta,serieFactura,serieCotizacion,codigoPos,autorizacion,codigoDoc FROM Configuracion WHERE (Tienda_idTienda = ?)");
-    query.bindValue(0,currentIdTienda);
+    query.bindValue(0,idTienda);
     query.exec();
     query.next();
     ui->lineEdit_IGV->setText(query.value(0).toString());
@@ -372,7 +434,7 @@ void ui_configuracion::on_btnAgregar_Tienda_clicked()
 {
 
 
-    if(currentIdEmpresa.compare("")==0)
+    if(idEmpresa.compare("")==0)
     {
         QMessageBox *msgBox =new QMessageBox;
         msgBox->setIcon(QMessageBox::Information);
@@ -388,8 +450,8 @@ void ui_configuracion::on_btnAgregar_Tienda_clicked()
 
         tienda_agregar = new ui_tienda_agregar;
         connect(tienda_agregar,SIGNAL(actualizarParent(QString)),this,SLOT(update_comboBox_Tienda(QString)));
-        tienda_agregar->set_idEmpresa(currentIdEmpresa);
-        tienda_agregar->set_idTienda(currentIdTienda);
+        tienda_agregar->set_idEmpresa(idEmpresa);
+        tienda_agregar->set_idTienda(idTienda);
         tienda_agregar->set_caso(1);
         tienda_agregar->setWindowTitle("Agregar Tienda");
         tienda_agregar->show();
@@ -458,7 +520,7 @@ void ui_configuracion::on_tableView_configuracion_clicked(const QModelIndex &ind
 {
     this->index = index;
 }
-bool ui_configuracion::actualizar_descuento(){
+void ui_configuracion::actualizar_descuento(){
 
     QSqlQuery query, query1;
     query.prepare("SELECT idProducto,precioVenta FROM Producto");

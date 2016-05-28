@@ -58,7 +58,7 @@ bool configurador::leerConfiguracion()
     return true;
 }
 
-bool configurador::actualizarConfiguracion(QString a, QString b, QString c, QString d, QString e)
+void configurador::actualizarConfiguracion(QString a, QString b, QString c, QString d, QString e)
 {
     conexiondb->setHost(a);
     conexiondb->setName(b);

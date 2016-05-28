@@ -6,6 +6,8 @@
 #include <vitrina/ui_agregar_empresa.h>
 #include <vitrina/ui_tienda_agregar.h>
 #include <configuracion/programa.h>
+#include <vitrina/object_Empresa.h>
+#include <vitrina/object_Tienda.h>
 class ui_agregar_empresa;
 using namespace std;
 namespace Ui {
@@ -21,10 +23,10 @@ public:
     ~ui_configuracion();
 public:
 
-    QString get_currentIdEmpresa();
-    QString get_currentIdTienda();
-    void set_currentIdEmpresa(QString);
-    void set_currentIdTienda(QString);    
+    QString get_idEmpresa();
+    QString get_idTienda();
+    void set_idEmpresa(QString);
+    void set_idTienda(QString);
     void loadTableConfiguracion();
 public slots:
     void update_comboBox_Empresa();
@@ -61,7 +63,7 @@ private slots:
 
     void on_tableView_configuracion_clicked(const QModelIndex &index);
 
-    bool actualizar_descuento();
+    void actualizar_descuento();
 
 signals:
     void closeparent();
@@ -69,10 +71,8 @@ signals:
 private:
     Ui::ui_configuracion *ui;
     void saveConfiguration();
-    map<QString,QString> Empresas;
-    map<QString,QString> Tiendas;
-    QString currentIdEmpresa;
-    QString currentIdTienda;
+    QString idEmpresa;
+    QString idTienda;
     void loadConfiguration();
     configurador* config;
     std::map<int,QString> res;
@@ -81,6 +81,12 @@ private:
     ui_tienda_agregar* tienda_agregar;
     QModelIndex index;
     int id;
+    bool conexion;
+    map<int,int> posComboboxEmpresa;
+    map<int,int> posComboboxTienda;
+
+    map<QString,QString> Empresas;
+    map<QString,QString> Tiendas;
 
 };
 
