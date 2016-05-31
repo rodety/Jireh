@@ -49,6 +49,7 @@ public:
     bool completar();
     QSqlQueryModel* mf_show(object_Producto tmp);
     QSqlQueryModel* mf_show_search(QString id);
+    bool mf_updateDes(object_Producto tmp, _QSTR d);
 
 };
 #endif // OBJECT_ACCESORIOS_H

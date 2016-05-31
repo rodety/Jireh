@@ -415,19 +415,16 @@ QSqlQueryModel* object_Luna::mf_show()
     {
         //consulta todos
         consulta = "SELECT idProducto as 'Codigo',descripcion as 'Descripcion',e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,d.valor as 'Diametro',c.nombre as 'Calidad',tl.nombre as 'Tipo de Luna',t.nombre as 'Tratamiento',l.valorInicial,l.valorFinal,l.cilindro as 'Cil. Ini',l.cilindrof as 'Cil. Fin',l.precio as 'Precio', observaciones as 'Obs.', la.nombre as 'Laboratorio', li.nombre as 'L. de Precio' FROM Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"' order by idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
-
         model->setQuery(consulta);
-
+        qDebug()<<consulta<<endl;
 
         return model;
-
     }
     //LUNAS ESFERICAS
     if(md_o_cilindro == "0")
     {
         v_luna = QString::number(fabs(md_o_valorInicial.toDouble()));
         consulta = "SELECT idProducto as 'Codigo',descripcion as 'Descripcion',e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,d.valor as 'Diametro',c.nombre as 'Calidad',tl.nombre as 'Tipo de Luna',t.nombre as 'Tratamiento',l.valorInicial,l.valorFinal,l.cilindro as 'Cil. Ini',l.cilindrof as 'Cil. Fin',l.precio as 'Precio', observaciones as 'Obs.', la.nombre as 'Laboratorio', li.nombre as 'L. de Precio' FROM Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.valorInicial <= '"+v_luna+"' AND l.valorFinal >= '"+v_luna+"' AND l.cilindro = '0' AND l.cilindrof = '0' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"' order by idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
-
         model->setQuery(consulta);
         qDebug()<<consulta<<endl;
 
@@ -438,9 +435,9 @@ QSqlQueryModel* object_Luna::mf_show()
     {
         v_cilindro = QString::number(fabs(md_o_cilindro.toDouble()));
         consulta = "SELECT idProducto as 'Codigo',descripcion as 'Descripcion',e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,d.valor as 'Diametro',c.nombre as 'Calidad',tl.nombre as 'Tipo de Luna',t.nombre as 'Tratamiento',l.valorInicial,l.valorFinal,l.cilindro as 'Cil. Ini',l.cilindrof as 'Cil. Fin',l.precio as 'Precio', observaciones as 'Obs.', la.nombre as 'Laboratorio', li.nombre as 'L. de Precio' FROM Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.cilindro <= '"+v_cilindro+"'AND l.cilindrof >= '"+v_cilindro+"' AND l.valorInicial = '0' AND l.valorFinal = '0' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"' order by idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
+        qDebug()<<consulta<<endl;
 
         model->setQuery(consulta);
-        qDebug()<<consulta<<endl;
 
         return model;
     }
@@ -453,6 +450,7 @@ QSqlQueryModel* object_Luna::mf_show()
         consulta = "SELECT idProducto as 'Codigo',descripcion as 'Descripcion',e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,d.valor as 'Diametro',c.nombre as 'Calidad',tl.nombre as 'Tipo de Luna',t.nombre as 'Tratamiento',l.valorInicial,l.valorFinal,l.cilindro as 'Cil. Ini',l.cilindrof as 'Cil. Fin',l.precio as 'Precio', observaciones as 'Obs.', la.nombre as 'Laboratorio', li.nombre as 'L. de Precio' FROM Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.valorInicial <= '"+v_luna+"' AND l.valorFinal >= '"+v_luna+"' AND l.cilindro <= '"+v_cilindro+"'AND l.cilindrof >= '"+v_cilindro+"' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"' order by idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
         model->setQuery(consulta);
         qDebug()<<consulta<<endl;
+
         return model;
     }
 }
@@ -484,6 +482,71 @@ QSqlQueryModel* object_Luna::mf_show_user()
 
     model->setQuery("SELECT idProducto as 'Codigo',descripcion as 'Descripcion',e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,d.valor as 'Diametro',c.nombre as 'Calidad',tl.nombre as 'Tipo de Luna',t.nombre as 'Tratamiento',l.valorInicial,l.valorFinal,l.cilindro as 'Cilindro',l.precio as 'Precio' FROM Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.valorInicial like '"+md_o_valorInicial+"' AND l.valorFinal like '"+md_o_valorFinal+"' AND l.cilindro like '"+md_o_cilindro+"' AND l.cilindrof like '"+md_o_cilindrof+"'");
     return model;
+}
+bool object_Luna::mf_updateDes(_QSTR d)
+{
+    QSqlQuery* model=new QSqlQuery;
+
+    QString v_luna;
+    QString v_cilindro;
+    QString consulta;
+//AQUI ESTA LA PENDEJADA, MYSQL ES LO MAXIMO
+    if(md_o_Diametro_idDiametro == "0")
+        md_o_Diametro_idDiametro = "%";
+    if(md_o_CalidadLuna_idCalidadLuna == "0")
+        md_o_CalidadLuna_idCalidadLuna = "%";
+    if(md_o_TipoLuna_idTipoLuna == "0")
+        md_o_TipoLuna_idTipoLuna = "%";
+    if(md_o_Tratamiento_idTratamiento == "0")
+        md_o_Tratamiento_idTratamiento = "%";
+    if(md_o_Laboratorio_idLaboratorio == "0")
+        md_o_Laboratorio_idLaboratorio = "%";
+    if(md_o_Lista_idLista == "0")
+        md_o_Lista_idLista = "%";
+
+
+    //TODAS LAS LUNAS
+    if(md_o_valorInicial == "0" && md_o_cilindro == "0")
+    {
+        //consulta todos
+        consulta = "UPDATE Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"'";
+        model->prepare(consulta);
+        model->bindValue(0,d);
+        qDebug()<<consulta<<endl;
+        return model->exec();
+    }
+    //LUNAS ESFERICAS
+    if(md_o_cilindro == "0")
+    {
+        v_luna = QString::number(fabs(md_o_valorInicial.toDouble()));
+        consulta = "UPDATE Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.valorInicial <= '"+v_luna+"' AND l.valorFinal >= '"+v_luna+"' AND l.cilindro = '0' AND l.cilindrof = '0' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"'";
+        model->prepare(consulta);
+        model->bindValue(0,d);
+        qDebug()<<consulta<<endl;
+        return model->exec();
+    }
+    // LUNAS CILINDRICAS
+    if(md_o_valorInicial == "0")
+    {
+        v_cilindro = QString::number(fabs(md_o_cilindro.toDouble()));
+        consulta = "UPDATE Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.cilindro <= '"+v_cilindro+"'AND l.cilindrof >= '"+v_cilindro+"' AND l.valorInicial = '0' AND l.valorFinal = '0' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"'";
+        model->prepare(consulta);
+        model->bindValue(0,d);
+        qDebug()<<consulta<<endl;
+        return model->exec();
+    }
+
+    //LUNAS CONBINADOS
+    if(md_o_cilindro != "0" && md_o_valorInicial != "0")
+    {
+        v_cilindro = md_o_cilindro;
+        v_luna = md_o_valorInicial;
+        consulta = "UPDATE Producto p,Estado e,Luna l,Diametro d,CalidadLuna c,TipoLuna tl,Tratamiento t, Laboratorio la, Lista li SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.idProducto=l.Producto_idProducto AND l.Laboratorio_idLaboratorio=la.idLaboratorio AND l.Lista_idLista=li.idLista AND l.Diametro_idDiametro=d.idDiametro AND l.CalidadLuna_idCalidadLuna=c.idCalidadLuna AND l.TipoLuna_idTipoLuna=tl.idTipoLuna AND l.Tratamiento_idTratamiento=t.idTratamiento AND d.idDiametro like '"+md_o_Diametro_idDiametro+"' AND c.idCalidadLuna like '"+md_o_CalidadLuna_idCalidadLuna+"' AND tl.idTipoLuna like '"+md_o_TipoLuna_idTipoLuna+"' AND t.idTratamiento like '"+md_o_Tratamiento_idTratamiento+"' AND l.valorInicial <= '"+v_luna+"' AND l.valorFinal >= '"+v_luna+"' AND l.cilindro <= '"+v_cilindro+"'AND l.cilindrof >= '"+v_cilindro+"' AND la.idLaboratorio like '"+md_o_Laboratorio_idLaboratorio+"' AND li.idLista like '"+md_o_Lista_idLista+"'";
+        model->prepare(consulta);
+        model->bindValue(0,d);
+        qDebug()<<consulta<<endl;
+        return model->exec();
+    }
 }
 
 

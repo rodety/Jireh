@@ -326,13 +326,31 @@ bool cliente::completarId(QString id)
 
 QSqlQueryModel* cliente::buscarCliente(QString _item)
 {
+    QStringList splitted = _item.split(" ");
+
+
     QSqlQueryModel *model = new QSqlQueryModel;
     QString query;
     if(_item.size() != 0)
-        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND ( nombres REGEXP '"+_item+"' OR primer_apellido REGEXP '"+_item+"' OR segundo_apellido REGEXP '"+_item+"' OR numeroDocumento REGEXP '"+_item+"' ) ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
+    {
+        query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 AND (";
+        for(int i=0;i<splitted.size();i++)
+        {
+            if(i==0)
+                query+= "nombres REGEXP '"+splitted.at(i)+"' OR ";
+            else
+                query+= " OR nombres REGEXP '"+splitted.at(i)+"' OR ";
+            query+= "primer_apellido REGEXP '"+splitted.at(i)+"' OR ";
+            query+= "segundo_apellido REGEXP '"+splitted.at(i)+"' OR ";
+            query+= "numeroDocumento REGEXP '"+splitted.at(i)+"'";
+        }
+            query+= ") ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
+
+    }
     else
         query = "SELECT idCliente,nombre as 'Documento',numeroDocumento as 'Numero de Documento',nombres as 'Nombres',primer_apellido as 'Apellido Paterno',segundo_apellido as 'Apellido Materno',telefono as 'Telefono',movil as 'Celular',ruc,razonSocial,direccion2 as 'Direc.' FROM Cliente,Documento WHERE idDocumento=Documento_idDocumento1 ORDER BY idCliente DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud());
+
     model->setQuery(query);
-    qDebug()<<query<<endl;
+
     return model;
 }

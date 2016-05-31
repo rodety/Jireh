@@ -390,3 +390,19 @@ QSqlQueryModel* object_LenteContacto::mf_show_search(QString id)
     return model;
 }
 
+bool object_LenteContacto::mf_updateDes(object_Producto myProducto, _QSTR d)
+{
+    QSqlQuery* model=new QSqlQuery;
+//AQUI ESTA LA PENDEJADA, MYSQL ES LO MAXIMO
+    QString idMarca = myProducto.mf_get_Marca_idMarca();
+    if(idMarca == "0")
+        idMarca = "%";
+    if(md_o_TipoLente_idTipoLente == "0")
+        md_o_TipoLente_idTipoLente = "%";
+    if(md_o_TiempoUso_idTiempoUso == "0")
+        md_o_TiempoUso_idTiempoUso = "%";
+    QString consulta = "UPDATE Producto p,Estado e,Marca m,LenteContacto l,TipoLente tl,Potencia po,CurvaBase cb,Diametro d,TiempoUso tu,Material ma SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.Marca_idMarca=m.idMarca AND p.idProducto=l.Producto_idProducto AND l.TipoLente_idTipoLente=tl.idTipoLente AND l.Potencia_idPotencia=po.idPotencia AND l.CurvaBase_idCurvaBase=cb.idCurvaBase AND l.Diametro_idDiametro=d.idDiametro AND l.TiempoUso_idTiempoUso=tu.idTiempoUso AND l.Material_idMaterial=ma.idMaterial AND m.idMarca like '"+idMarca+"' AND tl.idTipoLente like '"+md_o_TipoLente_idTipoLente+"' AND tu.idTiempoUso like '"+md_o_TiempoUso_idTiempoUso+"'";
+    model->prepare(consulta);
+    model->bindValue(0,d);
+    return model->exec();
+}

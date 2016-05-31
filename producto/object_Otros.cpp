@@ -290,3 +290,25 @@ QSqlQueryModel* object_Otros::mf_show_search(QString id)
     model->setQuery("SELECT Producto_idProducto as 'Id',codigo,descripcion,e.nombre as 'Estado',precioCompra,precioVenta,precioDescuento,stock,m.nombre as 'Marca',c.nombre as 'Color',t.nombre as 'Talla',ca.nombre as 'Calidad',tpo.nombre as 'Tipo',ge.nombre as 'Genero', p.cantidadVitrina as 'Cnt. Vitrina', p.cantidadAlmacen as 'Cnt. Almacen', p.accesorios as 'Acces.', p.observaciones as 'Obs.' FROM Producto p,Otros o,Estado e,Marca m,Color c,Talla t,Calidad ca,TipoOtros tpo, Genero ge WHERE p.Estado_idEstado=e.idEstado AND p.Marca_idMarca=m.idMarca AND p.idProducto=o.Producto_idProducto AND o.Color_idColor=c.idColor AND o.Talla_idTalla=t.idTalla AND o.Calidad_idCalidad=ca.idCalidad AND o.TipoOtros_idTipoOtros=tpo.idTipoOtros AND o.Genero_idGenero=ge.idGenero AND p.codigo REGEXP '"+id+"' order by idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud()));
     return model;
 }
+bool object_Otros::mf_updateDes(object_Producto myProducto, _QSTR d)
+{
+    QSqlQuery* model=new QSqlQuery;
+//AQUI ESTA LA PENDEJADA, MYSQL ES LO MAXIMO
+    QString idMarca = myProducto.mf_get_Marca_idMarca();
+    if(idMarca == "0")
+        idMarca = "%";
+    if(md_o_TipoOtros_idTipoOtros == "0")
+        md_o_TipoOtros_idTipoOtros = "%";
+    if(md_o_Calidad_idCalidad == "0")
+        md_o_Calidad_idCalidad = "%";
+    if(md_o_Color_idColor == "0")
+        md_o_Color_idColor = "%";
+    if(md_o_Talla_idTalla == "0")
+        md_o_Talla_idTalla = "%";
+    if(md_o_Genero_idGenero == "0")
+        md_o_Genero_idGenero = "%";
+
+    model->prepare("UPDATE Producto p,Otros o,Estado e,Marca m,Color c,Talla t,Calidad ca,TipoOtros tpo, Genero ge SET p.precioDescuento = p.precioVenta * ?/100 WHERE p.Estado_idEstado=e.idEstado AND p.Marca_idMarca=m.idMarca AND p.idProducto=o.Producto_idProducto AND o.Color_idColor=c.idColor AND o.Talla_idTalla=t.idTalla AND o.Calidad_idCalidad=ca.idCalidad AND o.TipoOtros_idTipoOtros=tpo.idTipoOtros AND o.Genero_idGenero=ge.idGenero AND p.Marca_idMarca like '"+idMarca+"' AND tpo.idTipoOtros like '"+md_o_TipoOtros_idTipoOtros+"' AND ca.idCalidad like '"+md_o_Calidad_idCalidad+"' AND c.idColor like '"+md_o_Color_idColor+"' AND t.idTalla like '"+md_o_Talla_idTalla+"' AND ge.idGenero like'"+md_o_Genero_idGenero+"'");
+    model->bindValue(0,d);
+    return model->exec();
+}

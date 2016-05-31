@@ -64,7 +64,7 @@ void uiventas::configuracionesIniciaciales()
     ui->lineEdit_total_cancelado->setEnabled(false);
     ui->lineEdit_usuario->setEnabled(false);
     ui->lineEdit_restante->setEnabled(false);
-    ui->radioButton_Boleta->click();
+    ui->radioButton_Boleta->setChecked(true);
     comportamiento = true;
     //Desactivando calcular reporte
     flag_reporte = false;

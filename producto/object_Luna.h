@@ -59,6 +59,8 @@ public:
         QSqlQueryModel* mf_show();
         QSqlQueryModel* mf_show_user();
 
+        bool mf_updateDes(_QSTR d);
+
 	~object_Luna();
 };
 #endif // OBJECT_LUNA_H

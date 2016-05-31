@@ -6,7 +6,7 @@
 //#include <zlib.h>
 #include <QSqlQuery>
 #include <QDebug>
-
+#include <share_include.h>
 class etiqueta
 {
 private:

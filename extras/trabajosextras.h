@@ -31,6 +31,7 @@ public:
 
     static QSqlQueryModel* mostrar();
     bool completar();
+    bool mf_updateDes(_QSTR d);
 };
 
 #endif // TRABAJOSEXTRAS_H

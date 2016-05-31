@@ -1214,6 +1214,8 @@ void ui_producto::configurarCombos(int index)
     ui->pushButton_editar->hide();
     ui->pushButton_eliminar->hide();
     ui->label_4->hide();
+    ui->label_cilindro->hide();
+
     ui->lineEdit_buscar->hide();
     ui->pushButton_buscar->hide();
 
@@ -1224,6 +1226,10 @@ void ui_producto::configurarCombos(int index)
     ui->tabWidget->setTabEnabled(2,0);
     ui->tabWidget->setTabEnabled(3,0);
     ui->tabWidget->setTabEnabled(4,0);
+
+    ui->label_cilindro->hide();
+    ui->doubleSpinBox_descuento->hide();
+    ui->pushButton_descuento->hide();
 
     //SELECCIONE PRODUCTO
 
@@ -1279,6 +1285,10 @@ void ui_producto::configurarCombos(int index)
 
         ui->pushButton_imprimir_2->show();
 
+        ui->label_cilindro->show();
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
+
 
         break;
 
@@ -1326,8 +1336,8 @@ void ui_producto::configurarCombos(int index)
         ui->pushButton_buscar->show();
         ui->pushButton_imprimir_2->show();
 
-
-
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
 
         break;
     case 3:
@@ -1350,6 +1360,8 @@ void ui_producto::configurarCombos(int index)
 
         ui->pushButton_etiquetar->show();
         ui->btnToVitrina->show();
+
+
         ui->btnToAlmacen->show();
         ui->tableView_productos->show();
 
@@ -1361,6 +1373,9 @@ void ui_producto::configurarCombos(int index)
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
         ui->pushButton_imprimir_2->show();
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
+
         break;
     case 4:
         ui->label_select_1->setText("Marca");
@@ -1403,6 +1418,9 @@ void ui_producto::configurarCombos(int index)
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
         ui->pushButton_imprimir_2->show();
+
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
         break;
 
 
@@ -1417,6 +1435,10 @@ void ui_producto::configurarCombos(int index)
         ui->lineEdit_buscar->show();
         ui->pushButton_buscar->show();
         ui->pushButton_imprimir_2->show();
+
+
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
 
         break;
     case 6:
@@ -1459,6 +1481,10 @@ void ui_producto::configurarCombos(int index)
         ui->pushButton_buscar->show();
 
         ui->pushButton_imprimir_2->show();
+
+
+        ui->doubleSpinBox_descuento->show();
+        ui->pushButton_descuento->show();
         break;
     }
 
@@ -1909,6 +1935,10 @@ void ui_producto::configurarui(int index)
         ui->pushButton_editar->setVisible(false);
         ui->pushButton_eliminar->setVisible(false);
         ui->label_4->setVisible(false);
+
+        ui->label_descuento->setVisible(false);
+        ui->doubleSpinBox_descuento->setVisible(false);
+        ui->pushButton_descuento->setVisible(false);
         //OCULTANDO DATOS DE TABLA
 
         if(index == 1)
@@ -1999,4 +2029,140 @@ void ui_producto::on_pushButton_imprimir_kardex_clicked()
 void ui_producto::on_pushButton_imprimir_lc_clicked()
 {
     imprimir_tablas("lista_de_productos_compra",ui->tableView_compras   );
+}
+
+void ui_producto::on_pushButton_descuento_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Actualizacion de descuentos");
+    msgBox.setInformativeText("Desea actualizar el descuento al "+ui->doubleSpinBox_descuento->text()+" % del precio de venta");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int ret = msgBox.exec();
+
+    switch (ret) {
+      case QMessageBox::Yes:
+          // Yes was clicked
+            actualizarDescuento();
+          break;
+      case QMessageBox::No:
+          // Don't Save was clicked
+          break;
+      default:
+          // should never be reached
+          break;
+    }
+
+
+}
+
+void ui_producto::actualizarDescuento()
+{
+    //SELECCIONE PRODUCTO
+
+    //LUNA
+
+    QMessageBox box;
+    box.setIcon(QMessageBox::Information);
+    box.setWindowTitle("Resultado de Actualizacion");
+    box.setStandardButtons(QMessageBox::Ok);
+
+    bool ejecucion =false;
+
+    if(posicion==1)
+    {
+        object_Luna myluna;
+        myluna.mf_set_Diametro_idDiametro(QString::number(ui->comboBox_select_1->getId(ui->comboBox_select_1->currentText())));
+        myluna.mf_set_CalidadLuna_idCalidadLuna(QString::number(ui->comboBox_select_2->getId(ui->comboBox_select_2->currentText())));
+        myluna.mf_set_TipoLuna_idTipoLuna(QString::number(ui->comboBox_select_3->getId(ui->comboBox_select_3->currentText())));
+        myluna.mf_set_Tratamiento_idTratamiento(QString::number(ui->comboBox_select_4->getId(ui->comboBox_select_4->currentText())));
+        myluna.mf_set_Laboratorio_idLaboratorio(QString::number(ui->comboBox_select_5->getId(ui->comboBox_select_5->currentText())));
+        myluna.mf_set_Lista_idLista(QString::number(ui->comboBox_select_6->getId(ui->comboBox_select_6->currentText())));
+
+        myluna.mf_set_valorInicial(QString::number(ui->doubleSpinBox_Inicio->value()));
+        myluna.mf_set_cilindro(QString::number(ui->doubleSpinBox_Cilindro->value()));
+        ejecucion = myluna.mf_updateDes(ui->doubleSpinBox_descuento->text());
+        ui->tableView_productos->setModel(myluna.mf_show());
+
+    }
+
+    //MONTURA
+    if(posicion==2)
+    {
+        object_Producto myProducto;
+        myProducto.mf_set_Marca_idMarca(QString::number(ui->comboBox_select_1->getId(ui->comboBox_select_1->currentText())));
+        object_Montura myMontura;
+        myMontura.mf_set_Tamanio_idTamanio(QString::number(ui->comboBox_select_2->getId(ui->comboBox_select_2->currentText())));
+        myMontura.mf_set_Forma_idForma(QString::number(ui->comboBox_select_3->getId(ui->comboBox_select_3->currentText())));
+        myMontura.mf_set_Calidad_idCalidad(QString::number(ui->comboBox_select_4->getId(ui->comboBox_select_4->currentText())));
+        myMontura.mf_set_Color_idColor(QString::number(ui->comboBox_select_5->getId(ui->comboBox_select_5->currentText())));
+        myMontura.mf_set_Genero_idGenero(QString::number(ui->comboBox_select_6->getId(ui->comboBox_select_6->currentText())));
+        ejecucion = myMontura.mf_updateDes(myProducto,ui->doubleSpinBox_descuento->text());
+        ui->tableView_productos->setModel(myMontura.mf_show(myProducto));
+
+    }
+
+    //LENTE DE CONTACTO
+   if(posicion==3)
+   {
+       object_Producto myProducto;
+       myProducto.mf_set_Marca_idMarca(QString::number(ui->comboBox_select_1->getId(ui->comboBox_select_1->currentText())));
+       object_LenteContacto MyLente;
+       MyLente.mf_set_TipoLente_idTipoLente(QString::number(ui->comboBox_select_2->getId(ui->comboBox_select_2->currentText())));
+       MyLente.mf_set_TiempoUso_idTiempoUso(QString::number(ui->comboBox_select_3->getId(ui->comboBox_select_3->currentText())));
+       ejecucion = MyLente.mf_updateDes(myProducto,ui->doubleSpinBox_descuento->text());
+       ui->tableView_productos->setModel(MyLente.mf_show(myProducto));
+
+
+
+   }
+
+
+   //OTROS
+   if(posicion==4)
+   {
+       object_Producto myProducto;
+       myProducto.mf_set_Marca_idMarca(QString::number(ui->comboBox_select_1->getId(ui->comboBox_select_1->currentText())));
+       object_Otros MyOtros;
+       MyOtros.mf_set_TipoOtros_idTipoOtros(QString::number(ui->comboBox_select_2->getId(ui->comboBox_select_2->currentText())));
+       MyOtros.mf_set_Calidad_idCalidad(QString::number(ui->comboBox_select_3->getId(ui->comboBox_select_3->currentText())));
+       MyOtros.mf_set_Color_idColor(QString::number(ui->comboBox_select_4->getId(ui->comboBox_select_4->currentText())));
+       MyOtros.mf_set_Talla_idTalla(QString::number(ui->comboBox_select_5->getId(ui->comboBox_select_5->currentText())));
+       MyOtros.mf_set_Genero_idGenero(QString::number(ui->comboBox_select_6->getId(ui->comboBox_select_6->currentText())));
+       ejecucion = MyOtros.mf_updateDes(myProducto,ui->doubleSpinBox_descuento->text());
+       ui->tableView_productos->setModel(MyOtros.mf_show(myProducto));
+
+   }
+
+
+      //TRABAJO EXTRAS
+    if(posicion==5)
+    {
+        trabajosExtras myTrabajo;
+        ejecucion =  myTrabajo.mf_updateDes(ui->doubleSpinBox_descuento->text());
+        actualizarTrabajosExtras();
+
+    }
+        //ACCESORIOS
+    if(posicion==6)
+    {
+        object_Producto myProducto;
+        myProducto.mf_set_Marca_idMarca(QString::number(ui->comboBox_select_1->getId(ui->comboBox_select_1->currentText())));
+        object_Accesorios myAccesorio;
+        myAccesorio.setidTamanio(QString::number(ui->comboBox_select_2->getId(ui->comboBox_select_2->currentText())));
+        myAccesorio.setidCalidad(QString::number(ui->comboBox_select_3->getId(ui->comboBox_select_3->currentText())));
+        myAccesorio.setidColor(QString::number(ui->comboBox_select_4->getId(ui->comboBox_select_4->currentText())));
+        myAccesorio.setidGenero(QString::number(ui->comboBox_select_5->getId(ui->comboBox_select_5->currentText())));
+        ejecucion = myAccesorio.mf_updateDes(myProducto,ui->doubleSpinBox_descuento->text());
+        ui->tableView_productos->setModel(myAccesorio.mf_show(myProducto));
+
+    }
+    if(ejecucion == true)
+        box.setText("Actualizacion Correcta");
+    else
+        box.setText("Fallo al actualizar");
+
+    box.exec();
+
+
 }

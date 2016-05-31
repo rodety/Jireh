@@ -101,3 +101,11 @@ bool trabajosExtras::completar()
 {
 
 }
+bool trabajosExtras::mf_updateDes(_QSTR d)
+{
+    QSqlQuery* model=new QSqlQuery;
+    model->prepare("UPDATE Producto p SET p.precioDescuento = p.precioVenta * ?/100 WHERE tipo = 7");
+    model->bindValue(0,d);
+    return model->exec();
+}
+

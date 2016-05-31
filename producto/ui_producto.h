@@ -108,6 +108,8 @@ private:
     void configurarui(int index);
 private slots:
     void seleccionar();
+    void actualizarDescuento();
+
     void actualizarTrabajosExtras();
     void on_doubleSpinBox_Inicio_editingFinished();
     bool verificaciones_para_mover();
@@ -136,6 +138,8 @@ private slots:
 
     void on_pushButton_imprimir_lc_clicked();
 
+
+    void on_pushButton_descuento_clicked();
 
 public slots:
     void setComportamiento(int);
