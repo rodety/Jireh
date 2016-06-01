@@ -22,7 +22,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -649,7 +649,7 @@
               </layout>
              </item>
              <item row="6" column="0">
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="label_precio_final">
                <property name="font">
                 <font>
                  <pointsize>14</pointsize>
@@ -751,7 +751,7 @@
                 </font>
                </property>
                <property name="text">
-                <string/>
+                <string>0</string>
                </property>
               </widget>
              </item>
@@ -763,7 +763,7 @@
                 </font>
                </property>
                <property name="text">
-                <string/>
+                <string>0</string>
                </property>
               </widget>
              </item>

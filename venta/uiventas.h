@@ -126,6 +126,8 @@ private slots:
 
 
 
+    void on_lineEdit_precio_textEdited(const QString &arg1);
+
 private:
     Ui::uiventas *ui;
     int count_row;

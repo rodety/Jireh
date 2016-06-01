@@ -29,14 +29,14 @@ private:
 public:
     CreaTicket()
     {
-        m_max = 50;
+        m_max = 46;
         t_izquierda = 60;
         t_derecha = 60;
         t_centro = 60;
         t_extremo = 18;//18
         t_totales = 25;
         t_descripcion = 36;//antes 16
-        t_longitud = 40;
+        t_longitud = 30;
         t_articulo = 40;
     }
      void LineasGuion()
@@ -137,7 +137,7 @@ public:
                 par1.insert(i,"\n");
         }
         parte1 = par1;
-        ticket += parte1 + "\n";
+        ticket += parte1 + "\n\n";
         impresora +=ticket; // imprime texto
     }
      void TextoArticulo(QString par1)

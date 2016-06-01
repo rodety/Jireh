@@ -65,6 +65,7 @@ void uiventas::configuracionesIniciaciales()
     ui->lineEdit_usuario->setEnabled(false);
     ui->lineEdit_restante->setEnabled(false);
     ui->radioButton_Boleta->setChecked(true);
+    //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
     comportamiento = true;
     //Desactivando calcular reporte
     flag_reporte = false;
@@ -157,7 +158,17 @@ bool uiventas::ventaBoleta()
 
 void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioVenta,QString precioDescuento,int cant,QString pos,int tipo,int stock_producto,QString precioCompra)
 {
-    float subtotal_item = cant*(precioVenta.toDouble());
+    float subtotal_item;
+    //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
+    if(recuperarVenta)
+    {
+        subtotal_item = cant*(precioVenta.toDouble()-precioDescuento.toDouble());
+
+    }
+    else
+    {
+        subtotal_item = cant*(precioVenta.toDouble());
+    }
     /*total_venta += subtotal_item;
     monto_igv = total_venta -(total_venta / ((igv/100)+1));
     ui->lineEdit_total->setText(QString::number(total_venta));
@@ -194,6 +205,7 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     seleccionados_model->setItem(count_row,10,new QStandardItem(precioCompra));
     seleccionados_model->setItem(count_row,11,new QStandardItem(QString::number(fuente)));
     seleccionados_model->setItem(count_row,12,new QStandardItem(precioDescuento));
+    seleccionados_model->setItem(count_row,13,new QStandardItem(precioVenta));
 
 
 
@@ -215,6 +227,7 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
     ui->tableView_Productos->setColumnWidth(10,0); //Precio Compra
     ui->tableView_Productos->setColumnWidth(11,0); //Fuente de Producto
     ui->tableView_Productos->setColumnWidth(12,0); //Copia del Descuento
+    ui->tableView_Productos->setColumnWidth(13,0); //Copia del PrecioVenta
     //ANCHANDO LAS FILAS
     ui->tableView_Productos->setRowHeight(count_row,10);
 
@@ -229,46 +242,40 @@ void uiventas::recojeProducto(QString codigo,QString descripcion,QString precioV
 
 void uiventas::on_lineEdit_efectivo_textChanged(const QString &arg1)
 {
+
+    if(ui->lineEdit_tarjeta->text().size() == 0)
+        ui->lineEdit_tarjeta->setText("0");
+
     double total,adelanto_efectivo,adelanto_tarjeta,monto_efectivo,monto_tarjeta;
     adelanto_efectivo = ui->label_efectivo->text().toDouble(0);
     adelanto_tarjeta = ui->label_tarjeta->text().toDouble(0);
     monto_efectivo = ui->lineEdit_efectivo->text().toDouble(0);
     monto_tarjeta = ui->lineEdit_tarjeta->text().toDouble(0);
     total = adelanto_efectivo+adelanto_tarjeta+monto_efectivo+monto_tarjeta;
-    if(comportamiento)
-    {
+
         calculaprecio(total);
 
 
-    }
-    else
-    {
-        calculaprecio(total);
-
-    }
 
 }
 
 void uiventas::on_lineEdit_tarjeta_textChanged(const QString &arg1)
 {
+    if(ui->lineEdit_efectivo->text().size() == 0)
+        ui->lineEdit_efectivo->setText("0");
+
+
     //COMPORTAMIENTO 1 AGREGAR NUEVO 0 EDITAR
+    //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
     double total,adelanto_efectivo,adelanto_tarjeta,monto_efectivo,monto_tarjeta;
     adelanto_efectivo = ui->label_efectivo->text().toDouble(0);
     adelanto_tarjeta = ui->label_tarjeta->text().toDouble(0);
     monto_efectivo = ui->lineEdit_efectivo->text().toDouble(0);
     monto_tarjeta = ui->lineEdit_tarjeta->text().toDouble(0);
     total = adelanto_efectivo+adelanto_tarjeta+monto_efectivo+monto_tarjeta;
-    if(comportamiento)
-    {
+
         calculaprecio(total);
 
-
-    }
-    else
-    {
-        calculaprecio(total);
-
-    }
 
 }
 void uiventas::calcular_monto_venta(double adelanto)
@@ -1240,10 +1247,10 @@ void uiventas::calcularReporte(int tipo)
         ui->tableView_Reporte_Ventas->setModel(consulta.mf_show(12));
 
     //CALCULANDO INGRESOS
-    float total =0;
+    double total =0;
     for(int i = 0;i<ui->tableView_Reporte_Ventas->model()->rowCount();i++)
     {
-        total+= ui->tableView_Reporte_Ventas->model()->index(i,3).data().toFloat();
+        total+= ui->tableView_Reporte_Ventas->model()->index(i,4).data().toFloat();
     }
     ui->label_Resultado->setText(QString::number(total));
 }
@@ -1389,6 +1396,7 @@ void uiventas::habilitar_nuevo()
         ui->radioButton_Boleta->setEnabled(true);
         ui->radioButton_cotizacion->setEnabled(true);
         ui->radioButton_Factura->setEnabled(true);
+        //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
         comportamiento = true;
         flag_reporte = true;
 
@@ -1687,7 +1695,7 @@ void uiventas::loadVenta(QString idVenta)
 
     //Se desactiva spin box descuento despues de realizada la venta
     ui->lineEdit_precio->setEnabled(false);
-    ui->label_11->hide();
+    ui->label_precio_final->hide();
 
     //GRABANDO ADELANTOS
     efectivo_pasado = ui->label_efectivo->text().toDouble();
@@ -1697,7 +1705,7 @@ void uiventas::loadVenta(QString idVenta)
     ui->pushButton_anular->setEnabled(true);
     ui->pushButton_Reimprimir->setEnabled(true);
     ui->pushButton_Reimprimir->show();
-
+    //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
     comportamiento = false;
     habilitar_editar();
     //DESABILITANDO INTERFACE SI TODO ESTA CANCELADO
@@ -1951,11 +1959,12 @@ void uiventas::on_pushButton_Imprimir_clicked()
             query.bindValue(0, id);
             query.exec();
             QString tmp;
-            int subtot,cont=1;
+            double subtot;
+            int cont=1;
             while(query.next())
             {
-                 int precio= (query.value(2).toInt());
-                 int descuento = (query.value(3).toInt());
+                 double precio= (query.value(2).toDouble());
+                 double descuento = (query.value(3).toDouble());
                  subtot = precio-descuento;
                  tmp= QString::number(cont)+";"+query.value(0).toString()+";"+"cant: "+(query.value(1).toString())+';'+"P: "+(query.value(2).toString())+';'+"Desc: "+(query.value(3).toString())+';'+"Sub: "+QString::number(subtot);
                  lista_e<<tmp;
@@ -1972,14 +1981,7 @@ void uiventas::on_pushButton_Imprimir_clicked()
 
 
 
-       /*qDebug()<<"antes de entrar for"<<endl;
-       for(int i=0;i<ids.length();i++)
-            qDebug()<<ids.at(i)<<endl;*/
 
-
-       //lista_2<<ui->label_Resultado->text();
-
-       //llenado de variables: uno x uno
        NCReport report;
        report.setReportSource( NCReportSource::File );
        //report.setReportFile("reportes/lista_de_Reporte_Ventas.xml");
@@ -1992,14 +1994,8 @@ void uiventas::on_pushButton_Imprimir_clicked()
        report.addParameter("hasta",ui->dateTimeEdit_Hasta->text());
        report.addParameter("total",ui->label_Resultado->text());
 
-           /*qDebug()<<"imprimiendo consultas.... !!!"<<endl;
-           for(int i=0;i<lista_3.length();i++)
-                qDebug()<<lista_3.at(i)<<endl;*/
 
-          // report.addStringList(lista_3,"mylist3");
            report.addStringList(lista_e,"mylist");
-           //report.addStringList(lista_2,"mylist2");
-
            report.runReportToPDF("pdf/prueba.pdf");
            report.runReportToPreview();
 
@@ -2040,12 +2036,7 @@ void uiventas::on_pushButton_eliminarProducto_clicked()
              ui->lineEdit_tarjeta->setEnabled(false);
          }
          count_row--;
-         /*
-         monto_igv = total_venta -(total_venta / ((igv/100)+1));
-         ui->lineEdit_total->setText(QString::number(total_venta));
-         //Recalculando el precio de venta
-         double total_adelanto = ui->lineEdit_tarjeta->text().toDouble() +  ui->lineEdit_efectivo->text().toDouble();
-         calculaprecio(total_adelanto);*/
+
 
          calcularSubtotal();
      }
@@ -2061,37 +2052,7 @@ void uiventas::on_tableView_Productos_entered(const QModelIndex &index)
 
 void uiventas::on_lineEdit_precio_editingFinished()
 {
-    double pVenta = ui->tableView_Productos->model()->index(indiceProducto.row(),2).data().toDouble();
-    int cantidadProducto = ui->tableView_Productos->model()->index(indiceProducto.row(),4).data().toInt();
-    double descuento = ui->tableView_Productos->model()->index(indiceProducto.row(),12).data().toDouble();
-    double maxDescuento = cantidadProducto*(pVenta-descuento);
-    double precio_descuento = ui->lineEdit_precio->text().toDouble();
-    double total_descuento = (pVenta-precio_descuento)/cantidadProducto;
-            if( precio_descuento < maxDescuento)
-    {
-        QMessageBox msgBox;
-        msgBox.setText(QString("El minimo precio es de: "+QString::number(maxDescuento)));
-        msgBox.exec();
-        ui->lineEdit_precio->setText(QString::number(maxDescuento));
-        ui->lineEdit_precio->setFocus();
-    }
-    else{
-                //SI EL PRECIO ES SUPERIOR AL PRECIO DE VENTA ENTONCES PONEMOS EL DESCUENTO EN CERO Y REEMPLAZAMOS LOS PRECIOS
-                if(total_descuento <0)
-                {
-                    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem("0"));
-                    seleccionados_model->setItem(indiceProducto.row(),2,new QStandardItem(QString::number(precio_descuento)));
-                }
-                else{
-                    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(total_descuento)));
-                    seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number(precio_descuento)));
-                }
 
-
-
-
-        calcularSubtotal();
-    }
 
 }
 
@@ -2160,4 +2121,42 @@ void uiventas::mostrarVentanaLunas()
 
 }
 
+void uiventas::on_lineEdit_precio_textEdited(const QString &arg1)
+{
+    ui->label_precio_final->setText("P. Final:");
+    double precio_final = arg1.toDouble(0);
+    double pVenta = ui->tableView_Productos->model()->index(indiceProducto.row(),13).data().toDouble();
+    double descuento = ui->tableView_Productos->model()->index(indiceProducto.row(),12).data().toDouble();
+    int cantidadProducto = ui->tableView_Productos->model()->index(indiceProducto.row(),4).data().toInt();
+    double descuento_final = pVenta -(precio_final/cantidadProducto);
+    double maxDescuento = (pVenta-descuento)*cantidadProducto;
 
+    seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(descuento_final)));
+    seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number(precio_final)));
+    if(descuento_final < 0)
+    {
+        seleccionados_model->setItem(indiceProducto.row(),2,new QStandardItem(QString::number(pVenta - descuento_final)));
+        seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem("0"));
+    }
+    else
+    {
+        if(descuento_final > descuento)
+        {
+            ui->label_precio_final->setText("P. min: "+QString::number(maxDescuento));
+            ui->lineEdit_precio->setFocus();
+            seleccionados_model->setItem(indiceProducto.row(),2,new QStandardItem(QString::number(pVenta)));
+            seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem("0"));
+            seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number(pVenta*cantidadProducto)));
+
+        }
+        else
+        {
+            seleccionados_model->setItem(indiceProducto.row(),2,new QStandardItem(QString::number(pVenta)));
+            seleccionados_model->setItem(indiceProducto.row(),3,new QStandardItem(QString::number(descuento_final)));
+            qDebug()<<"Descuento Final "<<descuento_final<<endl;
+            seleccionados_model->setItem(indiceProducto.row(),6,new QStandardItem(QString::number(precio_final)));
+        }
+    }
+    calcularSubtotal();
+
+}
