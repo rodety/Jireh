@@ -180,8 +180,8 @@ bool object_EntregaProducto::mf_add()
     QSqlQuery query;
 
     string str_query = "INSERT INTO EntregaProducto(";
-    str_query += "idEntregaProducto";
-    str_query += ", Cliente_idCliente";
+
+    str_query += " Cliente_idCliente";
     str_query += ", Colaborador_idColaborador";
     str_query += ", Producto_idProducto";
     str_query += ", Venta_idVenta";
@@ -194,17 +194,10 @@ bool object_EntregaProducto::mf_add()
     str_query += ", ?";
     str_query += ", ?";
     str_query += ", ?";
-    str_query += ", ?";
     str_query += ")";
 
     query.prepare(QString(str_query.c_str()));
-    int integer = 0;
-    if (md_o_idEntregaProducto != "")
-    {
-        query.bindValue(integer++, md_o_idEntregaProducto);
-    }
-    else
-        query.bindValue(integer++, "NULL");
+    int integer = 0;    
     query.bindValue(integer++, md_o_Cliente_idCliente);
     query.bindValue(integer++, md_o_Colaborador_idColaborador);
     query.bindValue(integer++, md_o_Producto_idProducto);
@@ -225,6 +218,8 @@ bool object_EntregaProducto::mf_add()
 
         qDebug()<<md_o_Cliente_idCliente<<" "<<md_o_Colaborador_idColaborador<<" "<<" "<<md_o_Producto_idProducto<<" "<<
                   " "<<md_o_Venta_idVenta<<" "<<md_o_estado<<" "<<md_o_fecha<<" "<< str_query.c_str()<<endl;
+        qDebug()<<query.lastError().text()<<endl;
+
 
         return false;
     }

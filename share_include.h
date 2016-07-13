@@ -38,6 +38,7 @@ using namespace std;
 #include <QWidget>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QString>
 #include <QVariant>
 #include <QSqlRecord>

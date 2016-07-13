@@ -384,6 +384,7 @@ bool object_Venta::mf_add()
 	str_query += ", Cliente_idCliente";
 	str_query += ", Colaborador_idColaborador";
 	str_query += ", tipoDocumento";
+        str_query += ", idHistorialClinico";
 	str_query += ") VALUES(";
 	str_query += "?";	
 	str_query += ", ?";
@@ -402,6 +403,7 @@ bool object_Venta::mf_add()
 	str_query += ", ?";
 	str_query += ", ?";
 	str_query += ", ?";
+        str_query += ", ?";
 	str_query += ")";
 
 	query.prepare(QString(str_query.c_str()));
@@ -424,6 +426,7 @@ bool object_Venta::mf_add()
 	query.bindValue(integer++, md_o_Cliente_idCliente);
 	query.bindValue(integer++, md_o_Colaborador_idColaborador);
 	query.bindValue(integer++, md_o_tipoDocumento);
+        query.bindValue(integer++, md_o_idHistorial);
 
 	if(query.exec())
 	{
@@ -449,7 +452,7 @@ bool object_Venta::mf_update()
 
 	QSqlQuery query;
 
-	query.prepare("UPDATE Venta SET fechaPreVenta = ?, fechaCancelacion = ?, serieDocumento = ?, numeroDocumento = ?, formaPago = ?, codigoTransaccion = ?, plazo = ?, montoTotal = ?, fechaEntrega = ?, montoAdelanto = ?, Entregado = ?, Anulado = ?, pendiente = ?, Tienda_idTienda = ?, Cliente_idCliente = ?, Colaborador_idColaborador = ?, tipoDocumento = ? WHERE idVenta = ?");
+        query.prepare("UPDATE Venta SET fechaPreVenta = ?, fechaCancelacion = ?, serieDocumento = ?, numeroDocumento = ?, formaPago = ?, codigoTransaccion = ?, plazo = ?, montoTotal = ?, fechaEntrega = ?, montoAdelanto = ?, Entregado = ?, Anulado = ?, pendiente = ?, Tienda_idTienda = ?, Cliente_idCliente = ?, Colaborador_idColaborador = ?, tipoDocumento = ?, idHistorialClinico = ? WHERE idVenta = ?");
 	query.bindValue(0, md_o_fechaPreVenta);
 	query.bindValue(1, md_o_fechaCancelacion);
 	query.bindValue(2, md_o_serieDocumento);
@@ -467,7 +470,8 @@ bool object_Venta::mf_update()
 	query.bindValue(14, md_o_Cliente_idCliente);
 	query.bindValue(15, md_o_Colaborador_idColaborador);
 	query.bindValue(16, md_o_tipoDocumento);
-	query.bindValue(17, md_o_idVenta);
+        query.bindValue(17, md_o_idHistorial);
+        query.bindValue(18, md_o_idVenta);
 
 	if(query.exec())
 	{
@@ -512,6 +516,10 @@ bool object_Venta::mf_remove()
 _QSTR object_Venta::mf_get_lastIdVenta()
 {
     return md_o_lastIdVenta;
+}
+_QSTR object_Venta::mf_get_idHistorialClinico()
+{
+    return md_o_idHistorial;
 }
 QSqlQueryModel* object_Venta::mf_show(int tipo)
 {
@@ -591,6 +599,11 @@ void object_Venta::mf_set_dateFrom(_QSTR dateFrom)
 void object_Venta::mf_set_dateTo(_QSTR dateTo)
 {
     md_o_dateTo = dateTo;
+}
+
+void object_Venta::mf_set_idHistorialClinico(_QSTR idHistorial)
+{
+    md_o_idHistorial = idHistorial;
 }
 
 bool object_Venta::mf_update_register(_QSTR pk, _QSTR flag)

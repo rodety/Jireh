@@ -86,6 +86,7 @@ bool accesorios::agregar()
         }
         if(!registrarKardex(stock.toInt(),0,"Aumento de Stock",1))
         {
+            qDebug()<<query.lastError()<<endl;
             return false;
         }
         query.clear();
@@ -100,11 +101,17 @@ bool accesorios::agregar()
             return true;
 
         }
-        else
+        else{
+            qDebug()<<query.lastError()<<endl;
+
             return false;
+        }
     }
     else
+    {
+        qDebug()<<query.lastError()<<endl;
         return false;
+    }
 }
 
 bool accesorios::actualizar()

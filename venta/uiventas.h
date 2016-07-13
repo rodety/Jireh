@@ -30,6 +30,7 @@
 #include <impresion/impresion.h>
 #include <impresion/articulo.h>
 #include <venta/qcomboboxitemdelegate.h>
+#include <cliente/historialclinico.h>
 namespace Ui {
 class uiventas;
 }
@@ -118,8 +119,6 @@ private slots:
 
     void on_lineEdit_precio_editingFinished();
 
-    void on_pushButton_Reimprimir_clicked();
-
     void on_tableView_Productos_activated(const QModelIndex &index);
 
     void on_comboBox_buscar_producto_activated(const QString &arg1);
@@ -127,6 +126,8 @@ private slots:
 
 
     void on_lineEdit_precio_textEdited(const QString &arg1);
+
+    void on_pushButton_Reimprimir_boleta_clicked();
 
 private:
     Ui::uiventas *ui;
@@ -185,12 +186,12 @@ private:
     void configurarPermisos();
     map<int,int> posComboboxTienda;
     map<int,int> posComboboxEmpresa;
-    bool ingresarMedida;
     bool recuperarVenta;
 
     double m_subTotal;
     double m_igv;
     double m_total;
+    historialClinico historial;
 
 
 

@@ -14,13 +14,13 @@ ui_tarjeta::ui_tarjeta(QWidget *parent) :
     ui->dateEdit->setDate(QDate::currentDate());
     ui->lineEdit_Monto->setEnabled(false);
 
-    QRegExp rx("[1-9]\\d{0,9}");
+    /*QRegExp rx("[0-9]\\d{0,9}");
     QValidator *validator = new QRegExpValidator(rx, this);
     ui->lineEdit_Afiliacion->setValidator(validator);
     ui->lineEdit_id->setValidator(validator);
     ui->lineEdit_Lote->setValidator(validator);
     ui->lineEdit_numero_Tarjeta->setValidator(validator);
-    ui->lineEdit_Referencia->setValidator(validator);
+    ui->lineEdit_Referencia->setValidator(validator);*/
 }
 
 ui_tarjeta::~ui_tarjeta()

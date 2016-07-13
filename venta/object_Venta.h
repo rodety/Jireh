@@ -29,6 +29,7 @@ private:
     _QSTR md_o_lastIdVenta;
     _QSTR md_o_dateFrom;
     _QSTR md_o_dateTo;
+    _QSTR md_o_idHistorial;
 
 public:
 	object_Venta();
@@ -55,6 +56,7 @@ public:
 	void mf_set_tipoDocumento(_QSTR tipoDocumento);
     void mf_set_dateFrom(_QSTR dateFrom);
     void mf_set_dateTo(_QSTR dateTo);
+    void mf_set_idHistorialClinico(_QSTR idHistorial);
 
 	_QSTR mf_get_idVenta();
 	_QSTR mf_get_fechaPreVenta();
@@ -75,6 +77,7 @@ public:
 	_QSTR mf_get_Colaborador_idColaborador();
 	_QSTR mf_get_tipoDocumento();
         _QSTR mf_get_lastIdVenta();
+        _QSTR mf_get_idHistorialClinico();
 
 	bool mf_load(_QSTR pk);
 	bool mf_add();

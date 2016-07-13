@@ -11,6 +11,7 @@ private:
     QString doctor;
     QString fecha;
     QString origen;
+    QString fecha_ingreso;
     medidasHistorial mCercaDerecha;
     medidasHistorial mCercaIzquierda;
     medidasHistorial mLejosDerecha;
@@ -25,6 +26,7 @@ public:
     QString getDoctor();
     QString getFecha();
     QString getOrigenMedicion();
+    QString getFecha_ingreso();
     medidasHistorial& getMedidasCercaDerecha();
     medidasHistorial& getMedidasCercaIzquierda();
     medidasHistorial& getMedidasLejosDerecha();
@@ -35,6 +37,7 @@ public:
     void setDoctor(QString);
     void setFecha(QString);
     void setOrigenMedicion(QString);
+    void setFecha_ingreso(QString);
     void setMedidasCercaDerecha(medidasHistorial);
     void setMedidasCercaIzquierda(medidasHistorial);
     void setMedidasLejosDerecha(medidasHistorial);
@@ -48,6 +51,9 @@ public:
 
     QSqlQueryModel* mostrar();
     bool buscar();
+    bool buscarFecha();
+    bool buscarId();
+
 };
 
 #endif // HISTORIALCLINICO_H

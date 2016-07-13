@@ -312,6 +312,7 @@ void ui_historial_clinico::on_pushButton_Aceptar_2_clicked()
 {
     historial_act.setIdCliente(cliente_act.getIdCliente());
     historial_act.setDoctor(ui->lineEdit_doctor->text());
+    historial_act.setFecha_ingreso(QDate::currentDate().toString(Qt::ISODate));
 
     QString year;year=year.setNum(ui->dateEdit_fecha->date().year());
     QString month;month=month.setNum(ui->dateEdit_fecha->date().month());

@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QSqlQueryModel>
 #include <QDebug>
+#include <QSqlError>
 
 /**
  * @file objetopersistente.h

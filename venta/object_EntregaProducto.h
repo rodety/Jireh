@@ -2,6 +2,7 @@
 #define OBJECT_ENTREGAPRODUCTO_H
 
 #include "share_include.h"
+#include <QSqlError>
 
 #define TABLE_NAME_ENTREGAPRODUCTO "EntregaProducto"
 class object_EntregaProducto:public object_general

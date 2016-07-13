@@ -7,7 +7,7 @@ object_Venta_has_Producto::object_Venta_has_Producto()
     //w!
 }
 
-object_Venta_has_Producto::object_Venta_has_Producto(_QSTR idVenta_has_Producto, _QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion)
+object_Venta_has_Producto::object_Venta_has_Producto(_QSTR idVenta_has_Producto, _QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion, _QSTR Producto_has_Vitrina_idProducto_has_Vitrina)
 {
     //file Venta_has_Producto
     //function construct_1
@@ -20,8 +20,9 @@ object_Venta_has_Producto::object_Venta_has_Producto(_QSTR idVenta_has_Producto,
     md_o_precio = precio;
     md_o_descuento = descuento;
     md_o_descripcion = descripcion;
+    md_o_Producto_has_Vitrina_idProducto_has_Vitrina = Producto_has_Vitrina_idProducto_has_Vitrina ;
 }
-object_Venta_has_Producto::object_Venta_has_Producto(_QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion)
+object_Venta_has_Producto::object_Venta_has_Producto(_QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion, _QSTR Producto_has_Vitrina_idProducto_has_Vitrina)
 {
     //file Venta_has_Producto
     //function construct_2
@@ -33,6 +34,7 @@ object_Venta_has_Producto::object_Venta_has_Producto(_QSTR Venta_idVenta, _QSTR 
     md_o_precio = precio;
     md_o_descuento = descuento;
     md_o_descripcion = descripcion;
+    md_o_Producto_has_Vitrina_idProducto_has_Vitrina = Producto_has_Vitrina_idProducto_has_Vitrina ;
 }
 object_Venta_has_Producto::~object_Venta_has_Producto()
 {
@@ -88,8 +90,17 @@ void object_Venta_has_Producto::mf_set_descripcion(_QSTR descripcion)
     //w!
 
     md_o_descripcion = descripcion;
+
 }
 
+void object_Venta_has_Producto::mf_set_Producto_has_Vitrina_idProducto_has_Vitrina(_QSTR Producto_has_Vitrina_idProducto_has_Vitrina)
+{
+    //function mf_set_descripcion
+    //w!
+
+    md_o_Producto_has_Vitrina_idProducto_has_Vitrina = Producto_has_Vitrina_idProducto_has_Vitrina;
+
+}
 _QSTR object_Venta_has_Producto::mf_get_idVenta_has_Producto()
 {
     //function mf_get_idVenta_has_Producto
@@ -138,8 +149,16 @@ _QSTR object_Venta_has_Producto::mf_get_descripcion()
     //w!
 
     return md_o_descripcion;
-}
 
+}
+_QSTR object_Venta_has_Producto::mf_get_Producto_has_Vitrina_idProducto_has_Vitrina()
+{
+    //function mf_get_descripcion
+    //w!
+
+    return md_o_Producto_has_Vitrina_idProducto_has_Vitrina;
+
+}
 bool object_Venta_has_Producto::mf_load(_QSTR pk)
 {
     //function mf_load
@@ -160,6 +179,7 @@ bool object_Venta_has_Producto::mf_load(_QSTR pk)
         md_o_precio = query.value(4).toString();
         md_o_descuento = query.value(5).toString();
         md_o_descripcion = query.value(6).toString();
+        md_o_Producto_has_Vitrina_idProducto_has_Vitrina = query.value(7).toString();
 
         //state OK
         //w!
@@ -187,8 +207,10 @@ bool object_Venta_has_Producto::mf_add()
     str_query += ", precio";
     str_query += ", descuento";
     str_query += ", descripcion";
+    str_query += ", Producto_has_Vitrina_idProducto_has_Vitrina";
     str_query += ") VALUES(";
     str_query += "?";
+    str_query += ", ?";
     str_query += ", ?";
     str_query += ", ?";
     str_query += ", ?";
@@ -198,7 +220,6 @@ bool object_Venta_has_Producto::mf_add()
     str_query += ")";
 
     qDebug()<<str_query.c_str()<<endl;
-    qDebug()<<"holaaa"<<endl;
 
     query.prepare(QString(str_query.c_str()));
     int integer = 0;
@@ -207,13 +228,14 @@ bool object_Venta_has_Producto::mf_add()
         query.bindValue(integer++, md_o_idVenta_has_Producto);
     }
     else
-        query.bindValue(integer++, "NULL");
+        query.bindValue(integer++, NULL);
     query.bindValue(integer++, md_o_Venta_idVenta);
     query.bindValue(integer++, md_o_Producto_idProducto);
     query.bindValue(integer++, md_o_cantidad);
     query.bindValue(integer++, md_o_precio);
     query.bindValue(integer++, md_o_descuento);
     query.bindValue(integer++, md_o_descripcion);
+    query.bindValue(integer++, md_o_Producto_has_Vitrina_idProducto_has_Vitrina);
 
     if(query.exec())
     {
@@ -230,7 +252,9 @@ bool object_Venta_has_Producto::mf_add()
               <<md_o_cantidad<<" "
              <<md_o_precio<<" "
             <<md_o_descuento<<" "
-              <<md_o_descripcion<<endl;
+           <<md_o_descripcion<<" "
+           <<md_o_Producto_has_Vitrina_idProducto_has_Vitrina<<endl;
+        qDebug()<<query.lastError()<<endl;
 
 
         return false;
@@ -244,14 +268,15 @@ bool object_Venta_has_Producto::mf_update()
 
     QSqlQuery query;
 
-    query.prepare("UPDATE Venta_has_Producto SET Venta_idVenta = ?, Producto_idProducto = ?, cantidad = ?, precio = ?, descuento = ?, descripcion = ? WHERE idVenta_has_Producto = ?");
+    query.prepare("UPDATE Venta_has_Producto SET Venta_idVenta = ?, Producto_idProducto = ?, cantidad = ?, precio = ?, descuento = ?, descripcion = ?, Producto_has_Vitrina_idProducto_has_Vitrina = ? WHERE idVenta_has_Producto = ?");
     query.bindValue(0, md_o_Venta_idVenta);
     query.bindValue(1, md_o_Producto_idProducto);
     query.bindValue(2, md_o_cantidad);
     query.bindValue(3, md_o_precio);
     query.bindValue(4, md_o_descuento);
     query.bindValue(5, md_o_descripcion);
-    query.bindValue(6, md_o_idVenta_has_Producto);
+    query.bindValue(6, md_o_Producto_has_Vitrina_idProducto_has_Vitrina);
+    query.bindValue(7, md_o_idVenta_has_Producto);
 
     if(query.exec())
     {

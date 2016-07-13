@@ -248,8 +248,7 @@ bool object_VentaPlazo::mf_add()
     QSqlQuery query;
 
     QString str_query = "INSERT INTO VentaPlazo(";
-    str_query += "idVentaPlazo";
-    str_query += ", Venta_idVenta";
+    str_query += " Venta_idVenta";
     str_query += ", Venta_has_Tarjeta_idVenta_has_Tarjeta";
     str_query += ", Colaborador_idColaborador";
     str_query += ", Tienda_idTienda";
@@ -260,8 +259,7 @@ bool object_VentaPlazo::mf_add()
     str_query += ", serieDocumento";
     str_query += ", registro";
     str_query += ") VALUES(";
-    str_query += "NULL";
-    str_query += ", "+md_o_Venta_idVenta;
+    str_query += " "+md_o_Venta_idVenta;
     str_query += ", "+md_o_Venta_has_Tarjeta_idVenta_has_Tarjeta;
     str_query += ", "+md_o_Colaborador_idColaborador;
     str_query += ", "+md_o_Tienda_idTienda;

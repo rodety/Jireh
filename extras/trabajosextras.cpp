@@ -92,9 +92,8 @@ bool trabajosExtras::eliminar()
 
 QSqlQueryModel* trabajosExtras::mostrar()
 {
-    QSqlQueryModel* model=new QSqlQueryModel;
-    //model->setQuery("SELECT idTrabajosExtras as 'Codigo',descripcion as 'Descripcion',precio as 'Precio', descuento as 'Descuento' FROM TrabajosExtras");
-    model->setQuery("SELECT idProducto as 'Codigo',descripcion as 'Descripcion',precioVenta as 'Precio',precioDescuento as 'Descuento' FROM Producto WHERE tipo = 7 ORDER BY idProducto DESC LIMIT "+QString::number(Programa::getPrograma()->getLongitud()));
+    QSqlQueryModel* model=new QSqlQueryModel;    
+    model->setQuery("SELECT idProducto as 'Codigo',descripcion as 'Descripcion',precioVenta as 'Precio',precioDescuento as 'Descuento' FROM Producto WHERE tipo = 7 ORDER BY idProducto ASC ");
     return model;
 }
 bool trabajosExtras::completar()

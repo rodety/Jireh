@@ -59,7 +59,6 @@ void uiventas::configuracionesIniciaciales()
 
     //DESABILITANDO BOTON DE TARJETA
     ui->pushButton_anular->setEnabled(false);
-    ui->pushButton_Reimprimir->setEnabled(false);
     ui->lineEdit_total->setEnabled(false);
     ui->lineEdit_total_cancelado->setEnabled(false);
     ui->lineEdit_usuario->setEnabled(false);
@@ -70,6 +69,7 @@ void uiventas::configuracionesIniciaciales()
     //Desactivando calcular reporte
     flag_reporte = false;
     ui->pushButton_registro_tarjeta->setEnabled(false);
+    ui->pushButton_Reimprimir_boleta->setEnabled(false);
 
     //DESACTIVANDOP LOS LINE EDIT
     ui->lineEdit_efectivo->setEnabled(false);
@@ -77,11 +77,9 @@ void uiventas::configuracionesIniciaciales()
 
     //DESACTIVANDO BOTONES
     ui->pushButton_anular->hide();
-    ui->pushButton_Reimprimir->hide();
     ui->pushButton_eliminarProducto->setEnabled(false);
     ui->radioButton_cotizacion->hide();
     //contro de ingreso de medidad una sola vez
-    ingresarMedida = true;
     recuperarVenta = false;
 
 }
@@ -438,15 +436,18 @@ void uiventas::on_pushButton_guardar_clicked()
     }
 
     //Forma de pago Contado 0, Credito 1, Ambos 2,  ninguno 3
-    if(ui->label_efectivo->text().toDouble() > 0 && ui->label_tarjeta->text().toDouble() > 0)
+    if(ui->lineEdit_efectivo->text().toDouble() > 0.0 && ui->lineEdit_tarjeta->text().toDouble() > 0.0)
         formaPago = "2";
     else
     {
-        if(ui->label_tarjeta->text().toDouble() > 0)
+        if(ui->lineEdit_tarjeta->text().toDouble() > 0.0)
+        {
             formaPago = "1";
+            qDebug()<<"FORMA DE PAGO CREDITO 111111"<<endl;
+        }
         else
         {
-            if(ui->label_efectivo->text().toDouble() > 0)
+            if(ui->lineEdit_efectivo->text().toDouble() > 0.0)
                 formaPago = "0";
             else
                 formaPago = "3";
@@ -517,6 +518,14 @@ void uiventas::on_pushButton_guardar_clicked()
     venta.mf_set_Colaborador_idColaborador(IdColaborador);
     venta.mf_set_tipoDocumento(tipoDocumento);
 
+    //REGISTRANDO LA VENTA CON RECETA DEL CLIENTE
+    historial.setIdCliente(idCliente);
+    historial.setFecha_ingreso(ui->dateTimeEdit_fecha_preventa->date().toString(Qt::ISODate));
+    if(historial.buscarFecha())
+    {
+        venta.mf_set_idHistorialClinico(historial.getIdHistorialClinico());
+    }
+
     //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
     /**********************************************************************/
     if(comportamiento)
@@ -571,6 +580,7 @@ void uiventas::on_pushButton_guardar_clicked()
 
         for(int i = 0; i<count_row;i++)
         {
+            int fuente_producto = seleccionados_model->item(i,11)->text().toInt();
             object_Venta_has_Producto vendido;
             vendido.mf_set_Venta_idVenta(venta.mf_get_lastIdVenta());
             vendido.mf_set_Producto_idProducto(seleccionados_model->item(i,0)->text());
@@ -578,6 +588,9 @@ void uiventas::on_pushButton_guardar_clicked()
             vendido.mf_set_precio(seleccionados_model->item(i,2)->text());
             vendido.mf_set_descuento(seleccionados_model->item(i,3)->text());
             vendido.mf_set_descripcion(seleccionados_model->item(i,1)->text());
+
+            if(fuente_producto ==1)
+                vendido.mf_set_Producto_has_Vitrina_idProducto_has_Vitrina(seleccionados_model->item(i,7)->text());            
 
             if(!vendido.mf_add())
             {
@@ -1351,7 +1364,6 @@ void uiventas::limpiarInterfazVenta()
     ui->lineEdit_precio->setEnabled(false);
     ui->pushButton_eliminarProducto->setEnabled(false);
 
-    ingresarMedida = true;
     recuperarVenta = false;
 
 
@@ -1370,7 +1382,6 @@ void uiventas::habilitar_editar()
     ui->radioButton_Factura->setEnabled(false);
 
     ui->pushButton_anular->setEnabled(true);
-    ui->pushButton_Reimprimir->setEnabled(true);
     ui->dateTimeEdit_entrega->setEnabled(true);
     ui->pushButton_anular->show();
     comportamiento = false;
@@ -1392,7 +1403,6 @@ void uiventas::habilitar_nuevo()
         //LA FECHA DE VENTA NO PUEDE EDITARSE DADO QUE LA BOLETA SE PUDO IMPRIMIR
         ui->dateTimeEdit_fecha_preventa->setEnabled(false);
         ui->pushButton_anular->setEnabled(false);
-        ui->pushButton_Reimprimir->setEnabled(false);
         ui->radioButton_Boleta->setEnabled(true);
         ui->radioButton_cotizacion->setEnabled(true);
         ui->radioButton_Factura->setEnabled(true);
@@ -1488,7 +1498,10 @@ void uiventas::on_comboBox_buscar_producto_activated(int index)
     {
         cliente cliente_selec;
         cliente_selec.setIdCliente(customer.getIdCliente());
-        if(ingresarMedida){
+        historial.setIdCliente(customer.getIdCliente());
+        historial.setFecha_ingreso(ui->dateTimeEdit_fecha_preventa->date().toString(Qt::ISODate));
+
+        if(!historial.buscarFecha()){
             ui_historial_clinico * historial = new ui_historial_clinico;
             historial->setWindowTitle("Nuevo Historial");
             historial->setCliente(&cliente_selec);
@@ -1566,6 +1579,13 @@ void uiventas::on_tableView_pagos_clicked(const QModelIndex &index)
 {
     index_pagos = index;
     QString tarjeta = ui->tableView_pagos->model()->index(index.row(),5).data().toString();
+    double adelanto =  tarjeta.toDouble(0)+ ui->tableView_pagos->model()->index(index.row(),4).data().toDouble(0);
+    double t_igv = Sesion::getIgv();
+    m_igv = adelanto -(adelanto/(t_igv/100+1));
+    m_subTotal = adelanto-m_igv;
+    m_total = adelanto;
+
+    ui->pushButton_Reimprimir_boleta->setEnabled(true);
     if(tarjeta.toDouble() > 0)
         ui->pushButton_registro_tarjeta->setEnabled(true);
     else
@@ -1662,7 +1682,7 @@ void uiventas::loadVenta(QString idVenta)
     for(int i=0;i<salida.size();i++)
     {
         v_producto.mf_load(salida[i]);
-        recojeProducto(v_producto.mf_get_Producto_idProducto(),v_producto.mf_get_descripcion(),v_producto.mf_get_precio(),v_producto.mf_get_descuento(),v_producto.mf_get_cantidad().toInt(),"0",0,0,"0");
+        recojeProducto(v_producto.mf_get_Producto_idProducto(),v_producto.mf_get_descripcion(),v_producto.mf_get_precio(),v_producto.mf_get_descuento(),v_producto.mf_get_cantidad().toInt(),v_producto.mf_get_Producto_has_Vitrina_idProducto_has_Vitrina(),0,0,"0");
     }
     salida.clear();
 
@@ -1703,8 +1723,6 @@ void uiventas::loadVenta(QString idVenta)
     calculaprecio(efectivo_pasado + tarjeta_pasado);
     //ACTIVANDO BOTONES
     ui->pushButton_anular->setEnabled(true);
-    ui->pushButton_Reimprimir->setEnabled(true);
-    ui->pushButton_Reimprimir->show();
     //COMPORTAMIENTO TRUE = NUEVA VENTA, FALSE ACTUALIZAR VENTA
     comportamiento = false;
     habilitar_editar();
@@ -1902,8 +1920,6 @@ void uiventas::configurarPermisos()
     else{
         ui->pushButton_anular->show();
         ui->pushButton_anular->setEnabled(true);
-        ui->pushButton_Reimprimir->show();
-        ui->pushButton_Reimprimir->setEnabled(true);
     }
 
 }
@@ -1932,6 +1948,7 @@ void uiventas::on_pushButton_Imprimir_clicked()
         QString var,id;
         QStringList ids;
         QString adelanto, total;
+
        for(int i=0;i<fila;i++)
         {
             var.clear();int y=0;
@@ -1955,26 +1972,168 @@ void uiventas::on_pushButton_Imprimir_clicked()
             //qDebug()<<var<<endl;
             lista_e<<var;
             QSqlQuery query;
-            query.prepare("select descripcion, cantidad, precio,descuento from Venta_has_Producto where Venta_idVenta = ?");
+            QSqlQuery query2;
+            query.prepare("select descripcion, cantidad, precio,descuento,Producto_has_Vitrina_idProducto_has_Vitrina from Venta_has_Producto where Venta_idVenta = ?");
             query.bindValue(0, id);
             query.exec();
             QString tmp;
             double subtot;
             int cont=1;
+            QString ubicacion;
             while(query.next())
             {
+
                  double precio= (query.value(2).toDouble());
                  double descuento = (query.value(3).toDouble());
                  subtot = precio-descuento;
-                 tmp= QString::number(cont)+";"+query.value(0).toString()+";"+"cant: "+(query.value(1).toString())+';'+"P: "+(query.value(2).toString())+';'+"Desc: "+(query.value(3).toString())+';'+"Sub: "+QString::number(subtot);
+                 tmp= QString::number(cont)+";"+query.value(0).toString()+";cant: "+(query.value(1).toString())+';'+"P: "+(query.value(2).toString())+';'+"Desc: "+(query.value(3).toString())+';'+"Sub: "+QString::number(subtot);
                  lista_e<<tmp;
+
+                 //BUSCANDO UBICACION DEL PRODUCTOS SOLAMENTE CUANDO PROVIENE DE UNA VITRINA
+
+                 if(query.value(4).toString() != "0")
+                 {
+                     qDebug()<<"valor del IDDDDD "<<query.value(4).toString()<<endl;
+                     query2.prepare("SELECT fila, columna, nivel,Vitrina.nombre,Tienda.nombre FROM Vitrina,Producto_has_Vitrina,Tienda WHERE idProducto_has_Vitrina = ? AND Vitrina_Ubicacion_idUbicacion = Ubicacion_idUbicacion AND idTienda = Tienda_idTienda");
+                     query2.bindValue(0,query.value(4).toString());
+                     query2.exec();
+                     if(query2.next())
+                     {
+                         ubicacion = ";****UBICACION***    Fila: "+query2.value(0).toString();
+                         ubicacion += " Columna: "+query2.value(1).toString();
+                         ubicacion += " Nivel: "+query2.value(2).toString();
+                         ubicacion += " Vitrina: "+query2.value(3).toString();
+                         ubicacion += " Tienda: "+query2.value(4).toString();
+                         ubicacion += ";;;;";
+                         lista_e<<ubicacion;
+
+                     }
+                 }
                  cont++;
             }
             QString last1;
-            last1= " ; ; ; ;ADELANTO: ;"+adelanto;
+
+
+            query.prepare("SELECT nombres, primer_apellido, segundo_apellido FROM Colaborador , Venta WHERE idColaborador = Colaborador_idColaborador AND idVenta = ?");
+            query.bindValue(0, id);
+            query.exec();
+            if(query.next())
+            {
+                last1= ";VENDEDOR: "+query.value(0).toString()+" "+query.value(1).toString()+" "+query.value(2).toString()+"                                                               ADELANTO: ;"+adelanto+";TOTAL:"+total+";SALDO:;"+QString::number(total.toDouble(0) - adelanto.toDouble(0));
+                lista_e<<last1;
+                last1= ";;;;;";
+                lista_e<<last1;
+
+            }
+
+            //  RECUEPERANDO DATOS DE TARJETA
+
+            query.prepare("SELECT Venta_has_Tarjeta_idVenta_has_Tarjeta FROM VentaPlazo WHERE Venta_idVenta = ?");
+            query.bindValue(0, id);
+            query.exec();
+            if(query.next())
+            {
+                QString idVenta_has_Tarjeta = query.value(0).toString();
+                query.prepare("SELECT id,tarjeta,referencia,lote,monto,codigoAfiliacion,nombre_pagador,Tarjeta_idTarjeta FROM Venta_has_Tarjeta WHERE idVenta_has_Tarjeta = ?");
+                query.bindValue(0, idVenta_has_Tarjeta);
+                query.exec();
+                if(query.next())
+                {
+                    QSqlQuery query1;
+                    query1.prepare("SELECT nombre FROM Tarjeta WHERE idTarjeta = ?");
+                    query1.bindValue(0,query.value(7).toString());
+                    query1.exec();
+                    QString n_tarjeta;
+                    if(query1.next())
+                        n_tarjeta = query1.value(0).toString();
+                    else
+                        n_tarjeta = "FALTA REGISTRAR DATOS DE TARJETA";
+
+
+
+                    last1= ";***PAGO CON TARJETA***    "+n_tarjeta+"     NOMBRE: "+query.value(6).toString()+";;;;";
+                    lista_e<<last1;
+                    last1= ";ID: "+query.value(0).toString()+",    #OPERACION "+query.value(1).toString()+",    REF:"+query.value(2).toString()+",   LOT:"+query.value(3).toString()+",    AFILIA:"+query.value(5).toString()+";MONT:"+query.value(4).toString()+";;;";
+                    lista_e<<last1;
+                    last1= ";;;;;";
+                }
+
+            }
+
+            //BUSCANDO HISTORIA RELACIONADO A VENTA
+            query.prepare("select idHistorialClinico from Venta where idVenta = ?");
+            query.bindValue(0, id);
+            if(query.exec())
+            {
+                if(query.next())
+                {
+                    historial.setIdHistorialClinico(query.value(0).toString());
+                    qDebug()<<"id historial clinico "<<query.value(0).toString()<<endl;
+                    if(historial.buscarId())
+                    {
+                        QString medicion = "Desconocido";
+
+                        if(historial.getOrigenMedicion() == "1")
+                            medicion = "Pago";
+                        if(historial.getOrigenMedicion() == "2")
+                            medicion = "Externa";
+                        if(historial.getOrigenMedicion() == "3")
+                            medicion = "Cortesia";
+
+
+
+                        last1 = ";*** RECETA ***  DOCTOR: "+historial.getDoctor()+"     ORIGEN MEDICION: "+medicion+";ESFERICO;CILINDRICO;EJE;DIS. PUPILAR";
+                        lista_e<<last1;
+
+                        last1= ";LEJOS OJO DERECHO ";
+                        last1 +=";"+historial.getMedidasLejosDerecha().getEsferico();
+                        last1 +=";"+historial.getMedidasLejosDerecha().getCilindrico();
+                        last1 +=";"+historial.getMedidasLejosDerecha().getEje();
+                        last1 +=";"+historial.getMedidasLejosDerecha().getDistanciaPupilar();
+                        lista_e<<last1;
+
+                        last1= ";LEJOS OJO IZQUIERDO ";
+                        last1 +=";"+historial.getMedidasLejosIzquierda().getEsferico();
+                        last1 +=";"+historial.getMedidasLejosIzquierda().getCilindrico();
+                        last1 +=";"+historial.getMedidasLejosIzquierda().getEje();
+                        last1 +=";"+historial.getMedidasLejosIzquierda().getDistanciaPupilar();
+                        lista_e<<last1;
+
+
+                        last1= ";Cerca OJO DERECHO ";
+                        last1 +=";"+historial.getMedidasCercaDerecha().getEsferico();
+                        last1 +=";"+historial.getMedidasCercaDerecha().getCilindrico();
+                        last1 +=";"+historial.getMedidasCercaDerecha().getEje();
+                        last1 +=";"+historial.getMedidasCercaDerecha().getDistanciaPupilar();
+                        lista_e<<last1;
+
+                        last1= ";Cerca OJO IZQUIERDO ";
+                        last1 +=";"+historial.getMedidasCercaIzquierda().getEsferico();
+                        last1 +=";"+historial.getMedidasCercaIzquierda().getCilindrico();
+                        last1 +=";"+historial.getMedidasCercaIzquierda().getEje();
+                        last1 +=";"+historial.getMedidasCercaIzquierda().getDistanciaPupilar();
+                        lista_e<<last1;
+                    }
+                }
+                else
+                {
+                    qDebug()<<"SIN RESULTADOS"<<endl;
+                }
+            }
+            else
+                qDebug()<<query.lastError()<<endl;
+
+            last1= ";OBSERVACIONES:________________________________________________________________________________________________;;;;";
             lista_e<<last1;
-            last1= " ; ; ; ;TOTAL: ;"+total;
-            lista_e<<last1;
+
+
+
+
+
+
+
+
+
         }
        for(int i=0;i<lista_e.length();i++)
             qDebug()<<lista_e.at(i)<<endl;
@@ -2056,31 +2215,6 @@ void uiventas::on_lineEdit_precio_editingFinished()
 
 }
 
-void uiventas::on_pushButton_Reimprimir_clicked()
-{
-    QMessageBox msgBox;
-    msgBox.setText("Reimpresion de Comprobante.");
-    msgBox.setInformativeText("Desea volver a imprimir el comprobante de pago?");
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::Yes);
-    int ret = msgBox.exec();
-
-    switch (ret) {
-      case QMessageBox::Yes:
-          // Yes was clicked
-            imprimir(validarCancelado());
-          break;
-      case QMessageBox::No:
-          // Don't Save was clicked
-          break;
-      default:
-          // should never be reached
-          break;
-    }
-
-    limpiarInterfazVenta();
-    ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());
-}
 
 void uiventas::on_tableView_Productos_activated(const QModelIndex &index)
 {
@@ -2117,7 +2251,6 @@ void uiventas::mostrarVentanaLunas()
     form->show();
     connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),this,SLOT(recojeProducto(QString,QString,QString,QString,int,QString,int,int,QString)));
     connect(form,SIGNAL(sentProductoVenta(QString,QString,QString,QString,int,QString,int,int,QString)),form,SLOT(close()));
-    ingresarMedida = false;
 
 }
 
@@ -2160,3 +2293,31 @@ void uiventas::on_lineEdit_precio_textEdited(const QString &arg1)
     calcularSubtotal();
 
 }
+
+void uiventas::on_pushButton_Reimprimir_boleta_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Reimpresion de Comprobante.");
+    msgBox.setInformativeText("Desea volver a imprimir el comprobante de pago?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+    int ret = msgBox.exec();
+
+    switch (ret) {
+      case QMessageBox::Yes:
+          // Yes was clicked
+            imprimir(validarCancelado());
+          break;
+      case QMessageBox::No:
+          // Don't Save was clicked
+          break;
+      default:
+          // should never be reached
+          break;
+    }
+
+    limpiarInterfazVenta();
+    ui->dateTimeEdit_Hasta->setDateTime(QDateTime::currentDateTime());
+
+}
+

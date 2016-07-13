@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>929</width>
+    <width>961</width>
     <height>637</height>
    </rect>
   </property>
@@ -533,18 +533,6 @@
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_Reimprimir">
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Imprimir</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
              <item row="0" column="2">
@@ -951,7 +939,7 @@
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_8">
-         <item row="0" column="0" rowspan="2">
+         <item row="0" column="0" rowspan="3">
           <widget class="QTableView" name="tableView_pagos"/>
          </item>
          <item row="0" column="1">
@@ -961,7 +949,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
             <widget class="QLabel" name="label_7">
@@ -1008,7 +996,7 @@
            </item>
           </layout>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="1">
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -1020,6 +1008,13 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="pushButton_Reimprimir_boleta">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

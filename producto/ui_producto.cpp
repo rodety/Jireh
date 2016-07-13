@@ -371,7 +371,7 @@ void ui_producto::cargar_producto(bool comportamiento)
 
 
             ui_agregaraccesorios* form=new ui_agregaraccesorios;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setAccesorio(productoActual);
             form->setWindowTitle(titulo);
             form->show();
@@ -444,7 +444,7 @@ void ui_producto::cargar_producto(bool comportamiento)
         {
 
             ui_agregaraccesorios* form=new ui_agregaraccesorios;
-            form->setModo(true);
+            form->setModo(comportamiento);
             form->setWindowTitle(titulo);
             form->show();
             connect(form,SIGNAL(guardado()),this,SLOT(seleccionar()));

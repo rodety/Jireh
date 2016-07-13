@@ -354,7 +354,7 @@ QSqlQueryModel *object_Producto_has_Vitrina::mf_show()
 
     //consulta = "SELECT p.codigo as 'Codigo', t.nombre as 'Tienda', v.nombre as 'Vitrina', pv.fila as 'Fila', pv.columna as 'Columna', pv.nivel as 'Nivel',pv.fecha as 'Fecha', CONCAT(c.nombres,' ',c.primer_apellido) as 'Colaborador' FROM Producto p, Tienda t, Vitrina v, Producto_has_Vitrina pv, Colaborador c WHERE p.idProducto = '"+md_o_Producto_idProducto+"' AND v.Tienda_idTienda = t.idTienda AND v.Ubicacion_idUbicacion = pv.Vitrina_Ubicacion_idUbicacion AND pv.Producto_idProducto = '"+md_o_Producto_idProducto+"' AND c.idColaborador = pv.Colaborador_Persona_idPersona ORDER BY pv.fecha";
 
-    consulta = "SELECT pv.idProducto_has_Vitrina as 'id', p.codigo as 'Codigo', t.nombre as 'Tienda', v.nombre as 'Vitrina', pv.fila as 'Fila', pv.columna as 'Columna', pv.nivel as 'Nivel',pv.fecha as 'Fecha', CONCAT(c.nombres,' ',c.primer_apellido) as 'Colaborador' FROM Producto p, Tienda t, Vitrina v, Producto_has_Vitrina pv, Colaborador c WHERE p.idProducto = '"+md_o_Producto_idProducto+"' AND v.Tienda_idTienda = t.idTienda AND v.Ubicacion_idUbicacion = pv.Vitrina_Ubicacion_idUbicacion AND pv.Producto_idProducto = '"+md_o_Producto_idProducto+"' AND c.idColaborador = pv.Colaborador_Persona_idPersona ORDER BY pv.fecha";
+    consulta = "SELECT pv.idProducto_has_Vitrina as 'id', p.codigo as 'Codigo', t.nombre as 'Tienda', v.nombre as 'Vitrina', pv.fila as 'Fila', pv.columna as 'Columna', pv.nivel as 'Nivel',pv.fecha as 'Fecha', CONCAT(c.nombres,' ',c.primer_apellido) as 'Colaborador' FROM Producto p, Tienda t, Vitrina v, Producto_has_Vitrina pv, Colaborador c WHERE p.idProducto = '"+md_o_Producto_idProducto+"' AND v.Tienda_idTienda = t.idTienda AND v.Ubicacion_idUbicacion = pv.Vitrina_Ubicacion_idUbicacion AND pv.Producto_idProducto = '"+md_o_Producto_idProducto+"' AND c.idColaborador = pv.Colaborador_Persona_idPersona AND pv.estado = 'P' ORDER BY pv.fecha";
 
     QSqlQuery query(consulta);
     model->setQuery(query);
@@ -402,6 +402,7 @@ bool object_Producto_has_Vitrina::mf_update_estado()
     }else{
         //state FAILED
         //w!
+        qDebug()<<query.lastError()<<endl;
 
         return false;
     }

@@ -15,11 +15,11 @@ private:
     _QSTR md_o_precio;
     _QSTR md_o_descuento;
     _QSTR md_o_descripcion;
-
+    _QSTR md_o_Producto_has_Vitrina_idProducto_has_Vitrina;
 public:
     object_Venta_has_Producto();
-    object_Venta_has_Producto(_QSTR idVenta_has_Producto, _QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion);
-    object_Venta_has_Producto(_QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion);
+    object_Venta_has_Producto(_QSTR idVenta_has_Producto, _QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion, _QSTR Producto_has_Vitrina_idProducto_has_Vitrina);
+    object_Venta_has_Producto(_QSTR Venta_idVenta, _QSTR Producto_idProducto, _QSTR cantidad, _QSTR precio, _QSTR descuento, _QSTR descripcion, _QSTR Producto_has_Vitrina_idProducto_has_Vitrina);
 
     void mf_set_idVenta_has_Producto(_QSTR idVenta_has_Producto);
     void mf_set_Venta_idVenta(_QSTR Venta_idVenta);
@@ -28,6 +28,7 @@ public:
     void mf_set_precio(_QSTR precio);
     void mf_set_descuento(_QSTR descuento);
     void mf_set_descripcion(_QSTR descripcion);
+    void mf_set_Producto_has_Vitrina_idProducto_has_Vitrina(_QSTR Producto_has_Vitrina_idProducto_has_Vitrina);
 
     _QSTR mf_get_idVenta_has_Producto();
     _QSTR mf_get_Venta_idVenta();
@@ -36,6 +37,7 @@ public:
     _QSTR mf_get_precio();
     _QSTR mf_get_descuento();
     _QSTR mf_get_descripcion();
+    _QSTR mf_get_Producto_has_Vitrina_idProducto_has_Vitrina();
     vector<_QSTR> mf_listPk(_QSTR pk);
     bool mf_load(_QSTR pk);
     bool mf_add();
@@ -54,7 +56,6 @@ public:
     obj_Venta_has_Producto.mf_set_precio();
     obj_Venta_has_Producto.mf_set_descuento();
     obj_Venta_has_Producto.mf_set_descripcion();
-
     obj_Venta_has_Producto.mf_get_idVenta_has_Producto();
     obj_Venta_has_Producto.mf_get_Venta_idVenta();
     obj_Venta_has_Producto.mf_get_Producto_idProducto();

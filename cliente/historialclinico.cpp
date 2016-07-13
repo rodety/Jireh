@@ -108,11 +108,12 @@ bool historialClinico::agregar()
 
     if(mCercaDerecha.agregar()&&mCercaIzquierda.agregar()&&mLejosDerecha.agregar()&&mLejosIzquierda.agregar())
     {
-        query.prepare("INSERT INTO HistorialClinico(idCliente,doctor,fecha,origen) VALUES (?,?,?,?);");
+        query.prepare("INSERT INTO HistorialClinico(idCliente,doctor,fecha,origen,fecha_ingreso) VALUES (?,?,?,?,?);");
         query.bindValue(0,idCliente);
         query.bindValue(1,doctor);
         query.bindValue(2,fecha);
         query.bindValue(3,origen);
+        query.bindValue(4,fecha_ingreso);
         if(query.exec())
         {
             query.clear();
@@ -178,11 +179,12 @@ bool historialClinico::actualizar()
         query.clear();
         if(mCercaDerecha.actualizar()&&mCercaIzquierda.actualizar()&&mLejosDerecha.actualizar()&&mLejosIzquierda.actualizar())
         {
-            query.prepare("UPDATE HistorialClinico SET doctor=?,fecha=?,origen=? where idHistorialClinico=?");
+            query.prepare("UPDATE HistorialClinico SET doctor=?,fecha=?,origen=?,fecha_ingreso=? where idHistorialClinico=?");
             query.bindValue(0,doctor);
             query.bindValue(1,fecha);            
             query.bindValue(2,origen);
-            query.bindValue(3,idHistorialClinico);
+            query.bindValue(3,fecha_ingreso);
+            query.bindValue(4,idHistorialClinico);
             if(query.exec())
                 return true;
             else
@@ -193,10 +195,11 @@ bool historialClinico::actualizar()
     {
         if(mCercaDerecha.actualizar()&&mCercaIzquierda.actualizar()&&mLejosDerecha.actualizar()&&mLejosIzquierda.actualizar())
         {
-            query.prepare("UPDATE HistorialClinico SET doctor=?,origen=? where idHistorialClinico=?");
+            query.prepare("UPDATE HistorialClinico SET doctor=?,origen=?,fecha_ingreso=? where idHistorialClinico=?");
             query.bindValue(0,doctor);            
             query.bindValue(1,origen);
-            query.bindValue(2,idHistorialClinico);
+            query.bindValue(2,fecha_ingreso);
+            query.bindValue(3,idHistorialClinico);
 
             if(query.exec())
                 return true;
@@ -241,10 +244,9 @@ QSqlQueryModel* historialClinico::mostrar()
 bool historialClinico::buscar()
 {
     QSqlQuery query;
-    query.prepare("select * from HistorialClinico where idCliente=? and doctor=? and fecha=?");
-    query.bindValue(0,idCliente);
-    query.bindValue(1,doctor);
-    query.bindValue(2,fecha);
+    query.prepare("select * from HistorialClinico where idCliente=? and fecha=?");
+    query.bindValue(0,idCliente);    
+    query.bindValue(1,fecha);
     if(query.exec())
     {
         if(query.size()!=0)
@@ -295,13 +297,100 @@ bool historialClinico::buscar()
         return false;
     return false;
 }
+bool historialClinico::buscarFecha()
+{
+    QSqlQuery query;
+    query.prepare("select idHistorialClinico from HistorialClinico where idCliente=? and fecha_ingreso=?");
+    query.bindValue(0,idCliente);
+    query.bindValue(1,fecha_ingreso);
+    if(query.exec())
+    {
+        if(query.size()!=0)
+        {
+            query.first();
+            idHistorialClinico=query.value(0).toString();
+            return true;
+        }
+        return false;
+    }
+    else
+        return false;
+    return false;
+
+}
+bool historialClinico::buscarId()
+{
+    QSqlQuery query;
+    query.prepare("select * from HistorialClinico where idHistorialClinico = ?");
+    query.bindValue(0,idHistorialClinico);
+
+    if(query.exec())
+    {
+        if(query.size()!=0)
+        {
+            query.first();
+            idHistorialClinico=query.value(0).toString();
+            doctor = query.value(2).toString();
+            origen = query.value(4).toString();
+            fecha_ingreso = query.value(5).toString();
+            query.clear();
+            query.prepare("select idMedidaHistorial from HistorialClinico_has_MedidaHistorial where idHistorialClinico=? and distancia=? and ojo=?");
+            query.bindValue(0,idHistorialClinico);
+            query.bindValue(1,"Cerca");
+            query.bindValue(2,"Derecho");
+            query.exec();
+            query.first();
+            mCercaDerecha.setIdMedidasHistorial(query.value(0).toString());
+            query.clear();
+            query.prepare("select idMedidaHistorial from HistorialClinico_has_MedidaHistorial where idHistorialClinico=? and distancia=? and ojo=?");
+            query.bindValue(0,idHistorialClinico);
+            query.bindValue(1,"Cerca");
+            query.bindValue(2,"Izquierdo");
+            query.exec();
+            query.first();
+            mCercaIzquierda.setIdMedidasHistorial(query.value(0).toString());
+            query.clear();
+            query.prepare("select idMedidaHistorial from HistorialClinico_has_MedidaHistorial where idHistorialClinico=? and distancia=? and ojo=?");
+            query.bindValue(0,idHistorialClinico);
+            query.bindValue(1,"Lejos");
+            query.bindValue(2,"Derecho");
+            query.exec();
+            query.first();
+            mLejosDerecha.setIdMedidasHistorial(query.value(0).toString());
+            query.clear();
+            query.prepare("select idMedidaHistorial from HistorialClinico_has_MedidaHistorial where idHistorialClinico=? and distancia=? and ojo=?");
+            query.bindValue(0,idHistorialClinico);
+            query.bindValue(1,"Lejos");
+            query.bindValue(2,"Izquierdo");
+            query.exec();
+            query.first();
+            mLejosIzquierda.setIdMedidasHistorial(query.value(0).toString());
+            if(mCercaDerecha.buscar()&&mCercaIzquierda.buscar()&&mLejosDerecha.buscar()&&mLejosIzquierda.buscar())
+                return true;
+            else
+                return false;
+        }
+        return false;
+    }
+    else
+        return false;
+    return false;
+}
+void historialClinico::setOrigenMedicion(QString origen)
+{
+    this->origen = origen;
+}
 
 QString historialClinico::getOrigenMedicion()
 {
     return origen;
-}
 
-void historialClinico::setOrigenMedicion(QString origen)
+}
+QString historialClinico::getFecha_ingreso()
 {
-    this->origen = origen;
+    return fecha_ingreso;
+}
+void historialClinico::setFecha_ingreso(QString fecha_ingreso)
+{
+    this->fecha_ingreso = fecha_ingreso;
 }

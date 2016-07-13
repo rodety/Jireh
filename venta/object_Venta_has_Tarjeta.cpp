@@ -242,8 +242,7 @@ bool object_Venta_has_Tarjeta::mf_add()
 	QSqlQuery query;
 
 	string str_query = "INSERT INTO Venta_has_Tarjeta(";
-	str_query += "idVenta_has_Tarjeta";
-	str_query += ", Tarjeta_idTarjeta";
+        str_query += " Tarjeta_idTarjeta";
 	str_query += ", id";
 	str_query += ", tarjeta";
 	str_query += ", referencia";
@@ -262,17 +261,11 @@ bool object_Venta_has_Tarjeta::mf_add()
 	str_query += ", ?";
 	str_query += ", ?";
 	str_query += ", ?";
-	str_query += ", ?";
 	str_query += ")";
 
 	query.prepare(QString(str_query.c_str()));
 	int integer = 0;
-	if (md_o_idVenta_has_Tarjeta != "")
-	{
-		query.bindValue(integer++, md_o_idVenta_has_Tarjeta);
-	}
-	else
-                query.bindValue(integer++, "NULL");
+
 	query.bindValue(integer++, md_o_Tarjeta_idTarjeta);
 	query.bindValue(integer++, md_o_id);
 	query.bindValue(integer++, md_o_tarjeta);
